@@ -1,0 +1,425 @@
+@extends('layouts.app')
+
+@section('title', 'Kontak - Tata Bhuana Scaffolding')
+@section('description', 'Hubungi kami untuk konsultasi dan penawaran scaffolding terbaik untuk proyek konstruksi Anda.')
+
+@section('content')
+<style>
+@keyframes slideInTop {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.page-header-animated {
+    animation: slideInTop 0.6s ease-out;
+}
+
+.contact-card {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.contact-card:nth-child(1) { animation-delay: 0.1s; }
+.contact-card:nth-child(2) { animation-delay: 0.2s; }
+.contact-card:nth-child(3) { animation-delay: 0.3s; }
+.contact-card:nth-child(4) { animation-delay: 0.4s; }
+
+.branch-card {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.branch-card:nth-child(1) { animation-delay: 0.1s; }
+.branch-card:nth-child(2) { animation-delay: 0.3s; }
+.branch-card:nth-child(3) { animation-delay: 0.5s; }
+</style>
+
+<!-- Hero Section -->
+<section class="contact-hero text-white py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center hero-content">
+                <h1 class="display-3 fw-bold mb-3">Hubungi Kami</h1>
+                <p class="lead hero-subtitle">Kami siap membantu kebutuhan scaffolding proyek Anda</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Contact Section -->
+@if($profile)
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="row g-4 mb-5">
+            <div class="col-lg-3 col-md-6">
+                <div class="contact-card h-100">
+                    <div class="contact-icon bg-primary">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h5 class="fw-bold mt-3 mb-2">Telepon</h5>
+                    <p class="text-muted mb-0">
+                        <a href="tel:{{ $profile->phone }}" class="text-decoration-none">{{ $profile->phone }}</a>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="contact-card h-100">
+                    <div class="contact-icon bg-success">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h5 class="fw-bold mt-3 mb-2">Email</h5>
+                    <p class="text-muted mb-0">
+                        <a href="mailto:{{ $profile->email }}" class="text-decoration-none">{{ $profile->email }}</a>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="contact-card h-100">
+                    <div class="contact-icon bg-info">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h5 class="fw-bold mt-3 mb-2">Alamat</h5>
+                    <p class="text-muted mb-0 small">{{ Str::limit($profile->address, 50) }}</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="contact-card h-100">
+                    <div class="contact-icon bg-warning">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h5 class="fw-bold mt-3 mb-2">Jam Operasional</h5>
+                    <p class="text-muted mb-0 small">Senin - Jumat: 08:00 - 17:00</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@endif
+
+<!-- Branches Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+    
+        
+        @if($branches->count() > 0)
+            <div class="row g-4">
+                @foreach($branches as $branch)
+                <div class="col-lg-4 col-md-6">
+                    <div class="branch-card card h-100 shadow-sm border-0 position-relative overflow-hidden">
+                        @if($branch->is_main_branch)
+                        <div class="branch-badge">
+                            <i class="fas fa-star me-1"></i>Kantor Pusat
+                        </div>
+                        @endif
+                        
+                        <div class="card-body p-4">
+                            <h4 class="fw-bold mb-3">{{ $branch->name }}</h4>
+                            
+                            <div class="branch-info mb-3">
+                                <div class="info-item mb-2">
+                                    <i class="fas fa-map-marker-alt text-primary me-2"></i>
+                                    <span class="small">{{ $branch->address }}</span>
+                                </div>
+                                
+                                <div class="info-item mb-2">
+                                    <i class="fas fa-phone text-primary me-2"></i>
+                                    <span class="small">{{ $branch->phone }}</span>
+                                </div>
+                            </div>
+                            
+                            @if($branch->maps_url)
+                            <a href="{{ $branch->maps_url }}" target="_blank" class="btn btn-primary w-100">
+                                <i class="fas fa-map-marker-alt me-2"></i>Lihat di Google Maps
+                            </a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        @else
+            <div class="alert alert-info text-center">
+                <i class="fas fa-info-circle me-2"></i>Informasi cabang akan segera ditambahkan.
+            </div>
+        @endif
+    </div>
+</section>
+
+<!-- Map Section -->
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h2 class="display-5 fw-bold mb-3">Lokasi Kami</h2>
+            <p class="lead text-muted">Temukan kami di peta</p>
+        </div>
+        <div class="ratio ratio-21x9 shadow-lg rounded-3 overflow-hidden">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.2726368919797!2d110.36913207475823!3d-7.7956228425447175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5777570c7b65%3A0x2c1c1335f3d91f5e!2sYogyakarta%2C%20Indonesia!5e0!3m2!1sen!2sus!4v1635781234567!5m2!1sen!2sus" 
+                    style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+</section>
+
+<style>
+.contact-card {
+    text-align: center;
+    padding: 2rem;
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    border: 1px solid #f0f0f0;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.contact-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 1.5rem;
+    color: white;
+    background: #dc2626;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact-card:hover .contact-icon {
+    transform: rotate(360deg) scale(1.1);
+    background: #16a34a;
+}
+
+.branch-card {
+    transition: all 0.3s ease;
+    border-radius: 15px;
+}
+
+.branch-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1) !important;
+}
+
+.branch-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, #ffc107, #ff9800);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    z-index: 1;
+}
+
+.branch-info {
+    border-left: 3px solid #dc2626;
+    padding-left: 15px;
+}
+
+.contact-hero {
+    background: #dc2626;
+    padding: 120px 0 80px;
+    position: relative;
+}
+
+.hero-content {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-subtitle {
+    animation: fadeInUp 1s ease-out 0.2s both;
+    font-size: 1.5rem;
+}
+
+.info-item i {
+    color: #dc2626;
+}
+
+.branch-badge {
+    background: #16a34a;
+}
+
+.info-item {
+    display: flex;
+    align-items: start;
+    font-size: 0.95rem;
+    color: #495057;
+}
+
+.info-item i {
+    width: 20px;
+    margin-top: 3px;
+}
+
+.branch-card .card-body {
+    position: relative;
+}
+
+.branch-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #dc2626;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.branch-card:hover::before {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .contact-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .scroll-to-top-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 48px;
+        height: 48px;
+        font-size: 1.2rem;
+    }
+}
+
+/* Scroll to Top Button */
+.scroll-to-top-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #dc2626;
+    color: white;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4), 0 0 0 3px rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 9999;
+    opacity: 0;
+    transform: translateX(100px) scale(0.8);
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.scroll-to-top-btn.show {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    pointer-events: auto;
+    visibility: visible;
+}
+
+.scroll-to-top-btn:hover {
+    background: #b91c1c;
+    transform: translateY(-8px) scale(1.08);
+    box-shadow: 0 8px 30px rgba(220, 38, 38, 0.5), 0 0 0 4px rgba(255, 255, 255, 0.2);
+}
+
+.scroll-to-top-btn:active {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 4px 20px rgba(220, 38, 38, 0.4), 0 0 0 3px rgba(255, 255, 255, 0.15);
+}
+
+.scroll-to-top-btn i {
+    transition: transform 0.3s ease;
+}
+
+.scroll-to-top-btn:hover i {
+    transform: translateY(-3px);
+}
+</style>
+
+<!-- Scroll to Top Button -->
+<button id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll ke Atas">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+<script>
+// Scroll to Top Button Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+    
+    if (!scrollToTopBtn) {
+        console.warn('Scroll to Top button not found');
+        return;
+    }
+    
+    // Function to show/hide button based on scroll position
+    function toggleScrollButton() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        
+        // Button muncul setelah scroll 100px saja
+        if (scrollTop > 100) {
+            scrollToTopBtn.classList.add('show');
+        } else {
+            scrollToTopBtn.classList.remove('show');
+        }
+    }
+    
+    // Listen to scroll event
+    window.addEventListener('scroll', toggleScrollButton, { passive: true });
+    
+    // Scroll to top when button is clicked
+    scrollToTopBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    // Check initial scroll position setelah sedikit delay
+    setTimeout(toggleScrollButton, 100);
+});
+</script>
+@endsection

@@ -242,20 +242,6 @@
 </section>
 @endif
 
-<!-- CTA Section -->
-<section class="cta-section py-5 text-white">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text-center cta-content">
-                <h2 class="display-5 fw-bold mb-4">Siap Memesan?</h2>
-                <p class="lead mb-5">Hubungi kami sekarang untuk mendapatkan penawaran terbaik</p>
-                <a href="{{ route('contact') }}" class="cta-button btn btn-lg px-5 py-3">
-                    <i class="fas fa-phone me-2"></i>Hubungi Kami Sekarang
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
 
 <style>
 /* Button Styles - Jelas dan Konsisten */
@@ -435,11 +421,31 @@
 
 @media (max-width: 768px) {
     .scroll-to-top-btn {
-        bottom: 20px;
+        bottom: 90px; /* Lebih tinggi agar tidak bertumpuk dengan floating buttons */
         right: 20px;
         width: 48px;
         height: 48px;
         font-size: 1.2rem;
+        z-index: 9996; /* Di bawah floating buttons tapi masih di atas konten */
+    }
+}
+
+/* Extra small mobile - posisi lebih tinggi lagi */
+@media (max-width: 480px) {
+    .scroll-to-top-btn {
+        bottom: 100px; /* Lebih tinggi lagi untuk layar kecil */
+        right: 15px;
+        width: 46px;
+        height: 46px;
+        font-size: 1.1rem;
+    }
+}
+
+/* Landscape mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .scroll-to-top-btn {
+        bottom: 80px;
+        right: 20px;
     }
 }
 </style>

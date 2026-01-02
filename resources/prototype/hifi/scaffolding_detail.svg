@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1024" viewBox="0 0 1440 1024">
+  <rect x="0" y="0" width="1440" height="1024" fill="#ffffff"/>
+  <rect x="0" y="0" width="1440" height="80" fill="#0f172a"/>
+  <text x="40" y="50" font-family="Segoe UI, Arial" font-size="24" fill="#ffffff">Detail Scaffolding</text>
+  <text x="1040" y="50" font-family="Segoe UI, Arial" font-size="16" fill="#cbd5e1">Home  Layanan  Proyek  Cabang  Kontak</text>
+  <rect x="40" y="110" width="680" height="420" rx="12" fill="#e2e8f0"/>
+  <text x="60" y="140" font-family="Segoe UI, Arial" font-size="16" fill="#334155">Galeri gambar produk (dengan watermark)</text>
+  <rect x="760" y="110" width="640" height="420" rx="12" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="780" y="150" font-family="Segoe UI, Arial" font-size="20" font-weight="600" fill="#0f172a">Ringlock Scaffold</text>
+  <text x="780" y="180" font-family="Segoe UI, Arial" font-size="15" fill="#64748b">Material: Galvanis</text>
+  <text x="780" y="205" font-family="Segoe UI, Arial" font-size="15" fill="#64748b">Dimensi: Modular</text>
+  <text x="780" y="230" font-family="Segoe UI, Arial" font-size="15" fill="#64748b">Max Height: 24m</text>
+  <text x="780" y="255" font-family="Segoe UI, Arial" font-size="15" fill="#64748b">Max Load: 400kg</text>
+  <text x="780" y="280" font-family="Segoe UI, Arial" font-size="15" fill="#64748b">Stok: 120 unit</text>
+  <rect x="780" y="310" width="300" height="44" rx="8" fill="#22c55e"/>
+  <text x="800" y="338" font-family="Segoe UI, Arial" font-size="16" fill="#ffffff">Hubungi via WhatsApp</text>
+  <rect x="40" y="560" width="1360" height="180" rx="12" fill="#fff7ed" stroke="#fed7aa"/>
+  <text x="60" y="590" font-family="Segoe UI, Arial" font-size="18" fill="#0f172a">Deskripsi Produk</text>
+  <text x="60" y="620" font-family="Segoe UI, Arial" font-size="14" fill="#334155">Sistem scaffolding modular dengan kekuatan tinggi dan kemudahan instalasi untuk berbagai kebutuhan konstruksi.</text>
+  <rect x="0" y="980" width="1440" height="44" fill="#0f172a"/>
+  <text x="40" y="1007" font-family="Segoe UI, Arial" font-size="14" fill="#cbd5e1">© Tata Bhuana Scaffolding</text>
+</svg>

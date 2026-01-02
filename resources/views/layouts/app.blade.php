@@ -182,6 +182,78 @@
     }
     </style>
     
+    <style>
+    /* Global alignment untuk floating buttons di mobile */
+    @media (max-width: 768px) {
+        /* Pastikan semua floating buttons sejajar vertikal dengan left yang sama */
+        .floating-whatsapp-transparent,
+        .floating-facebook-transparent,
+        .floating-instagram-transparent {
+            left: max(15px, env(safe-area-inset-left, 15px)) !important;
+        }
+        
+        /* Pastikan jarak konsisten antar button */
+        .floating-whatsapp-transparent {
+            bottom: max(20px, env(safe-area-inset-bottom, 20px)) !important;
+        }
+        
+        .floating-facebook-transparent {
+            bottom: max(95px, env(safe-area-inset-bottom, 95px)) !important;
+        }
+        
+        .floating-instagram-transparent {
+            bottom: max(170px, env(safe-area-inset-bottom, 170px)) !important;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        /* Pastikan semua floating buttons sejajar vertikal dengan left yang sama */
+        .floating-whatsapp-transparent,
+        .floating-facebook-transparent,
+        .floating-instagram-transparent {
+            left: max(15px, env(safe-area-inset-left, 15px)) !important;
+        }
+        
+        /* Pastikan jarak konsisten antar button untuk layar kecil */
+        .floating-whatsapp-transparent {
+            bottom: max(15px, env(safe-area-inset-bottom, 15px)) !important;
+        }
+        
+        .floating-facebook-transparent {
+            bottom: max(85px, env(safe-area-inset-bottom, 85px)) !important;
+        }
+        
+        .floating-instagram-transparent {
+            bottom: max(155px, env(safe-area-inset-bottom, 155px)) !important;
+        }
+    }
+    
+    /* Fix untuk scroll to top button di mobile - pastikan bisa diklik */
+    @media (max-width: 768px) {
+        .scroll-to-top-btn.show {
+            z-index: 10000 !important;
+            pointer-events: auto !important;
+            touch-action: manipulation !important;
+            -webkit-tap-highlight-color: rgba(220, 38, 38, 0.3) !important;
+        }
+        
+        .scroll-to-top-btn {
+            z-index: 10000 !important;
+            pointer-events: auto !important;
+            touch-action: manipulation !important;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .scroll-to-top-btn {
+            min-width: 50px !important;
+            min-height: 50px !important;
+            width: 50px !important;
+            height: 50px !important;
+        }
+    }
+    </style>
+    
     @stack('styles')
 </head>
 <body>
@@ -224,6 +296,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('branches.index') ? 'active' : '' }}" href="{{ route('branches.index') }}">Cabang</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('articles.index') ? 'active' : '' }}" href="{{ route('articles.index') }}">Artikel</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Kontak</a>
@@ -271,6 +346,7 @@
                         <li><a href="{{ route('services') }}" class="text-white text-decoration-none">Jual Scaffolding</a></li>
                         <li><a href="{{ route('scaffoldings.index') }}" class="text-white text-decoration-none">Katalog Produk</a></li>
                         <li><a href="{{ route('projects.index') }}" class="text-white text-decoration-none">Galeri Proyek</a></li>
+                        <li><a href="{{ route('articles.index') }}" class="text-white text-decoration-none">Artikel</a></li>
                         <li><a href="{{ route('branches.index') }}" class="text-white text-decoration-none">Cabang Kami</a></li>
                         <li><a href="{{ route('contact') }}" class="text-white text-decoration-none">Konsultasi</a></li>
                     </ul>
@@ -365,6 +441,41 @@
         scrollElements.forEach(element => {
             observer.observe(element);
         });
+    });
+    </script>
+    
+    <!-- Global Script untuk Scroll to Top Button di Mobile -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Fix untuk scroll to top button di mobile
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+        
+        if (scrollToTopBtn) {
+            // Pastikan button bisa diklik di mobile dengan touch event
+            scrollToTopBtn.addEventListener('touchstart', function(e) {
+                e.stopPropagation();
+                this.style.opacity = '0.8';
+                this.style.transform = 'scale(0.95)';
+            }, { passive: true });
+            
+            scrollToTopBtn.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                this.style.opacity = '1';
+                this.style.transform = 'scale(1)';
+                
+                // Scroll to top
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }, { passive: false });
+            
+            // Pastikan button tidak di-block oleh elemen lain
+            scrollToTopBtn.style.zIndex = '10000';
+            scrollToTopBtn.style.pointerEvents = 'auto';
+            scrollToTopBtn.style.touchAction = 'manipulation';
+        }
     });
     </script>
     

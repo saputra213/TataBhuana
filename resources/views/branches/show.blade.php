@@ -197,16 +197,47 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title fw-bold mb-3">Lokasi di Peta</h5>
-                        <div class="ratio ratio-21x9">
+                        <h5 class="card-title fw-bold mb-3">
+                            <i class="fas fa-map-marked-alt text-primary me-2"></i>Lokasi di Peta
+                        </h5>
+                        <p class="text-muted mb-3">
+                            <i class="fas fa-map-marker-alt text-danger me-2"></i>{{ $branch->address }}
+                        </p>
+                        <div class="ratio ratio-21x9" style="min-height: 400px;">
                             @if($branch->latitude && $branch->longitude)
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.521260322283!2d{{ $branch->longitude }}!3d{{ $branch->latitude }}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5390917b759%3A0x6b45e67356080477!2s{{ urlencode($branch->address) }}!5e0!3m2!1sen!2sus!4v1635781234567!5m2!1sen!2sus" 
-                                        style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                <iframe 
+                                    src="https://maps.google.com/maps?q={{ $branch->latitude }},{{ $branch->longitude }}&hl=id&z=16&output=embed" 
+                                    style="border:0; border-radius: 8px;" 
+                                    allowfullscreen="" 
+                                    loading="lazy" 
+                                    referrerpolicy="no-referrer-when-downgrade"
+                                    title="Lokasi {{ $branch->name }}">
+                                </iframe>
+                            @elseif($branch->address)
+                                <iframe 
+                                    src="https://maps.google.com/maps?q={{ urlencode($branch->address) }}&hl=id&z=15&output=embed" 
+                                    style="border:0; border-radius: 8px;" 
+                                    allowfullscreen="" 
+                                    loading="lazy" 
+                                    referrerpolicy="no-referrer-when-downgrade"
+                                    title="Lokasi {{ $branch->name }}">
+                                </iframe>
                             @else
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.521260322283!2d106.81956131576984!3d-6.194745895493029!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5390917b759%3A0x6b45e67356080477!2s{{ urlencode($branch->address) }}!5e0!3m2!1sen!2sus!4v1635781234567!5m2!1sen!2sus" 
-                                        style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                <div class="bg-light d-flex align-items-center justify-content-center h-100 rounded">
+                                    <div class="text-center">
+                                        <i class="fas fa-map-marker-alt fa-3x text-muted mb-3"></i>
+                                        <p class="text-muted">Lokasi belum tersedia</p>
+                                    </div>
+                                </div>
                             @endif
                         </div>
+                        @if(($branch->latitude && $branch->longitude) || $branch->address)
+                        <div class="mt-3">
+                            <a href="{{ $branch->google_maps_url }}" target="_blank" class="btn btn-primary">
+                                <i class="fas fa-map-marked-alt me-2"></i>Buka di Google Maps
+                            </a>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>

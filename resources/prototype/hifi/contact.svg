@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1024" viewBox="0 0 1440 1024">
+  <rect x="0" y="0" width="1440" height="1024" fill="#ffffff"/>
+  <rect x="0" y="0" width="1440" height="80" fill="#0f172a"/>
+  <text x="40" y="50" font-family="Segoe UI, Arial" font-size="24" fill="#ffffff">Kontak</text>
+  <text x="1040" y="50" font-family="Segoe UI, Arial" font-size="16" fill="#cbd5e1">Home  Layanan  Proyek  Cabang  Kontak</text>
+  <rect x="40" y="110" width="840" height="500" rx="12" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="60" y="140" font-family="Segoe UI, Arial" font-size="18" fill="#0f172a">Form Kontak</text>
+  <rect x="60" y="160" width="800" height="44" rx="8" fill="#e2e8f0"/>
+  <text x="70" y="188" font-family="Segoe UI, Arial" font-size="14" fill="#334155">Nama</text>
+  <rect x="60" y="214" width="800" height="44" rx="8" fill="#e2e8f0"/>
+  <text x="70" y="242" font-family="Segoe UI, Arial" font-size="14" fill="#334155">Email</text>
+  <rect x="60" y="268" width="800" height="44" rx="8" fill="#e2e8f0"/>
+  <text x="70" y="296" font-family="Segoe UI, Arial" font-size="14" fill="#334155">Telepon</text>
+  <rect x="60" y="322" width="800" height="44" rx="8" fill="#e2e8f0"/>
+  <text x="70" y="350" font-family="Segoe UI, Arial" font-size="14" fill="#334155">Subjek</text>
+  <rect x="60" y="376" width="800" height="174" rx="8" fill="#e2e8f0"/>
+  <text x="70" y="404" font-family="Segoe UI, Arial" font-size="14" fill="#334155">Pesan</text>
+  <rect x="60" y="564" width="180" height="44" rx="8" fill="#22c55e"/>
+  <text x="90" y="592" font-family="Segoe UI, Arial" font-size="16" fill="#ffffff">Kirim</text>
+  <rect x="900" y="110" width="500" height="500" rx="12" fill="#fff7ed" stroke="#fed7aa"/>
+  <text x="920" y="140" font-family="Segoe UI, Arial" font-size="18" fill="#0f172a">Cabang Aktif</text>
+  <text x="920" y="170" font-family="Segoe UI, Arial" font-size="14" fill="#334155">Alamat • Telepon • Maps URL</text>
+  <rect x="40" y="640" width="1360" height="140" rx="12" fill="#fefce8" stroke="#fde68a"/>
+  <text x="60" y="670" font-family="Segoe UI, Arial" font-size="18" fill="#0f172a">Sosial Media</text>
+  <text x="60" y="700" font-family="Segoe UI, Arial" font-size="14" fill="#334155">Facebook • Instagram • WhatsApp</text>
+  <rect x="0" y="980" width="1440" height="44" fill="#0f172a"/>
+  <text x="40" y="1007" font-family="Segoe UI, Arial" font-size="14" fill="#cbd5e1">© Tata Bhuana Scaffolding</text>
+</svg>

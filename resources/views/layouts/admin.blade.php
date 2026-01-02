@@ -34,6 +34,12 @@
                     <a class="nav-link text-white {{ request()->routeIs('admin.projects.*') ? 'bg-primary' : '' }}" href="{{ route('admin.projects.index') }}">
                         <i class="fas fa-project-diagram me-2"></i>Proyek
                     </a>
+                    <a class="nav-link text-white {{ request()->routeIs('admin.articles.*') ? 'bg-primary' : '' }}" href="{{ route('admin.articles.index') }}">
+                        <i class="fas fa-newspaper me-2"></i>Artikel
+                    </a>
+                    <a class="nav-link text-white {{ request()->routeIs('admin.comments.*') ? 'bg-primary' : '' }}" href="{{ route('admin.comments.index') }}">
+                        <i class="fas fa-comments me-2"></i>Komentar
+                    </a>
                     <a class="nav-link text-white {{ request()->routeIs('admin.branches.*') ? 'bg-primary' : '' }}" href="{{ route('admin.branches.index') }}">
                         <i class="fas fa-map-marker-alt me-2"></i>Cabang
                     </a>

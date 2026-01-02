@@ -343,9 +343,15 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    /* Pastikan semua floating buttons sejajar vertikal */
+    .floating-whatsapp-transparent,
+    .floating-facebook-transparent,
+    .floating-instagram-transparent {
+        left: max(15px, env(safe-area-inset-left, 15px)) !important;
+    }
+    
     .floating-whatsapp-transparent {
         bottom: max(20px, env(safe-area-inset-bottom, 20px));
-        left: max(20px, env(safe-area-inset-left, 20px));
     }
     
     .wa-main-button {
@@ -402,6 +408,13 @@ body {
     .floating-whatsapp-transparent {
         bottom: max(15px, env(safe-area-inset-bottom, 15px));
         left: max(15px, env(safe-area-inset-left, 15px));
+    }
+    
+    /* Pastikan semua button sejajar vertikal */
+    .floating-whatsapp-transparent,
+    .floating-facebook-transparent,
+    .floating-instagram-transparent {
+        left: max(15px, env(safe-area-inset-left, 15px)) !important;
     }
     
     .wa-main-button {

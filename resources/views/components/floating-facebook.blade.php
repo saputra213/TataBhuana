@@ -45,7 +45,7 @@
     left: 25px;
     z-index: 9997;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* Safe area untuk mobile */
+    /* Safe area untuk mobile - akan di-override di media query */
     bottom: max(110px, env(safe-area-inset-bottom, 110px));
     left: max(25px, env(safe-area-inset-left, 25px));
 }
@@ -312,21 +312,24 @@
 /* Responsive Design */
 @media (max-width: 768px) {
     .floating-facebook-transparent {
-        bottom: max(105px, env(safe-area-inset-bottom, 105px));
-        left: max(20px, env(safe-area-inset-left, 20px));
+        /* Button height 60px + gap 15px = 75px dari WhatsApp */
+        bottom: max(95px, env(safe-area-inset-bottom, 95px));
+        left: max(15px, env(safe-area-inset-left, 15px));
     }
 }
 
 /* Extra small screens - stack buttons vertically */
 @media (max-width: 600px) {
     .floating-facebook-transparent {
-        bottom: max(105px, env(safe-area-inset-bottom, 105px));
-        left: max(20px, env(safe-area-inset-left, 20px));
+        /* Button height 60px + gap 15px = 75px dari WhatsApp */
+        bottom: max(95px, env(safe-area-inset-bottom, 95px));
+        left: max(15px, env(safe-area-inset-left, 15px));
     }
     
     .floating-instagram-transparent {
-        bottom: max(190px, env(safe-area-inset-bottom, 190px));
-        left: max(20px, env(safe-area-inset-left, 20px));
+        /* Button height 60px + gap 15px = 75px dari Facebook, total 170px dari bottom */
+        bottom: max(170px, env(safe-area-inset-bottom, 170px));
+        left: max(15px, env(safe-area-inset-left, 15px));
     }
 }
 
@@ -379,7 +382,8 @@
 
 @media (max-width: 480px) {
     .floating-facebook-transparent {
-        bottom: max(100px, env(safe-area-inset-bottom, 100px));
+        /* Button height 55px + gap 15px = 70px dari WhatsApp */
+        bottom: max(85px, env(safe-area-inset-bottom, 85px));
         left: max(15px, env(safe-area-inset-left, 15px));
     }
     

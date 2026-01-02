@@ -7,6 +7,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminScaffoldingController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\ArticleController;
 
 // Frontend Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -26,6 +27,11 @@ Route::get('/projects/{project}', [\App\Http\Controllers\ProjectController::clas
 // Branch Routes
 Route::get('/branches', [\App\Http\Controllers\BranchController::class, 'index'])->name('branches.index');
 Route::get('/branches/{branch}', [\App\Http\Controllers\BranchController::class, 'show'])->name('branches.show');
+
+// Article Routes
+Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
+Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
+Route::post('/articles/{article}/comment', [ArticleController::class, 'storeComment'])->name('articles.comment.store');
 
 // Admin Authentication Routes
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -49,5 +55,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         
         // Branch Management
         Route::resource('branches', \App\Http\Controllers\Admin\AdminBranchController::class);
+        
+        // Article Management
+        Route::resource('articles', \App\Http\Controllers\Admin\AdminArticleController::class);
+
+        // Comment Management
+        Route::get('/comments', [\App\Http\Controllers\Admin\AdminCommentController::class, 'index'])->name('comments.index');
+        Route::put('/comments/{comment}/approve', [\App\Http\Controllers\Admin\AdminCommentController::class, 'approve'])->name('comments.approve');
+        Route::delete('/comments/{comment}', [\App\Http\Controllers\Admin\AdminCommentController::class, 'destroy'])->name('comments.destroy');
     });
 });

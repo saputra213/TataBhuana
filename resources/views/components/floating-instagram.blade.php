@@ -45,7 +45,7 @@
     left: 25px;
     z-index: 9998;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* Safe area untuk mobile */
+    /* Safe area untuk mobile - akan di-override di media query */
     bottom: max(195px, env(safe-area-inset-bottom, 195px));
     left: max(25px, env(safe-area-inset-left, 25px));
 }
@@ -311,8 +311,9 @@
 /* Responsive Design */
 @media (max-width: 768px) {
     .floating-instagram-transparent {
-        bottom: max(190px, env(safe-area-inset-bottom, 190px));
-        left: max(20px, env(safe-area-inset-left, 20px));
+        /* Button height 60px + gap 15px = 75px dari Facebook, total 170px dari bottom (95 + 75) */
+        bottom: max(170px, env(safe-area-inset-bottom, 170px));
+        left: max(15px, env(safe-area-inset-left, 15px));
     }
 }
 
@@ -378,7 +379,8 @@
 
 @media (max-width: 480px) {
     .floating-instagram-transparent {
-        bottom: max(185px, env(safe-area-inset-bottom, 185px));
+        /* Button height 55px + gap 15px = 70px dari Facebook, total 155px dari bottom (85 + 70) */
+        bottom: max(155px, env(safe-area-inset-bottom, 155px));
         left: max(15px, env(safe-area-inset-left, 15px));
     }
     

@@ -299,20 +299,6 @@
 </section>
 @endif
 
-<!-- CTA Section -->
-<section class="cta-section py-5 text-white">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text-center cta-content">
-                <h2 class="display-5 fw-bold mb-4">Siap Memulai Proyek Anda?</h2>
-                <p class="lead mb-5">Hubungi kami sekarang untuk konsultasi dan penawaran terbaik</p>
-                <a href="{{ route('contact') }}" class="cta-button btn btn-lg px-5 py-3">
-                    <i class="fas fa-phone me-2"></i>Hubungi Kami Sekarang
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
 
 <style>
 /* Button Styles - Jelas dan Konsisten */
@@ -487,11 +473,51 @@
 
 @media (max-width: 768px) {
     .scroll-to-top-btn {
-        bottom: 20px;
+        bottom: 90px; /* Lebih tinggi agar tidak bertumpuk dengan floating buttons */
         right: 20px;
         width: 48px;
         height: 48px;
         font-size: 1.2rem;
+        z-index: 10000 !important; /* Pastikan di atas semua elemen termasuk floating buttons */
+        pointer-events: auto !important; /* Pastikan bisa diklik */
+        touch-action: manipulation; /* Optimasi untuk touch */
+        -webkit-tap-highlight-color: rgba(220, 38, 38, 0.3); /* Highlight saat tap di mobile */
+    }
+    
+    .scroll-to-top-btn.show {
+        pointer-events: auto !important;
+        z-index: 10000 !important;
+    }
+}
+
+/* Extra small mobile - posisi lebih tinggi lagi */
+@media (max-width: 480px) {
+    .scroll-to-top-btn {
+        bottom: 100px; /* Lebih tinggi lagi untuk layar kecil */
+        right: 15px;
+        width: 50px; /* Sedikit lebih besar untuk memudahkan tap */
+        height: 50px;
+        font-size: 1.1rem;
+        z-index: 10000 !important;
+        pointer-events: auto !important;
+        touch-action: manipulation;
+        min-width: 50px; /* Minimum touch target size */
+        min-height: 50px;
+    }
+    
+    .scroll-to-top-btn.show {
+        pointer-events: auto !important;
+        z-index: 10000 !important;
+    }
+}
+
+/* Landscape mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .scroll-to-top-btn {
+        bottom: 80px;
+        right: 20px;
+        z-index: 10000 !important;
+        pointer-events: auto !important;
     }
 }
 </style>
@@ -529,11 +555,26 @@ document.addEventListener('DOMContentLoaded', function() {
     // Scroll to top when button is clicked
     scrollToTopBtn.addEventListener('click', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
         });
     });
+    
+    // Tambahkan event listener untuk touch (mobile)
+    scrollToTopBtn.addEventListener('touchstart', function(e) {
+        e.stopPropagation();
+    }, { passive: true });
+    
+    scrollToTopBtn.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }, { passive: false });
     
     // Check initial scroll position setelah sedikit delay
     setTimeout(toggleScrollButton, 100);

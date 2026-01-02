@@ -860,11 +860,32 @@
     }
     
     .scroll-to-top-btn {
-        bottom: 25px;
-        left: 25px;
-        width: 52px;
-        height: 52px;
-        font-size: 1.25rem;
+        bottom: 90px; /* Lebih tinggi agar tidak bertumpuk dengan floating buttons */
+        right: 20px; /* Pindah ke kanan untuk konsistensi */
+        left: auto; /* Reset left */
+        width: 48px;
+        height: 48px;
+        font-size: 1.2rem;
+        z-index: 9996; /* Di bawah floating buttons tapi masih di atas konten */
+    }
+}
+
+/* Extra small mobile - posisi lebih tinggi lagi */
+@media (max-width: 480px) {
+    .scroll-to-top-btn {
+        bottom: 100px; /* Lebih tinggi lagi untuk layar kecil */
+        right: 15px;
+        width: 46px;
+        height: 46px;
+        font-size: 1.1rem;
+    }
+}
+
+/* Landscape mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .scroll-to-top-btn {
+        bottom: 80px;
+        right: 20px;
     }
 }
 

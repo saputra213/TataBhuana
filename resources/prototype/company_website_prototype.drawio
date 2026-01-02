@@ -1,0 +1,106 @@
+<mxfile host="app.diagrams.net" modified="2025-11-28T00:00:00.000Z" agent="5.0 (Windows)" version="20.6.3" etag="company_website_prototype" type="device">
+  <diagram id="Proto-Home" name="Home">
+    <mxGraphModel dx="1420" dy="784" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="h0"/>
+        <mxCell id="h1" parent="h0"/>
+        <mxCell id="h_container" value="Home" style="whiteSpace=wrap;html=1;rounded=1;strokeWidth=2;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="h1"><mxGeometry x="60" y="40" width="980" height="700" as="geometry"/></mxCell>
+        <mxCell id="h_header" value="Header: Logo + Nav (Home, Tentang, Layanan, Proyek, Cabang, Kontak)" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#f5f5f5;" vertex="1" parent="h_container"><mxGeometry x="20" y="20" width="940" height="60" as="geometry"/></mxCell>
+        <mxCell id="h_hero" value="Hero: gambar latar + tagline perusahaan + tombol CTA" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#dae8fc;" vertex="1" parent="h_container"><mxGeometry x="20" y="100" width="940" height="180" as="geometry"/></mxCell>
+        <mxCell id="h_featured_scaff" value="Scaffolding Unggulan (grid 3x2 card)" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#e1d5e7;" vertex="1" parent="h_container"><mxGeometry x="20" y="300" width="460" height="180" as="geometry"/></mxCell>
+        <mxCell id="h_featured_proj" value="Proyek Unggulan (grid 3x2 card bergambar)" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#fff2cc;" vertex="1" parent="h_container"><mxGeometry x="500" y="300" width="460" height="180" as="geometry"/></mxCell>
+        <mxCell id="h_about_strip" value="Strip Tentang Kami singkat + link ke halaman Tentang" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#d5e8d4;" vertex="1" parent="h_container"><mxGeometry x="20" y="500" width="940" height="80" as="geometry"/></mxCell>
+        <mxCell id="h_footer" value="Footer: alamat, kontak, media sosial" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#f5f5f5;" vertex="1" parent="h_container"><mxGeometry x="20" y="600" width="940" height="80" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="Proto-Services" name="Services">
+    <mxGraphModel dx="1420" dy="784" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="s0"/>
+        <mxCell id="s1" parent="s0"/>
+        <mxCell id="s_container" value="Services" style="whiteSpace=wrap;html=1;rounded=1;strokeWidth=2;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="s1"><mxGeometry x="60" y="40" width="980" height="700" as="geometry"/></mxCell>
+        <mxCell id="s_header" value="Header" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#f5f5f5;" vertex="1" parent="s_container"><mxGeometry x="20" y="20" width="940" height="60" as="geometry"/></mxCell>
+        <mxCell id="s_intro" value="Deskripsi layanan scaffolding + keunggulan" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#dae8fc;" vertex="1" parent="s_container"><mxGeometry x="20" y="100" width="940" height="120" as="geometry"/></mxCell>
+        <mxCell id="s_list" value="Daftar layanan: Sewa/Proyek/Instalasi/Perawatan (grid card)" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#fff2cc;" vertex="1" parent="s_container"><mxGeometry x="20" y="240" width="940" height="300" as="geometry"/></mxCell>
+        <mxCell id="s_cta" value="CTA: Hubungi Kami / Lihat Scaffolding" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#d5e8d4;" vertex="1" parent="s_container"><mxGeometry x="20" y="560" width="940" height="80" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="Proto-Scaffoldings-List" name="Scaffoldings (List)">
+    <mxGraphModel dx="1420" dy="784" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="sl0"/>
+        <mxCell id="sl1" parent="sl0"/>
+        <mxCell id="sl_container" value="Scaffoldings List" style="whiteSpace=wrap;html=1;rounded=1;strokeWidth=2;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="sl1"><mxGeometry x="60" y="40" width="980" height="700" as="geometry"/></mxCell>
+        <mxCell id="sl_header" value="Header" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#f5f5f5;" vertex="1" parent="sl_container"><mxGeometry x="20" y="20" width="940" height="60" as="geometry"/></mxCell>
+        <mxCell id="sl_filters" value="Filter: Tipe, Material; Sort: Nama/Price" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#dae8fc;" vertex="1" parent="sl_container"><mxGeometry x="20" y="100" width="940" height="80" as="geometry"/></mxCell>
+        <mxCell id="sl_grid" value="Grid scaffolding (card bergambar, harga sewa/ jual, dimensi)" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#e1d5e7;" vertex="1" parent="sl_container"><mxGeometry x="20" y="200" width="940" height="440" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="Proto-Scaffolding-Detail" name="Scaffolding (Detail)">
+    <mxGraphModel dx="1420" dy="784" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="sd0"/>
+        <mxCell id="sd1" parent="sd0"/>
+        <mxCell id="sd_container" value="Scaffolding Detail" style="whiteSpace=wrap;html=1;rounded=1;strokeWidth=2;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="sd1"><mxGeometry x="60" y="40" width="980" height="700" as="geometry"/></mxCell>
+        <mxCell id="sd_header" value="Header" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#f5f5f5;" vertex="1" parent="sd_container"><mxGeometry x="20" y="20" width="940" height="60" as="geometry"/></mxCell>
+        <mxCell id="sd_gallery" value="Galeri gambar produk + watermark" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#fff2cc;" vertex="1" parent="sd_container"><mxGeometry x="20" y="100" width="480" height="300" as="geometry"/></mxCell>
+        <mxCell id="sd_specs" value="Spesifikasi: tipe, material, dimensi, max height, max load, stok" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#d5e8d4;" vertex="1" parent="sd_container"><mxGeometry x="520" y="100" width="440" height="300" as="geometry"/></mxCell>
+        <mxCell id="sd_pricing" value="Harga sewa/jual + CTA: Hubungi via WhatsApp" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#dae8fc;" vertex="1" parent="sd_container"><mxGeometry x="20" y="420" width="940" height="120" as="geometry"/></mxCell>
+        <mxCell id="sd_desc" value="Deskripsi produk detail" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;" vertex="1" parent="sd_container"><mxGeometry x="20" y="560" width="940" height="120" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="Proto-Projects-List" name="Projects (List)">
+    <mxGraphModel dx="1420" dy="784" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="pl0"/>
+        <mxCell id="pl1" parent="pl0"/>
+        <mxCell id="pl_container" value="Projects List" style="whiteSpace=wrap;html=1;rounded=1;strokeWidth=2;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="pl1"><mxGeometry x="60" y="40" width="980" height="700" as="geometry"/></mxCell>
+        <mxCell id="pl_header" value="Header" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#f5f5f5;" vertex="1" parent="pl_container"><mxGeometry x="20" y="20" width="940" height="60" as="geometry"/></mxCell>
+        <mxCell id="pl_filters" value="Filter: Tipe & Status; Pencarian: judul, klien, lokasi" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#dae8fc;" vertex="1" parent="pl_container"><mxGeometry x="20" y="100" width="940" height="80" as="geometry"/></mxCell>
+        <mxCell id="pl_grid" value="Grid proyek (card bergambar, status, lokasi)" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#e1d5e7;" vertex="1" parent="pl_container"><mxGeometry x="20" y="200" width="940" height="440" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="Proto-Branches-List" name="Branches (List)">
+    <mxGraphModel dx="1420" dy="784" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="bl0"/>
+        <mxCell id="bl1" parent="bl0"/>
+        <mxCell id="bl_container" value="Branches List" style="whiteSpace=wrap;html=1;rounded=1;strokeWidth=2;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="bl1"><mxGeometry x="60" y="40" width="980" height="700" as="geometry"/></mxCell>
+        <mxCell id="bl_header" value="Header" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#f5f5f5;" vertex="1" parent="bl_container"><mxGeometry x="20" y="20" width="940" height="60" as="geometry"/></mxCell>
+        <mxCell id="bl_mainmap" value="Map kantor utama + daftar cabang (main branch ditandai)" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#fff2cc;" vertex="1" parent="bl_container"><mxGeometry x="20" y="100" width="940" height="300" as="geometry"/></mxCell>
+        <mxCell id="bl_list" value="List cabang (card: alamat, telepon, jam operasional, services)" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#d5e8d4;" vertex="1" parent="bl_container"><mxGeometry x="20" y="420" width="940" height="220" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="Proto-Contact" name="Contact">
+    <mxGraphModel dx="1420" dy="784" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="c0"/>
+        <mxCell id="c1" parent="c0"/>
+        <mxCell id="c_container" value="Contact" style="whiteSpace=wrap;html=1;rounded=1;strokeWidth=2;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="c1"><mxGeometry x="60" y="40" width="980" height="700" as="geometry"/></mxCell>
+        <mxCell id="c_header" value="Header" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#f5f5f5;" vertex="1" parent="c_container"><mxGeometry x="20" y="20" width="940" height="60" as="geometry"/></mxCell>
+        <mxCell id="c_form" value="Form kontak: nama, email, telepon, subjek, pesan + kirim" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#dae8fc;" vertex="1" parent="c_container"><mxGeometry x="20" y="100" width="600" height="380" as="geometry"/></mxCell>
+        <mxCell id="c_branches" value="Info cabang aktif (alamat, telepon, maps url)" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#d5e8d4;" vertex="1" parent="c_container"><mxGeometry x="640" y="100" width="320" height="380" as="geometry"/></mxCell>
+        <mxCell id="c_social" value="Sosial media & WhatsApp floating button" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#fff2cc;" vertex="1" parent="c_container"><mxGeometry x="20" y="500" width="940" height="160" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="Proto-Admin-Dashboard" name="Admin (Dashboard)">
+    <mxGraphModel dx="1420" dy="784" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="ad0"/>
+        <mxCell id="ad1" parent="ad0"/>
+        <mxCell id="ad_container" value="Admin Dashboard" style="whiteSpace=wrap;html=1;rounded=1;strokeWidth=2;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="ad1"><mxGeometry x="60" y="40" width="980" height="700" as="geometry"/></mxCell>
+        <mxCell id="ad_header" value="Header: logo admin + tombol logout" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#f5f5f5;" vertex="1" parent="ad_container"><mxGeometry x="20" y="20" width="940" height="60" as="geometry"/></mxCell>
+        <mxCell id="ad_nav" value="Nav: Profil, Scaffolding, Proyek, Cabang" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#fff2cc;" vertex="1" parent="ad_container"><mxGeometry x="20" y="100" width="220" height="560" as="geometry"/></mxCell>
+        <mxCell id="ad_metrics" value="Kartu metrik: jumlah scaffolding, tersedia, proyek, selesai, cabang aktif, main branch" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#d5e8d4;" vertex="1" parent="ad_container"><mxGeometry x="260" y="100" width="700" height="200" as="geometry"/></mxCell>
+        <mxCell id="ad_recent" value="Tabel ringkas item terbaru (scaffolding/proyek/cabang)" style="whiteSpace=wrap;html=1;rounded=0;strokeWidth=1;fillColor=#dae8fc;" vertex="1" parent="ad_container"><mxGeometry x="260" y="320" width="700" height="340" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

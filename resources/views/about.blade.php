@@ -159,7 +159,7 @@
                         </div>
                         <div class="service-content">
                             <h4 class="fw-bold mb-3">Konsultasi & Support</h4>
-                            <p class="text-muted mb-0">Tim ahli kami siap memberikan konsultasi dan dukungan teknis 24/7 untuk memastikan kesuksesan proyek konstruksi Anda.</p>
+                            <p class="text-muted mb-0">Tim ahli kami siap memberikan konsultasi dan dukungan teknis untuk memastikan kesuksesan proyek konstruksi Anda.</p>
                         </div>
                     </div>
                 </div>
@@ -207,21 +207,6 @@
                     <h5 class="fw-bold mb-3">Produk Berkualitas</h5>
                     <p class="text-muted">Peralatan terawat, aman, dan sesuai standar industri untuk menjamin keselamatan pekerjaan.</p>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- CTA Section -->
-<section class="cta-section py-5 text-white">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text-center cta-content">
-                <h2 class="display-5 fw-bold mb-4">Ingin Bekerja Sama dengan Kami?</h2>
-                <p class="lead mb-5">Hubungi kami untuk konsultasi dan penawaran terbaik</p>
-                <a href="{{ route('contact') }}" class="cta-button btn btn-lg px-5 py-3">
-                    <i class="fas fa-phone me-2"></i>Hubungi Kami Sekarang
-                </a>
             </div>
         </div>
     </div>
@@ -670,11 +655,31 @@
     }
     
     .scroll-to-top-btn {
-        bottom: 20px;
+        bottom: 90px; /* Lebih tinggi agar tidak bertumpuk dengan floating buttons */
         right: 20px;
         width: 48px;
         height: 48px;
         font-size: 1.2rem;
+        z-index: 9996; /* Di bawah floating buttons tapi masih di atas konten */
+    }
+}
+
+/* Extra small mobile - posisi lebih tinggi lagi */
+@media (max-width: 480px) {
+    .scroll-to-top-btn {
+        bottom: 100px; /* Lebih tinggi lagi untuk layar kecil */
+        right: 15px;
+        width: 46px;
+        height: 46px;
+        font-size: 1.1rem;
+    }
+}
+
+/* Landscape mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .scroll-to-top-btn {
+        bottom: 80px;
+        right: 20px;
     }
 }
 

@@ -1,0 +1,38 @@
+<mxfile host="app.diagrams.net" modified="2025-11-28T00:00:00.000Z" agent="5.0 (Windows)" version="20.6.3" etag="ucd_tata_bhuana_admin" type="device">
+  <diagram id="UCD-Admin" name="Admin">
+    <mxGraphModel dx="1420" dy="784" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="container" value="Website Tata Bhuana Scaffolding" style="whiteSpace=wrap;html=1;rounded=1;strokeWidth=2;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="160" y="40" width="820" height="500" as="geometry"/>
+        </mxCell>
+        <mxCell id="actorAdmin" value="Admin" style="shape=umlActor;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="160" width="80" height="160" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_admin_login" value="Login Admin" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="container"><mxGeometry x="220" y="80" width="180" height="50" as="geometry"/></mxCell>
+        <mxCell id="uc_admin_register" value="Register Admin" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="container"><mxGeometry x="420" y="80" width="180" height="50" as="geometry"/></mxCell>
+        <mxCell id="uc_admin_logout" value="Logout Admin" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="container"><mxGeometry x="620" y="80" width="180" height="50" as="geometry"/></mxCell>
+        <mxCell id="uc_admin_dashboard" value="Lihat Dashboard" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="container"><mxGeometry x="220" y="150" width="200" height="60" as="geometry"/></mxCell>
+        <mxCell id="uc_admin_profile" value="Kelola Profil Perusahaan" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="container"><mxGeometry x="450" y="150" width="220" height="60" as="geometry"/></mxCell>
+        <mxCell id="uc_admin_scaff_crud" value="CRUD Scaffolding" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="container"><mxGeometry x="700" y="150" width="200" height="60" as="geometry"/></mxCell>
+        <mxCell id="uc_admin_proj_crud" value="CRUD Proyek" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="container"><mxGeometry x="260" y="220" width="200" height="60" as="geometry"/></mxCell>
+        <mxCell id="uc_admin_branch_crud" value="CRUD Cabang" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="container"><mxGeometry x="500" y="220" width="200" height="60" as="geometry"/></mxCell>
+        <mxCell id="uc_image_watermark" value="Proses Gambar &amp; Watermark" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;" vertex="1" parent="container"><mxGeometry x="740" y="220" width="220" height="60" as="geometry"/></mxCell>
+        <mxCell id="e_a_login" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="actorAdmin" target="uc_admin_login"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_a_register" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="actorAdmin" target="uc_admin_register"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_a_logout" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="actorAdmin" target="uc_admin_logout"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_a_dashboard" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="actorAdmin" target="uc_admin_dashboard"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_a_profile" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="actorAdmin" target="uc_admin_profile"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_a_scaff_crud" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="actorAdmin" target="uc_admin_scaff_crud"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_a_proj_crud" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="actorAdmin" target="uc_admin_proj_crud"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_a_branch_crud" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="actorAdmin" target="uc_admin_branch_crud"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_inc_img_scaff" value="&lt;&lt;include&gt;&gt;" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=classic;strokeColor=#6c8ebf;html=1;" edge="1" parent="container" source="uc_admin_scaff_crud" target="uc_image_watermark"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_inc_img_proj" value="&lt;&lt;include&gt;&gt;" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=classic;strokeColor=#6c8ebf;html=1;" edge="1" parent="container" source="uc_admin_proj_crud" target="uc_image_watermark"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_dash_scaff" value="pembaruan metrik" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=classic;strokeColor=#82b366;html=1;" edge="1" parent="container" source="uc_admin_scaff_crud" target="uc_admin_dashboard"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_dash_proj" value="pembaruan metrik" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=classic;strokeColor=#82b366;html=1;" edge="1" parent="container" source="uc_admin_proj_crud" target="uc_admin_dashboard"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_dash_branch" value="pembaruan metrik" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=classic;strokeColor=#82b366;html=1;" edge="1" parent="container" source="uc_admin_branch_crud" target="uc_admin_dashboard"><mxGeometry relative="1" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  </mxfile>

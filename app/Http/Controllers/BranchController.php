@@ -15,8 +15,13 @@ class BranchController extends Controller
             ->orderBy('sort_order', 'asc')
             ->get();
         $profile = CompanyProfile::first();
+        
+        // Ambil kantor utama untuk map
+        $mainBranch = Branch::where('is_active', true)
+            ->where('is_main_branch', true)
+            ->first();
 
-        return view('branches.index', compact('branches', 'profile'));
+        return view('branches.index', compact('branches', 'profile', 'mainBranch'));
     }
 
     public function show(Branch $branch)

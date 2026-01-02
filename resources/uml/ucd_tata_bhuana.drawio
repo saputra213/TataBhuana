@@ -1,0 +1,235 @@
+<mxfile host="app.diagrams.net" modified="2025-11-28T00:00:00.000Z" agent="5.0 (Windows)" version="20.6.3" etag="ucd_tata_bhuana" type="device">
+  <diagram id="UCD-1" name="Use Case Diagram">
+    <mxGraphModel dx="1420" dy="784" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="container" value="Website Tata Bhuana Scaffolding" style="whiteSpace=wrap;html=1;rounded=1;strokeWidth=2;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="160" y="40" width="820" height="650" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="actorUser" value="Pengguna" style="shape=umlActor;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="160" width="80" height="160" as="geometry"/>
+        </mxCell>
+        <mxCell id="actorAdmin" value="Admin" style="shape=umlActor;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="160" width="80" height="160" as="geometry"/>
+        </mxCell>
+
+        <!-- User general pages -->
+        <mxCell id="uc_home" value="Lihat Beranda" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="container">
+          <mxGeometry x="220" y="80" width="180" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_about" value="Lihat Tentang" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="container">
+          <mxGeometry x="420" y="80" width="180" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_services" value="Lihat Layanan" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="container">
+          <mxGeometry x="620" y="80" width="180" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_contact" value="Lihat Kontak" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="container">
+          <mxGeometry x="320" y="150" width="180" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_contactsend" value="Kirim Form Kontak" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="container">
+          <mxGeometry x="520" y="150" width="180" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- User scaffolding -->
+        <mxCell id="uc_scaff_index" value="Telusuri Scaffolding" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="container">
+          <mxGeometry x="220" y="240" width="200" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_scaff_filter" value="Filter/Sort Scaffolding" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="container">
+          <mxGeometry x="450" y="240" width="200" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_scaff_show" value="Lihat Detail Scaffolding" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="container">
+          <mxGeometry x="680" y="240" width="200" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- User projects -->
+        <mxCell id="uc_proj_index" value="Telusuri Proyek" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="container">
+          <mxGeometry x="220" y="330" width="200" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_proj_filter" value="Filter/Search Proyek" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="container">
+          <mxGeometry x="450" y="330" width="200" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_proj_show" value="Lihat Detail Proyek" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="container">
+          <mxGeometry x="680" y="330" width="200" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- User branches -->
+        <mxCell id="uc_br_index" value="Lihat Cabang" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="container">
+          <mxGeometry x="300" y="420" width="200" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_br_show" value="Lihat Detail Cabang" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="container">
+          <mxGeometry x="540" y="420" width="220" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Admin use cases -->
+        <mxCell id="uc_admin_login" value="Login Admin" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="container">
+          <mxGeometry x="220" y="520" width="180" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_admin_register" value="Register Admin" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="container">
+          <mxGeometry x="420" y="520" width="180" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_admin_logout" value="Logout Admin" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="container">
+          <mxGeometry x="620" y="520" width="180" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_admin_dashboard" value="Lihat Dashboard" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="container">
+          <mxGeometry x="220" y="590" width="200" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_admin_profile" value="Kelola Profil Perusahaan" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="container">
+          <mxGeometry x="450" y="590" width="220" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_admin_scaff_crud" value="CRUD Scaffolding" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="container">
+          <mxGeometry x="700" y="590" width="200" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_admin_proj_crud" value="CRUD Proyek" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="container">
+          <mxGeometry x="260" y="660" width="200" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_admin_branch_crud" value="CRUD Cabang" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="container">
+          <mxGeometry x="500" y="660" width="200" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc_image_watermark" value="Proses Gambar &amp; Watermark" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;" vertex="1" parent="container">
+          <mxGeometry x="740" y="660" width="220" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Edges: User to user use cases -->
+        <mxCell id="e_u_home" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;" edge="1" parent="1" source="actorUser" target="uc_home">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_u_about" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="actorUser" target="uc_about"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_u_services" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="actorUser" target="uc_services"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_u_contact" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="actorUser" target="uc_contact"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_u_contactsend" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="actorUser" target="uc_contactsend"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <mxCell id="e_u_scaff_index" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="actorUser" target="uc_scaff_index"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_u_scaff_filter" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="actorUser" target="uc_scaff_filter"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_u_scaff_show" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="actorUser" target="uc_scaff_show"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <mxCell id="e_u_proj_index" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="actorUser" target="uc_proj_index"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_u_proj_filter" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="actorUser" target="uc_proj_filter"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_u_proj_show" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="actorUser" target="uc_proj_show"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <mxCell id="e_u_br_index" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="actorUser" target="uc_br_index"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_u_br_show" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="actorUser" target="uc_br_show"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Edges: Admin to admin use cases -->
+        <mxCell id="e_a_login" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="actorAdmin" target="uc_admin_login"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_a_register" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="actorAdmin" target="uc_admin_register"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_a_logout" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="actorAdmin" target="uc_admin_logout"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_a_dashboard" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="actorAdmin" target="uc_admin_dashboard"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_a_profile" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="actorAdmin" target="uc_admin_profile"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_a_scaff_crud" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="actorAdmin" target="uc_admin_scaff_crud"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_a_proj_crud" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="actorAdmin" target="uc_admin_proj_crud"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_a_branch_crud" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="actorAdmin" target="uc_admin_branch_crud"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Include-like relations -->
+        <mxCell id="e_inc_scaff" value="&lt;&lt;include&gt;&gt;" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=classic;strokeColor=#6c8ebf;html=1;" edge="1" parent="container" source="uc_scaff_index" target="uc_scaff_filter"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_inc_proj" value="&lt;&lt;include&gt;&gt;" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=classic;strokeColor=#6c8ebf;html=1;" edge="1" parent="container" source="uc_proj_index" target="uc_proj_filter"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_inc_contact" value="&lt;&lt;include&gt;&gt;" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=classic;strokeColor=#6c8ebf;html=1;" edge="1" parent="container" source="uc_contact" target="uc_contactsend"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_inc_img_scaff" value="&lt;&lt;include&gt;&gt;" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=classic;strokeColor=#6c8ebf;html=1;" edge="1" parent="container" source="uc_admin_scaff_crud" target="uc_image_watermark"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_inc_img_proj" value="&lt;&lt;include&gt;&gt;" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=classic;strokeColor=#6c8ebf;html=1;" edge="1" parent="container" source="uc_admin_proj_crud" target="uc_image_watermark"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Dashboard metric updates -->
+        <mxCell id="e_dash_scaff" value="pembaruan metrik" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=classic;strokeColor=#82b366;html=1;" edge="1" parent="container" source="uc_admin_scaff_crud" target="uc_admin_dashboard"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_dash_proj" value="pembaruan metrik" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=classic;strokeColor=#82b366;html=1;" edge="1" parent="container" source="uc_admin_proj_crud" target="uc_admin_dashboard"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_dash_branch" value="pembaruan metrik" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=classic;strokeColor=#82b366;html=1;" edge="1" parent="container" source="uc_admin_branch_crud" target="uc_admin_dashboard"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="UCD-User" name="Pengguna">
+    <mxGraphModel dx="1420" dy="784" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="u0"/>
+        <mxCell id="u1" parent="u0"/>
+
+        <mxCell id="u_container" value="Website Tata Bhuana Scaffolding" style="whiteSpace=wrap;html=1;rounded=1;strokeWidth=2;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="u1">
+          <mxGeometry x="160" y="40" width="820" height="500" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="u_actorUser" value="Pengguna" style="shape=umlActor;html=1;outlineConnect=0;" vertex="1" parent="u1">
+          <mxGeometry x="40" y="160" width="80" height="160" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="u_uc_home" value="Lihat Beranda" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="u_container"><mxGeometry x="220" y="80" width="180" height="50" as="geometry"/></mxCell>
+        <mxCell id="u_uc_about" value="Lihat Tentang" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="u_container"><mxGeometry x="420" y="80" width="180" height="50" as="geometry"/></mxCell>
+        <mxCell id="u_uc_services" value="Lihat Layanan" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="u_container"><mxGeometry x="620" y="80" width="180" height="50" as="geometry"/></mxCell>
+        <mxCell id="u_uc_contact" value="Lihat Kontak" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="u_container"><mxGeometry x="320" y="150" width="180" height="50" as="geometry"/></mxCell>
+        <mxCell id="u_uc_contactsend" value="Kirim Form Kontak" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="u_container"><mxGeometry x="520" y="150" width="180" height="50" as="geometry"/></mxCell>
+
+        <mxCell id="u_uc_scaff_index" value="Telusuri Scaffolding" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="u_container"><mxGeometry x="220" y="240" width="200" height="60" as="geometry"/></mxCell>
+        <mxCell id="u_uc_scaff_filter" value="Filter/Sort Scaffolding" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="u_container"><mxGeometry x="450" y="240" width="200" height="60" as="geometry"/></mxCell>
+        <mxCell id="u_uc_scaff_show" value="Lihat Detail Scaffolding" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="u_container"><mxGeometry x="680" y="240" width="200" height="60" as="geometry"/></mxCell>
+
+        <mxCell id="u_uc_proj_index" value="Telusuri Proyek" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="u_container"><mxGeometry x="220" y="330" width="200" height="60" as="geometry"/></mxCell>
+        <mxCell id="u_uc_proj_filter" value="Filter/Search Proyek" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="u_container"><mxGeometry x="450" y="330" width="200" height="60" as="geometry"/></mxCell>
+        <mxCell id="u_uc_proj_show" value="Lihat Detail Proyek" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="u_container"><mxGeometry x="680" y="330" width="200" height="60" as="geometry"/></mxCell>
+
+        <mxCell id="u_uc_br_index" value="Lihat Cabang" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="u_container"><mxGeometry x="300" y="420" width="200" height="60" as="geometry"/></mxCell>
+        <mxCell id="u_uc_br_show" value="Lihat Detail Cabang" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="u_container"><mxGeometry x="540" y="420" width="220" height="60" as="geometry"/></mxCell>
+
+        <mxCell id="u_e_u_home" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="u1" source="u_actorUser" target="u_uc_home"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="u_e_u_about" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="u1" source="u_actorUser" target="u_uc_about"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="u_e_u_services" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="u1" source="u_actorUser" target="u_uc_services"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="u_e_u_contact" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="u1" source="u_actorUser" target="u_uc_contact"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="u_e_u_contactsend" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="u1" source="u_actorUser" target="u_uc_contactsend"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="u_e_u_scaff_index" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="u1" source="u_actorUser" target="u_uc_scaff_index"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="u_e_u_scaff_filter" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="u1" source="u_actorUser" target="u_uc_scaff_filter"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="u_e_u_scaff_show" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="u1" source="u_actorUser" target="u_uc_scaff_show"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="u_e_u_proj_index" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="u1" source="u_actorUser" target="u_uc_proj_index"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="u_e_u_proj_filter" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="u1" source="u_actorUser" target="u_uc_proj_filter"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="u_e_u_proj_show" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="u1" source="u_actorUser" target="u_uc_proj_show"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="u_e_u_br_index" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="u1" source="u_actorUser" target="u_uc_br_index"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="u_e_u_br_show" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="u1" source="u_actorUser" target="u_uc_br_show"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <mxCell id="u_e_inc_scaff" value="&lt;&lt;include&gt;&gt;" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=classic;strokeColor=#6c8ebf;html=1;" edge="1" parent="u_container" source="u_uc_scaff_index" target="u_uc_scaff_filter"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="u_e_inc_proj" value="&lt;&lt;include&gt;&gt;" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=classic;strokeColor=#6c8ebf;html=1;" edge="1" parent="u_container" source="u_uc_proj_index" target="u_uc_proj_filter"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="u_e_inc_contact" value="&lt;&lt;include&gt;&gt;" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=classic;strokeColor=#6c8ebf;html=1;" edge="1" parent="u_container" source="u_uc_contact" target="u_uc_contactsend"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="UCD-Admin" name="Admin">
+    <mxGraphModel dx="1420" dy="784" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="a0"/>
+        <mxCell id="a1" parent="a0"/>
+
+        <mxCell id="a_container" value="Website Tata Bhuana Scaffolding" style="whiteSpace=wrap;html=1;rounded=1;strokeWidth=2;fillColor=#ffffff;strokeColor=#000000;" vertex="1" parent="a1">
+          <mxGeometry x="160" y="40" width="820" height="500" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="a_actorAdmin" value="Admin" style="shape=umlActor;html=1;outlineConnect=0;" vertex="1" parent="a1">
+          <mxGeometry x="1000" y="160" width="80" height="160" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="a_uc_admin_login" value="Login Admin" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="a_container"><mxGeometry x="220" y="80" width="180" height="50" as="geometry"/></mxCell>
+        <mxCell id="a_uc_admin_register" value="Register Admin" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="a_container"><mxGeometry x="420" y="80" width="180" height="50" as="geometry"/></mxCell>
+        <mxCell id="a_uc_admin_logout" value="Logout Admin" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="a_container"><mxGeometry x="620" y="80" width="180" height="50" as="geometry"/></mxCell>
+        <mxCell id="a_uc_admin_dashboard" value="Lihat Dashboard" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="a_container"><mxGeometry x="220" y="150" width="200" height="60" as="geometry"/></mxCell>
+        <mxCell id="a_uc_admin_profile" value="Kelola Profil Perusahaan" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="a_container"><mxGeometry x="450" y="150" width="220" height="60" as="geometry"/></mxCell>
+        <mxCell id="a_uc_admin_scaff_crud" value="CRUD Scaffolding" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="a_container"><mxGeometry x="700" y="150" width="200" height="60" as="geometry"/></mxCell>
+        <mxCell id="a_uc_admin_proj_crud" value="CRUD Proyek" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="a_container"><mxGeometry x="260" y="220" width="200" height="60" as="geometry"/></mxCell>
+        <mxCell id="a_uc_admin_branch_crud" value="CRUD Cabang" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;" vertex="1" parent="a_container"><mxGeometry x="500" y="220" width="200" height="60" as="geometry"/></mxCell>
+        <mxCell id="a_uc_image_watermark" value="Proses Gambar &amp; Watermark" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;" vertex="1" parent="a_container"><mxGeometry x="740" y="220" width="220" height="60" as="geometry"/></mxCell>
+
+        <mxCell id="a_e_a_login" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="a1" source="a_actorAdmin" target="a_uc_admin_login"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a_e_a_register" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="a1" source="a_actorAdmin" target="a_uc_admin_register"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a_e_a_logout" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="a1" source="a_actorAdmin" target="a_uc_admin_logout"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a_e_a_dashboard" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="a1" source="a_actorAdmin" target="a_uc_admin_dashboard"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a_e_a_profile" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="a1" source="a_actorAdmin" target="a_uc_admin_profile"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a_e_a_scaff_crud" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="a1" source="a_actorAdmin" target="a_uc_admin_scaff_crud"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a_e_a_proj_crud" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="a1" source="a_actorAdmin" target="a_uc_admin_proj_crud"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a_e_a_branch_crud" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="a1" source="a_actorAdmin" target="a_uc_admin_branch_crud"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <mxCell id="a_e_inc_img_scaff" value="&lt;&lt;include&gt;&gt;" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=classic;strokeColor=#6c8ebf;html=1;" edge="1" parent="a_container" source="a_uc_admin_scaff_crud" target="a_uc_image_watermark"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a_e_inc_img_proj" value="&lt;&lt;include&gt;&gt;" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=classic;strokeColor=#6c8ebf;html=1;" edge="1" parent="a_container" source="a_uc_admin_proj_crud" target="a_uc_image_watermark"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <mxCell id="a_e_dash_scaff" value="pembaruan metrik" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=classic;strokeColor=#82b366;html=1;" edge="1" parent="a_container" source="a_uc_admin_scaff_crud" target="a_uc_admin_dashboard"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a_e_dash_proj" value="pembaruan metrik" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=classic;strokeColor=#82b366;html=1;" edge="1" parent="a_container" source="a_uc_admin_proj_crud" target="a_uc_admin_dashboard"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a_e_dash_branch" value="pembaruan metrik" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=classic;strokeColor=#82b366;html=1;" edge="1" parent="a_container" source="a_uc_admin_branch_crud" target="a_uc_admin_dashboard"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+  </mxfile>

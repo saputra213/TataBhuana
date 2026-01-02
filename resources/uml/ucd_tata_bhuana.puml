@@ -1,0 +1,73 @@
+@startuml
+actor "Pengguna" as User
+actor "Admin" as Admin
+
+rectangle "Website Tata Bhuana Scaffolding" {
+  usecase "Lihat Beranda" as UC_Home
+  usecase "Lihat Tentang" as UC_About
+  usecase "Lihat Layanan" as UC_Services
+  usecase "Lihat Kontak" as UC_Contact
+  usecase "Kirim Form Kontak" as UC_ContactSend
+
+  usecase "Telusuri Scaffolding" as UC_ScaffIndex
+  usecase "Filter/Sort Scaffolding" as UC_ScaffFilter
+  usecase "Lihat Detail Scaffolding" as UC_ScaffShow
+
+  usecase "Telusuri Proyek" as UC_ProjIndex
+  usecase "Filter/Search Proyek" as UC_ProjFilter
+  usecase "Lihat Detail Proyek" as UC_ProjShow
+
+  usecase "Lihat Cabang" as UC_BrIndex
+  usecase "Lihat Detail Cabang" as UC_BrShow
+
+  usecase "Login Admin" as UC_AdminLogin
+  usecase "Register Admin" as UC_AdminRegister
+  usecase "Logout Admin" as UC_AdminLogout
+  usecase "Lihat Dashboard" as UC_AdminDashboard
+
+  usecase "Kelola Profil Perusahaan" as UC_AdminProfile
+  usecase "CRUD Scaffolding" as UC_AdminScaffCRUD
+  usecase "CRUD Proyek" as UC_AdminProjCRUD
+  usecase "CRUD Cabang" as UC_AdminBranchCRUD
+
+  usecase "Proses Gambar & Watermark" as UC_ImageWatermark
+}
+
+User --> UC_Home
+User --> UC_About
+User --> UC_Services
+User --> UC_Contact
+User --> UC_ContactSend
+
+User --> UC_ScaffIndex
+User --> UC_ScaffFilter
+User --> UC_ScaffShow
+
+User --> UC_ProjIndex
+User --> UC_ProjFilter
+User --> UC_ProjShow
+
+User --> UC_BrIndex
+User --> UC_BrShow
+
+Admin --> UC_AdminLogin
+Admin --> UC_AdminRegister
+Admin --> UC_AdminLogout
+Admin --> UC_AdminDashboard
+
+Admin --> UC_AdminProfile
+Admin --> UC_AdminScaffCRUD
+Admin --> UC_AdminProjCRUD
+Admin --> UC_AdminBranchCRUD
+
+UC_AdminScaffCRUD ..> UC_ImageWatermark : <<include>>
+UC_AdminProjCRUD ..> UC_ImageWatermark : <<include>>
+
+UC_ScaffIndex ..> UC_ScaffFilter : <<include>>
+UC_ProjIndex ..> UC_ProjFilter : <<include>>
+UC_Contact ..> UC_ContactSend : <<include>>
+
+UC_AdminScaffCRUD ..> UC_AdminDashboard : pembaruan metrik
+UC_AdminProjCRUD ..> UC_AdminDashboard : pembaruan metrik
+UC_AdminBranchCRUD ..> UC_AdminDashboard : pembaruan metrik
+@enduml

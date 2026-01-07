@@ -25,34 +25,62 @@
         transition: all 0.3s ease;
         position: relative;
         padding: 0.5rem 1rem;
-        border-radius: 8px;
+        border-radius: 12px;
         margin-right: 1rem;
-    }
-    
-    .navbar-brand::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(90deg, rgba(22, 163, 74, 0.6) 0%, rgba(22, 163, 74, 0.5) 30%, rgba(22, 163, 74, 0.3) 60%, transparent 100%);
-        border-radius: 8px;
-        z-index: -1;
-        transition: all 0.3s ease;
-    }
-    
-    .navbar-brand:hover::before {
-        background: linear-gradient(90deg, rgba(22, 163, 74, 0.7) 0%, rgba(22, 163, 74, 0.6) 30%, rgba(22, 163, 74, 0.4) 60%, transparent 100%);
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(5px);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        color: #ffffff !important;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
     }
     
     .navbar-brand:hover {
-        transform: scale(1.05);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        background: rgba(255, 255, 255, 0.2);
     }
     
     .navbar-brand img {
         position: relative;
         z-index: 1;
+        transition: all 0.3s ease;
+    }
+
+    .brand-text {
+        font-weight: 800;
+        font-size: 1.25rem;
+        letter-spacing: -0.5px;
+        line-height: 1.2;
+    }
+
+    @media (max-width: 768px) {
+        .navbar-brand {
+            padding: 0.4rem 0.8rem;
+        }
+        .brand-text {
+            font-size: 1rem;
+        }
+        .navbar-brand img {
+            height: 32px !important;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .navbar-brand {
+            padding: 0.3rem 0.6rem;
+            margin-right: 0.5rem;
+        }
+        .brand-text {
+            font-size: 0.9rem;
+            max-width: 150px;
+            white-space: normal;
+        }
+        .navbar-brand img {
+            height: 28px !important;
+        }
     }
     
     .nav-link {
@@ -184,51 +212,6 @@
     </style>
     
     <style>
-    /* Global alignment untuk floating buttons di mobile */
-    @media (max-width: 768px) {
-        /* Pastikan semua floating buttons sejajar vertikal dengan left yang sama */
-        .floating-whatsapp-transparent,
-        .floating-facebook-transparent,
-        .floating-instagram-transparent {
-            left: max(15px, env(safe-area-inset-left, 15px)) !important;
-        }
-        
-        /* Pastikan jarak konsisten antar button */
-        .floating-whatsapp-transparent {
-            bottom: max(20px, env(safe-area-inset-bottom, 20px)) !important;
-        }
-        
-        .floating-facebook-transparent {
-            bottom: max(95px, env(safe-area-inset-bottom, 95px)) !important;
-        }
-        
-        .floating-instagram-transparent {
-            bottom: max(170px, env(safe-area-inset-bottom, 170px)) !important;
-        }
-    }
-    
-    @media (max-width: 480px) {
-        /* Pastikan semua floating buttons sejajar vertikal dengan left yang sama */
-        .floating-whatsapp-transparent,
-        .floating-facebook-transparent,
-        .floating-instagram-transparent {
-            left: max(15px, env(safe-area-inset-left, 15px)) !important;
-        }
-        
-        /* Pastikan jarak konsisten antar button untuk layar kecil */
-        .floating-whatsapp-transparent {
-            bottom: max(15px, env(safe-area-inset-bottom, 15px)) !important;
-        }
-        
-        .floating-facebook-transparent {
-            bottom: max(85px, env(safe-area-inset-bottom, 85px)) !important;
-        }
-        
-        .floating-instagram-transparent {
-            bottom: max(155px, env(safe-area-inset-bottom, 155px)) !important;
-        }
-    }
-    
     /* Fix untuk scroll to top button di mobile - pastikan bisa diklik */
     @media (max-width: 768px) {
         .scroll-to-top-btn.show {
@@ -261,17 +244,19 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-primary fixed-top">
         <div class="container">
-            <a class="navbar-brand fw-bold d-flex align-items-center" href="{{ route('home') }}">
+            <a class="navbar-brand fw-bold" href="{{ route('home') }}">
                 @if(file_exists(public_path('images/logo.png')))
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo {{ $profile->company_name ?? 'Tata Bhuana' }}" class="me-2" style="height: 40px; width: auto;">
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo {{ $profile->company_name ?? 'Tata Bhuana' }}" class="img-fluid" style="max-height: 40px; width: auto;">
                 @else
-                    <i class="fas fa-building me-2"></i>
+                    <i class="fas fa-building text-white" style="font-size: 24px;"></i>
                 @endif
-                @if($profile ?? false)
-                    {{ $profile->company_name }}
-                @else
-                    Tata Bhuana
-                @endif
+                <span class="brand-text">
+                    @if($profile ?? false)
+                        {{ $profile->company_name }}
+                    @else
+                        Tata Bhuana
+                    @endif
+                </span>
             </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -406,14 +391,11 @@
         </div>
     </footer>
 
-    <!-- Transparent Floating WhatsApp Button -->
-    @include('components.floating-whatsapp', ['branches' => \App\Models\Branch::where('is_active', true)->orderBy('sort_order')->get()])
-
-    <!-- Transparent Floating Instagram Button -->
-    @include('components.floating-instagram', ['profile' => $profile ?? null])
-
-    <!-- Transparent Floating Facebook Button -->
-    @include('components.floating-facebook', ['profile' => $profile ?? null])
+    <!-- Floating Social Button (Combined) -->
+    @include('components.floating-social', [
+        'branches' => \App\Models\Branch::where('is_active', true)->orderBy('sort_order')->get(),
+        'profile' => $profile ?? null
+    ])
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

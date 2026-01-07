@@ -153,7 +153,7 @@
             </div>
         </div>
         
-        <div class="row g-4">
+        <div class="row g-4 icon-grid-3">
             <div class="col-md-4">
                 <div class="text-center p-4 bg-white rounded shadow-sm h-100">
                     <div class="mb-3">

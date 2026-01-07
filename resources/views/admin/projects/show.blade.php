@@ -110,43 +110,7 @@
                     </div>
                 </div>
                 
-                @if($project->challenges || $project->solutions || $project->results)
-                <hr>
-                <h6 class="fw-bold">Kisah Proyek</h6>
-                
-                @if($project->challenges)
-                <div class="mb-3">
-                    <h6 class="text-danger mb-2">
-                        <i class="fas fa-exclamation-triangle me-2"></i>Tantangan
-                    </h6>
-                    <div class="text-muted">
-                        {!! nl2br(e($project->challenges)) !!}
-                    </div>
-                </div>
-                @endif
-                
-                @if($project->solutions)
-                <div class="mb-3">
-                    <h6 class="text-primary mb-2">
-                        <i class="fas fa-lightbulb me-2"></i>Solusi
-                    </h6>
-                    <div class="text-muted">
-                        {!! nl2br(e($project->solutions)) !!}
-                    </div>
-                </div>
-                @endif
-                
-                @if($project->results)
-                <div class="mb-3">
-                    <h6 class="text-success mb-2">
-                        <i class="fas fa-trophy me-2"></i>Hasil
-                    </h6>
-                    <div class="text-muted">
-                        {!! nl2br(e($project->results)) !!}
-                    </div>
-                </div>
-                @endif
-                @endif
+
             </div>
         </div>
     </div>

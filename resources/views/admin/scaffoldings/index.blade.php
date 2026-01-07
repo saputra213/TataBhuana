@@ -24,8 +24,7 @@
                             <th>Material</th>
                             <th>Harga Sewa</th>
                             <th>Harga Jual</th>
-                            <th>Stok</th>
-                            <th>Status</th>
+                            <th>Status Stok</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -63,10 +62,7 @@
                                 @endif
                             </td>
                             <td>
-                                <span class="badge bg-info">{{ $scaffolding->stock_quantity }} unit</span>
-                            </td>
-                            <td>
-                                @if($scaffolding->is_available)
+                                @if($scaffolding->stock_quantity > 0)
                                     <span class="badge bg-success">Tersedia</span>
                                 @else
                                     <span class="badge bg-danger">Tidak Tersedia</span>

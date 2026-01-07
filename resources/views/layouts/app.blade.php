@@ -98,6 +98,7 @@
     .navbar-nav .nav-item:nth-child(5) { animation: fadeInDown 0.8s ease-out 0.5s both; }
     .navbar-nav .nav-item:nth-child(6) { animation: fadeInDown 0.8s ease-out 0.6s both; }
     .navbar-nav .nav-item:nth-child(7) { animation: fadeInDown 0.8s ease-out 0.7s both; }
+    .navbar-nav .nav-item:nth-child(8) { animation: fadeInDown 0.8s ease-out 0.8s both; }
     
     @keyframes fadeInLeft {
         from {

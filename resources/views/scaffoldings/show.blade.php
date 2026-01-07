@@ -93,8 +93,12 @@
                             </div>
                             <div class="col-6">
                                 <div class="d-flex justify-content-between">
-                                    <span class="text-muted">Stok:</span>
-                                    <strong>{{ $scaffolding->stock_quantity }} unit</strong>
+                                    <span class="text-muted">Status:</span>
+                                    @if($scaffolding->stock_quantity > 0)
+                                        <span class="badge bg-success">Tersedia</span>
+                                    @else
+                                        <span class="badge bg-danger">Tidak Tersedia</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>

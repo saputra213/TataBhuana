@@ -114,29 +114,7 @@
                         @enderror
                     </div>
                     
-                    <div class="mb-3">
-                        <label for="challenges" class="form-label">Tantangan</label>
-                        <textarea class="form-control @error('challenges') is-invalid @enderror" id="challenges" name="challenges" rows="3">{{ old('challenges') }}</textarea>
-                        @error('challenges')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="solutions" class="form-label">Solusi</label>
-                        <textarea class="form-control @error('solutions') is-invalid @enderror" id="solutions" name="solutions" rows="3">{{ old('solutions') }}</textarea>
-                        @error('solutions')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="results" class="form-label">Hasil</label>
-                        <textarea class="form-control @error('results') is-invalid @enderror" id="results" name="results" rows="3">{{ old('results') }}</textarea>
-                        @error('results')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
+
                     
                     <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input" id="is_featured" name="is_featured" {{ old('is_featured') ? 'checked' : '' }}>

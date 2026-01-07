@@ -197,10 +197,7 @@
                         <i class="fas fa-info-circle text-primary me-2"></i>
                         <small>Upload gambar baru akan mengganti gambar lama</small>
                     </li>
-                    <li class="mb-2">
-                        <i class="fas fa-info-circle text-primary me-2"></i>
-                        <small>Isi tantangan, solusi, dan hasil untuk cerita yang lengkap</small>
-                    </li>
+
                     <li class="mb-2">
                         <i class="fas fa-info-circle text-primary me-2"></i>
                         <small>Proyek unggulan akan ditampilkan di halaman utama</small>

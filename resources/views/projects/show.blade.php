@@ -149,51 +149,7 @@
             </div>
         </div>
         
-        <!-- Project Story -->
-        @if($project->challenges || $project->solutions || $project->results)
-        <div class="row mt-5">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="fw-bold mb-4">Kisah Proyek</h3>
-                        
-                        @if($project->challenges)
-                        <div class="mb-4">
-                            <h5 class="fw-bold text-danger mb-3">
-                                <i class="fas fa-exclamation-triangle me-2"></i>Tantangan
-                            </h5>
-                            <div class="text-muted">
-                                {!! nl2br(e($project->challenges)) !!}
-                            </div>
-                        </div>
-                        @endif
-                        
-                        @if($project->solutions)
-                        <div class="mb-4">
-                            <h5 class="fw-bold text-primary mb-3">
-                                <i class="fas fa-lightbulb me-2"></i>Solusi
-                            </h5>
-                            <div class="text-muted">
-                                {!! nl2br(e($project->solutions)) !!}
-                            </div>
-                        </div>
-                        @endif
-                        
-                        @if($project->results)
-                        <div class="mb-4">
-                            <h5 class="fw-bold text-success mb-3">
-                                <i class="fas fa-trophy me-2"></i>Hasil
-                            </h5>
-                            <div class="text-muted">
-                                {!! nl2br(e($project->results)) !!}
-                            </div>
-                        </div>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endif
+
         
         <!-- Related Projects -->
         @if($relatedProjects->count() > 0)
@@ -242,7 +198,7 @@
             </div>
         </div>
         
-        <div class="row g-4">
+        <div class="row g-4 icon-grid-3">
             <div class="col-md-4">
                 <div class="text-center p-4 bg-white rounded shadow-sm h-100">
                     <div class="mb-3">
@@ -620,7 +576,6 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 </style>
 @endpush
-
 
 
 

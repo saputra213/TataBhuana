@@ -72,7 +72,7 @@
 @if($profile)
 <section class="py-5 bg-white">
     <div class="container">
-        <div class="row g-4 mb-5">
+        <div class="row g-4 mb-5 icon-grid-3">
             <div class="col-lg-3 col-md-6">
                 <div class="contact-card h-100">
                     <div class="contact-icon bg-primary">

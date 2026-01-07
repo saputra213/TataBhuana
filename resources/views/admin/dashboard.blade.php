@@ -6,70 +6,70 @@
 @section('content')
 <div class="row">
     <div class="col-12">
-        <h2 class="mb-4">Selamat Datang, {{ auth('admin')->user()->name }}!</h2>
+        <h2 class="mb-3 mb-lg-4 fs-3 fs-lg-2">Selamat Datang, {{ auth('admin')->user()->name }}!</h2>
     </div>
 </div>
 
 <!-- Stats Cards -->
-<div class="row g-4 mb-5">
-    <div class="col-lg-3 col-md-6">
-        <div class="card bg-primary text-white">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <h6 class="card-title">Total Scaffolding</h6>
-                        <h3 class="mb-0">{{ $scaffoldingCount }}</h3>
+<div class="row g-3 g-lg-4 mb-4 mb-lg-5">
+    <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card bg-primary text-white h-100">
+            <div class="card-body p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="overflow-hidden me-2">
+                        <h6 class="card-title text-truncate mb-1" style="font-size: 0.9rem;">Total Scaffolding</h6>
+                        <h3 class="mb-0 fs-2">{{ $scaffoldingCount }}</h3>
                     </div>
-                    <div class="align-self-center">
-                        <i class="fas fa-building fa-2x"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="col-lg-3 col-md-6">
-        <div class="card bg-success text-white">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <h6 class="card-title">Tersedia</h6>
-                        <h3 class="mb-0">{{ $availableScaffolding }}</h3>
-                    </div>
-                    <div class="align-self-center">
-                        <i class="fas fa-check-circle fa-2x"></i>
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-building fa-2x opacity-75"></i>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     
-    <div class="col-lg-3 col-md-6">
-        <div class="card bg-warning text-white">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <h6 class="card-title">Tidak Tersedia</h6>
-                        <h3 class="mb-0">{{ $scaffoldingCount - $availableScaffolding }}</h3>
+    <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card bg-success text-white h-100">
+            <div class="card-body p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="overflow-hidden me-2">
+                        <h6 class="card-title text-truncate mb-1" style="font-size: 0.9rem;">Tersedia</h6>
+                        <h3 class="mb-0 fs-2">{{ $availableScaffolding }}</h3>
                     </div>
-                    <div class="align-self-center">
-                        <i class="fas fa-times-circle fa-2x"></i>
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-check-circle fa-2x opacity-75"></i>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     
-    <div class="col-lg-3 col-md-6">
-        <div class="card bg-info text-white">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <h6 class="card-title">Total Proyek</h6>
-                        <h3 class="mb-0">{{ $projectCount }}</h3>
+    <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card bg-warning text-white h-100">
+            <div class="card-body p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="overflow-hidden me-2">
+                        <h6 class="card-title text-truncate mb-1" style="font-size: 0.9rem;">Tidak Tersedia</h6>
+                        <h3 class="mb-0 fs-2">{{ $scaffoldingCount - $availableScaffolding }}</h3>
                     </div>
-                    <div class="align-self-center">
-                        <i class="fas fa-project-diagram fa-2x"></i>
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-times-circle fa-2x opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card bg-info text-white h-100">
+            <div class="card-body p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="overflow-hidden me-2">
+                        <h6 class="card-title text-truncate mb-1" style="font-size: 0.9rem;">Total Proyek</h6>
+                        <h3 class="mb-0 fs-2">{{ $projectCount }}</h3>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-project-diagram fa-2x opacity-75"></i>
                     </div>
                 </div>
             </div>
@@ -77,65 +77,65 @@
     </div>
 </div>
 
-<div class="row g-4 mb-5">
-    <div class="col-lg-3 col-md-6">
-        <div class="card bg-success text-white">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <h6 class="card-title">Proyek Selesai</h6>
-                        <h3 class="mb-0">{{ $completedProjects }}</h3>
+<div class="row g-3 g-lg-4 mb-4 mb-lg-5">
+    <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card bg-success text-white h-100">
+            <div class="card-body p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="overflow-hidden me-2">
+                        <h6 class="card-title text-truncate mb-1" style="font-size: 0.9rem;">Proyek Selesai</h6>
+                        <h3 class="mb-0 fs-2">{{ $completedProjects }}</h3>
                     </div>
-                    <div class="align-self-center">
-                        <i class="fas fa-check-circle fa-2x"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="col-lg-3 col-md-6">
-        <div class="card bg-warning text-white">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <h6 class="card-title">Total Cabang</h6>
-                        <h3 class="mb-0">{{ $branchCount }}</h3>
-                    </div>
-                    <div class="align-self-center">
-                        <i class="fas fa-map-marker-alt fa-2x"></i>
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-check-circle fa-2x opacity-75"></i>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     
-    <div class="col-lg-3 col-md-6">
-        <div class="card bg-secondary text-white">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <h6 class="card-title">Kantor Pusat</h6>
-                        <h3 class="mb-0">{{ $mainBranches }}</h3>
+    <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card bg-warning text-white h-100">
+            <div class="card-body p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="overflow-hidden me-2">
+                        <h6 class="card-title text-truncate mb-1" style="font-size: 0.9rem;">Total Cabang</h6>
+                        <h3 class="mb-0 fs-2">{{ $branchCount }}</h3>
                     </div>
-                    <div class="align-self-center">
-                        <i class="fas fa-building fa-2x"></i>
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-map-marker-alt fa-2x opacity-75"></i>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     
-    <div class="col-lg-3 col-md-6">
-        <div class="card bg-dark text-white">
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <h6 class="card-title">Total Stok</h6>
-                        <h3 class="mb-0">{{ \App\Models\Scaffolding::sum('stock_quantity') }}</h3>
+    <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card bg-secondary text-white h-100">
+            <div class="card-body p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="overflow-hidden me-2">
+                        <h6 class="card-title text-truncate mb-1" style="font-size: 0.9rem;">Kantor Pusat</h6>
+                        <h3 class="mb-0 fs-2">{{ $mainBranches }}</h3>
                     </div>
-                    <div class="align-self-center">
-                        <i class="fas fa-boxes fa-2x"></i>
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-building fa-2x opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card bg-dark text-white h-100">
+            <div class="card-body p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="overflow-hidden me-2">
+                        <h6 class="card-title text-truncate mb-1" style="font-size: 0.9rem;">Total Stok</h6>
+                        <h3 class="mb-0 fs-2">{{ \App\Models\Scaffolding::sum('stock_quantity') }}</h3>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-boxes fa-2x opacity-75"></i>
                     </div>
                 </div>
             </div>

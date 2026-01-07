@@ -17,7 +17,7 @@
 <body>
     <div class="d-flex">
         <!-- Sidebar -->
-        <div class="bg-dark text-white" style="width: 250px; min-height: 100vh;">
+        <div class="bg-dark text-white d-none d-lg-block" style="width: 250px; min-height: 100vh;">
             <div class="p-3">
                 <h5 class="fw-bold mb-4">
                     <i class="fas fa-cogs me-2"></i>
@@ -62,19 +62,22 @@
             <!-- Top Bar -->
             <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
                 <div class="container-fluid">
-                    <span class="navbar-brand mb-0 h1">@yield('page-title', 'Dashboard')</span>
+                    <button class="btn btn-outline-secondary d-lg-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#adminSidebarOffcanvas">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <span class="navbar-brand mb-0 fs-4 fs-lg-3 fw-bold">@yield('page-title', 'Dashboard')</span>
                     
                     <div class="navbar-nav ms-auto">
                         <span class="navbar-text">
                             <i class="fas fa-user me-2"></i>
-                            {{ auth('admin')->user()->name }}
+                            <span class="d-none d-sm-inline">{{ auth('admin')->user()->name }}</span>
                         </span>
                     </div>
                 </div>
             </nav>
             
             <!-- Page Content -->
-            <main class="p-4">
+            <main class="p-3 p-lg-4">
                 @if(session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('success') }}
@@ -91,6 +94,45 @@
                 
                 @yield('content')
             </main>
+        </div>
+    </div>
+    
+    <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="adminSidebarOffcanvas">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Admin Panel</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <nav class="nav flex-column">
+                <a class="nav-link text-white {{ request()->routeIs('admin.dashboard') ? 'bg-primary' : '' }}" href="{{ route('admin.dashboard') }}">
+                    <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                </a>
+                <a class="nav-link text-white {{ request()->routeIs('admin.scaffoldings.*') ? 'bg-primary' : '' }}" href="{{ route('admin.scaffoldings.index') }}">
+                    <i class="fas fa-building me-2"></i>Scaffolding
+                </a>
+                <a class="nav-link text-white {{ request()->routeIs('admin.projects.*') ? 'bg-primary' : '' }}" href="{{ route('admin.projects.index') }}">
+                    <i class="fas fa-project-diagram me-2"></i>Proyek
+                </a>
+                <a class="nav-link text-white {{ request()->routeIs('admin.articles.*') ? 'bg-primary' : '' }}" href="{{ route('admin.articles.index') }}">
+                    <i class="fas fa-newspaper me-2"></i>Artikel
+                </a>
+                <a class="nav-link text-white {{ request()->routeIs('admin.comments.*') ? 'bg-primary' : '' }}" href="{{ route('admin.comments.index') }}">
+                    <i class="fas fa-comments me-2"></i>Komentar
+                </a>
+                <a class="nav-link text-white {{ request()->routeIs('admin.branches.*') ? 'bg-primary' : '' }}" href="{{ route('admin.branches.index') }}">
+                    <i class="fas fa-map-marker-alt me-2"></i>Cabang
+                </a>
+                <a class="nav-link text-white {{ request()->routeIs('admin.profile') ? 'bg-primary' : '' }}" href="{{ route('admin.profile') }}">
+                    <i class="fas fa-building me-2"></i>Profil Perusahaan
+                </a>
+                <hr class="text-white">
+                <a class="nav-link text-white" href="{{ route('home') }}" target="_blank">
+                    <i class="fas fa-external-link-alt me-2"></i>Lihat Website
+                </a>
+                <a class="nav-link text-white" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="fas fa-sign-out-alt me-2"></i>Logout
+                </a>
+            </nav>
         </div>
     </div>
     

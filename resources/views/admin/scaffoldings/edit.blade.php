@@ -88,8 +88,11 @@
                         </div>
                         
                         <div class="col-md-4 mb-3">
-                            <label for="stock_quantity" class="form-label">Jumlah Stok *</label>
-                            <input type="number" class="form-control @error('stock_quantity') is-invalid @enderror" id="stock_quantity" name="stock_quantity" value="{{ old('stock_quantity', $scaffolding->stock_quantity) }}" min="0" required>
+                            <label for="stock_quantity" class="form-label">Status Stok *</label>
+                            <select class="form-select @error('stock_quantity') is-invalid @enderror" id="stock_quantity" name="stock_quantity" required>
+                                <option value="1" {{ old('stock_quantity', $scaffolding->stock_quantity) > 0 ? 'selected' : '' }}>Tersedia</option>
+                                <option value="0" {{ old('stock_quantity', $scaffolding->stock_quantity) == 0 ? 'selected' : '' }}>Tidak Tersedia</option>
+                            </select>
                             @error('stock_quantity')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

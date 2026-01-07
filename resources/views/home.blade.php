@@ -414,89 +414,51 @@
     animation: kenBurnsZoom 15s ease-in-out infinite;
 }
 
-/* Smooth fade transition untuk carousel - Hanya foto yang slide, background tetap */
-#heroTripleCarousel.carousel-fade .carousel-item {
-    position: relative;
-    /* Jangan set opacity di sini - hanya foto yang akan slide */
-    transition: none; /* Nonaktifkan transition default Bootstrap */
-}
-
-#heroTripleCarousel.carousel-fade .triple-slide-container {
-    position: relative;
-    /* Container tetap visible */
-    transition: none; /* Nonaktifkan transition mitigasi default */
-}
-
-/* Foto center dengan transisi slide - Slide horizontal smooth */
-#heroTripleCarousel .carousel-item:not(.active) .center-main-image {
-    transform: scale(1.05);
-    opacity: 0;
-    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                opacity 0.1s linear; /* Opacity transition sangat cepat */
-    pointer-events: none;
-}
-
-/* Slide dari kanan saat next */
-#heroTripleCarousel .carousel-item.carousel-item-next .center-main-image {
-    transform: translateX(100%) scale(1.05);
-    opacity: 0;
-    z-index: 2;
-}
-
-/* Slide dari kiri saat prev */
-#heroTripleCarousel .carousel-item.carousel-item-prev .center-main-image {
-    transform: translateX(-100%) scale(1.05);
-    opacity: 0;
-    z-index: 2;
-}
-
-/* Foto aktif - di posisi tengah - OPACITY LANGSUNG tanpa delay */
-#heroTripleCarousel .carousel-item.active .center-main-image {
-    transform: translateX(0) scale(1);
-    opacity: 1 !important; /* Force opacity untuk immediate visibility */
-    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                opacity 0.05s linear !important; /* Opacity transition sangat cepat */
-    pointer-events: auto;
+/* Smooth fade transition untuk carousel - Menggunakan mode Fade */
+#heroTripleCarousel .carousel-item {
+    transition: opacity 0.8s ease-in-out !important;
     z-index: 1;
 }
 
-/* Foto yang keluar - slide ke kiri saat next, ke kanan saat prev */
-#heroTripleCarousel .carousel-item.active.carousel-item-start .center-main-image {
-    transform: translateX(-100%) scale(0.95);
-    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                opacity 0.05s linear;
+#heroTripleCarousel .carousel-item.active {
+    z-index: 2;
+    opacity: 1;
 }
 
-#heroTripleCarousel .carousel-item.active.carousel-item-end .center-main-image {
-    transform: translateX(100%) scale(0.95);
-    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                opacity 0.05s linear;
+/* Efek Riam (Ripple) - Center Image Zoom Out Smooth */
+#heroTripleCarousel .carousel-item .center-main-image {
+    transform: scale(1.1);
+    opacity: 0;
+    transition: transform 1.2s cubic-bezier(0.215, 0.610, 0.355, 1.000), opacity 0.8s ease-out;
+    will-change: transform, opacity;
 }
 
-/* Smooth fade untuk side panels - transisi lebih smooth */
-#heroTripleCarousel .carousel-item:not(.active) .slide-panel-left .panel-image,
-#heroTripleCarousel .carousel-item:not(.active) .slide-panel-right .panel-image {
-    opacity: 0.5;
-    transform: scale(1.03);
-    filter: grayscale(100%) blur(2px) brightness(0.7);
-    transition: opacity 1.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 1.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+#heroTripleCarousel .carousel-item.active .center-main-image {
+    transform: scale(1);
+    opacity: 1;
+    /* Ken Burns Effect lanjutan setelah masuk */
+    animation: kenBurnsZoom 15s ease-in-out 1.2s infinite alternate;
 }
 
-#heroTripleCarousel .carousel-item.active .slide-panel-left .panel-image,
+/* Side Panels - Ripple Effect (Muncul sedikit setelah center) */
+#heroTripleCarousel .carousel-item .slide-panel-left .panel-image,
+#heroTripleCarousel .carousel-item .slide-panel-right .panel-image {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    transition: transform 1s cubic-bezier(0.215, 0.610, 0.355, 1.000), opacity 0.8s ease-out;
+    will-change: transform, opacity;
+}
+
+#heroTripleCarousel .carousel-item.active .slide-panel-left .panel-image {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition-delay: 0.1s; /* Ripple delay */
+}
+
 #heroTripleCarousel .carousel-item.active .slide-panel-right .panel-image {
     opacity: 1;
-    transform: scale(1);
-    filter: grayscale(100%) blur(2px) brightness(0.7);
-    transition: opacity 1.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 1.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* Animasi slide in untuk side panels */
-#heroTripleCarousel .carousel-item.active .slide-panel-left .panel-image {
-    animation: slideInLeftSmooth 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-#heroTripleCarousel .carousel-item.active .slide-panel-right .panel-image {
-    animation: slideInRightSmooth 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    transform: translateY(0) scale(1);
+    transition-delay: 0.1s; /* Ripple delay */
 }
 
 .slide-panel-center .center-overlay {
@@ -756,7 +718,12 @@
     border: none;
     opacity: 0.9;
     transition: all 0.3s ease;
-    z-index: 10;
+    z-index: 999;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
 .carousel-control-triple:hover {
@@ -1535,143 +1502,27 @@ document.addEventListener('DOMContentLoaded', function() {
         const title = activeItem.querySelector('.hero-main-title');
         const subtitle = activeItem.querySelector('.hero-subtitle-text');
         const button = activeItem.querySelector('.hero-contact-btn');
-        const centerImage = activeItem.querySelector('.center-main-image');
-        const leftImage = activeItem.querySelector('.slide-panel-left .panel-image');
-        const rightImage = activeItem.querySelector('.slide-panel-right .panel-image');
         
-        // Reset semua animasi teks
+        // Reset animasi teks
         [title, subtitle, button].forEach(el => {
             if (el) {
                 el.style.animation = 'none';
                 el.style.opacity = '0';
-                void el.offsetWidth;
+                void el.offsetWidth; // Trigger reflow
             }
         });
         
-        // Reset animasi foto dengan smooth - hanya foto, background tetap
-        // TAPI: Pastikan center image selalu visible dan memiliki src
-        if (centerImage) {
-            // Pastikan src tetap valid dengan menggunakan data-src sebagai fallback
-            const dataSrc = centerImage.getAttribute('data-src');
-            if (dataSrc && (!centerImage.src || centerImage.complete === false)) {
-                centerImage.src = dataSrc;
-            }
-            // Pastikan center image tidak di-hide
-            centerImage.style.display = 'block';
-            centerImage.style.visibility = 'visible';
-            centerImage.style.opacity = ''; // Biarkan CSS yang handle
-            centerImage.style.animation = 'none';
-            void centerImage.offsetWidth;
-        }
-        
-        [leftImage, rightImage].forEach(el => {
-            if (el) {
-                el.style.animation = 'none';
-                void el.offsetWidth;
-            }
-        });
-        
-        // Pastikan center image langsung visible tanpa delay (prioritas utama)
-        if (centerImage) {
-            const dataSrc = centerImage.getAttribute('data-src');
-            if (dataSrc && centerImage.src !== dataSrc) {
-                centerImage.src = dataSrc;
-            }
-            // Langsung set visible tanpa delay
-            centerImage.style.display = 'block';
-            centerImage.style.visibility = 'visible';
-            centerImage.style.opacity = '1';
-        }
-        
-        // Restart semua animasi dengan requestAnimationFrame untuk lebih cepat (tanpa delay 50ms)
-        requestAnimationFrame(() => {
-            // Animasi foto center dengan Ken Burns (slide effect sudah diatur oleh CSS)
-            if (centerImage) {
-                // Slide transition sudah diatur oleh CSS, hanya tambahkan Ken Burns untuk efek hidup
-                centerImage.style.animation = 'kenBurnsZoom 15s ease-in-out 0.3s infinite';
-            }
-            
-            // Animasi side panels dengan slide smooth
-            if (leftImage) {
-                leftImage.style.animation = 'slideInLeftSmooth 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.1s forwards';
-            }
-            if (rightImage) {
-                rightImage.style.animation = 'slideInRightSmooth 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.1s forwards';
-            }
-            
-            // Animasi teks dengan delay bertahap - dikurangi untuk lebih cepat
-            if (title) {
-                title.style.animation = 'slideInDownFade 0.8s ease-out 0.2s forwards';
-            }
-            if (subtitle) {
-                subtitle.style.animation = 'slideInUpFade 0.8s ease-out 0.3s forwards';
-            }
-            if (button) {
-                button.style.animation = 'scaleInFade 0.6s ease-out 0.4s forwards';
-            }
-        });
+        // Restart animasi teks dengan delay bertahap (Staggered Ripple Effect)
+        setTimeout(() => {
+            if (title) title.style.animation = 'slideInDownFade 0.8s ease-out 0.2s forwards';
+            if (subtitle) subtitle.style.animation = 'slideInUpFade 0.8s ease-out 0.4s forwards';
+            if (button) button.style.animation = 'scaleInFade 0.6s ease-out 0.6s forwards';
+        }, 50);
     }
     
-    // Event listener untuk slide mulai bergerak - prepare smooth transition
+    // Event listener untuk slide mulai bergerak - reset animasi teks
     carousel.addEventListener('slide.bs.carousel', function(event) {
-        const currentActive = carousel.querySelector('.carousel-item.active');
-        const nextItem = carousel.querySelector('.carousel-item.carousel-item-next') || 
-                        carousel.querySelector('.carousel-item.carousel-item-prev');
-        
-        // Prepare next slide untuk smooth slide transition
-        if (nextItem) {
-            const nextCenterImage = nextItem.querySelector('.center-main-image');
-            const isNext = nextItem.classList.contains('carousel-item-next');
-            
-            // Set posisi awal untuk slide effect
-            if (nextCenterImage) {
-                // Pastikan src valid sebelum slide in
-                const dataSrc = nextCenterImage.getAttribute('data-src');
-                if (dataSrc && (!nextCenterImage.src || nextCenterImage.src !== dataSrc)) {
-                    nextCenterImage.src = dataSrc;
-                }
-                
-                // Pastikan visible
-                nextCenterImage.style.display = 'block';
-                nextCenterImage.style.visibility = 'visible';
-                
-                if (isNext) {
-                    // Slide dari kanan untuk next
-                    nextCenterImage.style.transform = 'translateX(100%) scale(1.05)';
-                    nextCenterImage.style.opacity = '0';
-                } else {
-                    // Slide dari kiri untuk prev
-                    nextCenterImage.style.transform = 'translateX(-100%) scale(1.05)';
-                    nextCenterImage.style.opacity = '0';
-                }
-            }
-            
-            // Prepare side images
-            const sideImages = nextItem.querySelectorAll('.slide-panel-left .panel-image, .slide-panel-right .panel-image');
-            sideImages.forEach(img => {
-                img.style.opacity = '0';
-                img.style.transform = 'scale(1.05)';
-            });
-        }
-        
-        // Slide out foto aktif yang akan diganti
-        if (currentActive) {
-            const activeImage = currentActive.querySelector('.center-main-image');
-            const isNextDirection = event.direction === 'next';
-            
-            if (activeImage) {
-                if (isNextDirection) {
-                    // Slide ke kiri saat next
-                    activeImage.style.transform = 'translateX(-100%) scale(0.95)';
-                    activeImage.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.05s linear';
-                } else {
-                    // Slide ke kanan saat prev
-                    activeImage.style.transform = 'translateX(100%) scale(0.95)';
-                    activeImage.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.05s linear';
-                }
-                activeImage.style.opacity = '0';
-            }
-        }
+        // Tidak perlu manipulasi transform manual, biarkan CSS handle
     });
     
     // Fungsi untuk update left/right panel images secara dinamis dengan perbaikan
@@ -1750,30 +1601,10 @@ document.addEventListener('DOMContentLoaded', function() {
     carousel.addEventListener('slid.bs.carousel', function(event) {
         const activeItem = event.relatedTarget || carousel.querySelector('.carousel-item.active');
         
-        // PASTIKAN center image di active item langsung visible tanpa delay
         if (activeItem) {
             const centerImage = activeItem.querySelector('.center-main-image');
             if (centerImage) {
-                const dataSrc = centerImage.getAttribute('data-src');
-                if (dataSrc) {
-                    // Force reload jika src tidak match atau gambar belum load - LANGSUNG tanpa delay
-                    if (!centerImage.src || centerImage.src !== dataSrc || centerImage.complete === false) {
-                        centerImage.src = dataSrc;
-                    }
-                    // Langsung set visible tanpa delay - prioritas utama
-                    centerImage.style.display = 'block';
-                    centerImage.style.visibility = 'visible';
-                    centerImage.style.opacity = '1';
-                    centerImage.style.position = 'absolute';
-                    // Set transition opacity 0s untuk immediate visibility, transform tetap smooth
-                    centerImage.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0s linear !important';
-                    // Set ulang transition setelah immediate visibility
-                    requestAnimationFrame(() => {
-                        centerImage.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.05s linear';
-                        // Pastikan opacity tetap 1
-                        centerImage.style.opacity = '1';
-                    });
-                }
+                centerImage.style.animationPlayState = 'running';
             }
         }
         
@@ -1782,27 +1613,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Update side panels langsung tanpa delay besar
         updateSidePanels();
         
-        // Double check center image dengan requestAnimationFrame untuk smooth
-        requestAnimationFrame(() => {
-            if (activeItem) {
-                const centerImage = activeItem.querySelector('.center-main-image');
-                if (centerImage) {
-                    const dataSrc = centerImage.getAttribute('data-src');
-                    if (dataSrc) {
-                        // Re-check src dan visibility
-                        if (!centerImage.src || centerImage.src !== dataSrc) {
-                            centerImage.src = dataSrc;
-                        }
-                        // Pastikan tetap visible
-                        if (centerImage.style.opacity === '0' || centerImage.style.display === 'none') {
-                            centerImage.style.display = 'block';
-                            centerImage.style.visibility = 'visible';
-                            centerImage.style.opacity = '1';
-                        }
-                    }
-                }
-            }
-        });
+        // Tidak ada manipulasi tambahan untuk menghindari flicker
         
         // Hanya foto yang fade, background tetap visible - jangan set opacity pada carousel-item
         // Background scaffolding pattern harus tetap terlihat
@@ -1838,6 +1649,116 @@ document.addEventListener('DOMContentLoaded', function() {
             activeImage.style.animationPlayState = 'running';
         }
     });
+
+    // === SWIPE & DRAG SUPPORT ===
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let isDragging = false;
+    let startX = 0;
+    let currentX = 0;
+    
+    // Mouse events for desktop dragging
+    carousel.addEventListener('mousedown', e => {
+        // Ignore if clicking on buttons or links
+        if (e.target.closest('button') || e.target.closest('a')) return;
+        
+        isDragging = true;
+        startX = e.clientX;
+        currentX = startX; // Initialize currentX
+        carousel.style.cursor = 'grabbing';
+        carousel.style.userSelect = 'none';
+    });
+
+    carousel.addEventListener('mousemove', e => {
+        if (!isDragging) return;
+        e.preventDefault();
+        currentX = e.clientX;
+    });
+
+    carousel.addEventListener('mouseup', e => {
+        if (!isDragging) return;
+        finishDrag(e.clientX);
+    });
+
+    carousel.addEventListener('mouseleave', () => {
+        // Only finish drag if we were actually dragging
+        if (isDragging) {
+            finishDrag(currentX);
+        }
+    });
+
+    function finishDrag(endX) {
+        isDragging = false;
+        carousel.style.cursor = 'default';
+        carousel.style.userSelect = 'auto';
+        
+        const diffX = endX - startX;
+        handleGesture(diffX);
+    }
+
+    // Touch events for mobile (Enhancement to default Bootstrap behavior)
+    carousel.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, {passive: true});
+
+    carousel.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleGesture(touchEndX - touchStartX);
+    }, {passive: true});
+
+    // Manual Nav Button Handler (Fix for non-responsive buttons)
+    const prevBtn = carousel.querySelector('.carousel-control-prev');
+    const nextBtn = carousel.querySelector('.carousel-control-next');
+    
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation(); // Prevent propagation issues
+            try {
+                const bsCarousel = bootstrap.Carousel.getInstance(carousel) || new bootstrap.Carousel(carousel);
+                bsCarousel.prev();
+            } catch (err) { console.error('Carousel prev error:', err); }
+        });
+    }
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation(); // Prevent propagation issues
+            try {
+                const bsCarousel = bootstrap.Carousel.getInstance(carousel) || new bootstrap.Carousel(carousel);
+                bsCarousel.next();
+            } catch (err) { console.error('Carousel next error:', err); }
+        });
+    }
+
+    function handleGesture(diffX) {
+        const threshold = 50; // Minimum distance to trigger slide
+        
+        if (Math.abs(diffX) > threshold) {
+            if (diffX > 0) {
+                // Dragged Right -> Prev Slide
+                const prevBtn = carousel.querySelector('.carousel-control-prev');
+                if (prevBtn) prevBtn.click();
+                else {
+                    try {
+                        const bsCarousel = bootstrap.Carousel.getInstance(carousel);
+                        if (bsCarousel) bsCarousel.prev();
+                    } catch (e) { console.log('Bootstrap instance not found'); }
+                }
+            } else {
+                // Dragged Left -> Next Slide
+                const nextBtn = carousel.querySelector('.carousel-control-next');
+                if (nextBtn) nextBtn.click();
+                else {
+                    try {
+                        const bsCarousel = bootstrap.Carousel.getInstance(carousel);
+                        if (bsCarousel) bsCarousel.next();
+                    } catch (e) { console.log('Bootstrap instance not found'); }
+                }
+            }
+        }
+    }
 });
 
 // Scroll to Top Button Functionality

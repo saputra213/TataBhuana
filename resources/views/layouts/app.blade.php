@@ -27,7 +27,7 @@
         padding: 0.5rem 1rem;
         border-radius: 8px;
         margin-right: 1rem;
-    }
+        }
     
     .navbar-brand::before {
         content: '';
@@ -53,6 +53,51 @@
     .navbar-brand img {
         position: relative;
         z-index: 1;
+    }
+    <style>
+    /* Global alignment untuk floating buttons di mobile */
+    @media (max-width: 768px) {
+        /* Pastikan semua floating buttons sejajar vertikal dengan left yang sama */
+        .floating-whatsapp-transparent,
+        .floating-facebook-transparent,
+        .floating-instagram-transparent {
+            left: max(15px, env(safe-area-inset-left, 15px)) !important;
+        }
+        
+        /* Pastikan jarak konsisten antar button */
+        .floating-whatsapp-transparent {
+            bottom: max(20px, env(safe-area-inset-bottom, 20px)) !important;
+        }
+        
+        .floating-facebook-transparent {
+            bottom: max(95px, env(safe-area-inset-bottom, 95px)) !important;
+        }
+        
+        .floating-instagram-transparent {
+            bottom: max(170px, env(safe-area-inset-bottom, 170px)) !important;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        /* Pastikan semua floating buttons sejajar vertikal dengan left yang sama */
+        .floating-whatsapp-transparent,
+        .floating-facebook-transparent,
+        .floating-instagram-transparent {
+            left: max(15px, env(safe-area-inset-left, 15px)) !important;
+        }
+        
+        /* Pastikan jarak konsisten antar button untuk layar kecil */
+        .floating-whatsapp-transparent {
+            bottom: max(15px, env(safe-area-inset-bottom, 15px)) !important;
+        }
+        
+        .floating-facebook-transparent {
+            bottom: max(85px, env(safe-area-inset-bottom, 85px)) !important;
+        }
+        
+        .floating-instagram-transparent {
+            bottom: max(155px, env(safe-area-inset-bottom, 155px)) !important;
+        }
     }
     
     .nav-link {
@@ -184,51 +229,6 @@
     </style>
     
     <style>
-    /* Global alignment untuk floating buttons di mobile */
-    @media (max-width: 768px) {
-        /* Pastikan semua floating buttons sejajar vertikal dengan left yang sama */
-        .floating-whatsapp-transparent,
-        .floating-facebook-transparent,
-        .floating-instagram-transparent {
-            left: max(15px, env(safe-area-inset-left, 15px)) !important;
-        }
-        
-        /* Pastikan jarak konsisten antar button */
-        .floating-whatsapp-transparent {
-            bottom: max(20px, env(safe-area-inset-bottom, 20px)) !important;
-        }
-        
-        .floating-facebook-transparent {
-            bottom: max(95px, env(safe-area-inset-bottom, 95px)) !important;
-        }
-        
-        .floating-instagram-transparent {
-            bottom: max(170px, env(safe-area-inset-bottom, 170px)) !important;
-        }
-    }
-    
-    @media (max-width: 480px) {
-        /* Pastikan semua floating buttons sejajar vertikal dengan left yang sama */
-        .floating-whatsapp-transparent,
-        .floating-facebook-transparent,
-        .floating-instagram-transparent {
-            left: max(15px, env(safe-area-inset-left, 15px)) !important;
-        }
-        
-        /* Pastikan jarak konsisten antar button untuk layar kecil */
-        .floating-whatsapp-transparent {
-            bottom: max(15px, env(safe-area-inset-bottom, 15px)) !important;
-        }
-        
-        .floating-facebook-transparent {
-            bottom: max(85px, env(safe-area-inset-bottom, 85px)) !important;
-        }
-        
-        .floating-instagram-transparent {
-            bottom: max(155px, env(safe-area-inset-bottom, 155px)) !important;
-        }
-    }
-    
     /* Fix untuk scroll to top button di mobile - pastikan bisa diklik */
     @media (max-width: 768px) {
         .scroll-to-top-btn.show {
@@ -261,9 +261,9 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-primary fixed-top">
         <div class="container">
-            <a class="navbar-brand fw-bold d-flex align-items-center" href="{{ route('home') }}">
+             <a class="navbar-brand fw-bold d-flex align-items-center" href="{{ route('home') }}">
                 @if(file_exists(public_path('images/logo.png')))
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo {{ $profile->company_name ?? 'Tata Bhuana' }}" class="me-2" style="height: 40px; width: auto;">
+                   <img src="{{ asset('images/logo.png') }}" alt="Logo {{ $profile->company_name ?? 'Tata Bhuana' }}" class="me-2" style="height: 40px; width: auto;">
                 @else
                     <i class="fas fa-building me-2"></i>
                 @endif
@@ -272,6 +272,7 @@
                 @else
                     Tata Bhuana
                 @endif
+                
             </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -414,6 +415,7 @@
 
     <!-- Transparent Floating Facebook Button -->
     @include('components.floating-facebook', ['profile' => $profile ?? null])
+    
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

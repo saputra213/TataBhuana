@@ -27,14 +27,7 @@
         padding: 0.5rem 1rem;
         border-radius: 12px;
         margin-right: 1rem;
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(5px);
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        color: #ffffff !important;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
+
     }
     
     .navbar-brand:hover {
@@ -80,6 +73,51 @@
         }
         .navbar-brand img {
             height: 28px !important;
+        }
+    }
+    <style>
+    /* Global alignment untuk floating buttons di mobile */
+    @media (max-width: 768px) {
+        /* Pastikan semua floating buttons sejajar vertikal dengan left yang sama */
+        .floating-whatsapp-transparent,
+        .floating-facebook-transparent,
+        .floating-instagram-transparent {
+            left: max(15px, env(safe-area-inset-left, 15px)) !important;
+        }
+        
+        /* Pastikan jarak konsisten antar button */
+        .floating-whatsapp-transparent {
+            bottom: max(20px, env(safe-area-inset-bottom, 20px)) !important;
+        }
+        
+        .floating-facebook-transparent {
+            bottom: max(95px, env(safe-area-inset-bottom, 95px)) !important;
+        }
+        
+        .floating-instagram-transparent {
+            bottom: max(170px, env(safe-area-inset-bottom, 170px)) !important;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        /* Pastikan semua floating buttons sejajar vertikal dengan left yang sama */
+        .floating-whatsapp-transparent,
+        .floating-facebook-transparent,
+        .floating-instagram-transparent {
+            left: max(15px, env(safe-area-inset-left, 15px)) !important;
+        }
+        
+        /* Pastikan jarak konsisten antar button untuk layar kecil */
+        .floating-whatsapp-transparent {
+            bottom: max(15px, env(safe-area-inset-bottom, 15px)) !important;
+        }
+        
+        .floating-facebook-transparent {
+            bottom: max(85px, env(safe-area-inset-bottom, 85px)) !important;
+        }
+        
+        .floating-instagram-transparent {
+            bottom: max(155px, env(safe-area-inset-bottom, 155px)) !important;
         }
     }
     
@@ -244,19 +282,11 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-primary fixed-top">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="{{ route('home') }}">
-                @if(file_exists(public_path('images/logo.png')))
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo {{ $profile->company_name ?? 'Tata Bhuana' }}" class="img-fluid" style="max-height: 40px; width: auto;">
+
                 @else
                     <i class="fas fa-building text-white" style="font-size: 24px;"></i>
                 @endif
-                <span class="brand-text">
-                    @if($profile ?? false)
-                        {{ $profile->company_name }}
-                    @else
-                        Tata Bhuana
-                    @endif
-                </span>
+
             </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -391,11 +421,7 @@
         </div>
     </footer>
 
-    <!-- Floating Social Button (Combined) -->
-    @include('components.floating-social', [
-        'branches' => \App\Models\Branch::where('is_active', true)->orderBy('sort_order')->get(),
-        'profile' => $profile ?? null
-    ])
+
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

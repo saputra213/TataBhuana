@@ -139,12 +139,6 @@ Login ke admin panel dan gunakan fitur "Tambah Scaffolding".
 ### Mengubah Informasi Perusahaan
 Login ke admin panel dan edit di menu "Profil Perusahaan".
 
-## Support
-
-Untuk pertanyaan atau bantuan, silakan hubungi:
-- Email: info@tatabhuana.com
-- Phone: +62 21 1234 5678
-
 ## License
 
 Project ini dibuat untuk Tata Bhuana Scaffolding. All rights reserved.

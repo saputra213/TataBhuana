@@ -19,7 +19,7 @@
                             {{ $article->formatted_published_date ?? $article->created_at->format('d M Y') }}
                         </p>
                         <div class="card-text">
-                            {!! nl2br(e($article->content)) !!}
+                            {!! $article->content !!}
                         </div>
                     </div>
                 </div>
@@ -110,4 +110,3 @@
     </div>
 </section>
 @endsection
-

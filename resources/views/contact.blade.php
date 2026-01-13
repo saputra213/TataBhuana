@@ -152,11 +152,11 @@
                                 </div>
                             </div>
                             
-                            @if($branch->maps_url)
+                            
                             <a href="{{ $branch->maps_url }}" target="_blank" class="btn btn-primary w-100">
                                 <i class="fas fa-map-marker-alt me-2"></i>Lihat di Google Maps
                             </a>
-                            @endif
+                            
                         </div>
                     </div>
                 </div>
@@ -167,20 +167,6 @@
                 <i class="fas fa-info-circle me-2"></i>Informasi cabang akan segera ditambahkan.
             </div>
         @endif
-    </div>
-</section>
-
-<!-- Map Section -->
-<section class="py-5 bg-white">
-    <div class="container">
-        <div class="text-center mb-4">
-            <h2 class="display-5 fw-bold mb-3">Lokasi Kami</h2>
-            <p class="lead text-muted">Temukan kami di peta</p>
-        </div>
-        <div class="ratio ratio-21x9 shadow-lg rounded-3 overflow-hidden">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.2726368919797!2d110.36913207475823!3d-7.7956228425447175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5777570c7b65%3A0x2c1c1335f3d91f5e!2sYogyakarta%2C%20Indonesia!5e0!3m2!1sen!2sus!4v1635781234567!5m2!1sen!2sus" 
-                    style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
     </div>
 </section>
 

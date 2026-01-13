@@ -45,7 +45,7 @@
                 <hr>
 
                 <div class="mt-3">
-                    {!! nl2br(e($article->content)) !!}
+                    {!! $article->content !!}
                 </div>
             </div>
         </div>
@@ -68,4 +68,3 @@
     </div>
 </div>
 @endsection
-

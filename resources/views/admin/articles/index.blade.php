@@ -47,7 +47,7 @@
                             </td>
                             <td>{{ $article->formatted_published_date ?? '-' }}</td>
                             <td>
-                                <a href="{{ route('admin.articles.show', $article) }}" class="btn btn-sm btn-info">
+                                <a href="{{ route('admin.articles.show', $article) }}" class="btn btn-sm btn-primary">
                                     <i class="fas fa-eye me-1"></i>Lihat
                                 </a>
                                 <a href="{{ route('admin.articles.edit', $article) }}" class="btn btn-sm btn-primary">
@@ -78,4 +78,3 @@
     </div>
 @endif
 @endsection
-

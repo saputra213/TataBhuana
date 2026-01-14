@@ -117,7 +117,7 @@
                             </div>
                             
                             <div class="d-flex gap-2">
-                                <a href="{{ route('scaffoldings.show', $scaffolding) }}" class="btn btn-success-modern flex-grow-1">
+                                <a href="{{ route('scaffoldings.show', $scaffolding) }}" class="btn btn-danger flex-grow-1">
                                     <i class="fas fa-eye me-2"></i>Detail
                                 </a>
                                 <a href="{{ route('contact') }}" class="btn btn-outline-success-modern">
@@ -134,7 +134,7 @@
                 <i class="fas fa-search fa-3x text-muted mb-3"></i>
                 <h4 class="text-muted">Tidak ada produk yang ditemukan</h4>
                 <p class="text-muted">Coba ubah filter pencarian Anda</p>
-                <a href="{{ route('scaffoldings.index') }}" class="btn btn-success-modern">
+                <a href="{{ route('scaffoldings.index') }}" class="btn btn-danger">
                     <i class="fas fa-refresh me-2"></i>Reset Filter
                 </a>
             </div>
@@ -212,7 +212,7 @@
 
 <!-- CTA Section -->
 <!-- CTA Section -->
-<section class="py-5 bg-primary text-white">
+<section class="py-5 bg-danger text-white">
     <div class="container text-center">
         <h2 class="display-5 fw-bold mb-3">Siap Memulai Proyek Anda?</h2>
         <p class="lead mb-4">Hubungi kami sekarang untuk konsultasi gratis dan penawaran terbaik</p>

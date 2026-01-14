@@ -70,7 +70,7 @@
                             </td>
                             <td>
                                 <div class="btn-group" role="group">
-                                    <a href="{{ route('admin.scaffoldings.show', $scaffolding) }}" class="btn btn-sm btn-outline-info" title="Lihat">
+                                    <a href="{{ route('admin.scaffoldings.show', $scaffolding) }}" class="btn btn-sm btn-outline-primary" title="Lihat">
                                         <i class="fas fa-eye"></i>
                                     </a>
                                     <a href="{{ route('admin.scaffoldings.edit', $scaffolding) }}" class="btn btn-sm btn-outline-primary" title="Edit">
@@ -114,11 +114,5 @@
 @endsection
 
 @push('scripts')
-<script>
-function confirmDelete(id) {
-    if (confirm('Apakah Anda yakin ingin menghapus scaffolding ini?')) {
-        document.getElementById('delete-form-' + id).submit();
-    }
-}
-</script>
+@vite('resources/js/admin/confirmDelete.js')
 @endpush

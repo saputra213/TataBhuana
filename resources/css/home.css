@@ -1,0 +1,1207 @@
+/* Triple Slider Hero Section */
+.hero-triple-slider {
+    height: 85vh;
+    min-height: 600px;
+}
+
+.triple-slide-container {
+    display: flex;
+    height: 85vh;
+    min-height: 600px;
+}
+
+.slide-panel {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+
+.slide-panel-left,
+.slide-panel-right {
+    flex: 0 0 20%;
+    position: relative;
+}
+
+.slide-panel-center {
+    flex: 1;
+    position: relative;
+    background: #dc2626;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    /* Background tetap visible, tidak ikut animasi */
+    transition: none !important;
+    animation: none !important;
+}
+
+/* Scaffolding Pattern untuk Center Panel - Background Statis */
+.slide-panel-center::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    /* Pastikan background tidak ikut animasi */
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+    /* Realistic scaffolding frame pattern dengan struktur arch */
+    background-image: 
+        /* Vertical frame supports */
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 74px,
+            rgba(139, 0, 0, 0.45) 75px,
+            rgba(139, 0, 0, 0.55) 77px,
+            rgba(139, 0, 0, 0.45) 79px,
+            transparent 80px,
+            transparent 160px
+        ),
+        /* Horizontal top bar */
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 84px,
+            rgba(139, 0, 0, 0.4) 85px,
+            rgba(139, 0, 0, 0.5) 87px,
+            rgba(139, 0, 0, 0.4) 89px,
+            transparent 90px,
+            transparent 180px
+        ),
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 99px,
+            rgba(139, 0, 0, 0.35) 100px,
+            rgba(139, 0, 0, 0.45) 102px,
+            rgba(139, 0, 0, 0.35) 104px,
+            transparent 105px,
+            transparent 210px
+        ),
+        /* Internal arch structure */
+        repeating-linear-gradient(
+            45deg,
+            transparent 0px,
+            transparent 69px,
+            rgba(139, 0, 0, 0.25) 70px,
+            rgba(139, 0, 0, 0.3) 72px,
+            transparent 73px,
+            transparent 140px
+        ),
+        repeating-linear-gradient(
+            -45deg,
+            transparent 0px,
+            transparent 89px,
+            rgba(139, 0, 0, 0.25) 90px,
+            rgba(139, 0, 0, 0.3) 92px,
+            transparent 93px,
+            transparent 180px
+        ),
+        /* Curved arch bottom */
+        repeating-radial-gradient(
+            ellipse 50px 30px at 50% 95%,
+            rgba(139, 0, 0, 0.2) 0%,
+            rgba(139, 0, 0, 0.25) 40%,
+            transparent 70%
+        ),
+        /* Scratch effect */
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 12px,
+            rgba(0, 0, 0, 0.08) 13px,
+            transparent 14px,
+            transparent 30px
+        ),
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 16px,
+            rgba(0, 0, 0, 0.06) 17px,
+            transparent 18px,
+            transparent 35px
+        ),
+        repeating-linear-gradient(
+            15deg,
+            transparent 0px,
+            transparent 22px,
+            rgba(0, 0, 0, 0.05) 23px,
+            transparent 24px,
+            transparent 45px
+        ),
+        repeating-linear-gradient(
+            -15deg,
+            transparent 0px,
+            transparent 28px,
+            rgba(0, 0, 0, 0.05) 29px,
+            transparent 30px,
+            transparent 55px
+        );
+    background-size: 
+        160px 180px,
+        180px 180px,
+        210px 210px,
+        140px 140px,
+        180px 180px,
+        160px 200px,
+        60px 35px,
+        35px 70px,
+        90px 90px,
+        110px 110px;
+    background-position: 
+        80px 0px,
+        0px 10px,
+        0px 105px,
+        40px 50px,
+        120px 60px,
+        80px 150px,
+        5px 8px,
+        8px 5px,
+        12px 18px,
+        18px 22px;
+    opacity: 0.85;
+    filter: blur(0.3px);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.center-image-container {
+    position: relative;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    border-radius: 12px;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    /* Pastikan container tidak ikut animasi carousel */
+    transition: none;
+    animation: none;
+}
+
+.panel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.slide-panel-center .panel-image,
+.center-main-image {
+    filter: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.05s linear;
+    will-change: transform, opacity;
+    transform-origin: center center;
+}
+
+/* Ken Burns Effect - Zoom in slow untuk foto center */
+#heroTripleCarousel .carousel-item.active .center-main-image {
+    animation: kenBurnsZoom 15s ease-in-out infinite;
+}
+
+/* Smooth fade transition untuk carousel - Menggunakan mode Fade */
+#heroTripleCarousel .carousel-item {
+    transition: opacity 0.8s ease-in-out !important;
+    z-index: 1;
+}
+
+#heroTripleCarousel .carousel-item.active {
+    z-index: 2;
+    opacity: 1;
+}
+
+/* Efek Riam (Ripple) - Center Image Zoom Out Smooth */
+#heroTripleCarousel .carousel-item .center-main-image {
+    transform: scale(1.1);
+    opacity: 0;
+    transition: transform 1.2s cubic-bezier(0.215, 0.610, 0.355, 1.000), opacity 0.8s ease-out;
+    will-change: transform, opacity;
+}
+
+#heroTripleCarousel .carousel-item.active .center-main-image {
+    transform: scale(1);
+    opacity: 1;
+    /* Ken Burns Effect lanjutan setelah masuk */
+    animation: kenBurnsZoom 15s ease-in-out 1.2s infinite alternate;
+}
+
+/* Side Panels - Ripple Effect (Muncul sedikit setelah center) */
+#heroTripleCarousel .carousel-item .slide-panel-left .panel-image,
+#heroTripleCarousel .carousel-item .slide-panel-right .panel-image {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    transition: transform 1s cubic-bezier(0.215, 0.610, 0.355, 1.000), opacity 0.8s ease-out;
+    will-change: transform, opacity;
+}
+
+#heroTripleCarousel .carousel-item.active .slide-panel-left .panel-image {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition-delay: 0.1s; /* Ripple delay */
+}
+
+#heroTripleCarousel .carousel-item.active .slide-panel-right .panel-image {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition-delay: 0.1s; /* Ripple delay */
+}
+
+.slide-panel-center .center-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 12px;
+    z-index: 1;
+}
+
+.slide-panel-center .center-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 700px;
+    z-index: 2;
+    text-align: center;
+}
+
+.slide-panel-left,
+.slide-panel-right {
+    background: #dc2626;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Scaffolding Pattern Background - Realistic Frame dengan Scratch Effect */
+.slide-panel-left::before,
+.slide-panel-right::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Realistic scaffolding frame pattern dengan struktur arch */
+    background-image: 
+        /* Subtle vertical lines - lebih abstract dengan spacing yang lebih longgar */
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 38px,
+            rgba(0, 0, 0, 0.25) 39px,
+            rgba(0, 0, 0, 0.25) 41px,
+            transparent 42px,
+            transparent 80px
+        ),
+        /* Horizontal ledgers - palang horizontal */
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 84px,
+            rgba(139, 0, 0, 0.4) 85px,
+            rgba(139, 0, 0, 0.5) 87px,
+            rgba(139, 0, 0, 0.4) 89px,
+            transparent 90px,
+            transparent 180px
+        ),
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 99px,
+            rgba(139, 0, 0, 0.35) 100px,
+            rgba(139, 0, 0, 0.45) 102px,
+            rgba(139, 0, 0, 0.35) 104px,
+            transparent 105px,
+            transparent 210px
+        ),
+        /* Internal arch structure - diagonal untuk bentuk arch */
+        repeating-linear-gradient(
+            45deg,
+            transparent 0px,
+            transparent 69px,
+            rgba(139, 0, 0, 0.25) 70px,
+            rgba(139, 0, 0, 0.3) 72px,
+            transparent 73px,
+            transparent 140px
+        ),
+        repeating-linear-gradient(
+            -45deg,
+            transparent 0px,
+            transparent 89px,
+            rgba(139, 0, 0, 0.25) 90px,
+            rgba(139, 0, 0, 0.3) 92px,
+            transparent 93px,
+            transparent 180px
+        ),
+        /* Curved arch bottom */
+        repeating-radial-gradient(
+            ellipse 50px 30px at 50% 95%,
+            rgba(139, 0, 0, 0.2) 0%,
+            rgba(139, 0, 0, 0.25) 40%,
+            transparent 70%
+        ),
+        /* Very light crosshatch untuk tekstur halus */
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 12px,
+            rgba(0, 0, 0, 0.08) 13px,
+            transparent 14px,
+            transparent 30px
+        ),
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 16px,
+            rgba(0, 0, 0, 0.06) 17px,
+            transparent 18px,
+            transparent 35px
+        ),
+        repeating-linear-gradient(
+            15deg,
+            transparent 0px,
+            transparent 22px,
+            rgba(0, 0, 0, 0.05) 23px,
+            transparent 24px,
+            transparent 45px
+        ),
+        repeating-linear-gradient(
+            -15deg,
+            transparent 0px,
+            transparent 28px,
+            rgba(0, 0, 0, 0.05) 29px,
+            transparent 30px,
+            transparent 55px
+        );
+    background-size: 
+        160px 180px,    /* vertical frame */
+        180px 180px,    /* horizontal top */
+        210px 210px,    /* horizontal middle */
+        140px 140px,    /* diagonal arch 1 */
+        180px 180px,    /* diagonal arch 2 */
+        160px 200px,    /* curved arch */
+        60px 35px,      /* horizontal scratch */
+        35px 70px,      /* vertical scratch */
+        90px 90px,      /* diagonal scratch 1 */
+        110px 110px;    /* diagonal scratch 2 */
+    background-position: 
+        80px 0px,       /* vertical frame */
+        0px 10px,       /* horizontal top */
+        0px 105px,      /* horizontal middle */
+        40px 50px,      /* diagonal arch 1 */
+        120px 60px,     /* diagonal arch 2 */
+        80px 150px,     /* curved arch */
+        5px 8px,        /* scratches */
+        8px 5px,
+        12px 18px,
+        18px 22px;
+    opacity: 0.85;
+    filter: blur(0.3px);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.slide-panel-left .panel-image,
+.slide-panel-right .panel-image {
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    filter: grayscale(100%) blur(2px) brightness(0.7);
+    object-fit: cover;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.slide-panel-left:hover .panel-image,
+.slide-panel-right:hover .panel-image {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    filter: grayscale(70%) blur(1px) brightness(0.8);
+}
+
+.center-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.center-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 2;
+    width: 90%;
+    max-width: 700px;
+}
+
+.hero-main-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8), 0 2px 10px rgba(0, 0, 0, 0.6);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    opacity: 0;
+    animation: slideInDownFade 0.8s ease-out 0.3s forwards;
+}
+
+.hero-subtitle-text {
+    font-size: 1.25rem;
+    text-shadow: 0 3px 15px rgba(0, 0, 0, 0.8), 0 1px 5px rgba(0, 0, 0, 0.6);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    opacity: 0;
+    animation: slideInUpFade 0.8s ease-out 0.5s forwards;
+}
+
+.hero-contact-btn {
+    background: #16a34a; /* Hijau solid untuk kontras dengan background merah */
+    color: white;
+    padding: 14px 35px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    border: 2px solid white; /* Border putih untuk lebih kontras */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 0 3px rgba(255, 255, 255, 0.3); /* Shadow lebih kuat dengan glow putih */
+    opacity: 0;
+    animation: scaleInFade 0.6s ease-out 0.7s forwards;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Text shadow untuk readability */
+}
+
+.hero-contact-btn:hover {
+    background: #15803d; /* Hijau lebih gelap saat hover */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6), 0 0 0 4px rgba(255, 255, 255, 0.4);
+    color: white;
+    border-color: white;
+}
+
+/* Carousel Controls */
+.carousel-control-triple {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    background: white;
+    border-radius: 50%;
+    border: none;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+    z-index: 999;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.carousel-control-triple:hover {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-control-triple.carousel-control-prev {
+    left: 20px;
+}
+
+.carousel-control-triple.carousel-control-next {
+    right: 20px;
+}
+
+.carousel-control-prev-icon-custom,
+.carousel-control-next-icon-custom {
+    color: #333;
+    font-size: 1.5rem;
+}
+
+/* Scroll to Top Button - Pojok kanan bawah */
+.scroll-to-top-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #dc2626;
+    color: white;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4), 0 0 0 3px rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 9999;
+    opacity: 0;
+    transform: translateX(100px) scale(0.8);
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.scroll-to-top-btn.show {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    pointer-events: auto;
+    visibility: visible;
+}
+
+.scroll-to-top-btn:hover {
+    background: #b91c1c;
+    transform: translateY(-8px) scale(1.08);
+    box-shadow: 0 8px 30px rgba(220, 38, 38, 0.5), 0 0 0 4px rgba(255, 255, 255, 0.2);
+}
+
+.scroll-to-top-btn:active {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 4px 20px rgba(220, 38, 38, 0.4), 0 0 0 3px rgba(255, 255, 255, 0.15);
+}
+
+.scroll-to-top-btn i {
+    transition: transform 0.3s ease;
+}
+
+.scroll-to-top-btn:hover i {
+    transform: translateY(-3px);
+}
+
+
+@media (max-width: 768px) {
+    .hero-triple-slider {
+        height: 70vh;
+        min-height: 500px;
+    }
+    
+    .triple-slide-container {
+        height: 70vh;
+        min-height: 500px;
+    }
+    
+    .slide-panel-left,
+    .slide-panel-right {
+        display: none;
+    }
+    
+    .slide-panel-center {
+        flex: 1;
+    }
+    
+    .hero-main-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle-text {
+        font-size: 1rem;
+    }
+    
+    .scroll-to-top-btn {
+        bottom: 90px; /* Lebih tinggi agar tidak bertumpuk dengan floating buttons */
+        right: 20px; /* Pindah ke kanan untuk konsistensi */
+        left: auto; /* Reset left */
+        width: 48px;
+        height: 48px;
+        font-size: 1.2rem;
+        z-index: 9996; /* Di bawah floating buttons tapi masih di atas konten */
+    }
+}
+
+/* Extra small mobile - posisi lebih tinggi lagi */
+@media (max-width: 480px) {
+    .scroll-to-top-btn {
+        bottom: 100px; /* Lebih tinggi lagi untuk layar kecil */
+        right: 15px;
+        width: 46px;
+        height: 46px;
+        font-size: 1.1rem;
+    }
+}
+
+/* Landscape mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .scroll-to-top-btn {
+        bottom: 80px;
+        right: 20px;
+    }
+}
+
+.hero-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(255,255,255,0.05) 0%, transparent 50%);
+    pointer-events: none;
+    animation: pulse 8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+.text-red-gradient {
+    color: #dc2626;
+    animation: slideInLeft 1s ease-out;
+}
+
+.text-green-gradient {
+    color: #16a34a;
+    animation: slideInRight 1s ease-out;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.btn-green-modern {
+    background: #16a34a;
+    border: none;
+    color: white;
+    font-weight: bold;
+}
+
+.btn-green-modern:hover {
+    background: #15803d;
+    box-shadow: 0 10px 30px rgba(22, 163, 74, 0.4) !important;
+}
+
+.btn-red-modern {
+    background: #dc2626;
+    border: none;
+    color: white;
+    font-weight: bold;
+}
+
+.btn-red-modern:hover {
+    background: #b91c1c;
+    box-shadow: 0 10px 30px rgba(220, 38, 38, 0.4) !important;
+}
+
+/* Image Zoom & Shimmer Animation */
+.card-img-top {
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.card-img-top img {
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+}
+
+.card:hover .card-img-top img {
+    transform: scale(1.15);
+}
+
+.card-img-top::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transition: left 0.5s;
+    pointer-events: none;
+}
+
+.card:hover .card-img-top::after {
+    left: 100%;
+}
+
+.hero-title {
+    animation: fadeInUp 0.8s ease-out;
+    color: white;
+}
+
+.hero-image-wrapper {
+    position: relative;
+    animation: fadeInRight 1s ease-out;
+}
+
+.hero-image {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 25px;
+    box-shadow: 0 25px 70px rgba(0,0,0,0.4);
+    transform: perspective(1000px) rotateY(-5deg);
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    border: 5px solid rgba(255,255,255,0.1);
+}
+
+.hero-image:hover {
+    transform: perspective(1000px) rotateY(0deg) scale(1.05);
+    box-shadow: 0 35px 90px rgba(0,0,0,0.5);
+}
+
+/* Hero Slider Styles */
+.hero-slide-img {
+    width: 100%;
+    height: 650px;
+    object-fit: cover;
+}
+
+.slide-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.slide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(220, 38, 38, 0.7), rgba(0,0,0,0.5));
+    z-index: 1;
+}
+
+.slide-content-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+    z-index: 2;
+    animation: fadeInUp 1s ease-out;
+}
+
+.slide-title {
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    animation: fadeInUp 1.2s ease-out;
+}
+
+.slide-description {
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    animation: fadeInUp 1.4s ease-out;
+}
+
+.slide-btn-white {
+    background: white;
+    color: #dc2626;
+    font-weight: 700;
+    border-radius: 50px;
+    border: none;
+    transition: all 0.3s ease;
+    animation: fadeInUp 1.6s ease-out;
+}
+
+.slide-btn-white:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    color: #dc2626;
+    background: #f8f9fa;
+}
+
+.slide-btn-outline {
+    background: transparent;
+    color: white;
+    font-weight: 700;
+    border-radius: 50px;
+    border: 2px solid white;
+    transition: all 0.3s ease;
+    animation: fadeInUp 1.6s ease-out;
+}
+
+.slide-btn-outline:hover {
+    background: white;
+    color: #dc2626;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+#heroCarousel {
+    overflow: hidden;
+}
+
+#heroCarousel .carousel-control-prev,
+#heroCarousel .carousel-control-next {
+    width: 60px;
+    height: 60px;
+    background: rgba(220, 38, 38, 0.9);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+}
+
+#heroCarousel .carousel-control-prev {
+    left: 20px;
+}
+
+#heroCarousel .carousel-control-next {
+    right: 20px;
+}
+
+#heroCarousel .carousel-control-prev:hover,
+#heroCarousel .carousel-control-next:hover {
+    background: #dc2626;
+    transform: translateY(-50%) scale(1.1);
+}
+
+#heroCarousel .carousel-indicators {
+    bottom: 20px;
+}
+
+#heroCarousel .carousel-indicators button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    margin: 0 5px;
+    border: 2px solid transparent;
+}
+
+#heroCarousel .carousel-indicators .active {
+    background: #dc2626;
+    border-color: #dc2626;
+}
+
+.hover-lift {
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3) !important;
+}
+
+.hover-lift::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s;
+    background: radial-gradient(circle, rgba(255,255,255,0.2), transparent);
+}
+
+.hover-lift:hover::before {
+    opacity: 1;
+}
+
+.min-vh-50 {
+    min-height: 50vh;
+}
+
+/* Service Quick Cards */
+.service-quick-card {
+    display: block;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    background: white;
+    border-radius: 20px;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    color: #333;
+    border: 2px solid transparent;
+}
+
+.service-quick-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    border-color: #f0f0f0;
+}
+
+.service-icon-box {
+    width: 90px;
+    height: 90px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 2.5rem;
+    color: white;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: relative;
+    overflow: hidden;
+}
+
+.service-icon-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: all 0.5s;
+    transform: rotate(45deg);
+}
+
+.service-quick-card:hover .service-icon-box::before {
+    animation: shine 0.8s;
+}
+
+@keyframes shine {
+    0% { left: -50%; }
+    100% { left: 150%; }
+}
+
+.service-quick-card:hover .service-icon-box {
+    transform: scale(1.15) rotate(8deg);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.service-animate {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+}
+
+.bg-red-gradient {
+    background: #dc2626;
+}
+
+.bg-green-gradient {
+    background: #16a34a;
+}
+
+/* Feature Cards */
+.feature-card {
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    background: #ffffff !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(22, 163, 74, 0.1);
+    transition: left 0.5s;
+}
+
+.feature-card:hover::before {
+    left: 100%;
+}
+
+.feature-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+}
+
+.feature-icon {
+    width: 100px;
+    height: 100px;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: relative;
+}
+
+.feature-card:hover .feature-icon {
+    transform: scale(1.15) rotate(10deg);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+.feature-text {
+    line-height: 1.8;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInDownFade {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInUpFade {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleInFade {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Reset animasi saat slide berubah */
+#heroTripleCarousel .carousel-item:not(.active) .hero-main-title,
+#heroTripleCarousel .carousel-item:not(.active) .hero-subtitle-text,
+#heroTripleCarousel .carousel-item:not(.active) .hero-contact-btn {
+    opacity: 0;
+    animation: none;
+}
+
+#heroTripleCarousel .carousel-item.active .hero-main-title,
+#heroTripleCarousel .carousel-item.active .hero-subtitle-text,
+#heroTripleCarousel .carousel-item.active .hero-contact-btn {
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Ken Burns Zoom Effect */
+@keyframes kenBurnsZoom {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Smooth Slide Animations untuk Side Panels */
+@keyframes slideInLeftSmooth {
+    from {
+        opacity: 0;
+        transform: translateX(-30px) scale(1.05);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes slideInRightSmooth {
+    from {
+        opacity: 0;
+        transform: translateX(30px) scale(1.05);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+/* Zoom In Effect untuk Center Image */
+@keyframes zoomInSmooth {
+    from {
+        opacity: 0;
+        transform: scale(1.15);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-image {
+        height: 300px;
+        margin-top: 2rem;
+    }
+    
+    .hero-title {
+        font-size: 2rem !important;
+    }
+}

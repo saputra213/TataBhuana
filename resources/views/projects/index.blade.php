@@ -121,7 +121,7 @@
                                 </div>
                             </div>
                             
-                            <a href="{{ route('projects.show', $project) }}" class="btn btn-success-modern">
+                            <a href="{{ route('projects.show', $project) }}" class="btn btn-danger">
                                 <i class="fas fa-eye me-2"></i>Lihat Detail
                             </a>
                         </div>
@@ -143,7 +143,7 @@
                 <i class="fas fa-folder-open fa-3x text-muted mb-3"></i>
                 <h4 class="text-muted">Tidak ada proyek yang ditemukan</h4>
                 <p class="text-muted">Coba ubah filter pencarian Anda</p>
-                <a href="{{ route('projects.index') }}" class="btn btn-success-modern">
+                <a href="{{ route('projects.index') }}" class="btn btn-danger">
                     <i class="fas fa-refresh me-2"></i>Reset Filter
                 </a>
             </div>
@@ -220,8 +220,7 @@
 @endif
 
 <!-- CTA Section -->
-<<!-- CTA Section -->
-<section class="py-5 bg-primary text-white">
+<section class="py-5 bg-danger text-white">
     <div class="container text-center">
         <h2 class="display-5 fw-bold mb-3">Siap Memulai Proyek Anda?</h2>
         <p class="lead mb-4">Hubungi kami sekarang untuk konsultasi gratis dan penawaran terbaik</p>
@@ -231,353 +230,16 @@
     </div>
 </section>
 
-<style>
-/* Hero Section */
-.projects-hero {
-    background: #dc2626;
-    padding: 120px 0 80px;
-    position: relative;
-    overflow: hidden;
-}
-
-.hero-content {
-    animation: fadeInUp 0.8s ease-out;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.hero-subtitle {
-    animation: fadeInUp 1s ease-out 0.2s both;
-    font-size: 1.5rem;
-}
-
-/* Project Cards */
-.project-card {
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    animation: fadeInUp 0.8s ease-out forwards;
-    opacity: 0;
-    border: 2px solid transparent;
-    border-radius: 15px;
-    position: relative;
-}
-
-.project-card:nth-child(1) { animation-delay: 0.1s; }
-.project-card:nth-child(2) { animation-delay: 0.2s; }
-.project-card:nth-child(3) { animation-delay: 0.3s; }
-.project-card:nth-child(4) { animation-delay: 0.4s; }
-.project-card:nth-child(5) { animation-delay: 0.5s; }
-.project-card:nth-child(6) { animation-delay: 0.6s; }
-
-.project-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-    border-color: #dc2626;
-}
-
-.project-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: #16a34a;
-    transform: scaleX(0);
-    transition: transform 0.4s ease;
-    border-radius: 15px 15px 0 0;
-    z-index: 1;
-}
-
-.project-card:hover::before {
-    transform: scaleX(1);
-}
-
-.project-image-container {
-    position: relative;
-    overflow: hidden;
-}
-
-.image-count-badge {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: rgba(255, 255, 255, 0.95);
-    color: #333;
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    z-index: 2;
-}
-
-.featured-badge {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: #16a34a;
-    color: white;
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    z-index: 2;
-}
-
-/* Button Styles - Jelas dan Konsisten */
-.btn-success-modern {
-    background: #16a34a;
-    color: white !important;
-    font-weight: 600;
-    border: 2px solid #16a34a;
-    border-radius: 8px;
-    padding: 0.6rem 1.2rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 3px 10px rgba(22, 163, 74, 0.4);
-    text-decoration: none;
-}
-
-.btn-success-modern:hover {
-    background: #15803d;
-    color: white !important;
-    border-color: #15803d;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(22, 163, 74, 0.5);
-}
-
-/* CTA Section */
-.cta-section {
-    background: #dc2626;
-    position: relative;
-    overflow: hidden;
-}
-
-.cta-section::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -10%;
-    width: 500px;
-    height: 500px;
-    background: #16a34a;
-    border-radius: 50%;
-    opacity: 0.1;
-    animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-20px) rotate(180deg);
-    }
-}
-
-.cta-content {
-    position: relative;
-    z-index: 2;
-}
-
-.cta-button {
-    background: white;
-    color: #dc2626;
-    font-weight: 700;
-    border-radius: 50px;
-    border: none;
-    transition: all 0.4s ease;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
-
-.cta-button:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-    color: #dc2626;
-    background: white;
-}
-
-.cta-button i {
-    animation: phone-ring 2s ease-in-out infinite;
-}
-
-@keyframes phone-ring {
-    0%, 100% {
-        transform: rotate(0deg);
-    }
-    10%, 30% {
-        transform: rotate(-15deg);
-    }
-    20% {
-        transform: rotate(15deg);
-    }
-}
-
-/* Badge Styles */
-.badge-primary-modern {
-    background: #dc2626;
-    color: white;
-}
-
-.badge-status-modern.status-success {
-    background: #16a34a;
-    color: white;
-}
-
-.badge-status-modern.status-warning {
-    background: #f59e0b;
-    color: white;
-}
-
-.badge-status-modern.status-danger {
-    background: #ef4444;
-    color: white;
-}
-
-.badge-status-modern.status-info {
-    background: #3b82f6;
-    color: white;
-}
-
-@media (max-width: 768px) {
-    .projects-hero {
-        padding: 80px 0 60px;
-    }
-}
-
-/* Scroll to Top Button */
-.scroll-to-top-btn {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    background: #dc2626;
-    color: white;
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.35rem;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4), 0 0 0 3px rgba(255, 255, 255, 0.1);
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    z-index: 9999;
-    opacity: 0;
-    transform: translateX(100px) scale(0.8);
-    pointer-events: none;
-    visibility: hidden;
-}
-
-.scroll-to-top-btn.show {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-    pointer-events: auto;
-    visibility: visible;
-}
-
-.scroll-to-top-btn:hover {
-    background: #b91c1c;
-    transform: translateY(-8px) scale(1.08);
-    box-shadow: 0 8px 30px rgba(220, 38, 38, 0.5), 0 0 0 4px rgba(255, 255, 255, 0.2);
-}
-
-.scroll-to-top-btn:active {
-    transform: translateY(-4px) scale(1.03);
-    box-shadow: 0 4px 20px rgba(220, 38, 38, 0.4), 0 0 0 3px rgba(255, 255, 255, 0.15);
-}
-
-.scroll-to-top-btn i {
-    transition: transform 0.3s ease;
-}
-
-.scroll-to-top-btn:hover i {
-    transform: translateY(-3px);
-}
-
-@media (max-width: 768px) {
-    .scroll-to-top-btn {
-        bottom: 90px; /* Lebih tinggi agar tidak bertumpuk dengan floating buttons */
-        right: 20px;
-        width: 48px;
-        height: 48px;
-        font-size: 1.2rem;
-        z-index: 9996; /* Di bawah floating buttons tapi masih di atas konten */
-    }
-}
-
-/* Extra small mobile - posisi lebih tinggi lagi */
-@media (max-width: 480px) {
-    .scroll-to-top-btn {
-        bottom: 100px; /* Lebih tinggi lagi untuk layar kecil */
-        right: 15px;
-        width: 46px;
-        height: 46px;
-        font-size: 1.1rem;
-    }
-}
-
-/* Landscape mobile */
-@media (max-width: 768px) and (orientation: landscape) {
-    .scroll-to-top-btn {
-        bottom: 80px;
-        right: 20px;
-    }
-}
-</style>
-
 <!-- Scroll to Top Button -->
 <button id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll ke Atas">
     <i class="fas fa-arrow-up"></i>
 </button>
-
-<script>
-// Scroll to Top Button Functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
-    
-    if (!scrollToTopBtn) {
-        console.warn('Scroll to Top button not found');
-        return;
-    }
-    
-    // Function to show/hide button based on scroll position
-    function toggleScrollButton() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-        
-        // Button muncul setelah scroll 100px saja
-        if (scrollTop > 100) {
-            scrollToTopBtn.classList.add('show');
-        } else {
-            scrollToTopBtn.classList.remove('show');
-        }
-    }
-    
-    // Listen to scroll event
-    window.addEventListener('scroll', toggleScrollButton, { passive: true });
-    
-    // Scroll to top when button is clicked
-    scrollToTopBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-    
-    // Check initial scroll position setelah sedikit delay
-    setTimeout(toggleScrollButton, 100);
-});
-</script>
 @endsection
 
+@push('styles')
+    @vite('resources/css/projects-index.css')
+@endpush
+
+@push('scripts')
+    @vite('resources/js/projects-index.js')
+@endpush

@@ -266,7 +266,7 @@
                             @endif
                         </div>
                         
-                        <a href="{{ route('scaffoldings.show', $scaffolding) }}" class="btn btn-success">
+                        <a href="{{ route('scaffoldings.show', $scaffolding) }}" class="btn btn-danger">
                             <i class="fas fa-eye me-2"></i>Detail Produk
                         </a>
                     </div>

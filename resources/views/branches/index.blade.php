@@ -163,7 +163,7 @@
                                     
                                     <div class="mt-auto">
                                         <div class="d-flex gap-2 flex-column flex-sm-row">
-                                            <a href="{{ route('branches.show', $branch) }}" class="btn btn-success btn-sm flex-grow-1 text-center">
+                                            <a href="{{ route('branches.show', $branch) }}" class="btn btn-danger btn-sm flex-grow-1 text-center">
                                                 <i class="fas fa-eye me-1"></i>Detail
                                             </a>
                                             <a href="{{ $branch->google_maps_url }}" target="_blank" class="btn btn-outline-primary btn-sm" style="min-width: 50px;">
@@ -321,7 +321,7 @@
 
 <!-- CTA Section -->
 <!-- CTA Section -->
-<section class="py-5 bg-primary text-white">
+<section class="py-5 bg-danger text-white">
     <div class="container text-center px-3">
         <h2 class="display-5 fw-bold mb-3" style="font-size: clamp(1.5rem, 5vw, 2.5rem);">Siap Memulai Proyek Anda?</h2>
         <p class="lead mb-4" style="font-size: clamp(1rem, 3vw, 1.25rem); padding: 0 15px;">Hubungi kami sekarang untuk konsultasi gratis dan penawaran terbaik</p>

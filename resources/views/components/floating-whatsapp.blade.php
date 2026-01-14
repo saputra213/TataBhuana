@@ -38,6 +38,13 @@
     <div class="wa-backdrop" id="waBackdrop"></div>
 </div>
 
+@push('styles')
+@vite('resources/css/components/floating-whatsapp.css')
+@endpush
+@push('scripts')
+@vite('resources/js/components/floating-whatsapp.js')
+@endpush
+
 <style>
 /* Transparent Floating WhatsApp Styles - Paling bawah di kiri */
 .floating-whatsapp-transparent {
@@ -340,7 +347,6 @@ body {
     opacity: 1;
     visibility: visible;
 }
-
 /* Responsive Design */
 @media (max-width: 768px) {
     /* Pastikan semua floating buttons sejajar vertikal */
@@ -497,197 +503,3 @@ body {
     }
 }
 </style>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const mainButton = document.getElementById('waMainButton');
-    const buttonsContainer = document.getElementById('waButtonsContainer');
-    const backdrop = document.getElementById('waBackdrop');
-    const closeButton = document.getElementById('waCloseButton');
-    
-    // Toggle buttons container
-    function toggleButtons() {
-        const isOpen = buttonsContainer.classList.contains('show');
-        
-        if (isOpen) {
-            closeButtons();
-        } else {
-            openButtons();
-        }
-    }
-    
-    // Open buttons
-    function openButtons() {
-        buttonsContainer.classList.add('show');
-        backdrop.classList.add('show');
-        
-        // Add haptic feedback for mobile
-        if (navigator.vibrate) {
-            navigator.vibrate(50);
-        }
-        
-        // Add click animation to main button
-        mainButton.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-            mainButton.style.transform = 'scale(1)';
-        }, 150);
-    }
-    
-    // Close buttons
-    function closeButtons() {
-        buttonsContainer.classList.remove('show');
-        backdrop.classList.remove('show');
-        
-        // Reset branch items animation
-        const branchItems = document.querySelectorAll('.wa-branch-item');
-        branchItems.forEach((item, index) => {
-            item.style.animationDelay = `${index * 0.1}s`;
-        });
-    }
-    
-    // Event listeners
-    mainButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        toggleButtons();
-    });
-    
-    closeButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        closeButtons();
-    });
-    
-    backdrop.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        closeButtons();
-    });
-    
-    // Branch item clicks
-    const branchItems = document.querySelectorAll('.wa-branch-item');
-    branchItems.forEach(item => {
-        item.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const whatsappUrl = this.getAttribute('data-whatsapp');
-            const branchName = this.getAttribute('data-branch');
-            
-            if (whatsappUrl) {
-                // Add loading animation
-                const icon = this.querySelector('.wa-branch-icon i');
-                const originalClass = icon.className;
-                icon.className = 'fas fa-spinner fa-spin';
-                
-                // Open WhatsApp
-                window.open(whatsappUrl, '_blank');
-                
-                // Reset icon after delay
-                setTimeout(() => {
-                    icon.className = originalClass;
-                }, 2000);
-                
-                // Close buttons after opening WhatsApp
-                setTimeout(() => {
-                    closeButtons();
-                }, 500);
-                
-                // Add success feedback
-                if (navigator.vibrate) {
-                    navigator.vibrate([50, 100, 50]);
-                }
-            }
-        });
-    });
-    
-    // Keyboard support
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape' && buttonsContainer.classList.contains('show')) {
-            closeButtons();
-        }
-    });
-    
-    // Prevent buttons container from closing when clicking inside
-    buttonsContainer.addEventListener('click', function(event) {
-        event.stopPropagation();
-    });
-    
-    // Add intersection observer for performance
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    });
-    
-    if (mainButton) {
-        observer.observe(mainButton);
-    }
-    
-    // Add smooth animations
-    const style = document.createElement('style');
-    style.textContent = `
-        .wa-branch-button {
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        
-        .wa-main-button {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        
-        .wa-buttons-container {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-    `;
-    document.head.appendChild(style);
-    
-    // Add touch support for mobile
-    let touchStartY = 0;
-    let touchEndY = 0;
-    
-    mainButton.addEventListener('touchstart', function(e) {
-        touchStartY = e.changedTouches[0].screenY;
-    });
-    
-    mainButton.addEventListener('touchend', function(e) {
-        touchEndY = e.changedTouches[0].screenY;
-        handleSwipe();
-    });
-    
-    function handleSwipe() {
-        const swipeThreshold = 50;
-        const diff = touchStartY - touchEndY;
-        
-        if (Math.abs(diff) > swipeThreshold) {
-            if (diff > 0) {
-                // Swipe up - open buttons
-                openButtons();
-            } else {
-                // Swipe down - close buttons
-                closeButtons();
-            }
-        }
-    }
-    
-    // Add performance optimization
-    let ticking = false;
-    
-    function updateAnimations() {
-        if (!ticking) {
-            requestAnimationFrame(() => {
-                // Update any dynamic animations here
-                ticking = false;
-            });
-            ticking = true;
-        }
-    }
-    
-    // Listen for scroll events for performance
-    window.addEventListener('scroll', updateAnimations, { passive: true });
-    
-    console.log('Transparent WhatsApp buttons initialized successfully');
-});
-</script>

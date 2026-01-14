@@ -181,7 +181,7 @@
                 <i class="fas fa-project-diagram fa-3x text-info mb-3"></i>
                 <h5 class="card-title">Kelola Proyek</h5>
                 <p class="card-text text-muted">Tambah dan edit galeri proyek</p>
-                <a href="{{ route('admin.projects.index') }}" class="btn btn-info">
+                <a href="{{ route('admin.projects.index') }}" class="btn btn-primary">
                     <i class="fas fa-list me-2"></i>Kelola
                 </a>
             </div>
@@ -220,7 +220,7 @@
                 <i class="fas fa-external-link-alt fa-3x text-info mb-3"></i>
                 <h5 class="card-title">Lihat Website</h5>
                 <p class="card-text text-muted">Buka website untuk melihat hasil</p>
-                <a href="{{ route('home') }}" target="_blank" class="btn btn-info">
+                <a href="{{ route('home') }}" target="_blank" class="btn btn-primary">
                     <i class="fas fa-external-link-alt me-2"></i>Buka
                 </a>
             </div>

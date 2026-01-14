@@ -37,6 +37,13 @@
     <div class="fb-backdrop" id="fbBackdrop"></div>
 </div>
 
+@push('styles')
+@vite('resources/css/components/floating-facebook.css')
+@endpush
+@push('scripts')
+@vite('resources/js/components/floating-facebook.js')
+@endpush
+
 <style>
 /* Transparent Floating Facebook Styles - Di atas WA di kiri */
 .floating-facebook-transparent {
@@ -455,121 +462,3 @@
     }
 }
 </style>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const mainButton = document.getElementById('fbMainButton');
-    const buttonsContainer = document.getElementById('fbButtonsContainer');
-    const backdrop = document.getElementById('fbBackdrop');
-    const closeButton = document.getElementById('fbCloseButton');
-    
-    // Toggle buttons container
-    function toggleButtons() {
-        const isOpen = buttonsContainer.classList.contains('show');
-        
-        if (isOpen) {
-            closeButtons();
-        } else {
-            openButtons();
-        }
-    }
-    
-    // Open buttons
-    function openButtons() {
-        buttonsContainer.classList.add('show');
-        backdrop.classList.add('show');
-        
-        // Add haptic feedback for mobile
-        if (navigator.vibrate) {
-            navigator.vibrate(50);
-        }
-        
-        // Add click animation to main button
-        mainButton.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-            mainButton.style.transform = 'scale(1)';
-        }, 150);
-    }
-    
-    // Close buttons
-    function closeButtons() {
-        buttonsContainer.classList.remove('show');
-        backdrop.classList.remove('show');
-        
-        // Reset social items animation
-        const socialItems = document.querySelectorAll('.fb-social-item');
-        socialItems.forEach((item, index) => {
-            item.style.animationDelay = `${index * 0.1}s`;
-        });
-    }
-    
-    // Event listeners
-    mainButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        toggleButtons();
-    });
-    
-    closeButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        closeButtons();
-    });
-    
-    backdrop.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        closeButtons();
-    });
-    
-    // Social item clicks
-    const socialItems = document.querySelectorAll('.fb-social-item');
-    socialItems.forEach(item => {
-        item.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const facebookUrl = this.getAttribute('data-facebook');
-            
-            if (facebookUrl) {
-                // Add loading animation
-                const icon = this.querySelector('.fb-social-icon i');
-                const originalClass = icon.className;
-                icon.className = 'fas fa-spinner fa-spin';
-                
-                // Open Facebook
-                window.open(facebookUrl, '_blank');
-                
-                // Reset icon after delay
-                setTimeout(() => {
-                    icon.className = originalClass;
-                }, 2000);
-                
-                // Close buttons after opening Facebook
-                setTimeout(() => {
-                    closeButtons();
-                }, 500);
-                
-                // Add success feedback
-                if (navigator.vibrate) {
-                    navigator.vibrate([50, 100, 50]);
-                }
-            }
-        });
-    });
-    
-    // Keyboard support
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape' && buttonsContainer.classList.contains('show')) {
-            closeButtons();
-        }
-    });
-    
-    // Prevent buttons container from closing when clicking inside
-    buttonsContainer.addEventListener('click', function(event) {
-        event.stopPropagation();
-    });
-    
-    console.log('Transparent Facebook buttons initialized successfully');
-});
-</script>

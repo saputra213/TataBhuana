@@ -128,7 +128,7 @@
                     <div class="service-icon-box bg-red-gradient">
                         <i class="fas fa-shopping-cart"></i>
                     </div>
-                    <h5 class="fw-bold mt-3 mb-2">Penjualan</h5>
+                    <h5 class="fw-bold mt-3 mb-2">Penjualan <i class="fas fa-arrow-right ms-2 text-muted"></i></h5>
                     <p class="text-muted small mb-0">Produk scaffolding berkualitas dengan harga kompetitif</p>
                 </a>
             </div>
@@ -138,7 +138,7 @@
                     <div class="service-icon-box bg-green-gradient">
                         <i class="fas fa-handshake"></i>
                     </div>
-                    <h5 class="fw-bold mt-3 mb-2">Persewaan</h5>
+                    <h5 class="fw-bold mt-3 mb-2">Persewaan <i class="fas fa-arrow-right ms-2 text-muted"></i></h5>
                     <p class="text-muted small mb-0">Layanan sewa scaffolding untuk proyek Anda</p>
                 </a>
             </div>
@@ -148,7 +148,7 @@
                     <div class="service-icon-box bg-red-gradient">
                         <i class="fas fa-truck"></i>
                     </div>
-                    <h5 class="fw-bold mt-3 mb-2">Pengiriman</h5>
+                    <h5 class="fw-bold mt-3 mb-2">Pengiriman <i class="fas fa-arrow-right ms-2 text-muted"></i></h5>
                     <p class="text-muted small mb-0">Pengiriman cepat ke lokasi proyek</p>
                 </a>
             </div>
@@ -158,7 +158,7 @@
                     <div class="service-icon-box bg-green-gradient">
                         <i class="fas fa-headset"></i>
                     </div>
-                    <h5 class="fw-bold mt-3 mb-2">Konsultasi</h5>
+                    <h5 class="fw-bold mt-3 mb-2">Konsultasi <i class="fas fa-arrow-right ms-2 text-muted"></i></h5>
                     <p class="text-muted small mb-0">Tim ahli siap membantu kebutuhan proyek Anda</p>
                 </a>
             </div>

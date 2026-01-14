@@ -620,11 +620,43 @@
     }
     
     .hero-main-title {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        line-height: 1.25;
+        margin-bottom: 0.75rem;
     }
     
     .hero-subtitle-text {
-        font-size: 1rem;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-contact-btn {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+        border-radius: 40px;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.4), 0 0 0 2px rgba(255, 255, 255, 0.25);
+    }
+    
+    .carousel-control-triple {
+        width: 48px;
+        height: 48px;
+    }
+    .carousel-control-triple.carousel-control-prev {
+        left: 10px;
+    }
+    .carousel-control-triple.carousel-control-next {
+        right: 10px;
+    }
+    .carousel-control-prev-icon-custom,
+    .carousel-control-next-icon-custom {
+        font-size: 1.25rem;
+    }
+    .slide-panel-center .center-content {
+        padding: 0 56px;
+    }
+    .hero-subtitle-text {
+        hyphens: auto;
     }
     
     .scroll-to-top-btn {
@@ -640,6 +672,23 @@
 
 /* Extra small mobile - posisi lebih tinggi lagi */
 @media (max-width: 480px) {
+    .slide-panel-center .center-content {
+        padding: 0 50px;
+    }
+    .hero-main-title {
+        font-size: 1.6rem;
+        margin-bottom: 0.6rem;
+    }
+    .hero-subtitle-text {
+        font-size: 0.9rem;
+        margin-bottom: 0.9rem;
+        hyphens: auto;
+    }
+    .hero-contact-btn {
+        padding: 9px 18px;
+        font-size: 0.9rem;
+        border-radius: 36px;
+    }
     .scroll-to-top-btn {
         bottom: 100px; /* Lebih tinggi lagi untuk layar kecil */
         right: 15px;

@@ -51,6 +51,51 @@
   position: relative;
   z-index: 1;
 }
+@media (max-width: 768px) {
+  .navbar-brand {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    padding: 0.35rem 0.75rem;
+    border-radius: 12px;
+    gap: 8px;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .navbar-brand img {
+    height: 32px !important;
+    width: auto !important;
+  }
+  .navbar-brand i {
+    font-size: 1.25rem;
+  }
+  .navbar-brand .brand-name {
+    font-size: clamp(0.85rem, 4vw, 1rem);
+    color: #fff;
+    white-space: nowrap;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+}
+@media (max-width: 480px) {
+  .navbar-brand {
+    padding: 0.3rem 0.6rem;
+    border-radius: 14px;
+  }
+  .navbar-brand img {
+    height: 26px !important;
+  }
+  .navbar-brand .brand-name {
+    font-size: clamp(0.85rem, 5vw, 1rem);
+    color: #fff;
+    white-space: nowrap;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+}
 /* Global alignment untuk floating buttons di mobile */
 @media (max-width: 768px) {
   .floating-whatsapp-transparent,

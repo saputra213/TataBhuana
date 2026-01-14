@@ -30,9 +30,9 @@
                     <i class="fas fa-building me-2"></i>
                 @endif
                 @if($profile ?? false)
-                    {{ $profile->company_name }}
+                    <span class="brand-name">{{ $profile->company_name }}</span>
                 @else
-                    Tata Bhuana
+                    <span class="brand-name">Tata Bhuana</span>
                 @endif
 
             </a>

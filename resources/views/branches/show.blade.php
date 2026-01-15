@@ -22,7 +22,7 @@
             <!-- Branch Image -->
             <div class="col-lg-6 mb-4">
                 @if($branch->image)
-                    <img src="{{ asset('storage/' . $branch->image) }}" alt="{{ $branch->name }}" class="img-fluid rounded shadow">
+                    <img src="{{ asset('storage/' . $branch->image) }}" alt="{{ $branch->name }}" class="img-fluid rounded shadow" loading="eager" fetchpriority="high" decoding="async">
                 @else
                     <div class="bg-light d-flex align-items-center justify-content-center rounded shadow" style="height: 400px;">
                         <div class="text-center">

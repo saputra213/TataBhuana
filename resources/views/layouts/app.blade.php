@@ -6,6 +6,13 @@
     <title>@yield('title', 'Tata Bhuana - Sewa & Jual Scaffolding')</title>
     <meta name="description" content="@yield('description', 'Perusahaan penyedia jasa sewa dan jual scaffolding berkualitas tinggi untuk proyek konstruksi Anda.')">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta property="og:title" content="@yield('title', 'Tata Bhuana - Sewa & Jual Scaffolding')">
+    <meta property="og:description" content="@yield('description', 'Perusahaan penyedia jasa sewa dan jual scaffolding berkualitas tinggi untuk proyek konstruksi Anda.')">
+    @if(file_exists(public_path('images/logo.png')))
+    <meta property="og:image" content="{{ asset('images/logo.png') }}">
+    @endif
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -24,7 +31,7 @@
 
             <a class="navbar-brand fw-bold d-flex align-items-center" href="{{ route('home') }}">
                 @if(file_exists(public_path('images/logo.png')))
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo {{ $profile->company_name ?? 'Tata Bhuana' }}" class="me-2" style="height: 40px; width: auto;">
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo {{ $profile->company_name ?? 'Tata Bhuana' }}" class="me-2" style="height: 40px; width: auto;" loading="eager" fetchpriority="high" decoding="async">
 
                 @else
                     <i class="fas fa-building me-2"></i>
@@ -84,7 +91,7 @@
                 <div class="col-lg-4 mb-4">
                     <h5 class="fw-bold mb-3 d-flex align-items-center">
                         @if(file_exists(public_path('images/logo.png')))
-                            <img src="{{ asset('images/logo.png') }}" alt="Logo {{ $profile->company_name ?? 'Tata Bhuana' }}" class="me-2" style="height: 30px; width: auto;">
+                            <img src="{{ asset('images/logo.png') }}" alt="Logo {{ $profile->company_name ?? 'Tata Bhuana' }}" class="me-2" style="height: 30px; width: auto;" loading="lazy" decoding="async">
                         @else
                             <i class="fas fa-building me-2"></i>
                         @endif

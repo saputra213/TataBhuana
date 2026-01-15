@@ -113,6 +113,49 @@
                             @enderror
                         </div>
                     </div>
+
+                    <div class="mb-3">
+                        <label for="hero_images" class="form-label">Gambar Hero Tambahan (bisa lebih dari satu)</label>
+                        <input type="file" class="form-control @error('hero_images.*') is-invalid @enderror" id="hero_images" name="hero_images[]" accept="image/*" multiple>
+                        <div class="form-text">Unggah beberapa gambar untuk slideshow hero. Maksimal 5MB per gambar.</div>
+                        @error('hero_images.*')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    
+                    @if($profile && is_array($profile->hero_images) && count($profile->hero_images) > 0)
+                        <div class="mb-3">
+                            <label class="form-label">Gambar Hero Saat Ini</label>
+                            <div class="d-flex flex-wrap gap-2">
+                                @foreach($profile->hero_images as $img)
+                                    <img src="{{ asset('storage/' . $img) }}" alt="Hero" class="img-thumbnail" style="width: 120px; height: 80px; object-fit: cover;">
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" value="1" id="replace_hero_images" name="replace_hero_images">
+                            <label class="form-check-label" for="replace_hero_images">
+                                Ganti semua gambar hero dengan yang baru
+                            </label>
+                        </div>
+                    @endif
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="hero_title" class="form-label">Judul Hero (H1)</label>
+                            <input type="text" class="form-control @error('hero_title') is-invalid @enderror" id="hero_title" name="hero_title" value="{{ old('hero_title', $profile->hero_title ?? '') }}" placeholder="Contoh: Mitra Konstruksi Andal">
+                            @error('hero_title')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="hero_description" class="form-label">Deskripsi Hero</label>
+                            <textarea class="form-control @error('hero_description') is-invalid @enderror" id="hero_description" name="hero_description" rows="3" placeholder="Teks singkat pendukung di bagian hero">{{ old('hero_description', $profile->hero_description ?? '') }}</textarea>
+                            @error('hero_description')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
                     
                     <hr>
                     <h6 class="fw-bold mb-3">Media Sosial</h6>

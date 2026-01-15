@@ -44,7 +44,7 @@
 
             </a>
             
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNav" aria-controls="mobileNav" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             
@@ -79,8 +79,49 @@
         </div>
     </nav>
 
+    <div class="offcanvas offcanvas-end text-bg-danger" tabindex="-1" id="mobileNav" aria-labelledby="mobileNavLabel" data-bs-backdrop="false">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="mobileNavLabel">
+                @if($profile ?? false)
+                    {{ $profile->company_name }}
+                @else
+                    Tata Bhuana
+                @endif
+            </h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Beranda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">Tentang Kami</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('services') ? 'active' : '' }}" href="{{ route('services') }}">Layanan</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('scaffoldings.index') ? 'active' : '' }}" href="{{ route('scaffoldings.index') }}">Produk</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('projects.index') ? 'active' : '' }}" href="{{ route('projects.index') }}">Galeri Proyek</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('branches.index') ? 'active' : '' }}" href="{{ route('branches.index') }}">Cabang</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('articles.index') ? 'active' : '' }}" href="{{ route('articles.index') }}">Artikel</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Kontak</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
     <!-- Main Content -->
-    <main style="margin-top: 76px;">
+    <main>
         @yield('content')
     </main>
 

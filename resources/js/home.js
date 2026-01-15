@@ -277,6 +277,59 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Featured projects strip auto scroll
+document.addEventListener('DOMContentLoaded', function() {
+    const strip = document.getElementById('featuredProjectsStrip');
+    const container = strip ? strip.querySelector('.strip-container') : null;
+    const prevBtn = document.getElementById('fpPrev');
+    const nextBtn = document.getElementById('fpNext');
+    
+    if (!strip || !container) {
+        return;
+    }
+    
+    const itemWidth = () => {
+        const first = container.querySelector('.strip-item');
+        return first ? first.getBoundingClientRect().width + 16 : 260;
+    };
+    
+    function scrollByAmount(dir = 1) {
+        container.scrollBy({
+            left: dir * itemWidth(),
+            behavior: 'smooth'
+        });
+    }
+    
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            scrollByAmount(-1);
+        });
+    }
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            scrollByAmount(1);
+        });
+    }
+    
+    let autoScrollId = null;
+    function startAutoScroll() {
+        if (autoScrollId) return;
+        autoScrollId = setInterval(() => {
+            const maxScrollLeft = container.scrollWidth - container.clientWidth;
+            if (container.scrollLeft >= maxScrollLeft - 5) {
+                container.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                scrollByAmount(1);
+            }
+        }, 5000);
+    }
+    
+    startAutoScroll();
+});
+
 // Scroll to Top Button Functionality
 document.addEventListener('DOMContentLoaded', function() {
     const scrollToTopBtn = document.getElementById('scrollToTopBtn');

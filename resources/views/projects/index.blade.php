@@ -67,7 +67,7 @@
                     <div class="card h-100 shadow-sm project-card">
                         @if($project->images && count($project->images) > 0)
                             <div class="project-image-container" style="position: relative; overflow: hidden;">
-                                <img src="{{ asset('storage/' . $project->images[0]) }}" class="card-img-top" alt="{{ $project->title }}" style="height: 250px; object-fit: cover;">
+                                <img src="{{ asset('storage/' . $project->images[0]) }}" class="card-img-top" alt="{{ $project->title }}" style="height: 250px; object-fit: cover;" loading="lazy" decoding="async">
                                 @if(count($project->images) > 1)
                                     <div class="position-absolute top-0 end-0 m-2 image-count-badge">
                                         <small><i class="fas fa-images me-1"></i>{{ count($project->images) }}</small>

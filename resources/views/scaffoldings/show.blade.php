@@ -22,9 +22,9 @@
             <!-- Product Image -->
             <div class="col-lg-6 mb-4">
                 @if($scaffolding->image)
-                    <img src="{{ asset('storage/' . $scaffolding->image) }}" alt="{{ $scaffolding->name }}" class="img-fluid rounded shadow">
+                    <img src="{{ asset('storage/' . $scaffolding->image) }}" alt="{{ $scaffolding->name }}" class="img-fluid rounded shadow" loading="eager" fetchpriority="high" decoding="async">
                 @else
-                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="{{ $scaffolding->name }}" class="img-fluid rounded shadow">
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="{{ $scaffolding->name }}" class="img-fluid rounded shadow" loading="eager" fetchpriority="high" decoding="async">
                 @endif
             </div>
             
@@ -150,9 +150,9 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="card h-100 shadow-sm">
                             @if($related->image)
-                                <img src="{{ asset('storage/' . $related->image) }}" class="card-img-top" alt="{{ $related->name }}" style="height: 200px; object-fit: cover;">
+                                <img src="{{ asset('storage/' . $related->image) }}" class="card-img-top" alt="{{ $related->name }}" style="height: 200px; object-fit: cover;" loading="lazy" decoding="async">
                             @else
-                                <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="{{ $related->name }}" style="height: 200px; object-fit: cover;">
+                                <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="{{ $related->name }}" style="height: 200px; object-fit: cover;" loading="lazy" decoding="async">
                             @endif
                             
                             <div class="card-body d-flex flex-column">

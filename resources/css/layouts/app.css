@@ -51,6 +51,9 @@
   position: relative;
   z-index: 1;
 }
+html, body {
+  overflow-x: hidden;
+}
 @media (max-width: 768px) {
   .navbar-brand {
     background: rgba(255, 255, 255, 0.15);
@@ -62,8 +65,7 @@
     display: flex;
     align-items: center;
     flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
   }
   .navbar-brand img {
     height: 32px !important;
@@ -73,7 +75,7 @@
     font-size: 1.25rem;
   }
   .navbar-brand .brand-name {
-    font-size: clamp(0.85rem, 4vw, 1rem);
+    font-size: clamp(0.8rem, 3.6vw, 0.95rem);
     color: #fff;
     white-space: nowrap;
     flex: 1 1 auto;
@@ -86,10 +88,10 @@
     border-radius: 14px;
   }
   .navbar-brand img {
-    height: 26px !important;
+    height: 24px !important;
   }
   .navbar-brand .brand-name {
-    font-size: clamp(0.85rem, 5vw, 1rem);
+    font-size: clamp(0.75rem, 4.8vw, 0.9rem);
     color: #fff;
     white-space: nowrap;
     flex: 1 1 auto;
@@ -217,6 +219,57 @@ footer .list-unstyled li:hover {
 }
 footer .text-white:hover {
   transition: all 0.3s ease;
+}
+
+/* Admin Dashboard mobile tweaks */
+@media (max-width: 768px) {
+  .admin-dashboard .card {
+    border-radius: 12px;
+  }
+  .admin-dashboard .card-body {
+    padding: 0.75rem !important;
+  }
+  .admin-dashboard .card .fa-2x {
+    font-size: 1.6rem;
+  }
+  .admin-dashboard .card .fa-3x {
+    font-size: 2rem;
+  }
+  .admin-dashboard .card .card-title {
+    font-size: 1rem;
+  }
+  .admin-dashboard .card h3 {
+    font-size: 1.4rem;
+  }
+  .admin-dashboard .card .btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+    border-radius: 8px;
+  }
+  .admin-dashboard .table {
+    font-size: 0.9rem;
+  }
+}
+@media (max-width: 480px) {
+  .admin-dashboard .card {
+    border-radius: 12px;
+  }
+  .admin-dashboard .card .fa-2x {
+    font-size: 1.4rem;
+  }
+  .admin-dashboard .card .fa-3x {
+    font-size: 1.8rem;
+  }
+  .admin-dashboard .card h3 {
+    font-size: 1.3rem;
+  }
+  .admin-dashboard .card .btn {
+    padding: 0.45rem 0.7rem;
+    font-size: 0.9rem;
+  }
+  .admin-dashboard .table {
+    font-size: 0.85rem;
+  }
 }
 /* Smooth page transitions */
 main {

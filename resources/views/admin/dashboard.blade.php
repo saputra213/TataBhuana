@@ -4,6 +4,7 @@
 @section('page-title', 'Dashboard')
 
 @section('content')
+<div class="admin-dashboard">
 <div class="row">
     <div class="col-12">
         <h2 class="mb-3 mb-lg-4 fs-3 fs-lg-2">Selamat Datang, {{ auth('admin')->user()->name }}!</h2>
@@ -144,12 +145,12 @@
 </div>
 
 <!-- Quick Actions -->
-<div class="row g-4 mb-5">
+<div class="row g-3 g-lg-4 mb-4 mb-lg-5">
     <div class="col-12">
         <h4 class="mb-3">Aksi Cepat</h4>
     </div>
     
-    <div class="col-lg-3 col-md-6">
+    <div class="col-12 col-sm-6 col-lg-3">
         <div class="card h-100">
             <div class="card-body text-center">
                 <i class="fas fa-plus-circle fa-3x text-primary mb-3"></i>
@@ -162,7 +163,7 @@
         </div>
     </div>
     
-    <div class="col-lg-3 col-md-6">
+    <div class="col-12 col-sm-6 col-lg-3">
         <div class="card h-100">
             <div class="card-body text-center">
                 <i class="fas fa-list fa-3x text-success mb-3"></i>
@@ -175,7 +176,7 @@
         </div>
     </div>
     
-    <div class="col-lg-3 col-md-6">
+    <div class="col-12 col-sm-6 col-lg-3">
         <div class="card h-100">
             <div class="card-body text-center">
                 <i class="fas fa-project-diagram fa-3x text-info mb-3"></i>
@@ -188,7 +189,7 @@
         </div>
     </div>
     
-    <div class="col-lg-3 col-md-6">
+    <div class="col-12 col-sm-6 col-lg-3">
         <div class="card h-100">
             <div class="card-body text-center">
                 <i class="fas fa-map-marker-alt fa-3x text-warning mb-3"></i>
@@ -201,7 +202,7 @@
         </div>
     </div>
     
-    <div class="col-lg-3 col-md-6">
+    <div class="col-12 col-sm-6 col-lg-3">
         <div class="card h-100">
             <div class="card-body text-center">
                 <i class="fas fa-building fa-3x text-secondary mb-3"></i>
@@ -214,7 +215,7 @@
         </div>
     </div>
     
-    <div class="col-lg-3 col-md-6">
+    <div class="col-12 col-sm-6 col-lg-3">
         <div class="card h-100">
             <div class="card-body text-center">
                 <i class="fas fa-external-link-alt fa-3x text-info mb-3"></i>
@@ -297,4 +298,5 @@
         </div>
     </div>
 </div>
+<!-- wrapper end -->
 @endsection

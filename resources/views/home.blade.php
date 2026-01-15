@@ -70,13 +70,13 @@
                             @php
                                 $leftIndex = $index > 0 ? $index - 1 : count($slides) - 1;
                             @endphp
-                            <img src="{{ asset('storage/' . $slides[$leftIndex]['image']) }}" alt="Previous" class="panel-image" data-slide-index="{{ $leftIndex }}" onerror="this.style.display='none'">
+                            <img src="{{ asset('storage/' . $slides[$leftIndex]['image']) }}" alt="Previous" class="panel-image" data-slide-index="{{ $leftIndex }}" loading="lazy" decoding="async" onerror="this.style.display='none'">
                         </div>
                         
                         <!-- Center Panel (Main) -->
                         <div class="slide-panel slide-panel-center">
                             <div class="center-image-container">
-                                <img src="{{ asset('storage/' . $slide['image']) }}" alt="Featured" class="panel-image center-main-image" data-src="{{ asset('storage/' . $slide['image']) }}" data-slide-index="{{ $index }}" onerror="console.error('Image failed to load:', this.src)">
+                                <img src="{{ asset('storage/' . $slide['image']) }}" alt="Featured" class="panel-image center-main-image" data-src="{{ asset('storage/' . $slide['image']) }}" data-slide-index="{{ $index }}" loading="{{ $index === 0 ? 'eager' : 'lazy' }}" fetchpriority="{{ $index === 0 ? 'high' : 'low' }}" decoding="async" onerror="console.error('Image failed to load:', this.src)">
                                 <div class="center-overlay"></div>
                                 <div class="center-content">
                                 <h1 class="hero-main-title text-white mb-3">{{ $slide['title'] }}</h1>
@@ -93,7 +93,7 @@
                             @php
                                 $rightIndex = $index < count($slides) - 1 ? $index + 1 : 0;
                             @endphp
-                            <img src="{{ asset('storage/' . $slides[$rightIndex]['image']) }}" alt="Next" class="panel-image" data-slide-index="{{ $rightIndex }}" onerror="this.style.display='none'">
+                            <img src="{{ asset('storage/' . $slides[$rightIndex]['image']) }}" alt="Next" class="panel-image" data-slide-index="{{ $rightIndex }}" loading="lazy" decoding="async" onerror="this.style.display='none'">
                         </div>
                     </div>
                 </div>
@@ -216,9 +216,9 @@
             <div class="col-lg-4 col-md-6">
                 <div class="card h-100 shadow-sm">
                     @if($scaffolding->image)
-                        <img src="{{ asset('storage/' . $scaffolding->image) }}" class="card-img-top" alt="{{ $scaffolding->name }}" style="height: 250px; object-fit: cover;">
+                        <img src="{{ asset('storage/' . $scaffolding->image) }}" class="card-img-top" alt="{{ $scaffolding->name }}" style="height: 250px; object-fit: cover;" loading="lazy" decoding="async">
                     @else
-                        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="{{ $scaffolding->name }}" style="height: 250px; object-fit: cover;">
+                        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="{{ $scaffolding->name }}" style="height: 250px; object-fit: cover;" loading="lazy" decoding="async">
                     @endif
                     
                     <div class="card-body d-flex flex-column">

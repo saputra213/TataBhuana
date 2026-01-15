@@ -110,7 +110,7 @@
                             <!-- Image Section - Stacked di Mobile -->
                             <div class="col-md-4 col-12 branch-image-wrapper">
                                 @if($branch->image)
-                                    <img src="{{ asset('storage/' . $branch->image) }}" class="img-fluid w-100 branch-card-image" alt="{{ $branch->name }}">
+                                    <img src="{{ asset('storage/' . $branch->image) }}" class="img-fluid w-100 branch-card-image" alt="{{ $branch->name }}" loading="lazy" decoding="async">
                                 @else
                                     <div class="bg-light d-flex align-items-center justify-content-center branch-placeholder">
                                         <div class="text-center">

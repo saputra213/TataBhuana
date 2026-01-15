@@ -35,7 +35,7 @@
                             @foreach($project->images as $index => $image)
                                 <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
                                     <img src="{{ asset('storage/' . $image) }}" class="d-block w-100 rounded shadow" 
-                                         alt="{{ $project->title }}" style="height: 500px; object-fit: cover;">
+                                         alt="{{ $project->title }}" style="height: 500px; object-fit: cover;" loading="{{ $index === 0 ? 'eager' : 'lazy' }}" fetchpriority="{{ $index === 0 ? 'high' : 'low' }}" decoding="async">
                                 </div>
                             @endforeach
                         </div>
@@ -161,7 +161,7 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="card h-100 shadow-sm">
                             @if($related->images && count($related->images) > 0)
-                                <img src="{{ asset('storage/' . $related->images[0]) }}" class="card-img-top" alt="{{ $related->title }}" style="height: 200px; object-fit: cover;">
+                                <img src="{{ asset('storage/' . $related->images[0]) }}" class="card-img-top" alt="{{ $related->title }}" style="height: 200px; object-fit: cover;" loading="lazy" decoding="async">
                             @else
                                 <div class="bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
                                     <i class="fas fa-image fa-2x text-muted"></i>
@@ -269,7 +269,6 @@
 @push('scripts')
     @vite('resources/js/projects-show.js')
 @endpush
-
 
 
 

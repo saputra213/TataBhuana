@@ -10,7 +10,7 @@
             <div class="col-lg-8">
                 <div class="card mb-4">
                     @if($article->image)
-                        <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->title }}" class="card-img-top" style="max-height: 400px; object-fit: cover;">
+                        <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->title }}" class="card-img-top" style="max-height: 400px; object-fit: cover;" loading="eager" fetchpriority="high" decoding="async">
                     @endif
                     <div class="card-body">
                         <h1 class="card-title">{{ $article->title }}</h1>
@@ -89,7 +89,7 @@
                                 @foreach($related as $item)
                                     <li class="mb-3 d-flex">
                                         @if($item->image)
-                                            <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title }}" class="rounded me-3" style="width: 60px; height: 60px; object-fit: cover;">
+                                            <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title }}" class="rounded me-3" style="width: 60px; height: 60px; object-fit: cover;" loading="lazy" decoding="async">
                                         @endif
                                         <div>
                                             <a href="{{ route('articles.show', $item) }}" class="text-decoration-none">{{ $item->title }}</a>

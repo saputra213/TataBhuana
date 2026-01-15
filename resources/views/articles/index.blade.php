@@ -40,7 +40,7 @@
                         <div class="card h-100 shadow-sm article-card">
                             <div class="card-img-wrapper overflow-hidden position-relative">
                                 @if($article->image)
-                                    <img src="{{ asset('storage/' . $article->image) }}" class="card-img-top" alt="{{ $article->title }}" style="height: 250px; object-fit: cover;">
+                                    <img src="{{ asset('storage/' . $article->image) }}" class="card-img-top" alt="{{ $article->title }}" style="height: 250px; object-fit: cover;" loading="lazy" decoding="async">
                                 @else
                                     <div class="bg-light d-flex align-items-center justify-content-center" style="height: 250px; width: 100%;">
                                         <i class="fas fa-newspaper fa-3x text-muted"></i>

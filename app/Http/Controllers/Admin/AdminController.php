@@ -47,6 +47,10 @@ class AdminController extends Controller
             'services' => 'required|string',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
             'hero_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+            'hero_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+            'replace_hero_images' => 'nullable|boolean',
+            'hero_title' => 'nullable|string|max:255',
+            'hero_description' => 'nullable|string',
             'facebook' => 'nullable|url',
             'instagram' => 'nullable|url',
             'whatsapp' => 'nullable|string'
@@ -62,6 +66,32 @@ class AdminController extends Controller
         // Handle hero image upload
         if ($request->hasFile('hero_image')) {
             $data['hero_image'] = $request->file('hero_image')->store('company', 'public');
+            \App\Services\ImageProcessingService::processHeroImage($data['hero_image'], 1920, 85);
+        }
+
+        // Handle multiple hero images
+        if ($request->hasFile('hero_images')) {
+            $newImages = [];
+            foreach ($request->file('hero_images') as $image) {
+                $storedPath = $image->store('company', 'public');
+                \App\Services\ImageProcessingService::processHeroImage($storedPath, 1920, 85);
+                $newImages[] = $storedPath;
+            }
+            $profileExisting = CompanyProfile::first();
+            if ($request->boolean('replace_hero_images')) {
+                if ($profileExisting && is_array($profileExisting->hero_images)) {
+                    foreach ($profileExisting->hero_images as $oldImg) {
+                        \Illuminate\Support\Facades\Storage::disk('public')->delete($oldImg);
+                    }
+                }
+                $data['hero_images'] = $newImages;
+            } else {
+                $merged = [];
+                if ($profileExisting && is_array($profileExisting->hero_images)) {
+                    $merged = $profileExisting->hero_images;
+                }
+                $data['hero_images'] = array_values(array_unique(array_merge($merged, $newImages)));
+            }
         }
         
         // Handle social media

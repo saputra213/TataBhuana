@@ -8,158 +8,114 @@
 @section('description', 'Perusahaan penyedia jasa sewa dan jual scaffolding berkualitas tinggi untuk proyek konstruksi Anda.')
 
 @section('content')
-<!-- Hero Triple Slider Section -->
-<section class="hero-triple-slider position-relative overflow-hidden">
-    <div id="heroTripleCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000" data-bs-wrap="true">
-        <div class="carousel-inner">
-            @php
-                $slides = [];
-                // Ambil semua foto dari semua proyek yang featured
-                if(isset($featuredProjects) && $featuredProjects->count() > 0) {
-                    foreach($featuredProjects as $project) {
-                        if($project->images && count($project->images) > 0) {
-                            // Ambil semua foto dari setiap proyek, bukan hanya foto pertama
-                            foreach($project->images as $image) {
-                                $slides[] = [
-                                    'image' => $image,
-                                    'title' => $project->title,
-                                    'description' => $project->description
-                                ];
-                            }
-                        }
-                    }
-                }
-                
-                // Ambil juga foto dari proyek lainnya jika masih kurang
-                if(count($slides) < 6) {
-                    $allProjects = \App\Models\Project::whereNotNull('images')
-                        ->where('is_featured', false)
-                        ->orderBy('created_at', 'desc')
-                        ->get();
-                    
-                    foreach($allProjects as $project) {
-                        if($project->images && count($project->images) > 0) {
-                            foreach($project->images as $image) {
-                                if(count($slides) >= 30) break; // Batasi maksimal 30 slide
-                                $slides[] = [
-                                    'image' => $image,
-                                    'title' => $project->title,
-                                    'description' => $project->description
-                                ];
-                            }
-                        }
-                        if(count($slides) >= 30) break;
-                    }
-                }
-                
-                // Fallback jika tidak ada foto sama sekali
-                if(empty($slides)) {
-                    $slides[] = [
-                        'image' => 'projects/OxxBwzXcvQxvz1NwVtmjNDnaUnK8OVOy8pzLN1OR.jpg',
-                        'title' => 'Aman, Kokoh, Efisien',
-                        'description' => 'Scaffolding standar SNI yang menjamin keselamatan dan kelancaran pekerjaan di lapangan.'
-                    ];
-                }
-            @endphp
-            
-            @foreach($slides as $index => $slide)
-                <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                    <div class="triple-slide-container">
-                        <!-- Left Panel -->
-                        <div class="slide-panel slide-panel-left">
-                            @php
-                                $leftIndex = $index > 0 ? $index - 1 : count($slides) - 1;
-                            @endphp
-                            <img src="{{ asset('storage/' . $slides[$leftIndex]['image']) }}" alt="Previous" class="panel-image" data-slide-index="{{ $leftIndex }}" loading="lazy" decoding="async" onerror="this.style.display='none'">
-                        </div>
-                        
-                        <!-- Center Panel (Main) -->
-                        <div class="slide-panel slide-panel-center">
-                            <div class="center-image-container">
-                                <img src="{{ asset('storage/' . $slide['image']) }}" alt="Featured" class="panel-image center-main-image" data-src="{{ asset('storage/' . $slide['image']) }}" data-slide-index="{{ $index }}" loading="{{ $index === 0 ? 'eager' : 'lazy' }}" fetchpriority="{{ $index === 0 ? 'high' : 'low' }}" decoding="async" onerror="console.error('Image failed to load:', this.src)">
-                                <div class="center-overlay"></div>
-                                <div class="center-content">
-                                <h1 class="hero-main-title text-white mb-3">{{ $slide['title'] }}</h1>
-                                <p class="hero-subtitle-text text-white mb-4">{{ Str::limit($slide['description'], 80) }}</p>
-                                <a href="{{ route('contact') }}" class="btn hero-contact-btn">
-                                    <i class="fas fa-phone-alt me-2"></i>Hubungi Kami
-                                </a>
-                            </div>
-                        </div>
-                </div>
-                        
-                        <!-- Right Panel -->
-                        <div class="slide-panel slide-panel-right">
-                            @php
-                                $rightIndex = $index < count($slides) - 1 ? $index + 1 : 0;
-                            @endphp
-                            <img src="{{ asset('storage/' . $slides[$rightIndex]['image']) }}" alt="Next" class="panel-image" data-slide-index="{{ $rightIndex }}" loading="lazy" decoding="async" onerror="this.style.display='none'">
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-        
-        <!-- Navigation Controls -->
-        <button class="carousel-control-triple carousel-control-prev" type="button" data-bs-target="#heroTripleCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon-custom">
-                <i class="fas fa-chevron-left"></i>
-            </span>
-        </button>
-        <button class="carousel-control-triple carousel-control-next" type="button" data-bs-target="#heroTripleCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon-custom">
-                <i class="fas fa-chevron-right"></i>
-            </span>
-        </button>
+<!-- Hero Slideshow Section -->
+@php
+    $bgImages = [];
+    if (!empty($profile?->hero_images) && is_array($profile->hero_images)) {
+        $bgImages = $profile->hero_images;
+    } elseif (!empty($profile?->hero_image)) {
+        $bgImages = [$profile->hero_image];
+    }
+@endphp
+<section class="hero-slideshow position-relative overflow-hidden">
+    <div class="hero-slides-container">
+        @forelse($bgImages as $idx => $img)
+            <img src="{{ asset('storage/' . $img) }}" alt="Hero {{ $idx + 1 }}" class="hero-bg-slide {{ $idx === 0 ? 'active' : '' }}" loading="{{ $idx === 0 ? 'eager' : 'lazy' }}" fetchpriority="{{ $idx === 0 ? 'high' : 'low' }}" decoding="async">
+        @empty
+            <div class="hero-bg-fallback"></div>
+        @endforelse
+        <div class="hero-overlay"></div>
     </div>
-    
-    <!-- Scroll to Top Button -->
-    <button id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll ke Atas">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="row">
+            <div class="col-12 text-center py-5 my-4">
+                <h1 class="display-3 fw-bold text-white mb-3">
+                    {{ $profile?->hero_title ?? 'Mitra Konstruksi Andal' }}
+                </h1>
+                <p class="lead text-white-50 mb-4">
+                    {{ $profile?->hero_description ?? ($profile?->description ?? 'Scaffolding berkualitas untuk proyek Anda, aman dan efisien.') }}
+                </p>
+                <a href="{{ route('contact') }}" class="btn btn-light btn-lg">
+                    <i class="fas fa-phone-alt me-2"></i>Hubungi Kami
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Company Profile Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="company-profile-wrapper">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-5">
+                    @if($profile && $profile->hero_image)
+                        <div class="company-profile-image-wrapper">
+                            <img src="{{ asset('storage/' . $profile->hero_image) }}" alt="{{ $profile->company_name ?? 'Profil Perusahaan' }}" class="company-profile-image" loading="lazy" decoding="async">
+                        </div>
+                    @else
+                        <div class="company-profile-image-fallback d-flex align-items-center justify-content-center">
+                            <span class="fw-bold text-white fs-3">{{ $profile->company_name ?? 'Tata Bhuana Scaffolding' }}</span>
+                        </div>
+                    @endif
+                </div>
+                <div class="col-lg-7">
+                    <p class="text-danger text-uppercase fw-bold small mb-2">Tentang Kami</p>
+                    <h2 class="fw-bold mb-3">
+                        {{ $profile?->company_name ?? 'Tata Bhuana Scaffolding' }}
+                    </h2>
+                    <p class="text-muted mb-0">
+                        {{ $profile?->about_us ?? 'Tata Bhuana Scaffolding adalah perusahaan penyedia sewa dan jual scaffolding yang berkomitmen memberikan solusi aman, berkualitas, dan efisien untuk berbagai proyek konstruksi Anda.' }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <!-- Quick Services Section -->
 <section class="py-5 bg-light">
     <div class="container">
+        <div class="row mb-4">
+            <div class="col-12 text-center home-services-heading">
+                <h2 class="fw-bold mb-1">Layanan Kami</h2>
+                <p class="text-muted mb-0">Pilihan layanan utama untuk mendukung proyek konstruksi Anda</p>
+            </div>
+        </div>
         <div class="row g-3">
-            <div class="col-lg-3 col-md-6">
+            <div class="col-6 col-md-6 col-lg-3">
                 <a href="{{ route('services') }}" class="service-quick-card text-decoration-none service-animate">
                     <div class="service-icon-box bg-red-gradient">
                         <i class="fas fa-shopping-cart"></i>
                     </div>
                     <h5 class="fw-bold mt-3 mb-2">Penjualan <i class="fas fa-arrow-right ms-2 text-muted"></i></h5>
-                    <p class="text-muted small mb-0">Produk scaffolding berkualitas dengan harga kompetitif</p>
                 </a>
             </div>
             
-            <div class="col-lg-3 col-md-6">
+            <div class="col-6 col-md-6 col-lg-3">
                 <a href="{{ route('services') }}" class="service-quick-card text-decoration-none service-animate" style="animation-delay: 0.1s;">
                     <div class="service-icon-box bg-green-gradient">
                         <i class="fas fa-handshake"></i>
                     </div>
                     <h5 class="fw-bold mt-3 mb-2">Persewaan <i class="fas fa-arrow-right ms-2 text-muted"></i></h5>
-                    <p class="text-muted small mb-0">Layanan sewa scaffolding untuk proyek Anda</p>
                 </a>
             </div>
             
-            <div class="col-lg-3 col-md-6">
+            <div class="col-6 col-md-6 col-lg-3">
                 <a href="{{ route('services') }}" class="service-quick-card text-decoration-none service-animate" style="animation-delay: 0.2s;">
                     <div class="service-icon-box bg-red-gradient">
                         <i class="fas fa-truck"></i>
                     </div>
                     <h5 class="fw-bold mt-3 mb-2">Pengiriman <i class="fas fa-arrow-right ms-2 text-muted"></i></h5>
-                    <p class="text-muted small mb-0">Pengiriman cepat ke lokasi proyek</p>
                 </a>
             </div>
             
-            <div class="col-lg-3 col-md-6">
+            <div class="col-6 col-md-6 col-lg-3">
                 <a href="{{ route('contact') }}" class="service-quick-card text-decoration-none service-animate" style="animation-delay: 0.3s;">
                     <div class="service-icon-box bg-green-gradient">
                         <i class="fas fa-headset"></i>
                     </div>
                     <h5 class="fw-bold mt-3 mb-2">Konsultasi <i class="fas fa-arrow-right ms-2 text-muted"></i></h5>
-                    <p class="text-muted small mb-0">Tim ahli siap membantu kebutuhan proyek Anda</p>
                 </a>
             </div>
         </div>
@@ -170,101 +126,113 @@
 <section class="py-5">
     <div class="container">
         <div class="row text-center mb-5">
-            <div class="col-12">
+            <div class="col-12 home-features-heading">
                 <h2 class="display-5 fw-bold mb-3">Mengapa Memilih Kami?</h2>
                 <p class="lead text-muted">Kualitas Selalu Terjaga, Layanan Terpercaya</p>
             </div>
         </div>
         
         <div class="row g-4 justify-content-center">
-            <div class="col-lg-5 col-md-6">
+            <div class="col-6 col-md-4 col-lg-2">
                 <div class="feature-card text-center h-100 p-5 bg-white rounded shadow-sm border-0">
                     <div class="feature-icon bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4 shadow">
                         <i class="fas fa-shield-alt fa-2x"></i>
                     </div>
-                    <h4 class="fw-bold mb-3">Keamanan Terjamin</h4>
-                    <p class="text-muted mb-0 feature-text">Semua scaffolding kami memenuhi standar keamanan internasional dan telah teruji kualitasnya untuk menjamin keselamatan pekerja di lapangan.</p>
+                    <h4 class="fw-bold mb-0">Keamanan Terjamin</h4>
                 </div>
             </div>
             
-            <div class="col-lg-5 col-md-6">
+            <div class="col-6 col-md-4 col-lg-2">
                 <div class="feature-card text-center h-100 p-5 bg-white rounded shadow-sm border-0">
                     <div class="feature-icon bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4 shadow">
                         <i class="fas fa-clock fa-2x"></i>
                     </div>
-                    <h4 class="fw-bold mb-3">Pengiriman Cepat</h4>
-                    <p class="text-muted mb-0 feature-text">Layanan pengiriman yang cepat dan tepat waktu untuk mendukung jadwal proyek Anda tanpa menunda kegiatan konstruksi.</p>
+                    <h4 class="fw-bold mb-0">Pengiriman Cepat</h4>
+                </div>
+            </div>
+            
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="feature-card text-center h-100 p-5 bg-white rounded shadow-sm border-0">
+                    <div class="feature-icon bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4 shadow">
+                        <i class="fas fa-boxes fa-2x"></i>
+                    </div>
+                    <h4 class="fw-bold mb-0">Stok Produk Lengkap</h4>
+                </div>
+            </div>
+            
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="feature-card text-center h-100 p-5 bg-white rounded shadow-sm border-0">
+                    <div class="feature-icon bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4 shadow">
+                        <i class="fas fa-bolt fa-2x"></i>
+                    </div>
+                    <h4 class="fw-bold mb-0">Cepat & Responsif</h4>
+                </div>
+            </div>
+            
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="feature-card text-center h-100 p-5 bg-white rounded shadow-sm border-0">
+                    <div class="feature-icon bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4 shadow">
+                        <i class="fas fa-trophy fa-2x"></i>
+                    </div>
+                    <h4 class="fw-bold mb-0">Produk Berkualitas</h4>
+                </div>
+            </div>
+            
+            <div class="col-6 col-md-4 col-lg-2">
+                <div class="feature-card text-center h-100 p-5 bg-white rounded shadow-sm border-0">
+                    <div class="feature-icon bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4 shadow">
+                        <i class="fas fa-headset fa-2x"></i>
+                    </div>
+                    <h4 class="fw-bold mb-0">Dukungan Teknis</h4>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Products Section -->
-@if($featuredScaffoldings->count() > 0)
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="row text-center mb-5">
-            <div class="col-12">
-                <h2 class="display-5 fw-bold mb-3">Produk Unggulan Kami</h2>
-                <p class="lead text-muted">Pilihan scaffolding berkualitas tinggi untuk berbagai kebutuhan proyek</p>
-            </div>
-        </div>
-        
-        <div class="row g-4">
-            @foreach($featuredScaffoldings as $scaffolding)
-            <div class="col-lg-4 col-md-6">
-                <div class="card h-100 shadow-sm">
-                    @if($scaffolding->image)
-                        <img src="{{ asset('storage/' . $scaffolding->image) }}" class="card-img-top" alt="{{ $scaffolding->name }}" style="height: 250px; object-fit: cover;" loading="lazy" decoding="async">
-                    @else
-                        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="{{ $scaffolding->name }}" style="height: 250px; object-fit: cover;" loading="lazy" decoding="async">
-                    @endif
-                    
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold">{{ $scaffolding->name }}</h5>
-                        <p class="card-text text-muted flex-grow-1">{{ Str::limit($scaffolding->description, 100) }}</p>
-                        
-                        <div class="mb-3">
-                            <span class="badge bg-primary me-2">{{ $scaffolding->type }}</span>
-                            <span class="badge bg-secondary">{{ $scaffolding->material }}</span>
-                        </div>
-                        
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            @if($scaffolding->rental_price)
-                            <div>
-                                <small class="text-muted">Sewa:</small>
-                                <strong class="text-primary">{{ $scaffolding->formatted_rental_price }}/hari</strong>
-                            </div>
-                            @endif
-                            @if($scaffolding->sale_price)
-                            <div>
-                                <small class="text-muted">Jual:</small>
-                                <strong class="text-success">{{ $scaffolding->formatted_sale_price }}</strong>
-                            </div>
-                            @endif
-                        </div>
-                        
-                        <a href="{{ route('scaffoldings.show', $scaffolding) }}" class="btn btn-danger">
-                            <i class="fas fa-eye me-2"></i>Detail Produk
-                        </a>
-                    </div>
+@if($featuredProjects->count() > 0)
+<section class="py-5">
+    <div class="container mb-3">
+        <div class="row">
+            <div class="col-12 d-flex align-items-center justify-content-between">
+                <h2 class="fw-bold mb-0">Proyek Unggulan</h2>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-outline-danger btn-sm" id="fpPrev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="btn btn-outline-danger btn-sm" id="fpNext"><i class="fas fa-chevron-right"></i></button>
                 </div>
             </div>
-            @endforeach
         </div>
-        
-        <div class="text-center mt-5">
-            <a href="{{ route('scaffoldings.index') }}" class="btn btn-outline-danger btn-lg">
-                <i class="fas fa-list me-2"></i>Lihat Semua Produk
+    </div>
+    <div id="featuredProjectsStrip" class="featured-projects-strip">
+        <div class="strip-container">
+            @foreach($featuredProjects as $project)
+            <a href="{{ route('projects.show', $project) }}" class="strip-item text-decoration-none">
+                @php
+                    $img = null;
+                    if ($project->images && is_array($project->images) && count($project->images) > 0) {
+                        $img = asset('storage/' . $project->images[0]);
+                    }
+                @endphp
+                @if($img)
+                    <img src="{{ $img }}" alt="{{ $project->title }}" loading="lazy" decoding="async">
+                @else
+                    <div class="strip-thumb-fallback"></div>
+                @endif
+                <div class="strip-content">
+                    <div class="strip-content-inner">
+                        <h6 class="mb-1 fw-bold">{{ $project->title }}</h6>
+                        <p class="small mb-0">{{ Str::limit($project->description, 80) }}</p>
+                    </div>
+                </div>
             </a>
+            @endforeach
         </div>
     </div>
 </section>
 @endif
 
 <!-- CTA Section -->
-<section class="py-5 bg-danger text-white">
+<section class="py-5 bg-danger text-white home-cta-section">
     <div class="container text-center">
         <h2 class="display-5 fw-bold mb-3">Siap Memulai Proyek Anda?</h2>
         <p class="lead mb-4">Hubungi kami sekarang untuk konsultasi gratis dan penawaran terbaik</p>
@@ -274,8 +242,44 @@
     </div>
 </section>
 
+<!-- Scroll To Top Button -->
+<button id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll ke Atas">
+    <i class="fas fa-arrow-up"></i>
+    <span class="visually-hidden">Kembali ke atas</span>
+</button>
+
 @push('scripts')
     @vite('resources/js/home.js')
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const slides = document.querySelectorAll('.hero-bg-slide');
+        if (!slides || slides.length === 0) return;
+        slides.forEach(img => {
+            if (img && img.src) {
+                const loader = new Image();
+                loader.src = img.src;
+            }
+        });
+        let current = 0;
+        const intervalMs = 7000;
+        function show(index) {
+            slides.forEach((img, i) => {
+                if (i === index) {
+                    img.classList.add('active');
+                } else {
+                    img.classList.remove('active');
+                }
+            });
+        }
+        show(current);
+        if (slides.length > 1) {
+            setInterval(() => {
+                current = (current + 1) % slides.length;
+                show(current);
+            }, intervalMs);
+        }
+    });
+    </script>
 @endpush
 
 @endsection

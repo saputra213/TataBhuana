@@ -1067,11 +1067,11 @@ h1, h2, h3, .display-1, .display-2, .display-3, .display-4, .display-5, .display
         padding-right: 1rem;
     }
     .feature-card {
-        padding: 1.5rem !important;
+        padding: 1.25rem 0.95rem !important;
     }
     .feature-icon {
-        width: 72px;
-        height: 72px;
+        width: 52px;
+        height: 52px;
     }
     .service-quick-card {
         padding: 1.25rem 1rem;

@@ -20,11 +20,14 @@ class CompanyProfile extends Model
         'services',
         'logo',
         'hero_image',
+        'hero_title',
+        'hero_description',
+        'hero_images',
         'social_media'
     ];
 
     protected $casts = [
-        'social_media' => 'array'
+        'social_media' => 'array',
+        'hero_images' => 'array'
     ];
 }
-

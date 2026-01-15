@@ -143,8 +143,73 @@ class ImageProcessingService
             }
         }
     }
-}
 
+    /**
+     * Process hero image: resize only with high quality, no background replace
+     */
+    public static function processHeroImage($imagePath, $maxWidth = 1920, $quality = 85)
+    {
+        $fullPath = storage_path('app/public/' . $imagePath);
+        if (!file_exists($fullPath)) {
+            return false;
+        }
+        try {
+            $imageInfo = getimagesize($fullPath);
+            if (!$imageInfo) {
+                return false;
+            }
+            $mimeType = $imageInfo['mime'];
+            $width = $imageInfo[0];
+            $height = $imageInfo[1];
+            switch ($mimeType) {
+                case 'image/jpeg':
+                    $image = imagecreatefromjpeg($fullPath);
+                    break;
+                case 'image/png':
+                    $image = imagecreatefrompng($fullPath);
+                    break;
+                case 'image/gif':
+                    $image = imagecreatefromgif($fullPath);
+                    break;
+                default:
+                    return false;
+            }
+            if (!$image) {
+                return false;
+            }
+            if ($width > $maxWidth) {
+                $newHeight = intval(($height * $maxWidth) / $width);
+                $resized = imagecreatetruecolor($maxWidth, $newHeight);
+                if ($mimeType == 'image/png') {
+                    imagealphablending($resized, false);
+                    imagesavealpha($resized, true);
+                }
+                imagecopyresampled($resized, $image, 0, 0, 0, 0, $maxWidth, $newHeight, $width, $height);
+                imagedestroy($image);
+                $image = $resized;
+                $width = $maxWidth;
+                $height = $newHeight;
+            }
+            switch ($mimeType) {
+                case 'image/jpeg':
+                    imagejpeg($image, $fullPath, $quality);
+                    break;
+                case 'image/png':
+                    imagesavealpha($image, true);
+                    imagepng($image, $fullPath, 9);
+                    break;
+                case 'image/gif':
+                    imagegif($image, $fullPath);
+                    break;
+            }
+            imagedestroy($image);
+            return true;
+        } catch (\Exception $e) {
+            \Log::error('Hero image processing failed: ' . $e->getMessage());
+            return false;
+        }
+    }
+}
 
 
 

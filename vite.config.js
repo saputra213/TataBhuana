@@ -26,7 +26,8 @@ export default defineConfig({
                 'resources/css/projects-index.css',
                 'resources/js/projects-index.js',
                 'resources/css/projects-show.css',
-                'resources/js/projects-show.js'
+                'resources/js/projects-show.js',
+                'resources/js/hero-slideshow.js'
             ],
             refresh: true,
         }),

@@ -71,40 +71,24 @@
                             </div>
                             <div class="col-6">
                                 <div class="d-flex justify-content-between">
-                                    <span class="text-muted">Stok:</span>
-                                    <strong>{{ $scaffolding->stock_quantity }} unit</strong>
+                                    <span class="text-muted">Status Stok:</span>
+                                    <div>
+                                        @if($scaffolding->stock_quantity > 0)
+                                            <span class="badge bg-success">Tersedia ({{ $scaffolding->stock_quantity }})</span>
+                                        @else
+                                            <span class="badge bg-danger">Tidak Tersedia</span>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         
-                        <h6 class="fw-bold">Harga</h6>
-                        <div class="row g-3 mb-4 justify-content-center">
-                            @if($scaffolding->rental_price)
-                            <div class="{{ $scaffolding->sale_price ? 'col-6' : 'col-12' }}">
-                                <div class="text-center p-3 bg-light rounded">
-                                    <h6 class="text-muted mb-1">Sewa</h6>
-                                    <h5 class="text-primary fw-bold mb-0">{{ $scaffolding->formatted_rental_price }}</h5>
-                                    <small class="text-muted">per hari</small>
-                                </div>
-                            </div>
-                            @endif
-                            @if($scaffolding->sale_price)
-                            <div class="{{ $scaffolding->rental_price ? 'col-6' : 'col-12' }}">
-                                <div class="text-center p-3 bg-light rounded">
-                                    <h6 class="text-muted mb-1">Jual</h6>
-                                    <h5 class="text-success fw-bold mb-0">{{ $scaffolding->formatted_sale_price }}</h5>
-                                    <small class="text-muted">harga satuan</small>
-                                </div>
-                            </div>
-                            @endif
-                        </div>
-                        
-                        <h6 class="fw-bold">Status</h6>
+                        <h6 class="fw-bold">Ketersediaan</h6>
                         <p class="mb-0">
                             @if($scaffolding->is_available)
-                                <span class="badge bg-success fs-6">Tersedia</span>
+                                <span class="badge bg-primary">Aktif</span>
                             @else
-                                <span class="badge bg-danger fs-6">Tidak Tersedia</span>
+                                <span class="badge bg-secondary">Non-aktif</span>
                             @endif
                         </p>
                     </div>

@@ -22,8 +22,6 @@
                             <th>Nama</th>
                             <th>Jenis</th>
                             <th>Material</th>
-                            <th>Harga Sewa</th>
-                            <th>Harga Jual</th>
                             <th>Status Stok</th>
                             <th>Aksi</th>
                         </tr>

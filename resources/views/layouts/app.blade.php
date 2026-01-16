@@ -57,9 +57,6 @@
                         <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">Tentang Kami</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('services') ? 'active' : '' }}" href="{{ route('services') }}">Layanan</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('scaffoldings.index') ? 'active' : '' }}" href="{{ route('scaffoldings.index') }}">Produk</a>
                     </li>
                     <li class="nav-item">
@@ -97,9 +94,6 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">Tentang Kami</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('services') ? 'active' : '' }}" href="{{ route('services') }}">Layanan</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('scaffoldings.index') ? 'active' : '' }}" href="{{ route('scaffoldings.index') }}">Produk</a>
@@ -154,8 +148,8 @@
                 <div class="col-lg-4 mb-4">
                     <h6 class="fw-bold mb-3">Layanan Kami</h6>
                     <ul class="list-unstyled">
-                        <li><a href="{{ route('services') }}" class="text-white text-decoration-none">Sewa Scaffolding</a></li>
-                        <li><a href="{{ route('services') }}" class="text-white text-decoration-none">Jual Scaffolding</a></li>
+                        <li><a href="{{ route('scaffoldings.index') }}" class="text-white text-decoration-none">Sewa Scaffolding</a></li>
+                        <li><a href="{{ route('scaffoldings.index') }}" class="text-white text-decoration-none">Jual Scaffolding</a></li>
                         <li><a href="{{ route('scaffoldings.index') }}" class="text-white text-decoration-none">Katalog Produk</a></li>
                         <li><a href="{{ route('projects.index') }}" class="text-white text-decoration-none">Galeri Proyek</a></li>
                         <li><a href="{{ route('branches.index') }}" class="text-white text-decoration-none">Cabang Kami</a></li>

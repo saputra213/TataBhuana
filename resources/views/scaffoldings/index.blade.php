@@ -4,6 +4,32 @@
 @section('description', 'Lihat katalog lengkap produk scaffolding berkualitas tinggi untuk kebutuhan proyek konstruksi Anda.')
 
 @section('content')
+<style>
+@media (max-width: 576px) {
+    .scaffolding-title {
+        font-size: 11px;
+        line-height: 1.1;
+    }
+    .scaffolding-spec-text {
+        font-size: 10px;
+        line-height: 1.1;
+    }
+    .scaffolding-spec-text div {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+@media (min-width: 992px) {
+    .scaffolding-btn-desktop {
+        padding: 0.6rem 1.2rem !important;
+    }
+    .scaffolding-btn-desktop .small {
+        font-size: 0.95rem;
+    }
+}
+</style>
 <!-- Hero Section -->
 <section class="scaffoldings-hero text-white py-5">
     <div class="container">
@@ -21,41 +47,86 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <form method="GET" action="{{ route('scaffoldings.index') }}" class="row g-3">
-                    <div class="col-md-3">
-                        <select name="type" class="form-select">
-                            <option value="">Semua Jenis</option>
-                            <option value="frame" {{ request('type') == 'frame' ? 'selected' : '' }}>Frame Scaffolding</option>
-                            <option value="tube" {{ request('type') == 'tube' ? 'selected' : '' }}>Tube Scaffolding</option>
-                            <option value="system" {{ request('type') == 'system' ? 'selected' : '' }}>System Scaffolding</option>
-                            <option value="mobile" {{ request('type') == 'mobile' ? 'selected' : '' }}>Mobile Scaffolding</option>
-                        </select>
+                <form method="GET" action="{{ route('scaffoldings.index') }}" class="row g-1 g-md-3" id="filterForm">
+                    <!-- Hidden Inputs for Filter Values -->
+                    <input type="hidden" name="type" id="inputType" value="{{ request('type') }}">
+                    <input type="hidden" name="material" id="inputMaterial" value="{{ request('material') }}">
+                    <input type="hidden" name="sort" id="inputSort" value="{{ request('sort') }}">
+
+                    <!-- Type Dropdown -->
+                    <div class="col-3">
+                        <div class="dropdown w-100">
+                            <button class="btn btn-outline-secondary btn-sm w-100 dropdown-toggle text-start text-truncate bg-white" type="button" id="dropdownType" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ 
+                                    request('type') == 'frame' ? 'Frame' : 
+                                    (request('type') == 'tube' ? 'Tube' : 
+                                    (request('type') == 'system' ? 'System' : 
+                                    (request('type') == 'mobile' ? 'Mobile' : 'Jenis')))
+                                }}
+                            </button>
+                            <ul class="dropdown-menu shadow-sm" aria-labelledby="dropdownType">
+                                <li><a class="dropdown-item {{ request('type') == '' ? 'active' : '' }}" href="#" onclick="setFilter('type', ''); return false;">Semua Jenis</a></li>
+                                <li><a class="dropdown-item {{ request('type') == 'frame' ? 'active' : '' }}" href="#" onclick="setFilter('type', 'frame'); return false;">Frame Scaffolding</a></li>
+                                <li><a class="dropdown-item {{ request('type') == 'tube' ? 'active' : '' }}" href="#" onclick="setFilter('type', 'tube'); return false;">Tube Scaffolding</a></li>
+                                <li><a class="dropdown-item {{ request('type') == 'system' ? 'active' : '' }}" href="#" onclick="setFilter('type', 'system'); return false;">System Scaffolding</a></li>
+                                <li><a class="dropdown-item {{ request('type') == 'mobile' ? 'active' : '' }}" href="#" onclick="setFilter('type', 'mobile'); return false;">Mobile Scaffolding</a></li>
+                            </ul>
+                        </div>
                     </div>
                     
-                    <div class="col-md-3">
-                        <select name="material" class="form-select">
-                            <option value="">Semua Material</option>
-                            <option value="steel" {{ request('material') == 'steel' ? 'selected' : '' }}>Baja</option>
-                            <option value="aluminum" {{ request('material') == 'aluminum' ? 'selected' : '' }}>Aluminium</option>
-                            <option value="galvanized" {{ request('material') == 'galvanized' ? 'selected' : '' }}>Galvanized</option>
-                        </select>
+                    <!-- Material Dropdown -->
+                    <div class="col-3">
+                        <div class="dropdown w-100">
+                            <button class="btn btn-outline-secondary btn-sm w-100 dropdown-toggle text-start text-truncate bg-white" type="button" id="dropdownMaterial" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ 
+                                    request('material') == 'steel' ? 'Baja' : 
+                                    (request('material') == 'aluminum' ? 'Alum.' : 
+                                    (request('material') == 'galvanized' ? 'Galv.' : 'Bahan'))
+                                }}
+                            </button>
+                            <ul class="dropdown-menu shadow-sm" aria-labelledby="dropdownMaterial">
+                                <li><a class="dropdown-item {{ request('material') == '' ? 'active' : '' }}" href="#" onclick="setFilter('material', ''); return false;">Semua Bahan</a></li>
+                                <li><a class="dropdown-item {{ request('material') == 'steel' ? 'active' : '' }}" href="#" onclick="setFilter('material', 'steel'); return false;">Baja</a></li>
+                                <li><a class="dropdown-item {{ request('material') == 'aluminum' ? 'active' : '' }}" href="#" onclick="setFilter('material', 'aluminum'); return false;">Aluminium</a></li>
+                                <li><a class="dropdown-item {{ request('material') == 'galvanized' ? 'active' : '' }}" href="#" onclick="setFilter('material', 'galvanized'); return false;">Galvanis</a></li>
+                            </ul>
+                        </div>
                     </div>
                     
-                    <div class="col-md-3">
-                        <select name="sort" class="form-select">
-                            <option value="">Urutkan</option>
-                            <option value="name" {{ request('sort') == 'name' ? 'selected' : '' }}>Nama A-Z</option>
-                            <option value="price_low" {{ request('sort') == 'price_low' ? 'selected' : '' }}>Harga Terendah</option>
-                            <option value="price_high" {{ request('sort') == 'price_high' ? 'selected' : '' }}>Harga Tertinggi</option>
-                        </select>
+                    <!-- Sort Dropdown -->
+                    <div class="col-3">
+                        <div class="dropdown w-100">
+                            <button class="btn btn-outline-secondary btn-sm w-100 dropdown-toggle text-start text-truncate bg-white" type="button" id="dropdownSort" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ 
+                                    request('sort') == 'name' ? 'Nama' : 
+                                    (request('sort') == 'price_low' ? 'Murah' : 
+                                    (request('sort') == 'price_high' ? 'Mahal' : 'Urut'))
+                                }}
+                            </button>
+                            <ul class="dropdown-menu shadow-sm" aria-labelledby="dropdownSort">
+                                <li><a class="dropdown-item {{ request('sort') == '' ? 'active' : '' }}" href="#" onclick="setFilter('sort', ''); return false;">Default</a></li>
+                                <li><a class="dropdown-item {{ request('sort') == 'name' ? 'active' : '' }}" href="#" onclick="setFilter('sort', 'name'); return false;">Nama A-Z</a></li>
+                                <li><a class="dropdown-item {{ request('sort') == 'price_low' ? 'active' : '' }}" href="#" onclick="setFilter('sort', 'price_low'); return false;">Harga Terendah</a></li>
+                                <li><a class="dropdown-item {{ request('sort') == 'price_high' ? 'active' : '' }}" href="#" onclick="setFilter('sort', 'price_high'); return false;">Harga Tertinggi</a></li>
+                            </ul>
+                        </div>
                     </div>
                     
-                    <div class="col-md-3">
-                        <button type="submit" class="btn btn-success-modern w-100">
-                            <i class="fas fa-filter me-2"></i>Filter
+                    <div class="col-3">
+                        <button type="submit" class="btn btn-success-modern w-100 btn-sm h-100 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-filter"></i> <span class="d-none d-md-inline ms-1">Filter</span>
                         </button>
                     </div>
                 </form>
+
+                <script>
+                    function setFilter(name, value) {
+                        // Set value to hidden input
+                        document.getElementById('input' + name.charAt(0).toUpperCase() + name.slice(1)).value = value;
+                        // Submit form
+                        document.getElementById('filterForm').submit();
+                    }
+                </script>
             </div>
         </div>
     </div>
@@ -67,61 +138,51 @@
         @if($scaffoldings->count() > 0)
             <div class="row g-4">
                 @foreach($scaffoldings as $scaffolding)
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-4">
                     <div class="card h-100 shadow-sm">
                         @if($scaffolding->image)
-                            <img src="{{ asset('storage/' . $scaffolding->image) }}" class="card-img-top" alt="{{ $scaffolding->name }}" style="height: 250px; object-fit: cover;" loading="lazy" decoding="async">
+                            <div class="ratio ratio-1x1">
+                                <img src="{{ asset('storage/' . $scaffolding->image) }}" class="card-img-top" alt="{{ $scaffolding->name }}" style="object-fit: cover;" loading="lazy" decoding="async">
+                            </div>
                         @else
-                            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.0&auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="{{ $scaffolding->name }}" style="height: 250px; object-fit: cover;" loading="lazy" decoding="async">
+                            <div class="ratio ratio-1x1">
+                                <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.0&auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="{{ $scaffolding->name }}" style="object-fit: cover;" loading="lazy" decoding="async">
+                            </div>
                         @endif
                         
                         <div class="card-body d-flex flex-column">
-                            <h5 class="card-title fw-bold">{{ $scaffolding->name }}</h5>
-                            <p class="card-text text-muted flex-grow-1">{{ Str::limit($scaffolding->description, 120) }}</p>
+                            <h6 class="card-title fw-semibold mb-2 scaffolding-title">{{ $scaffolding->name }}</h6>
                             
-                            <div class="mb-3">
-                                <span class="badge badge-primary-modern me-2">{{ ucfirst($scaffolding->type) }}</span>
+                            <div class="mb-2">
+                                <span class="badge badge-primary-modern me-1">{{ ucfirst($scaffolding->type) }}</span>
                                 <span class="badge badge-secondary-modern">{{ ucfirst($scaffolding->material) }}</span>
                             </div>
                             
-                            <div class="mb-3">
-                                <div class="row text-center">
-                                    <div class="col-4">
-                                        <small class="text-muted d-block">Dimensi</small>
-                                        <strong class="small">{{ $scaffolding->dimensions }}</strong>
-                                    </div>
-                                    <div class="col-4">
-                                        <small class="text-muted d-block">Tinggi</small>
-                                        <strong class="small">{{ $scaffolding->max_height }}m</strong>
-                                    </div>
-                                    <div class="col-4">
-                                        <small class="text-muted d-block">Beban</small>
-                                        <strong class="small">{{ $scaffolding->max_load }}kg</strong>
-                                    </div>
+                            <div class="mb-2">
+                                <div class="small scaffolding-spec-text">
+                                    <div>Dimensi&nbsp;:&nbsp;<span class="fw-semibold">{{ $scaffolding->dimensions }}</span></div>
+                                    <div>Tinggi&nbsp;:&nbsp;<span class="fw-semibold">{{ $scaffolding->max_height }}m</span></div>
+                                    <div>Beban Maks&nbsp;:&nbsp;<span class="fw-semibold">{{ $scaffolding->max_load }}kg</span></div>
                                 </div>
                             </div>
                             
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                @if($scaffolding->rental_price)
+                            <div class="d-flex justify-content-between align-items-center mb-2">
                                 <div>
-                                    <small class="text-muted">Sewa:</small>
-                                    <strong class="text-primary d-block">{{ $scaffolding->formatted_rental_price }}/hari</strong>
+                                    @if($scaffolding->stock_quantity > 0)
+                                        <span class="badge bg-success">Tersedia</span>
+                                    @else
+                                        <span class="badge bg-danger">Tidak Tersedia</span>
+                                    @endif
                                 </div>
-                                @endif
-                                @if($scaffolding->sale_price)
-                                <div>
-                                    <small class="text-muted">Jual:</small>
-                                    <strong class="text-success d-block">{{ $scaffolding->formatted_sale_price }}</strong>
-                                </div>
-                                @endif
                             </div>
                             
-                            <div class="d-flex gap-2">
-                                <a href="{{ route('scaffoldings.show', $scaffolding) }}" class="btn btn-danger flex-grow-1">
-                                    <i class="fas fa-eye me-2"></i>Detail
+                            <div class="d-flex justify-content-center gap-1">
+                                <a href="{{ route('scaffoldings.show', $scaffolding) }}" class="btn btn-danger btn-sm px-2 py-1 d-flex align-items-center scaffolding-btn-desktop">
+                                    <i class="fas fa-eye me-1 small"></i>
+                                    <span class="small">Detail</span>
                                 </a>
-                                <a href="{{ route('contact') }}" class="btn btn-outline-success-modern">
-                                    <i class="fas fa-phone"></i>
+                                <a href="{{ route('contact') }}" class="btn btn-outline-success-modern btn-sm px-2 py-1 d-flex align-items-center scaffolding-btn-desktop">
+                                    <i class="fas fa-phone small"></i>
                                 </a>
                             </div>
                         </div>
@@ -141,74 +202,6 @@
         @endif
     </div>
 </section>
-
-<!-- Contact Information Section -->
-@if(isset($profile))
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="row text-center mb-4">
-            <div class="col-12">
-                <h2 class="display-5 fw-bold mb-3">Hubungi Kami</h2>
-                <p class="lead text-muted">Tim kami siap membantu kebutuhan scaffolding Anda</p>
-            </div>
-        </div>
-        
-        <div class="row g-4 icon-grid-3">
-            <div class="col-md-4">
-                <div class="text-center p-4 bg-white rounded shadow-sm h-100">
-                    <div class="mb-3">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-circle" style="width: 60px; height: 60px;">
-                            <i class="fas fa-phone fa-lg"></i>
-                        </div>
-                    </div>
-                    <h5 class="fw-bold mb-2">Telepon</h5>
-                    @if($profile->phone)
-                        <p class="text-muted mb-0">
-                            <a href="tel:{{ $profile->phone }}" class="text-decoration-none text-primary">{{ $profile->phone }}</a>
-                        </p>
-                    @else
-                        <p class="text-muted mb-0">-</p>
-                    @endif
-                </div>
-            </div>
-            
-            <div class="col-md-4">
-                <div class="text-center p-4 bg-white rounded shadow-sm h-100">
-                    <div class="mb-3">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-success text-white rounded-circle" style="width: 60px; height: 60px;">
-                            <i class="fas fa-envelope fa-lg"></i>
-                        </div>
-                    </div>
-                    <h5 class="fw-bold mb-2">Email</h5>
-                    @if($profile->email)
-                        <p class="text-muted mb-0">
-                            <a href="mailto:{{ $profile->email }}" class="text-decoration-none text-primary">{{ $profile->email }}</a>
-                        </p>
-                    @else
-                        <p class="text-muted mb-0">-</p>
-                    @endif
-                </div>
-            </div>
-            
-            <div class="col-md-4">
-                <div class="text-center p-4 bg-white rounded shadow-sm h-100">
-                    <div class="mb-3">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-danger text-white rounded-circle" style="width: 60px; height: 60px;">
-                            <i class="fas fa-map-marker-alt fa-lg"></i>
-                        </div>
-                    </div>
-                    <h5 class="fw-bold mb-2">Alamat</h5>
-                    @if($profile->address)
-                        <p class="text-muted mb-0 small">{{ Str::limit($profile->address, 50) }}</p>
-                    @else
-                        <p class="text-muted mb-0">-</p>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-@endif
 
 <!-- CTA Section -->
 <!-- CTA Section -->

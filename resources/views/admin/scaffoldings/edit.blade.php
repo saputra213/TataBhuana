@@ -87,72 +87,48 @@
                             @enderror
                         </div>
                         
-                        <div class="col-md-4 mb-3">
-                            <label for="stock_quantity" class="form-label">Status Stok *</label>
-                            <select class="form-select @error('stock_quantity') is-invalid @enderror" id="stock_quantity" name="stock_quantity" required>
-                                <option value="1" {{ old('stock_quantity', $scaffolding->stock_quantity) > 0 ? 'selected' : '' }}>Tersedia</option>
-                                <option value="0" {{ old('stock_quantity', $scaffolding->stock_quantity) == 0 ? 'selected' : '' }}>Tidak Tersedia</option>
-                            </select>
+                        <div class="col-md-6 mb-3">
+                            <label for="stock_quantity" class="form-label">Jumlah Stok</label>
+                            <input type="number" class="form-control @error('stock_quantity') is-invalid @enderror" id="stock_quantity" name="stock_quantity" value="{{ old('stock_quantity', $scaffolding->stock_quantity) }}" min="0">
                             @error('stock_quantity')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                    </div>
-                    
-                    <div class="row">
+
                         <div class="col-md-6 mb-3">
-                            <label for="rental_price" class="form-label">Harga Sewa (per hari)</label>
-                            <div class="input-group">
-                                <span class="input-group-text">Rp</span>
-                                <input type="number" class="form-control @error('rental_price') is-invalid @enderror" id="rental_price" name="rental_price" value="{{ old('rental_price', $scaffolding->rental_price) }}" min="0" step="0.01">
-                            </div>
-                            @error('rental_price')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        
-                        <div class="col-md-6 mb-3">
-                            <label for="sale_price" class="form-label">Harga Jual</label>
-                            <div class="input-group">
-                                <span class="input-group-text">Rp</span>
-                                <input type="number" class="form-control @error('sale_price') is-invalid @enderror" id="sale_price" name="sale_price" value="{{ old('sale_price', $scaffolding->sale_price) }}" min="0" step="0.01">
-                            </div>
-                            @error('sale_price')
+                            <label for="image" class="form-label">Gambar Produk</label>
+                            @if($scaffolding->image)
+                                <div class="mb-2">
+                                    <img src="{{ asset('storage/' . $scaffolding->image) }}" alt="Current Image" class="img-thumbnail" style="max-height: 100px;">
+                                </div>
+                            @endif
+                            <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" accept="image/*">
+                            @error('image')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
                     
                     <div class="mb-3">
-                        <label for="image" class="form-label">Gambar</label>
-                        @if($scaffolding->image)
-                            <div class="mb-2">
-                                <img src="{{ asset('storage/' . $scaffolding->image) }}" alt="{{ $scaffolding->name }}" class="img-thumbnail" style="max-width: 200px;">
-                                <p class="text-muted small">Gambar saat ini</p>
-                            </div>
-                        @endif
-                        <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" accept="image/*">
-                        <div class="form-text">Format: JPG, PNG, GIF. Maksimal 5MB. Gambar akan otomatis resize max 1200px dan background menjadi putih. Kosongkan jika tidak ingin mengubah gambar.</div>
-                        @error('image')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="is_available" name="is_available" value="1" {{ old('is_available', $scaffolding->is_available) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="is_available">
+                                Tersedia untuk disewa/dijual
+                            </label>
+                        </div>
                     </div>
                     
                     <div class="mb-3">
-                        <label for="specifications" class="form-label">Spesifikasi Detail</label>
-                        <textarea class="form-control @error('specifications') is-invalid @enderror" id="specifications" name="specifications" rows="4">{{ old('specifications', $scaffolding->specifications) }}</textarea>
+                        <label for="specifications" class="form-label">Detail Spesifikasi (Opsional)</label>
+                        <textarea class="form-control @error('specifications') is-invalid @enderror" id="specifications" name="specifications" rows="5">{{ old('specifications', $scaffolding->specifications) }}</textarea>
                         @error('specifications')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     
-                    <div class="d-flex gap-2">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save me-2"></i>Update
-                        </button>
-                        <a href="{{ route('admin.scaffoldings.index') }}" class="btn btn-secondary">
-                            <i class="fas fa-times me-2"></i>Batal
-                        </a>
+                    <div class="d-flex justify-content-end gap-2">
+                        <a href="{{ route('admin.scaffoldings.index') }}" class="btn btn-secondary">Batal</a>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                     </div>
                 </form>
             </div>

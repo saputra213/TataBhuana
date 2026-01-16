@@ -83,6 +83,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
         Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
         Route::post('/profile', [AdminController::class, 'updateProfile'])->name('profile.update');
+
+        // About Page Management
+        Route::get('/about', [\App\Http\Controllers\Admin\AboutController::class, 'index'])->name('about.index');
+        Route::post('/about', [\App\Http\Controllers\Admin\AboutController::class, 'update'])->name('about.update');
         
         // Scaffolding Management
         Route::resource('scaffoldings', AdminScaffoldingController::class);

@@ -4,13 +4,16 @@
 @section('description', 'Pelajari lebih lanjut tentang Tata Bhuana, perusahaan penyedia jasa sewa dan jual scaffolding terpercaya.')
 
 @section('content')
-<!-- Hero Section -->
 <section class="hero-about text-white py-5">
     <div class="container">
         <div class="row">
             <div class="col-12 text-center hero-content">
-                <h1 class="display-3 fw-bold mb-3">Mitra Konstruksi Andal</h1>
-                <p class="hero-subtitle lead">Berpengalaman Sejak 2007</p>
+                <h1 class="display-3 fw-bold mb-3">
+                    {{ $profile?->about_hero_title ?? 'Mitra Konstruksi Andal' }}
+                </h1>
+                <p class="hero-subtitle lead">
+                    {{ $profile?->about_hero_subtitle ?? 'Berpengalaman Sejak 2007' }}
+                </p>
             </div>
         </div>
     </div>
@@ -25,8 +28,12 @@
                     <div class="stat-icon mb-3">
                         <i class="fas fa-globe float-animation"></i>
                     </div>
-                    <div class="stat-number">3</div>
-                    <div class="stat-label">Kota</div>
+                    <div class="stat-number">
+                        {{ $profile?->about_stat_cities ? Str::before($profile->about_stat_cities, ' ') : '3' }}
+                    </div>
+                    <div class="stat-label">
+                        {{ $profile?->about_stat_cities ? Str::after($profile->about_stat_cities, ' ') : 'Kota' }}
+                    </div>
                 </div>
             </div>
             <div class="col-md-4 col-6 mb-4 mb-md-0">
@@ -34,8 +41,12 @@
                     <div class="stat-icon mb-3">
                         <i class="fas fa-calendar-check float-animation" style="animation-delay: 0.5s;"></i>
                     </div>
-                    <div class="stat-number">18+</div>
-                    <div class="stat-label">Tahun Pengalaman</div>
+                    <div class="stat-number">
+                        {{ $profile?->about_stat_experience ? Str::before($profile->about_stat_experience, ' ') : '18+' }}
+                    </div>
+                    <div class="stat-label">
+                        {{ $profile?->about_stat_experience ? Str::after($profile->about_stat_experience, ' ') : 'Tahun Pengalaman' }}
+                    </div>
                 </div>
             </div>
             <div class="col-md-4 col-6 mx-auto mx-md-0">
@@ -43,8 +54,12 @@
                     <div class="stat-icon mb-3">
                         <i class="fas fa-project-diagram float-animation" style="animation-delay: 1s;"></i>
                     </div>
-                    <div class="stat-number">1000+</div>
-                    <div class="stat-label">Proyek Selesai</div>
+                    <div class="stat-number">
+                        {{ $profile?->about_stat_projects ? Str::before($profile->about_stat_projects, ' ') : '1000+' }}
+                    </div>
+                    <div class="stat-label">
+                        {{ $profile?->about_stat_projects ? Str::after($profile->about_stat_projects, ' ') : 'Proyek Selesai' }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -65,21 +80,21 @@
                         @endif
                     </h2>
                     <p class="lead text-muted mb-4">
-                        Kami dikenal sebagai perusahaan penyedia layanan sewa dan penjualan scaffolding (perancah) utama yang berpusat di Daerah Istimewa Yogyakarta. Dengan komitmen untuk memberikan layanan terbaik, kami telah dipercaya oleh berbagai klien untuk mendukung proyek konstruksi mereka dengan aman, berkualitas, dan efisien.
+                        {{ $profile?->about_main_text ?? 'Kami dikenal sebagai perusahaan penyedia layanan sewa dan penjualan scaffolding (perancah) utama yang berpusat di Daerah Istimewa Yogyakarta. Dengan komitmen untuk memberikan layanan terbaik, kami telah dipercaya oleh berbagai klien untuk mendukung proyek konstruksi mereka dengan aman, berkualitas, dan efisien.' }}
                     </p>
                     
                     <div class="feature-list">
                         <div class="feature-item fade-delay-1">
                             <div class="feature-icon"><i class="fas fa-check"></i></div>
-                            <span>Tim Profesional Berpengalaman</span>
+                            <span>{{ $profile?->about_feature_1 ?? 'Tim Profesional Berpengalaman' }}</span>
                         </div>
                         <div class="feature-item fade-delay-2">
                             <div class="feature-icon"><i class="fas fa-check"></i></div>
-                            <span>Produk Berkualitas Standar SNI</span>
+                            <span>{{ $profile?->about_feature_2 ?? 'Produk Berkualitas Standar SNI' }}</span>
                         </div>
                         <div class="feature-item fade-delay-3">
                             <div class="feature-icon"><i class="fas fa-check"></i></div>
-                            <span>Layanan Cepat & Responsif</span>
+                            <span>{{ $profile?->about_feature_3 ?? 'Layanan Cepat & Responsif' }}</span>
                         </div>
                     </div>
                 </div>
@@ -98,8 +113,47 @@
     </div>
 </section>
 
+<!-- Vision Mission Section -->
+<section class="vision-mission-section py-5 bg-white">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h2 class="section-title">Visi & Misi</h2>
+            </div>
+        </div>
+        <div class="row g-4 vision-mission-row">
+            <div class="col-md-6">
+                <div class="vision-mission-card h-100">
+                    <div class="vision-mission-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3 class="vision-mission-title">
+                        {{ $profile?->about_vision_title ?? 'Visi Kami' }}
+                    </h3>
+                    <p class="vision-mission-text">
+                        {{ $profile?->about_vision_text ?? 'Menjadi mitra utama penyedia solusi scaffolding yang aman, berkualitas, dan terpercaya untuk setiap proyek konstruksi di Indonesia.' }}
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="vision-mission-card h-100">
+                    <div class="vision-mission-icon mission-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3 class="vision-mission-title">
+                        {{ $profile?->about_mission_title ?? 'Misi Kami' }}
+                    </h3>
+                    <p class="vision-mission-text">
+                        {{ $profile?->about_mission_text ?? 'Memberikan layanan scaffolding yang responsif, profesional, dan berfokus pada keselamatan serta kepuasan pelanggan di setiap tahap proyek.' }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Services Section -->
-<section class="services-section py-5 bg-white">
+<section class="services-section py-5 bg-light">
     <div class="container">
         <div class="row mb-5">
             <div class="col-12 text-center">
@@ -107,105 +161,79 @@
                 <p class="section-subtitle">Solusi Lengkap Scaffolding & Bekisting untuk Proyek Anda</p>
             </div>
         </div>
-        
+
+
+
         <div class="row g-4">
-            <div class="col-md-6">
+            <div class="col-6 col-md-6">
                 <div class="service-feature">
                     <div class="d-flex">
                         <div class="service-icon">
                             <i class="fas fa-tools"></i>
                         </div>
                         <div class="service-content">
-                            <h4 class="fw-bold mb-3">Sewa Scaffolding</h4>
-                            <p class="text-muted mb-0">Layanan sewa scaffolding dengan berbagai jenis dan ukuran untuk kebutuhan proyek jangka pendek maupun panjang dengan kualitas terjamin.</p>
+                            <h4 class="fw-bold mb-3">
+                                {{ $profile?->about_service_1_title ?? 'Sewa Scaffolding' }}
+                            </h4>
+                            <p class="text-muted mb-0">
+                                {{ $profile?->about_service_1_description ?? 'Layanan sewa scaffolding dengan berbagai jenis dan ukuran untuk kebutuhan proyek jangka pendek maupun panjang dengan kualitas terjamin.' }}
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="col-md-6">
+            <div class="col-6 col-md-6">
                 <div class="service-feature">
                     <div class="d-flex">
                         <div class="service-icon">
                             <i class="fas fa-shopping-cart"></i>
                         </div>
                         <div class="service-content">
-                            <h4 class="fw-bold mb-3">Jual Scaffolding</h4>
-                            <p class="text-muted mb-0">Penjualan scaffolding berkualitas tinggi dengan harga kompetitif dan garansi kualitas terjamin, cocok untuk investasi jangka panjang.</p>
+                            <h4 class="fw-bold mb-3">
+                                {{ $profile?->about_service_2_title ?? 'Jual Scaffolding' }}
+                            </h4>
+                            <p class="text-muted mb-0">
+                                {{ $profile?->about_service_2_description ?? 'Penjualan scaffolding berkualitas tinggi dengan harga kompetitif dan garansi kualitas terjamin, cocok untuk investasi jangka panjang.' }}
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="col-md-6">
+            <div class="col-6 col-md-6">
                 <div class="service-feature">
                     <div class="d-flex">
                         <div class="service-icon">
                             <i class="fas fa-truck"></i>
                         </div>
                         <div class="service-content">
-                            <h4 class="fw-bold mb-3">Layanan Pengiriman</h4>
-                            <p class="text-muted mb-0">Pengiriman cepat dan aman dengan dukungan tim profesional yang berpengalaman, melayani berbagai daerah di Indonesia.</p>
+                            <h4 class="fw-bold mb-3">
+                                {{ $profile?->about_service_3_title ?? 'Layanan Pengiriman' }}
+                            </h4>
+                            <p class="text-muted mb-0">
+                                {{ $profile?->about_service_3_description ?? 'Pengiriman cepat dan aman dengan dukungan tim profesional yang berpengalaman, melayani berbagai daerah di Indonesia.' }}
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="col-md-6">
+            <div class="col-6 col-md-6">
                 <div class="service-feature">
                     <div class="d-flex">
                         <div class="service-icon">
                             <i class="fas fa-headset"></i>
                         </div>
                         <div class="service-content">
-                            <h4 class="fw-bold mb-3">Konsultasi & Support</h4>
-                            <p class="text-muted mb-0">Tim ahli kami siap memberikan konsultasi dan dukungan teknis untuk memastikan kesuksesan proyek konstruksi Anda.</p>
+                            <h4 class="fw-bold mb-3">
+                                {{ $profile?->about_service_4_title ?? 'Konsultasi & Support' }}
+                            </h4>
+                            <p class="text-muted mb-0">
+                                {{ $profile?->about_service_4_description ?? 'Tim ahli kami siap memberikan konsultasi dan dukungan teknis untuk memastikan kesuksesan proyek konstruksi Anda.' }}
+                            </p>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Why Choose Us -->
-<section class="why-section py-5 bg-light">
-    <div class="container">
-        <div class="row mb-5">
-            <div class="col-12 text-center">
-                <h2 class="section-title">Mengapa Memilih Kami?</h2>
-                <p class="section-subtitle">Kualitas Selalu Terjaga, Layanan Terpercaya</p>
-            </div>
-        </div>
-        
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="why-choose-card">
-                    <div class="why-icon">
-                        <i class="fas fa-boxes"></i>
-                    </div>
-                    <h5 class="fw-bold mb-3">Stok Produk Lengkap</h5>
-                    <p class="text-muted">Tersedia berbagai scaffolding, bekisting, dan peralatan konstruksi untuk berbagai kebutuhan proyek.</p>
-                </div>
-            </div>
-            
-            <div class="col-md-4">
-                <div class="why-choose-card">
-                    <div class="why-icon">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <h5 class="fw-bold mb-3">Cepat & Responsif</h5>
-                    <p class="text-muted">Konsultasi, estimasi, dan pengiriman tepat waktu dengan tim yang selalu siap melayani kebutuhan Anda.</p>
-                </div>
-            </div>
-            
-            <div class="col-md-4">
-                <div class="why-choose-card">
-                    <div class="why-icon">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <h5 class="fw-bold mb-3">Produk Berkualitas</h5>
-                    <p class="text-muted">Peralatan terawat, aman, dan sesuai standar industri untuk menjamin keselamatan pekerjaan.</p>
                 </div>
             </div>
         </div>
@@ -303,6 +331,43 @@
     color: #16a34a;
 }
 
+@media (max-width: 576px) {
+    .stats-section .row.g-4 {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.75rem;
+    }
+
+    .stats-section .col-6 {
+        flex: 0 0 48%;
+        max-width: 48%;
+        margin-bottom: 0.75rem;
+    }
+
+    .stats-section .col-6:last-child {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .stat-card {
+        padding: 16px 10px;
+    }
+
+    .stat-icon {
+        font-size: 1.5rem;
+    }
+
+    .stat-number {
+        font-size: 0.9rem;
+        line-height: 1.1;
+    }
+
+    .stat-label {
+        font-size: 0.7rem;
+    }
+}
+
 @keyframes countUp {
     from {
         opacity: 0;
@@ -337,6 +402,82 @@
 
 .fade-delay-3 {
     animation-delay: 0.6s;
+}
+
+.vision-mission-row {
+    align-items: stretch;
+}
+
+.vision-mission-card {
+    background: linear-gradient(135deg, #f8fafc, #ffffff);
+    border-radius: 18px;
+    padding: 24px 20px;
+    box-shadow: 0 12px 35px rgba(15, 23, 42, 0.12);
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.vision-mission-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(220, 38, 38, 0.08), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.vision-mission-card:hover::before {
+    opacity: 1;
+}
+
+.vision-mission-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #dc2626, #f97316);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    box-shadow: 0 10px 25px rgba(220, 38, 38, 0.35);
+}
+
+.mission-icon {
+    background: linear-gradient(135deg, #16a34a, #22c55e);
+    box-shadow: 0 10px 25px rgba(22, 163, 74, 0.35);
+}
+
+.vision-mission-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 4px;
+}
+
+.vision-mission-text {
+    font-size: 0.95rem;
+    color: #4b5563;
+    margin-bottom: 0;
+}
+
+@media (max-width: 576px) {
+    .vision-mission-card {
+        padding: 18px 14px;
+    }
+
+    .vision-mission-title {
+        font-size: 1.05rem;
+    }
+
+    .vision-mission-text {
+        font-size: 0.8rem;
+    }
 }
 
 /* About Section */
@@ -493,6 +634,35 @@
 
 .service-content {
     flex: 1;
+}
+
+@media (max-width: 576px) {
+    .service-feature {
+        padding: 18px 10px;
+    }
+
+    .service-feature .d-flex {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .service-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 1.2rem;
+        margin-right: 0;
+        margin-bottom: 8px;
+    }
+
+    .service-content h4 {
+        font-size: 0.9rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .service-content p {
+        font-size: 0.7rem;
+    }
 }
 
 /* Why Choose Cards */

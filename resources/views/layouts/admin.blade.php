@@ -46,6 +46,9 @@
                     <a class="nav-link text-white {{ request()->routeIs('admin.profile') ? 'bg-primary' : '' }}" href="{{ route('admin.profile') }}">
                         <i class="fas fa-building me-2"></i>Profil Perusahaan
                     </a>
+                    <a class="nav-link text-white {{ request()->routeIs('admin.about.index') ? 'bg-primary' : '' }}" href="{{ route('admin.about.index') }}">
+                        <i class="fas fa-info-circle me-2"></i>Tentang Kami
+                    </a>
                     <hr class="text-white">
                     <a class="nav-link text-white" href="{{ route('home') }}" target="_blank">
                         <i class="fas fa-external-link-alt me-2"></i>Lihat Website
@@ -124,6 +127,9 @@
                 </a>
                 <a class="nav-link text-white {{ request()->routeIs('admin.profile') ? 'bg-primary' : '' }}" href="{{ route('admin.profile') }}">
                     <i class="fas fa-building me-2"></i>Profil Perusahaan
+                </a>
+                <a class="nav-link text-white {{ request()->routeIs('admin.about.index') ? 'bg-primary' : '' }}" href="{{ route('admin.about.index') }}">
+                    <i class="fas fa-info-circle me-2"></i>Tentang Kami
                 </a>
                 <hr class="text-white">
                 <a class="nav-link text-white" href="{{ route('home') }}" target="_blank">

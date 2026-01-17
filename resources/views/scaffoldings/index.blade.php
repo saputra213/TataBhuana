@@ -5,6 +5,15 @@
 
 @section('content')
 <style>
+.scaffolding-btn-wrapper {
+    width: 100%;
+}
+
+.scaffolding-btn-desktop {
+    width: 100%;
+    justify-content: center;
+}
+
 @media (max-width: 576px) {
     .scaffolding-title {
         font-size: 11px;
@@ -52,6 +61,7 @@
                     <input type="hidden" name="type" id="inputType" value="{{ request('type') }}">
                     <input type="hidden" name="material" id="inputMaterial" value="{{ request('material') }}">
                     <input type="hidden" name="sort" id="inputSort" value="{{ request('sort') }}">
+                    <input type="hidden" name="per_page" id="inputPerPage" value="{{ request('per_page', 9) }}">
 
                     <!-- Type Dropdown -->
                     <div class="col-3">
@@ -121,11 +131,21 @@
 
                 <script>
                     function setFilter(name, value) {
-                        // Set value to hidden input
                         document.getElementById('input' + name.charAt(0).toUpperCase() + name.slice(1)).value = value;
-                        // Submit form
                         document.getElementById('filterForm').submit();
                     }
+
+                    document.addEventListener('DOMContentLoaded', function () {
+                        var isMobile = window.innerWidth <= 576;
+                        if (isMobile) {
+                            var currentPerPage = "{{ request('per_page') }}";
+                            if (!currentPerPage || currentPerPage != 6) {
+                                var url = new URL(window.location.href);
+                                url.searchParams.set('per_page', 6);
+                                window.location.replace(url.toString());
+                            }
+                        }
+                    });
                 </script>
             </div>
         </div>
@@ -138,7 +158,7 @@
         @if($scaffoldings->count() > 0)
             <div class="row g-4">
                 @foreach($scaffoldings as $scaffolding)
-                <div class="col-lg-4 col-4">
+                <div class="col-6 col-md-4">
                     <div class="card h-100 shadow-sm">
                         @if($scaffolding->image)
                             <div class="ratio ratio-1x1">
@@ -176,13 +196,10 @@
                                 </div>
                             </div>
                             
-                            <div class="d-flex justify-content-center gap-1">
+                            <div class="d-flex justify-content-center gap-1 mt-auto scaffolding-btn-wrapper">
                                 <a href="{{ route('scaffoldings.show', $scaffolding) }}" class="btn btn-danger btn-sm px-2 py-1 d-flex align-items-center scaffolding-btn-desktop">
                                     <i class="fas fa-eye me-1 small"></i>
                                     <span class="small">Detail</span>
-                                </a>
-                                <a href="{{ route('contact') }}" class="btn btn-outline-success-modern btn-sm px-2 py-1 d-flex align-items-center scaffolding-btn-desktop">
-                                    <i class="fas fa-phone small"></i>
                                 </a>
                             </div>
                         </div>
@@ -190,6 +207,14 @@
                 </div>
                 @endforeach
             </div>
+
+            @if($scaffoldings->hasPages())
+                <div class="row mt-4">
+                    <div class="col-12 d-flex justify-content-center">
+                        {{ $scaffoldings->withQueryString()->links() }}
+                    </div>
+                </div>
+            @endif
         @else
             <div class="text-center py-5">
                 <i class="fas fa-search fa-3x text-muted mb-3"></i>
@@ -461,12 +486,21 @@
 
 @media (max-width: 768px) {
     .scroll-to-top-btn {
-        bottom: 90px; /* Lebih tinggi agar tidak bertumpuk dengan floating buttons */
+        bottom: 90px;
         right: 20px;
+        left: auto;
         width: 48px;
         height: 48px;
         font-size: 1.2rem;
-        z-index: 9996; /* Di bawah floating buttons tapi masih di atas konten */
+        z-index: 10000 !important;
+        pointer-events: auto !important;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(220, 38, 38, 0.3);
+    }
+
+    .scroll-to-top-btn.show {
+        pointer-events: auto !important;
+        z-index: 10000 !important;
     }
 }
 

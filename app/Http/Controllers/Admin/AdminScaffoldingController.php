@@ -34,7 +34,7 @@ class AdminScaffoldingController extends Controller
             'dimensions' => 'required|string|max:255',
             'max_height' => 'required|integer|min:0',
             'max_load' => 'required|integer|min:0',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             'stock_quantity' => 'required|integer|min:0',
             'specifications' => 'nullable|string'
         ]);
@@ -80,7 +80,7 @@ class AdminScaffoldingController extends Controller
             'dimensions' => 'required|string|max:255',
             'max_height' => 'required|integer|min:0',
             'max_load' => 'required|integer|min:0',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             'stock_quantity' => 'required|integer|min:0',
             'specifications' => 'nullable|string'
         ]);

@@ -43,6 +43,12 @@
                     <a class="nav-link text-white {{ request()->routeIs('admin.branches.*') ? 'bg-primary' : '' }}" href="{{ route('admin.branches.index') }}">
                         <i class="fas fa-map-marker-alt me-2"></i>Cabang
                     </a>
+                    <a class="nav-link text-white {{ request()->routeIs('admin.home') ? 'bg-primary' : '' }}" href="{{ route('admin.home') }}">
+                        <i class="fas fa-home me-2"></i>Beranda
+                    </a>
+                    <a class="nav-link text-white ps-4 {{ request()->routeIs('admin.hero') ? 'bg-primary' : '' }}" href="{{ route('admin.hero') }}">
+                        <i class="fas fa-images me-2"></i>Hero Beranda
+                    </a>
                     <a class="nav-link text-white {{ request()->routeIs('admin.profile') ? 'bg-primary' : '' }}" href="{{ route('admin.profile') }}">
                         <i class="fas fa-building me-2"></i>Profil Perusahaan
                     </a>
@@ -124,6 +130,12 @@
                 </a>
                 <a class="nav-link text-white {{ request()->routeIs('admin.branches.*') ? 'bg-primary' : '' }}" href="{{ route('admin.branches.index') }}">
                     <i class="fas fa-map-marker-alt me-2"></i>Cabang
+                </a>
+                <a class="nav-link text-white {{ request()->routeIs('admin.home') ? 'bg-primary' : '' }}" href="{{ route('admin.home') }}">
+                    <i class="fas fa-home me-2"></i>Beranda
+                </a>
+                <a class="nav-link text-white ps-4 {{ request()->routeIs('admin.hero') ? 'bg-primary' : '' }}" href="{{ route('admin.hero') }}">
+                    <i class="fas fa-images me-2"></i>Hero Beranda
                 </a>
                 <a class="nav-link text-white {{ request()->routeIs('admin.profile') ? 'bg-primary' : '' }}" href="{{ route('admin.profile') }}">
                     <i class="fas fa-building me-2"></i>Profil Perusahaan

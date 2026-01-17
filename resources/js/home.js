@@ -2,10 +2,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const carousel = document.querySelector('#heroTripleCarousel');
     if (!carousel) return;
     
-    // Preload semua gambar untuk smooth transition tanpa bug
-    const allImages = carousel.querySelectorAll('.panel-image');
-    allImages.forEach(img => {
-        if (img.src) {
+    // Preload semua gambar (panel kiri/kanan dan center) untuk menghindari delay saat slide
+    const preloadImages = carousel.querySelectorAll('.panel-image, .center-main-image');
+    preloadImages.forEach(img => {
+        if (img && img.src) {
             const imageLoader = new Image();
             imageLoader.src = img.src;
         }
@@ -43,6 +43,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Fungsi untuk update left/right panel images secara dinamis dengan perbaikan
     function updateSidePanels() {
+        // Jika tidak ada panel kiri/kanan, tidak perlu melakukan apa-apa
+        const hasSidePanels = carousel.querySelector('.slide-panel-left') || carousel.querySelector('.slide-panel-right');
+        if (!hasSidePanels) {
+            return;
+        }
+
         const allItems = Array.from(carousel.querySelectorAll('.carousel-item'));
         const totalItems = allItems.length;
         
@@ -277,60 +283,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Featured projects strip auto scroll
-document.addEventListener('DOMContentLoaded', function() {
-    const strip = document.getElementById('featuredProjectsStrip');
-    const container = strip ? strip.querySelector('.strip-container') : null;
-    const prevBtn = document.getElementById('fpPrev');
-    const nextBtn = document.getElementById('fpNext');
-    
-    if (!strip || !container) {
-        return;
-    }
-    
-    const itemWidth = () => {
-        const first = container.querySelector('.strip-item');
-        return first ? first.getBoundingClientRect().width + 16 : 260;
-    };
-    
-    function scrollByAmount(dir = 1) {
-        container.scrollBy({
-            left: dir * itemWidth(),
-            behavior: 'smooth'
-        });
-    }
-    
-    if (prevBtn) {
-        prevBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            scrollByAmount(-1);
-        });
-    }
-    
-    if (nextBtn) {
-        nextBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            scrollByAmount(1);
-        });
-    }
-    
-    let autoScrollId = null;
-    function startAutoScroll() {
-        if (autoScrollId) return;
-        autoScrollId = setInterval(() => {
-            const maxScrollLeft = container.scrollWidth - container.clientWidth;
-            if (container.scrollLeft >= maxScrollLeft - 5) {
-                container.scrollTo({ left: 0, behavior: 'smooth' });
-            } else {
-                scrollByAmount(1);
-            }
-        }, 5000);
-    }
-    
-    startAutoScroll();
-});
-
-// Scroll to Top Button Functionality
 document.addEventListener('DOMContentLoaded', function() {
     const scrollToTopBtn = document.getElementById('scrollToTopBtn');
     
@@ -339,11 +291,9 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
     
-    // Function to show/hide button based on scroll position
     function toggleScrollButton() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
         
-        // Button muncul setelah scroll 100px saja
         if (scrollTop > 100) {
             scrollToTopBtn.classList.add('show');
         } else {
@@ -351,10 +301,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Listen to scroll event
     window.addEventListener('scroll', toggleScrollButton, { passive: true });
     
-    // Scroll to top when button is clicked
     scrollToTopBtn.addEventListener('click', function(e) {
         e.preventDefault();
         window.scrollTo({
@@ -363,6 +311,61 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Check initial scroll position setelah sedikit delay
+    scrollToTopBtn.addEventListener('touchstart', function(e) {
+        e.stopPropagation();
+    }, { passive: true });
+    
+    scrollToTopBtn.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }, { passive: false });
+    
     setTimeout(toggleScrollButton, 100);
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const strip = document.querySelector('#featuredProjectsStrip .strip-container');
+    const prevBtn = document.getElementById('fpPrev');
+    const nextBtn = document.getElementById('fpNext');
+    
+    if (!strip || !prevBtn || !nextBtn) {
+        return;
+    }
+    
+    const items = strip.querySelectorAll('.strip-item');
+    if (!items.length) {
+        return;
+    }
+    
+    function getStep() {
+        const firstItem = items[0];
+        const rect = firstItem.getBoundingClientRect();
+        const style = window.getComputedStyle(strip);
+        const gapValue = style.columnGap || style.gap || '0';
+        const gap = parseFloat(gapValue) || 0;
+        return rect.width + gap;
+    }
+    
+    function scrollByStep(direction) {
+        const step = getStep();
+        const offset = direction === 'next' ? step : -step;
+        strip.scrollBy({
+            left: offset,
+            behavior: 'smooth'
+        });
+    }
+    
+    prevBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        scrollByStep('prev');
+    });
+    
+    nextBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        scrollByStep('next');
+    });
 });

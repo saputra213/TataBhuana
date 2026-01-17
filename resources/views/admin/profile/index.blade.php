@@ -91,8 +91,8 @@
                                     <p class="text-muted small">Logo saat ini</p>
                                 </div>
                             @endif
-                            <input type="file" class="form-control @error('logo') is-invalid @enderror" id="logo" name="logo" accept="image/*">
-                            <div class="form-text">Format: JPG, PNG, GIF. Maksimal 5MB</div>
+                            <input type="file" class="form-control @error('logo') is-invalid @enderror" id="logo" name="logo" accept="image/*,.webp">
+                            <div class="form-text">Format: JPG, PNG, GIF, WEBP. Maksimal 5MB</div>
                             @error('logo')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -106,8 +106,8 @@
                                     <p class="text-muted small">Gambar hero saat ini</p>
                                 </div>
                             @endif
-                            <input type="file" class="form-control @error('hero_image') is-invalid @enderror" id="hero_image" name="hero_image" accept="image/*">
-                            <div class="form-text">Format: JPG, PNG, GIF. Maksimal 5MB</div>
+                            <input type="file" class="form-control @error('hero_image') is-invalid @enderror" id="hero_image" name="hero_image" accept="image/*,.webp">
+                            <div class="form-text">Format: JPG, PNG, GIF, WEBP. Maksimal 5MB</div>
                             @error('hero_image')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -116,8 +116,8 @@
 
                     <div class="mb-3">
                         <label for="hero_images" class="form-label">Gambar Hero Tambahan (bisa lebih dari satu)</label>
-                        <input type="file" class="form-control @error('hero_images.*') is-invalid @enderror" id="hero_images" name="hero_images[]" accept="image/*" multiple>
-                        <div class="form-text">Unggah beberapa gambar untuk slideshow hero. Maksimal 5MB per gambar.</div>
+                        <input type="file" class="form-control @error('hero_images.*') is-invalid @enderror" id="hero_images" name="hero_images[]" accept="image/*,.webp" multiple>
+                        <div class="form-text">Unggah beberapa gambar untuk slideshow hero. Format: JPG, PNG, GIF, WEBP. Maksimal 5MB per gambar.</div>
                         @error('hero_images.*')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

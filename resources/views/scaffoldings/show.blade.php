@@ -328,12 +328,21 @@
 
 @media (max-width: 768px) {
     .scroll-to-top-btn {
-        bottom: 90px; /* Lebih tinggi agar tidak bertumpuk dengan floating buttons */
+        bottom: 90px;
         right: 20px;
+        left: auto;
         width: 48px;
         height: 48px;
         font-size: 1.2rem;
-        z-index: 9996; /* Di bawah floating buttons tapi masih di atas konten */
+        z-index: 10000 !important;
+        pointer-events: auto !important;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(220, 38, 38, 0.3);
+    }
+
+    .scroll-to-top-btn.show {
+        pointer-events: auto !important;
+        z-index: 10000 !important;
     }
 }
 

@@ -84,6 +84,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
         Route::post('/profile', [AdminController::class, 'updateProfile'])->name('profile.update');
 
+        Route::get('/home', [AdminController::class, 'home'])->name('home');
+        Route::post('/home', [AdminController::class, 'updateHome'])->name('home.update');
+
+        Route::get('/hero', [AdminController::class, 'hero'])->name('hero');
+        Route::post('/hero', [AdminController::class, 'updateHero'])->name('hero.update');
+
         // About Page Management
         Route::get('/about', [\App\Http\Controllers\Admin\AboutController::class, 'index'])->name('about.index');
         Route::post('/about', [\App\Http\Controllers\Admin\AboutController::class, 'update'])->name('about.update');

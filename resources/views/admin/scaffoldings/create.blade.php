@@ -96,7 +96,8 @@
 
                         <div class="col-md-6 mb-3">
                             <label for="image" class="form-label">Gambar Produk</label>
-                            <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" accept="image/*">
+                            <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" accept="image/*,.webp">
+                            <div class="form-text">Format: JPG, PNG, GIF, WEBP. Maksimal 5MB</div>
                             @error('image')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -158,4 +159,3 @@
     </div>
 </div>
 @endsection
-

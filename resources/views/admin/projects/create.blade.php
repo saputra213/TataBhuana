@@ -107,8 +107,8 @@
                     
                     <div class="mb-3">
                         <label for="images" class="form-label">Gambar Proyek</label>
-                        <input type="file" class="form-control @error('images.*') is-invalid @enderror" id="images" name="images[]" accept="image/*" multiple>
-                        <div class="form-text">Pilih beberapa gambar untuk proyek ini. Format: JPG, PNG, GIF. Maksimal 5MB per gambar.</div>
+                        <input type="file" class="form-control @error('images.*') is-invalid @enderror" id="images" name="images[]" accept="image/*,.webp" multiple>
+                        <div class="form-text">Pilih beberapa gambar untuk proyek ini. Format: JPG, PNG, GIF, WEBP. Maksimal 5MB per gambar.</div>
                         @error('images.*')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -165,7 +165,6 @@
     </div>
 </div>
 @endsection
-
 
 
 

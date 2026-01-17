@@ -23,7 +23,9 @@
             <div class="col-md-8 col-lg-6">
                 <form action="{{ route('articles.index') }}" method="GET" class="d-flex shadow-sm rounded overflow-hidden">
                     <input type="text" name="search" value="{{ request('search') }}" class="form-control border-0 py-3 px-4" placeholder="Cari artikel..." style="border-radius: 0;">
-                    <button class="btn btn-primary px-4" type="submit" style="border-radius: 0;"><i class="fas fa-search me-1"></i> Cari</button>
+                    <button class="btn btn-danger px-4" type="submit" style="border-radius: 0; background-color: #dc2626; border-color: #dc2626;">
+                        <i class="fas fa-search me-1"></i> Cari
+                    </button>
                 </form>
             </div>
         </div>

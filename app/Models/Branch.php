@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Branch extends Model
 {
@@ -44,13 +45,23 @@ class Branch extends Model
 
     public function getGoogleMapsUrlAttribute()
     {
-        if ($this->maps_url) {
-            return $this->maps_url;
-        }
         if ($this->latitude && $this->longitude) {
-            return "https://www.google.com/maps?q={$this->latitude},{$this->longitude}";
+            return "https://www.google.com/maps/search/?api=1&query={$this->latitude},{$this->longitude}";
         }
-        return "https://www.google.com/maps/search/" . urlencode($this->address);
+
+        if ($this->maps_url) {
+            $url = $this->maps_url;
+            if (!Str::startsWith($url, ['http://', 'https://'])) {
+                $url = 'https://' . ltrim($url, '/');
+            }
+            return $url;
+        }
+
+        if ($this->address) {
+            return "https://www.google.com/maps/search/?api=1&query=" . urlencode($this->address);
+        }
+
+        return '#';
     }
 
     public function getOperatingHoursFormattedAttribute()

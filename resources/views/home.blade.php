@@ -231,24 +231,42 @@
         <div class="company-profile-wrapper">
             <div class="row align-items-center g-4">
                 <div class="col-lg-5">
-                    @if($profile && $profile->hero_image)
-                        <div class="company-profile-image-wrapper">
-                            <img src="{{ asset('storage/' . $profile->hero_image) }}" alt="{{ $profile->company_name ?? 'Profil Perusahaan' }}" class="company-profile-image" loading="lazy" decoding="async">
-                        </div>
-                    @else
-                        <div class="company-profile-image-fallback d-flex align-items-center justify-content-center">
-                            <span class="fw-bold text-white fs-3">{{ $profile->company_name ?? 'Tata Bhuana Scaffolding' }}</span>
-                        </div>
-                    @endif
+                    <div class="company-profile-image-wrapper">
+                        @if($profile && $profile->logo)
+                            <img src="{{ asset('storage/' . $profile->logo) }}" alt="{{ $profile->company_name ?? 'Profil Perusahaan' }}" class="company-profile-image" loading="lazy" decoding="async">
+                        @else
+                            <img src="{{ asset('storage/projects/VnqaffFD7MT1xzG0x4FPlmjPsr3s4iXAWUrxlnO3.jpg') }}" alt="Proyek Kami" class="company-profile-image" loading="lazy" decoding="async">
+                        @endif
+                    </div>
                 </div>
                 <div class="col-lg-7">
                     <p class="text-danger text-uppercase fw-bold small mb-2">Tentang Kami</p>
                     <h2 class="fw-bold mb-3">
                         {{ $profile?->company_name ?? 'Tata Bhuana Scaffolding' }}
                     </h2>
-                    <p class="text-muted mb-0">
-                        {{ $profile?->about_us ?? 'Tata Bhuana Scaffolding adalah perusahaan penyedia sewa dan jual scaffolding yang berkomitmen memberikan solusi aman, berkualitas, dan efisien untuk berbagai proyek konstruksi Anda.' }}
+                    <p class="text-muted mb-3">
+                        {{ $profile?->about_main_text ?? 'Kami dikenal sebagai perusahaan penyedia layanan sewa dan penjualan scaffolding (perancah) utama yang berpusat di Daerah Istimewa Yogyakarta. Dengan komitmen untuk memberikan layanan terbaik, kami telah dipercaya oleh berbagai klien untuk mendukung proyek konstruksi mereka dengan aman, berkualitas, dan efisien.' }}
                     </p>
+                    <ul class="list-unstyled mb-0">
+                        <li class="d-flex align-items-center mb-2">
+                            <span class="badge rounded-circle bg-danger me-2 d-flex align-items-center justify-content-center" style="width: 28px; height: 28px;">
+                                <i class="fas fa-check text-white"></i>
+                            </span>
+                            <span>{{ $profile?->about_feature_1 ?? 'Tim Profesional Berpengalaman' }}</span>
+                        </li>
+                        <li class="d-flex align-items-center mb-2">
+                            <span class="badge rounded-circle bg-danger me-2 d-flex align-items-center justify-content-center" style="width: 28px; height: 28px;">
+                                <i class="fas fa-check text-white"></i>
+                            </span>
+                            <span>{{ $profile?->about_feature_2 ?? 'Produk Berkualitas Standar SNI' }}</span>
+                        </li>
+                        <li class="d-flex align-items-center">
+                            <span class="badge rounded-circle bg-danger me-2 d-flex align-items-center justify-content-center" style="width: 28px; height: 28px;">
+                                <i class="fas fa-check text-white"></i>
+                            </span>
+                            <span>{{ $profile?->about_feature_3 ?? 'Layanan Cepat & Responsif' }}</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

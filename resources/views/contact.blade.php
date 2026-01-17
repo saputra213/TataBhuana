@@ -151,9 +151,8 @@
                                     <span class="small">{{ $branch->phone }}</span>
                                 </div>
                             </div>
-                            
-                            
-                            <a href="{{ $branch->maps_url }}" target="_blank" class="btn btn-primary w-100">
+
+                            <a href="{{ $branch->google_maps_url }}" target="_blank" rel="noopener" class="btn branch-map-btn w-100">
                                 <i class="fas fa-map-marker-alt me-2"></i>Lihat di Google Maps
                             </a>
                             
@@ -281,6 +280,24 @@
 
 .branch-card .card-body {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.branch-map-btn {
+    margin-top: auto;
+    background: #dc2626;
+    border-color: #dc2626;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.branch-map-btn:hover,
+.branch-map-btn:focus {
+    background: #b91c1c;
+    border-color: #b91c1c;
+    color: #ffffff;
 }
 
 .branch-card::before {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CompanyProfile;
 use App\Models\Scaffolding;
 use App\Models\Branch;
+use App\Models\Article;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -22,8 +23,14 @@ class HomeController extends Controller
             ->orderBy('sort_order', 'asc')
             ->take(6)
             ->get();
+
+        $latestArticles = Article::where('is_published', true)
+            ->orderBy('published_at', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->take(3)
+            ->get();
         
-        return view('home', compact('profile', 'featuredScaffoldings', 'featuredProjects'));
+        return view('home', compact('profile', 'featuredScaffoldings', 'featuredProjects', 'latestArticles'));
     }
 
     public function about()

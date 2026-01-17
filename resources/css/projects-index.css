@@ -220,6 +220,37 @@
     }
 }
 
+@media (max-width: 576px) {
+    .project-card .card-title {
+        font-size: 0.95rem;
+    }
+    .project-card .card-text,
+    .project-card .project-client-location {
+        display: none;
+    }
+    .project-image-container {
+        aspect-ratio: 1 / 1;
+        width: 80%;
+        margin: 0 auto;
+    }
+    .project-image-container img {
+        width: 100%;
+        height: 100% !important;
+        object-fit: cover;
+    }
+    .featured-badge {
+        padding: 4px 6px;
+        border-radius: 999px;
+    }
+    .featured-badge small {
+        font-size: 0;
+    }
+    .featured-badge small i {
+        font-size: 0.9rem;
+        margin-right: 0;
+    }
+}
+
 /* Scroll to Top Button */
 .scroll-to-top-btn {
     position: fixed;
@@ -273,12 +304,20 @@
 
 @media (max-width: 768px) {
     .scroll-to-top-btn {
-        bottom: 90px; /* Lebih tinggi agar tidak bertumpuk dengan floating buttons */
+        bottom: 90px;
         right: 20px;
         width: 48px;
         height: 48px;
         font-size: 1.2rem;
-        z-index: 9996; /* Di bawah floating buttons tapi masih di atas konten */
+        z-index: 10000 !important;
+        pointer-events: auto !important;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(220, 38, 38, 0.3);
+    }
+
+    .scroll-to-top-btn.show {
+        pointer-events: auto !important;
+        z-index: 10000 !important;
     }
 }
 

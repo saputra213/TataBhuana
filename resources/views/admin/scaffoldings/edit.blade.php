@@ -102,7 +102,8 @@
                                     <img src="{{ asset('storage/' . $scaffolding->image) }}" alt="Current Image" class="img-thumbnail" style="max-height: 100px;">
                                 </div>
                             @endif
-                            <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" accept="image/*">
+                            <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" accept="image/*,.webp">
+                            <div class="form-text">Format: JPG, PNG, GIF, WEBP. Maksimal 5MB</div>
                             @error('image')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

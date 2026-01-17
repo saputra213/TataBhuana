@@ -12,17 +12,14 @@ class ScaffoldingController extends Controller
     {
         $query = Scaffolding::where('is_available', true);
         
-        // Filter by type
         if ($request->filled('type')) {
             $query->where('type', $request->type);
         }
         
-        // Filter by material
         if ($request->filled('material')) {
             $query->where('material', $request->material);
         }
         
-        // Sort
         switch ($request->sort) {
             case 'name':
                 $query->orderBy('name', 'asc');
@@ -38,7 +35,8 @@ class ScaffoldingController extends Controller
                 break;
         }
         
-        $scaffoldings = $query->paginate(12);
+        $perPage = (int) $request->input('per_page', 9);
+        $scaffoldings = $query->paginate($perPage);
         $profile = CompanyProfile::first();
         return view('scaffoldings.index', compact('scaffoldings', 'profile'));
     }

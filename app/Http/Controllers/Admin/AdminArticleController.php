@@ -30,7 +30,7 @@ class AdminArticleController extends Controller
             'title' => 'required|string|max:255',
             'excerpt' => 'nullable|string|max:255',
             'content' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             'is_published' => 'nullable',
             'published_at' => 'nullable|date'
         ]);
@@ -75,7 +75,7 @@ class AdminArticleController extends Controller
             'title' => 'required|string|max:255',
             'excerpt' => 'nullable|string|max:255',
             'content' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             'is_published' => 'nullable',
             'published_at' => 'nullable|date'
         ]);
@@ -120,4 +120,3 @@ class AdminArticleController extends Controller
             ->with('success', 'Artikel berhasil dihapus!');
     }
 }
-

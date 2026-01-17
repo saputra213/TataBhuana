@@ -120,8 +120,8 @@
                                 </div>
                             </div>
                         @endif
-                        <input type="file" class="form-control @error('images.*') is-invalid @enderror" id="images" name="images[]" accept="image/*" multiple>
-                        <div class="form-text">Pilih gambar baru untuk mengganti gambar lama. Format: JPG, PNG, GIF. Maksimal 5MB per gambar.</div>
+                        <input type="file" class="form-control @error('images.*') is-invalid @enderror" id="images" name="images[]" accept="image/*,.webp" multiple>
+                        <div class="form-text">Pilih gambar baru untuk mengganti gambar lama. Format: JPG, PNG, GIF, WEBP. Maksimal 5MB per gambar.</div>
                         @error('images.*')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -208,7 +208,6 @@
     </div>
 </div>
 @endsection
-
 
 
 

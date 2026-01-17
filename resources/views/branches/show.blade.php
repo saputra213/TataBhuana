@@ -134,10 +134,10 @@
                 
                 <!-- Action Buttons -->
                 <div class="d-grid gap-2">
-                    <a href="{{ $branch->google_maps_url }}" target="_blank" class="btn btn-primary btn-lg">
+                    <a href="{{ $branch->google_maps_url }}" target="_blank" class="btn branch-map-btn btn-lg">
                         <i class="fas fa-map-marked-alt me-2"></i>Lihat di Google Maps
                     </a>
-                    <a href="{{ $branch->whatsapp_url }}" target="_blank" class="btn btn-outline-primary">
+                    <a href="{{ $branch->whatsapp_url }}" target="_blank" class="btn branch-whatsapp-btn">
                         <i class="fab fa-whatsapp me-2"></i>Hubungi via WhatsApp
                     </a>
                     <a href="{{ route('branches.index') }}" class="btn btn-outline-secondary">
@@ -233,7 +233,7 @@
                         </div>
                         @if(($branch->latitude && $branch->longitude) || $branch->address)
                         <div class="mt-3">
-                            <a href="{{ $branch->google_maps_url }}" target="_blank" class="btn btn-primary">
+                            <a href="{{ $branch->google_maps_url }}" target="_blank" class="btn branch-map-btn">
                                 <i class="fas fa-map-marked-alt me-2"></i>Buka di Google Maps
                             </a>
                         </div>
@@ -374,6 +374,34 @@
     border-color: white !important;
     box-shadow: 0 4px 12px rgba(255, 255, 255, 0.4);
     transform: translateY(-2px);
+}
+
+.branch-map-btn {
+    background: #dc2626;
+    border-color: #dc2626;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.branch-map-btn:hover,
+.branch-map-btn:focus {
+    background: #b91c1c;
+    border-color: #b91c1c;
+    color: #ffffff;
+}
+
+.branch-whatsapp-btn {
+    background: #16a34a;
+    border-color: #16a34a;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.branch-whatsapp-btn:hover,
+.branch-whatsapp-btn:focus {
+    background: #15803d;
+    border-color: #15803d;
+    color: #ffffff;
 }
 </style>
 @endsection

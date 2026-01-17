@@ -9,8 +9,14 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="card mb-4">
-                    @if($article->image)
-                        <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->title }}" class="card-img-top" style="max-height: 400px; object-fit: cover;" loading="eager" fetchpriority="high" decoding="async">
+                    @php
+                        $mainImageSrc = $article->image;
+                        if ($mainImageSrc && !\Illuminate\Support\Str::startsWith($mainImageSrc, ['http://', 'https://'])) {
+                            $mainImageSrc = asset('storage/' . $mainImageSrc);
+                        }
+                    @endphp
+                    @if($mainImageSrc)
+                        <img src="{{ $mainImageSrc }}" alt="{{ $article->title }}" class="card-img-top" style="max-height: 400px; object-fit: cover;" loading="eager" fetchpriority="high" decoding="async">
                     @endif
                     <div class="card-body">
                         <h1 class="card-title">{{ $article->title }}</h1>
@@ -88,8 +94,14 @@
                             <ul class="list-unstyled mb-0">
                                 @foreach($related as $item)
                                     <li class="mb-3 d-flex">
-                                        @if($item->image)
-                                            <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title }}" class="rounded me-3" style="width: 60px; height: 60px; object-fit: cover;" loading="lazy" decoding="async">
+                                        @php
+                                            $relatedImageSrc = $item->image;
+                                            if ($relatedImageSrc && !\Illuminate\Support\Str::startsWith($relatedImageSrc, ['http://', 'https://'])) {
+                                                $relatedImageSrc = asset('storage/' . $relatedImageSrc);
+                                            }
+                                        @endphp
+                                        @if($relatedImageSrc)
+                                            <img src="{{ $relatedImageSrc }}" alt="{{ $item->title }}" class="rounded me-3" style="width: 60px; height: 60px; object-fit: cover;" loading="lazy" decoding="async">
                                         @endif
                                         <div>
                                             <a href="{{ route('articles.show', $item) }}" class="text-decoration-none">{{ $item->title }}</a>

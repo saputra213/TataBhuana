@@ -27,7 +27,8 @@
 
             <div class="mb-3">
                 <label class="form-label">Gambar Sampul (opsional)</label>
-                <input type="file" name="image" class="form-control" accept="image/*">
+                <input type="file" name="image" class="form-control" accept="image/*,.webp">
+                <div class="form-text">Format: JPG, PNG, GIF, WEBP. Maksimal 5MB</div>
                 @if($article->image)
                     <div class="mt-2">
                         <img src="{{ asset('storage/' . $article->image) }}" alt="{{ $article->title }}" class="rounded" style="height: 80px; width: auto;">

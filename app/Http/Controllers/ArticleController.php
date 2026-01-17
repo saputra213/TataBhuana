@@ -20,9 +20,13 @@ class ArticleController extends Controller
             });
         }
 
+        $userAgent = $request->header('User-Agent', '');
+        $isMobile = preg_match('/Android|iPhone|iPad|iPod|Windows Phone|Mobi/i', $userAgent);
+        $perPage = $isMobile ? 5 : 9;
+
         $articles = $query->orderBy('published_at', 'desc')
             ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->paginate($perPage);
         $profile = CompanyProfile::first();
 
         return view('articles.index', compact('articles', 'profile'));
@@ -66,4 +70,3 @@ class ArticleController extends Controller
         return back()->with('success', 'Komentar berhasil dikirim dan menunggu persetujuan admin.');
     }
 }
-

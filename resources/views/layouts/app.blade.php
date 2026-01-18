@@ -130,14 +130,24 @@
                         @else
                             <i class="fas fa-building me-2"></i>
                         @endif
-                        @if($profile ?? false)
+                        @php
+                            $footerCompanyName = $profile->footer_company_name ?? null;
+                        @endphp
+                        @if($footerCompanyName)
+                            {{ $footerCompanyName }}
+                        @elseif($profile ?? false)
                             {{ $profile->company_name }}
                         @else
                             Tata Bhuana
                         @endif
                     </h5>
                     <p class="text-white">
-                        @if($profile ?? false)
+                        @php
+                            $footerCompanyDescription = $profile->footer_company_description ?? null;
+                        @endphp
+                        @if($footerCompanyDescription)
+                            {{ $footerCompanyDescription }}
+                        @elseif($profile ?? false)
                             {{ $profile->description }}
                         @else
                             Perusahaan penyedia jasa sewa dan jual scaffolding berkualitas tinggi untuk proyek konstruksi Anda.
@@ -146,31 +156,53 @@
                 </div>
                 
                 <div class="col-lg-4 mb-4">
-                    <h6 class="fw-bold mb-3">Layanan Kami</h6>
+                    <h6 class="fw-bold mb-3">
+                        {{ $profile?->footer_services_title ?? 'Layanan Kami' }}
+                    </h6>
                     <ul class="list-unstyled">
-                        <li><a href="{{ route('scaffoldings.index') }}" class="text-white text-decoration-none">Sewa Scaffolding</a></li>
-                        <li><a href="{{ route('scaffoldings.index') }}" class="text-white text-decoration-none">Jual Scaffolding</a></li>
-                        <li><a href="{{ route('scaffoldings.index') }}" class="text-white text-decoration-none">Katalog Produk</a></li>
-                        <li><a href="{{ route('projects.index') }}" class="text-white text-decoration-none">Galeri Proyek</a></li>
-                        <li><a href="{{ route('branches.index') }}" class="text-white text-decoration-none">Cabang Kami</a></li>
-                        <li><a href="{{ route('contact') }}" class="text-white text-decoration-none">Konsultasi</a></li>
+                        @if($profile && is_array($profile->footer_services_items) && count($profile->footer_services_items) > 0)
+                            @foreach($profile->footer_services_items as $item)
+                                @php
+                                    $label = $item['label'] ?? null;
+                                    $url = $item['url'] ?? '#';
+                                @endphp
+                                @if($label)
+                                    <li>
+                                        <a href="{{ $url }}" class="text-white text-decoration-none">{{ $label }}</a>
+                                    </li>
+                                @endif
+                            @endforeach
+                        @else
+                            <li><a href="{{ route('scaffoldings.index') }}" class="text-white text-decoration-none">Sewa Scaffolding</a></li>
+                            <li><a href="{{ route('scaffoldings.index') }}" class="text-white text-decoration-none">Jual Scaffolding</a></li>
+                            <li><a href="{{ route('scaffoldings.index') }}" class="text-white text-decoration-none">Katalog Produk</a></li>
+                            <li><a href="{{ route('projects.index') }}" class="text-white text-decoration-none">Galeri Proyek</a></li>
+                            <li><a href="{{ route('branches.index') }}" class="text-white text-decoration-none">Cabang Kami</a></li>
+                            <li><a href="{{ route('contact') }}" class="text-white text-decoration-none">Konsultasi</a></li>
+                        @endif
                     </ul>
                 </div>
                 
                 <div class="col-lg-4 mb-4">
-                    <h6 class="fw-bold mb-3">Kontak Kami</h6>
+                    @php
+                        $footerContactTitle = $profile->footer_contact_title ?? null;
+                        $footerContactAddress = $profile->footer_contact_address ?? null;
+                        $footerContactPhone = $profile->footer_contact_phone ?? null;
+                        $footerContactEmail = $profile->footer_contact_email ?? null;
+                    @endphp
+                    <h6 class="fw-bold mb-3">{{ $footerContactTitle ?: 'Kontak Kami' }}</h6>
                     @if($profile ?? false)
                         <p class="text-white mb-2">
                             <i class="fas fa-map-marker-alt me-2"></i>
-                            {{ $profile->address }}
+                            {{ $footerContactAddress ?: $profile->address }}
                         </p>
                         <p class="text-white mb-2">
                             <i class="fas fa-phone me-2"></i>
-                            {{ $profile->phone }}
+                            {{ $footerContactPhone ?: $profile->phone }}
                         </p>
                         <p class="text-white mb-2">
                             <i class="fas fa-envelope me-2"></i>
-                            {{ $profile->email }}
+                            {{ $footerContactEmail ?: $profile->email }}
                         </p>
                     @endif
                     
@@ -198,13 +230,18 @@
             
             <hr class="my-4">
             <div class="text-center text-white">
-                <p>&copy; {{ date('Y') }} 
+                <p>
+                    &copy; {{ date('Y') }}
                     @if($profile ?? false)
-                        {{ $profile->company_name }}
+                        {{ ' ' . $profile->company_name }}
                     @else
                         Tata Bhuana
                     @endif
-                    . Semua hak dilindungi.
+                    @if($profile && $profile->footer_copyright_text)
+                        {{ ' ' . $profile->footer_copyright_text }}
+                    @else
+                        . Semua hak dilindungi.
+                    @endif
                 </p>
             </div>
         </div>

@@ -7,6 +7,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminScaffoldingController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\FooterController;
 use App\Http\Controllers\ArticleController;
 
 // Frontend Routes
@@ -94,9 +95,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/hero', [AdminController::class, 'hero'])->name('hero');
         Route::post('/hero', [AdminController::class, 'updateHero'])->name('hero.update');
 
+        Route::get('/footer', [FooterController::class, 'index'])->name('footer.index');
+        Route::post('/footer', [FooterController::class, 'update'])->name('footer.update');
+
         // About Page Management
         Route::get('/about', [\App\Http\Controllers\Admin\AboutController::class, 'index'])->name('about.index');
         Route::post('/about', [\App\Http\Controllers\Admin\AboutController::class, 'update'])->name('about.update');
+
+        // Services Page Management
+        Route::get('/services-settings', [\App\Http\Controllers\Admin\ServicePageController::class, 'index'])->name('services.index');
+        Route::post('/services-settings', [\App\Http\Controllers\Admin\ServicePageController::class, 'update'])->name('services.update');
         
         // Scaffolding Management
         Route::resource('scaffoldings', AdminScaffoldingController::class);

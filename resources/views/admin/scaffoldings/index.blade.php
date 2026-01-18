@@ -46,20 +46,6 @@
                             <td><span class="badge bg-primary">{{ ucfirst($scaffolding->type) }}</span></td>
                             <td><span class="badge bg-secondary">{{ ucfirst($scaffolding->material) }}</span></td>
                             <td>
-                                @if($scaffolding->rental_price)
-                                    {{ $scaffolding->formatted_rental_price }}/hari
-                                @else
-                                    <span class="text-muted">-</span>
-                                @endif
-                            </td>
-                            <td>
-                                @if($scaffolding->sale_price)
-                                    {{ $scaffolding->formatted_sale_price }}
-                                @else
-                                    <span class="text-muted">-</span>
-                                @endif
-                            </td>
-                            <td>
                                 @if($scaffolding->stock_quantity > 0)
                                     <span class="badge bg-success">Tersedia</span>
                                 @else

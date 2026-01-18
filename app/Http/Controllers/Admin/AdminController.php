@@ -56,7 +56,6 @@ class AdminController extends Controller
             'phone' => 'required|string|max:20',
             'email' => 'required|email',
             'website' => 'nullable|url',
-            'about_us' => 'required|string',
             'services' => 'required|string',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             'hero_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',

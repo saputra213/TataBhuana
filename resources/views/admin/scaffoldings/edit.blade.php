@@ -170,10 +170,6 @@
                     </li>
                     <li class="mb-2">
                         <i class="fas fa-info-circle text-primary me-2"></i>
-                        <small>Harga sewa dan harga jual bersifat opsional</small>
-                    </li>
-                    <li class="mb-2">
-                        <i class="fas fa-info-circle text-primary me-2"></i>
                         <small>Gambar akan membantu pelanggan memahami produk</small>
                     </li>
                 </ul>

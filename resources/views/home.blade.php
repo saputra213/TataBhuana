@@ -284,7 +284,7 @@
         </div>
         <div class="row g-3">
             <div class="col-6 col-md-6 col-lg-3">
-                <a href="{{ route('services') }}" class="service-quick-card text-decoration-none service-animate">
+                <a href="{{ route('services.sales') }}" class="service-quick-card text-decoration-none service-animate">
                     <div class="service-icon-box bg-red-gradient">
                         <i class="fas fa-shopping-cart"></i>
                     </div>
@@ -293,7 +293,7 @@
             </div>
             
             <div class="col-6 col-md-6 col-lg-3">
-                <a href="{{ route('services') }}" class="service-quick-card text-decoration-none service-animate" style="animation-delay: 0.1s;">
+                <a href="{{ route('services.rental') }}" class="service-quick-card text-decoration-none service-animate" style="animation-delay: 0.1s;">
                     <div class="service-icon-box bg-green-gradient">
                         <i class="fas fa-handshake"></i>
                     </div>
@@ -302,7 +302,7 @@
             </div>
             
             <div class="col-6 col-md-6 col-lg-3">
-                <a href="{{ route('services') }}" class="service-quick-card text-decoration-none service-animate" style="animation-delay: 0.2s;">
+                <a href="{{ route('services.delivery') }}" class="service-quick-card text-decoration-none service-animate" style="animation-delay: 0.2s;">
                     <div class="service-icon-box bg-red-gradient">
                         <i class="fas fa-truck"></i>
                     </div>
@@ -311,7 +311,7 @@
             </div>
             
             <div class="col-6 col-md-6 col-lg-3">
-                <a href="{{ route('contact') }}" class="service-quick-card text-decoration-none service-animate" style="animation-delay: 0.3s;">
+                <a href="{{ route('services.consultation') }}" class="service-quick-card text-decoration-none service-animate" style="animation-delay: 0.3s;">
                     <div class="service-icon-box bg-green-gradient">
                         <i class="fas fa-headset"></i>
                     </div>
@@ -353,7 +353,7 @@
             
             <div class="col-6 col-md-4 col-lg-2">
                 <div class="feature-card text-center h-100 p-5 bg-white rounded shadow-sm border-0">
-                    <div class="feature-icon bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4 shadow">
+                    <div class="feature-icon bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4 shadow">
                         <i class="fas fa-boxes fa-2x"></i>
                     </div>
                     <h4 class="fw-bold mb-0">{{ $homeFeature3Title }}</h4>
@@ -362,7 +362,7 @@
             
             <div class="col-6 col-md-4 col-lg-2">
                 <div class="feature-card text-center h-100 p-5 bg-white rounded shadow-sm border-0">
-                    <div class="feature-icon bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4 shadow">
+                    <div class="feature-icon bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4 shadow">
                         <i class="fas fa-bolt fa-2x"></i>
                     </div>
                     <h4 class="fw-bold mb-0">{{ $homeFeature4Title }}</h4>
@@ -371,7 +371,7 @@
             
             <div class="col-6 col-md-4 col-lg-2">
                 <div class="feature-card text-center h-100 p-5 bg-white rounded shadow-sm border-0">
-                    <div class="feature-icon bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4 shadow">
+                    <div class="feature-icon bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4 shadow">
                         <i class="fas fa-trophy fa-2x"></i>
                     </div>
                     <h4 class="fw-bold mb-0">{{ $homeFeature5Title }}</h4>
@@ -380,7 +380,7 @@
             
             <div class="col-6 col-md-4 col-lg-2">
                 <div class="feature-card text-center h-100 p-5 bg-white rounded shadow-sm border-0">
-                    <div class="feature-icon bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4 shadow">
+                    <div class="feature-icon bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4 shadow">
                         <i class="fas fa-headset fa-2x"></i>
                     </div>
                     <h4 class="fw-bold mb-0">{{ $homeFeature6Title }}</h4>
@@ -484,13 +484,61 @@
 @endif
 
 <!-- CTA Section -->
-<section class="py-5 bg-danger text-white home-cta-section">
-    <div class="container text-center">
-        <h2 class="display-5 fw-bold mb-3">{{ $homeCtaTitle }}</h2>
-        <p class="lead mb-4">{{ $homeCtaSubtitle }}</p>
-        <a href="{{ route('contact') }}" class="btn btn-light btn-lg">
-            <i class="fas fa-phone me-2"></i>{{ $homeCtaButtonText }}
-        </a>
+<section class="py-5 bg-danger home-cta-section">
+    <div class="container">
+        <div class="home-cta-inner mx-auto">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-7">
+                    <div class="home-cta-kicker text-uppercase fw-semibold small mb-2">
+                        Jangan tunda keamanan proyek Anda.
+                    </div>
+                    <h2 class="home-cta-title fw-bold mb-3 text-white">
+                        {{ $homeCtaTitle }}
+                    </h2>
+                    <p class="home-cta-subtitle lead mb-3 text-white-50">
+                        {{ $homeCtaSubtitle }}
+                    </p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="home-cta-chip home-cta-chip-red">
+                            <i class="fas fa-shield-alt me-1"></i> Rekomendasi sistem scaffolding yang aman dan sesuai standar
+                        </span>
+                        <span class="home-cta-chip home-cta-chip-green">
+                            <i class="fas fa-headset me-1"></i> Tim support siap membantu dari perencanaan hingga eksekusi
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="home-cta-card bg-white text-start">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="home-cta-icon me-3">
+                                <i class="fas fa-clipboard-check"></i>
+                            </div>
+                            <div>
+                                <div class="fw-semibold small text-muted">
+                                    Konsultasi Proyek & Kebutuhan Scaffolding
+                                </div>
+                                <div class="fw-bold">
+                                    Tim siap membantu Anda
+                                </div>
+                            </div>
+                        </div>
+                        <p class="small text-muted mb-3">
+                            Ceritakan secara singkat jenis pekerjaan, ketinggian kerja, dan lokasi proyek Anda.
+                            Kami akan merangkum kebutuhan scaffolding, estimasi biaya, serta opsi sewa atau jual
+                            yang paling pas untuk tim Anda.
+                        </p>
+                        <div class="d-grid">
+                            <a href="{{ route('contact') }}" class="btn btn-danger btn-lg">
+                                <i class="fas fa-file-signature me-2"></i> Minta penawaran & konsultasi
+                            </a>
+                        </div>
+                        <div class="home-cta-meta small text-muted mt-3">
+                            <i class="fas fa-map-marker-alt me-1"></i> Berbasis di Yogyakarta, melayani berbagai proyek di sekitarnya.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 

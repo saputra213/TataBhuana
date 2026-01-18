@@ -152,6 +152,9 @@
                             <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Fleksibilitas jangka waktu</li>
                             <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Maintenance dan perawatan</li>
                         </ul>
+                        <a href="{{ route('services.rental') }}" class="btn btn-outline-primary mt-3">
+                            Pelajari detail layanan sewa
+                        </a>
                     </div>
                 </div>
             </div>
@@ -175,6 +178,9 @@
                             <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Garansi kualitas</li>
                             <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Berbagai ukuran tersedia</li>
                         </ul>
+                        <a href="{{ route('services.sales') }}" class="btn btn-outline-primary mt-3">
+                            Pelajari detail layanan jual
+                        </a>
                     </div>
                 </div>
             </div>

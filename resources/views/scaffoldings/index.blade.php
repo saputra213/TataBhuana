@@ -156,7 +156,7 @@
 <section class="py-5">
     <div class="container">
         @if($scaffoldings->count() > 0)
-            <div class="row g-4">
+            <div class="row g-4 products-grid-mobile-limit">
                 @foreach($scaffoldings as $scaffolding)
                 <div class="col-6 col-md-4">
                     <div class="card h-100 shadow-sm">
@@ -229,14 +229,61 @@
 </section>
 
 <!-- CTA Section -->
-<!-- CTA Section -->
-<section class="py-5 bg-danger text-white">
-    <div class="container text-center">
-        <h2 class="display-5 fw-bold mb-3">Siap Memulai Proyek Anda?</h2>
-        <p class="lead mb-4">Hubungi kami sekarang untuk konsultasi gratis dan penawaran terbaik</p>
-        <a href="{{ route('contact') }}" class="btn btn-light btn-lg">
-            <i class="fas fa-phone me-2"></i>Hubungi Kami Sekarang
-        </a>
+<section class="py-5 bg-danger home-cta-section">
+    <div class="container">
+        <div class="home-cta-inner mx-auto">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-7 text-white">
+                    <div class="home-cta-kicker text-uppercase fw-semibold small mb-2">
+                        Jangan tunda keamanan proyek Anda.
+                    </div>
+                    <h2 class="home-cta-title fw-bold mb-3">
+                        {{ $profile?->home_cta_title ?? 'Siap Memulai Proyek Anda?' }}
+                    </h2>
+                    <p class="home-cta-subtitle lead mb-3 text-white-50">
+                        {{ $profile?->home_cta_subtitle ?? 'Hubungi kami sekarang untuk konsultasi gratis dan penawaran terbaik' }}
+                    </p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="home-cta-chip home-cta-chip-red">
+                            <i class="fas fa-shield-alt me-1"></i> Rekomendasi sistem scaffolding yang aman dan sesuai standar
+                        </span>
+                        <span class="home-cta-chip home-cta-chip-green">
+                            <i class="fas fa-headset me-1"></i> Tim support siap membantu dari perencanaan hingga eksekusi
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="home-cta-card bg-white text-start">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="home-cta-icon me-3">
+                                <i class="fas fa-clipboard-check"></i>
+                            </div>
+                            <div>
+                                <div class="fw-semibold small text-muted">
+                                    Konsultasi Proyek & Kebutuhan Scaffolding
+                                </div>
+                                <div class="fw-bold">
+                                    Tim siap membantu Anda
+                                </div>
+                            </div>
+                        </div>
+                        <p class="small text-muted mb-3">
+                            Ceritakan secara singkat jenis pekerjaan, ketinggian kerja, dan lokasi proyek Anda.
+                            Kami akan merangkum kebutuhan scaffolding, estimasi biaya, serta opsi sewa atau jual
+                            yang paling pas untuk tim Anda.
+                        </p>
+                        <div class="d-grid">
+                            <a href="{{ route('contact') }}" class="btn btn-danger btn-lg">
+                                <i class="fas fa-file-signature me-2"></i> Minta penawaran & konsultasi
+                            </a>
+                        </div>
+                        <div class="home-cta-meta small text-muted mt-3">
+                            <i class="fas fa-map-marker-alt me-1"></i> Berbasis di Yogyakarta, melayani berbagai proyek di sekitarnya.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -267,6 +314,99 @@
 .hero-subtitle {
     animation: fadeInUp 1s ease-out 0.2s both;
     font-size: 1.5rem;
+}
+
+/* CTA styles */
+.home-cta-inner {
+    max-width: 1040px;
+}
+
+.home-cta-card {
+    border-radius: 24px;
+    padding: 1.9rem 1.7rem;
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.35);
+    position: relative;
+    overflow: hidden;
+}
+
+.home-cta-card::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: 24px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.8), rgba(248, 113, 113, 0.7));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+.home-cta-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 1.6rem;
+    box-shadow: 0 12px 30px rgba(220, 38, 38, 0.55);
+}
+
+.home-cta-chip {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.78rem;
+    backdrop-filter: blur(4px);
+}
+
+.home-cta-chip i {
+    font-size: 0.9rem;
+}
+
+.home-cta-chip-red {
+    background: rgba(248, 113, 113, 0.12);
+    color: #fee2e2;
+    border: 1px solid rgba(254, 226, 226, 0.4);
+}
+
+.home-cta-chip-green {
+    background: rgba(22, 163, 74, 0.12);
+    color: #bbf7d0;
+    border: 1px solid rgba(74, 222, 128, 0.5);
+}
+
+.home-cta-kicker {
+    letter-spacing: 0.08em;
+    color: rgba(254, 226, 226, 0.9);
+}
+
+.home-cta-title {
+    font-size: 2.4rem;
+}
+
+.home-cta-meta {
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .home-cta-card {
+        margin-top: 0.75rem;
+        padding: 1.4rem 1.25rem;
+    }
+    .home-cta-title {
+        font-size: 1.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .products-grid-mobile-limit > [class*="col-"]:nth-child(n+7) {
+        display: none;
+    }
 }
 
 /* Product Cards */

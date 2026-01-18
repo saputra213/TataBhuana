@@ -3,10 +3,6 @@
 @section('title', 'Produk Scaffolding - Tata Bhuana')
 @section('description', 'Lihat katalog lengkap produk scaffolding berkualitas tinggi untuk kebutuhan proyek konstruksi Anda.')
 
-@push('styles')
-    @vite('resources/css/home.css')
-@endpush
-
 @section('content')
 <style>
 .scaffolding-btn-wrapper {
@@ -160,7 +156,7 @@
 <section class="py-5">
     <div class="container">
         @if($scaffoldings->count() > 0)
-            <div class="row g-4">
+            <div class="row g-4 products-grid-mobile-limit">
                 @foreach($scaffoldings as $scaffolding)
                 <div class="col-6 col-md-4">
                     <div class="card h-100 shadow-sm">
@@ -318,6 +314,99 @@
 .hero-subtitle {
     animation: fadeInUp 1s ease-out 0.2s both;
     font-size: 1.5rem;
+}
+
+/* CTA styles */
+.home-cta-inner {
+    max-width: 1040px;
+}
+
+.home-cta-card {
+    border-radius: 24px;
+    padding: 1.9rem 1.7rem;
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.35);
+    position: relative;
+    overflow: hidden;
+}
+
+.home-cta-card::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: 24px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.8), rgba(248, 113, 113, 0.7));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+.home-cta-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 1.6rem;
+    box-shadow: 0 12px 30px rgba(220, 38, 38, 0.55);
+}
+
+.home-cta-chip {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.78rem;
+    backdrop-filter: blur(4px);
+}
+
+.home-cta-chip i {
+    font-size: 0.9rem;
+}
+
+.home-cta-chip-red {
+    background: rgba(248, 113, 113, 0.12);
+    color: #fee2e2;
+    border: 1px solid rgba(254, 226, 226, 0.4);
+}
+
+.home-cta-chip-green {
+    background: rgba(22, 163, 74, 0.12);
+    color: #bbf7d0;
+    border: 1px solid rgba(74, 222, 128, 0.5);
+}
+
+.home-cta-kicker {
+    letter-spacing: 0.08em;
+    color: rgba(254, 226, 226, 0.9);
+}
+
+.home-cta-title {
+    font-size: 2.4rem;
+}
+
+.home-cta-meta {
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .home-cta-card {
+        margin-top: 0.75rem;
+        padding: 1.4rem 1.25rem;
+    }
+    .home-cta-title {
+        font-size: 1.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .products-grid-mobile-limit > [class*="col-"]:nth-child(n+7) {
+        display: none;
+    }
 }
 
 /* Product Cards */

@@ -3,6 +3,10 @@
 @section('title', $branch->name . ' - Tata Bhuana Scaffolding')
 @section('description', $branch->description)
 
+@push('styles')
+    @vite('resources/css/home.css')
+@endpush
+
 @section('content')
 <!-- Breadcrumb -->
 <nav aria-label="breadcrumb" class="py-3 bg-light">
@@ -314,74 +318,70 @@
 @endif
 
 <!-- CTA Section -->
-<section class="cta-section py-5 text-white">
-    <div class="container text-center">
-        <h2 class="display-5 fw-bold mb-3">Siap Bekerja Sama?</h2>
-        <p class="lead mb-4">Hubungi cabang {{ $branch->name }} untuk konsultasi dan penawaran terbaik</p>
-        <a href="{{ $branch->whatsapp_url ?? route('contact') }}" target="_blank" class="btn btn-light btn-lg me-2">
-            <i class="fab fa-whatsapp me-2"></i>Hubungi via WhatsApp
-        </a>
-        <a href="{{ route('contact') }}" class="btn btn-outline-light btn-lg">
-            <i class="fas fa-phone me-2"></i>Kontak Lainnya
-        </a>
+<section class="py-5 bg-danger home-cta-section">
+    <div class="container">
+        <div class="home-cta-inner mx-auto">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-7 text-white">
+                    <div class="home-cta-kicker text-uppercase fw-semibold small mb-2">
+                        Jangan tunda keamanan proyek Anda.
+                    </div>
+                    <h2 class="home-cta-title fw-bold mb-3">
+                        {{ $profile?->home_cta_title ?? 'Siap Memulai Proyek Anda?' }}
+                    </h2>
+                    <p class="home-cta-subtitle lead mb-3 text-white-50">
+                        {{ $profile?->home_cta_subtitle ?? 'Hubungi kami sekarang untuk konsultasi gratis dan penawaran terbaik' }}
+                        @if($branch)
+                            Cabang {{ $branch->name }} siap membantu Anda.
+                        @endif
+                    </p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="home-cta-chip home-cta-chip-red">
+                            <i class="fas fa-shield-alt me-1"></i> Rekomendasi sistem scaffolding yang aman dan sesuai standar
+                        </span>
+                        <span class="home-cta-chip home-cta-chip-green">
+                            <i class="fas fa-headset me-1"></i> Tim support siap membantu dari perencanaan hingga eksekusi
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="home-cta-card bg-white text-start">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="home-cta-icon me-3">
+                                <i class="fas fa-clipboard-check"></i>
+                            </div>
+                            <div>
+                                <div class="fw-semibold small text-muted">
+                                    Konsultasi dengan cabang kami
+                                </div>
+                                <div class="fw-bold">
+                                    Cabang siap membantu Anda
+                                </div>
+                            </div>
+                        </div>
+                        <p class="small text-muted mb-3">
+                            Hubungi cabang untuk penjelasan detail ketersediaan stok, jadwal pengiriman,
+                            serta penawaran khusus sesuai lokasi proyek Anda.
+                        </p>
+                        <div class="d-grid gap-2">
+                            <a href="{{ $branch->whatsapp_url ?? route('contact') }}" target="_blank" class="btn btn-success btn-lg">
+                                <i class="fab fa-whatsapp me-2"></i>Hubungi cabang via WhatsApp
+                            </a>
+                            <a href="{{ route('contact') }}" class="btn btn-outline-danger btn-lg">
+                                <i class="fas fa-phone me-2"></i>Kontak pusat lainnya
+                            </a>
+                        </div>
+                        <div class="home-cta-meta small text-muted mt-3">
+                            @if($branch)
+                                <i class="fas fa-map-marker-alt me-1"></i> Lokasi cabang: {{ $branch->address }}
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
-
-<style>
-.cta-section {
-    background: #dc2626;
-    position: relative;
-    overflow: hidden;
-}
-
-.cta-section::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -10%;
-    width: 500px;
-    height: 500px;
-    background: #16a34a;
-    border-radius: 50%;
-    opacity: 0.1;
-    animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-20px) rotate(180deg);
-    }
-}
-
-.btn-outline-light {
-    background: transparent !important;
-    color: white !important;
-    font-weight: 600 !important;
-    border: 2px solid white !important;
-    border-radius: 8px;
-    padding: 0.6rem 1.2rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
-    text-decoration: none;
-}
-
-.btn-outline-light:hover {
-    background: white !important;
-    color: #dc2626 !important;
-    border-color: white !important;
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.4);
-    transform: translateY(-2px);
-}
-
-.branch-map-btn {
-    background: #dc2626;
-    border-color: #dc2626;
-    color: #ffffff;
-    font-weight: 600;
-}
 
 .branch-map-btn:hover,
 .branch-map-btn:focus {

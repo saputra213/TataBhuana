@@ -48,6 +48,30 @@ class HomeController extends Controller
         return view('services', compact('profile', 'scaffoldings'));
     }
 
+    public function serviceSales()
+    {
+        $profile = CompanyProfile::first();
+        return view('services.sales', compact('profile'));
+    }
+
+    public function serviceRental()
+    {
+        $profile = CompanyProfile::first();
+        return view('services.rental', compact('profile'));
+    }
+
+    public function serviceDelivery()
+    {
+        $profile = CompanyProfile::first();
+        return view('services.delivery', compact('profile'));
+    }
+
+    public function serviceConsultation()
+    {
+        $profile = CompanyProfile::first();
+        return view('services.consultation', compact('profile'));
+    }
+
     public function contact()
     {
         $profile = CompanyProfile::first();

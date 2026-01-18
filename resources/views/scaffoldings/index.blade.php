@@ -3,6 +3,10 @@
 @section('title', 'Produk Scaffolding - Tata Bhuana')
 @section('description', 'Lihat katalog lengkap produk scaffolding berkualitas tinggi untuk kebutuhan proyek konstruksi Anda.')
 
+@push('styles')
+    @vite('resources/css/home.css')
+@endpush
+
 @section('content')
 <style>
 .scaffolding-btn-wrapper {
@@ -229,14 +233,61 @@
 </section>
 
 <!-- CTA Section -->
-<!-- CTA Section -->
-<section class="py-5 bg-danger text-white">
-    <div class="container text-center">
-        <h2 class="display-5 fw-bold mb-3">Siap Memulai Proyek Anda?</h2>
-        <p class="lead mb-4">Hubungi kami sekarang untuk konsultasi gratis dan penawaran terbaik</p>
-        <a href="{{ route('contact') }}" class="btn btn-light btn-lg">
-            <i class="fas fa-phone me-2"></i>Hubungi Kami Sekarang
-        </a>
+<section class="py-5 bg-danger home-cta-section">
+    <div class="container">
+        <div class="home-cta-inner mx-auto">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-7 text-white">
+                    <div class="home-cta-kicker text-uppercase fw-semibold small mb-2">
+                        Jangan tunda keamanan proyek Anda.
+                    </div>
+                    <h2 class="home-cta-title fw-bold mb-3">
+                        {{ $profile?->home_cta_title ?? 'Siap Memulai Proyek Anda?' }}
+                    </h2>
+                    <p class="home-cta-subtitle lead mb-3 text-white-50">
+                        {{ $profile?->home_cta_subtitle ?? 'Hubungi kami sekarang untuk konsultasi gratis dan penawaran terbaik' }}
+                    </p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="home-cta-chip home-cta-chip-red">
+                            <i class="fas fa-shield-alt me-1"></i> Rekomendasi sistem scaffolding yang aman dan sesuai standar
+                        </span>
+                        <span class="home-cta-chip home-cta-chip-green">
+                            <i class="fas fa-headset me-1"></i> Tim support siap membantu dari perencanaan hingga eksekusi
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="home-cta-card bg-white text-start">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="home-cta-icon me-3">
+                                <i class="fas fa-clipboard-check"></i>
+                            </div>
+                            <div>
+                                <div class="fw-semibold small text-muted">
+                                    Konsultasi Proyek & Kebutuhan Scaffolding
+                                </div>
+                                <div class="fw-bold">
+                                    Tim siap membantu Anda
+                                </div>
+                            </div>
+                        </div>
+                        <p class="small text-muted mb-3">
+                            Ceritakan secara singkat jenis pekerjaan, ketinggian kerja, dan lokasi proyek Anda.
+                            Kami akan merangkum kebutuhan scaffolding, estimasi biaya, serta opsi sewa atau jual
+                            yang paling pas untuk tim Anda.
+                        </p>
+                        <div class="d-grid">
+                            <a href="{{ route('contact') }}" class="btn btn-danger btn-lg">
+                                <i class="fas fa-file-signature me-2"></i> Minta penawaran & konsultasi
+                            </a>
+                        </div>
+                        <div class="home-cta-meta small text-muted mt-3">
+                            <i class="fas fa-map-marker-alt me-1"></i> Berbasis di Yogyakarta, melayani berbagai proyek di sekitarnya.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 

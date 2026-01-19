@@ -54,7 +54,7 @@
   z-index: 1;
 }
 html, body {
-  overflow-x: hidden;
+  overflow-x: auto;
 }
 main {
   margin-top: 0 !important;
@@ -73,11 +73,18 @@ main {
   z-index: 1040;
 }
 .admin-layout > .flex-grow-1 {
-  margin-left: 250px;
+  width: 100%;
+}
+@media (min-width: 992px) {
+  .admin-layout > .flex-grow-1 {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+  }
 }
 @media (max-width: 991.98px) {
   .admin-layout > .flex-grow-1 {
     margin-left: 0;
+    width: 100%;
   }
   .admin-layout main {
     margin-top: 0.75rem !important;

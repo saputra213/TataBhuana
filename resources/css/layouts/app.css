@@ -59,6 +59,30 @@ html, body {
 main {
   margin-top: 0 !important;
 }
+.admin-layout {
+  min-height: 100vh;
+}
+.admin-sidebar {
+  flex: 0 0 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  height: 100vh;
+  align-self: stretch;
+  z-index: 1040;
+}
+.admin-layout > .flex-grow-1 {
+  margin-left: 250px;
+}
+@media (max-width: 991.98px) {
+  .admin-layout > .flex-grow-1 {
+    margin-left: 0;
+  }
+  .admin-layout main {
+    margin-top: 0.75rem !important;
+  }
+}
 @media (max-width: 768px) {
   .navbar .container {
     position: relative;
@@ -171,7 +195,7 @@ main {
 .nav-link {
   position: relative;
   transition: all 0.3s ease;
-  padding: 0.5rem 1rem !important;
+  padding: 0.5rem 0.75rem !important;
   margin: 0 0.25rem;
   border-radius: 8px;
 }
@@ -198,7 +222,24 @@ main {
   color: #ffd700 !important;
   font-weight: bold;
 }
+.admin-sidebar-nav .nav-link {
+  width: 100%;
+  margin: 0;
+  padding: 0.6rem 1rem !important;
+  border-radius: 10px;
+  display: block;
+}
+.admin-sidebar-nav .nav-link.bg-primary {
+  border-radius: 12px;
+}
 @media (max-width: 992px) {
+  #adminSidebarOffcanvas {
+    --bs-offcanvas-width: clamp(210px, 70vw, 260px);
+    top: 10px;
+    bottom: auto !important;
+    height: auto !important;
+    max-height: calc(100vh - 20px);
+  }
   .offcanvas.offcanvas-end {
     --bs-offcanvas-width: clamp(200px, 48vw, 240px);
     top: 10px;

@@ -15,16 +15,16 @@
     @stack('styles')
 </head>
 <body>
-    <div class="d-flex">
+    <div class="d-flex admin-layout">
         <!-- Sidebar -->
-        <div class="bg-dark text-white d-none d-lg-block" style="width: 250px; min-height: 100vh;">
+        <div class="bg-dark text-white d-none d-lg-block admin-sidebar" style="width: 250px; min-height: 100vh;">
             <div class="p-3">
                 <h5 class="fw-bold mb-4">
                     <i class="fas fa-cogs me-2"></i>
                     Admin Panel
                 </h5>
                 
-                <nav class="nav flex-column">
+                <nav class="nav flex-column admin-sidebar-nav">
                     <a class="nav-link text-white {{ request()->routeIs('admin.dashboard') ? 'bg-primary' : '' }}" href="{{ route('admin.dashboard') }}">
                         <i class="fas fa-tachometer-alt me-2"></i>Dashboard
                     </a>
@@ -54,6 +54,12 @@
                     </a>
                     <a class="nav-link text-white {{ request()->routeIs('admin.about.index') ? 'bg-primary' : '' }}" href="{{ route('admin.about.index') }}">
                         <i class="fas fa-info-circle me-2"></i>Tentang Kami
+                    </a>
+                    <a class="nav-link text-white {{ request()->routeIs('admin.services.*') ? 'bg-primary' : '' }}" href="{{ route('admin.services.index') }}">
+                        <i class="fas fa-concierge-bell me-2"></i>Layanan Kami
+                    </a>
+                    <a class="nav-link text-white {{ request()->routeIs('admin.footer.*') ? 'bg-primary' : '' }}" href="{{ route('admin.footer.index') }}">
+                        <i class="fas fa-shoe-prints me-2"></i>Footer Website
                     </a>
                     <hr class="text-white">
                     <a class="nav-link text-white" href="{{ route('home') }}" target="_blank">
@@ -112,7 +118,7 @@
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body">
-            <nav class="nav flex-column">
+            <nav class="nav flex-column admin-sidebar-nav">
                 <a class="nav-link text-white {{ request()->routeIs('admin.dashboard') ? 'bg-primary' : '' }}" href="{{ route('admin.dashboard') }}">
                     <i class="fas fa-tachometer-alt me-2"></i>Dashboard
                 </a>
@@ -142,6 +148,12 @@
                 </a>
                 <a class="nav-link text-white {{ request()->routeIs('admin.about.index') ? 'bg-primary' : '' }}" href="{{ route('admin.about.index') }}">
                     <i class="fas fa-info-circle me-2"></i>Tentang Kami
+                </a>
+                <a class="nav-link text-white {{ request()->routeIs('admin.services.*') ? 'bg-primary' : '' }}" href="{{ route('admin.services.index') }}">
+                    <i class="fas fa-concierge-bell me-2"></i>Layanan Kami
+                </a>
+                <a class="nav-link text-white {{ request()->routeIs('admin.footer.*') ? 'bg-primary' : '' }}" href="{{ route('admin.footer.index') }}">
+                    <i class="fas fa-shoe-prints me-2"></i>Footer Website
                 </a>
                 <hr class="text-white">
                 <a class="nav-link text-white" href="{{ route('home') }}" target="_blank">

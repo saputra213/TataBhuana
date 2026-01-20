@@ -110,38 +110,6 @@
             </div>
         </div>
     </div>
-    
-    <div class="col-6 col-lg-3">
-        <div class="card bg-secondary text-white h-100">
-            <div class="card-body p-3">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="overflow-hidden me-2">
-                        <h6 class="card-title mb-1" style="font-size: 0.9rem;">Kantor Pusat</h6>
-                        <h3 class="mb-0 fs-2">{{ $mainBranches }}</h3>
-                    </div>
-                    <div class="flex-shrink-0">
-                        <i class="fas fa-building fa-2x opacity-75"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="col-6 col-lg-3">
-        <div class="card bg-dark text-white h-100">
-            <div class="card-body p-3">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="overflow-hidden me-2">
-                        <h6 class="card-title mb-1" style="font-size: 0.9rem;">Total Stok</h6>
-                        <h3 class="mb-0 fs-2">{{ \App\Models\Scaffolding::sum('stock_quantity') }}</h3>
-                    </div>
-                    <div class="flex-shrink-0">
-                        <i class="fas fa-boxes fa-2x opacity-75"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <!-- Quick Actions -->

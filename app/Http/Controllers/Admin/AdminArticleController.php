@@ -28,6 +28,10 @@ class AdminArticleController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
+            'slug' => 'nullable|string|max:255',
+            'category' => 'required|string|max:255',
+            'author' => 'nullable|string|max:255',
+            'keywords' => 'nullable|string|max:255',
             'excerpt' => 'nullable|string|max:255',
             'content' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
@@ -35,10 +39,10 @@ class AdminArticleController extends Controller
             'published_at' => 'nullable|date'
         ]);
 
-        $data = $request->only(['title', 'excerpt', 'content', 'published_at']);
+        $data = $request->only(['title', 'excerpt', 'content', 'published_at', 'category', 'author', 'keywords']);
         $data['is_published'] = $request->has('is_published') || $request->input('is_published') === 'on';
 
-        $slugBase = Str::slug($data['title']);
+        $slugBase = $request->filled('slug') ? Str::slug($request->input('slug')) : Str::slug($data['title']);
         $slug = $slugBase;
         $counter = 1;
         while (Article::where('slug', $slug)->exists()) {
@@ -73,6 +77,10 @@ class AdminArticleController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
+            'slug' => 'nullable|string|max:255',
+            'category' => 'required|string|max:255',
+            'author' => 'nullable|string|max:255',
+            'keywords' => 'nullable|string|max:255',
             'excerpt' => 'nullable|string|max:255',
             'content' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
@@ -80,15 +88,20 @@ class AdminArticleController extends Controller
             'published_at' => 'nullable|date'
         ]);
 
-        $data = $request->only(['title', 'excerpt', 'content', 'published_at']);
+        $data = $request->only(['title', 'excerpt', 'content', 'published_at', 'category', 'author', 'keywords']);
         $data['is_published'] = $request->has('is_published') || $request->input('is_published') === 'on';
 
-        if ($article->title !== $data['title']) {
-            $slugBase = Str::slug($data['title']);
-            $slug = $slugBase;
+        // Check if title changed or slug is provided and different
+        $newSlugBase = $request->filled('slug') ? Str::slug($request->input('slug')) : Str::slug($data['title']);
+        
+        // Only update slug if it's explicitly changed via input or if title changed and no explicit slug provided
+        if (($request->filled('slug') && $newSlugBase !== $article->slug) || 
+            (!$request->filled('slug') && $article->title !== $data['title'])) {
+            
+            $slug = $newSlugBase;
             $counter = 1;
             while (Article::where('slug', $slug)->where('id', '!=', $article->id)->exists()) {
-                $slug = $slugBase . '-' . $counter;
+                $slug = $newSlugBase . '-' . $counter;
                 $counter++;
             }
             $data['slug'] = $slug;

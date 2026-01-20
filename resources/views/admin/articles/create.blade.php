@@ -3,31 +3,71 @@
 @section('title', 'Tambah Artikel - Admin Panel')
 @section('page-title', 'Tambah Artikel')
 
+@push('styles')
+<!-- Summernote CSS -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<style>
+    .note-editor .note-toolbar {
+        background: #f8f9fa;
+    }
+</style>
+@endpush
+
 @section('content')
 <div class="card">
     <div class="card-body">
         <form action="{{ route('admin.articles.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             
-            <div class="mb-3">
-                <label class="form-label">Judul</label>
-                <input type="text" name="title" class="form-control" value="{{ old('title') }}" required>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Pengarang</label>
+                    <input type="text" name="author" class="form-control" value="{{ old('author', auth('admin')->user()->name) }}" placeholder="Admin">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Kategori <span class="text-danger">*</span></label>
+                    <select name="category" class="form-select" required>
+                        <option value="" disabled {{ old('category') ? '' : 'selected' }}>Pilih salah satu opsi</option>
+                        <option value="Berita" {{ old('category') == 'Berita' ? 'selected' : '' }}>Berita</option>
+                        <option value="Tutorial" {{ old('category') == 'Tutorial' ? 'selected' : '' }}>Tutorial</option>
+                        <option value="Tips & Trik" {{ old('category') == 'Tips & Trik' ? 'selected' : '' }}>Tips & Trik</option>
+                        <option value="Lainnya" {{ old('category') == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Judul Artikel <span class="text-danger">*</span></label>
+                    <input type="text" name="title" class="form-control" value="{{ old('title') }}" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">URL Artikel</label>
+                    <input type="text" name="slug" class="form-control" value="{{ old('slug') }}" placeholder="kosongkan untuk generate otomatis">
+                </div>
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Ringkasan (opsional)</label>
-                <input type="text" name="excerpt" class="form-control" value="{{ old('excerpt') }}" maxlength="255">
+                <label class="form-label">Deskripsi</label>
+                <textarea name="excerpt" class="form-control" rows="3" maxlength="160" placeholder="Maksimal 160 Karakter (opsional)">{{ old('excerpt') }}</textarea>
+                <div class="form-text">Maksimal 160 Karakter (opsional)</div>
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Konten</label>
-                <textarea name="content" class="form-control rich-editor" rows="8" required>{{ old('content') }}</textarea>
+                <label class="form-label">Keywords</label>
+                <input type="text" name="keywords" class="form-control" value="{{ old('keywords') }}" placeholder="Pisahkan dengan koma">
+                <div class="form-text">Pisahkan dengan koma</div>
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Gambar Sampul (opsional)</label>
+                <label class="form-label">Gambar Thumbnail</label>
                 <input type="file" name="image" class="form-control" accept="image/*,.webp">
-                <div class="form-text">Format: JPG, PNG, GIF, WEBP. Maksimal 5MB</div>
+                <div class="form-text">Seret & Jatuhkan berkas Anda atau Jelajahi</div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Tulis Artikel <span class="text-danger">*</span></label>
+                <textarea name="content" id="summernote" class="form-control" required>{{ old('content') }}</textarea>
             </div>
 
             <div class="row">
@@ -54,8 +94,28 @@
                 </button>
             </div>
     </div>
+</div>
 @endsection
 
 @push('scripts')
-@vite('resources/js/admin/articles/create.js')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#summernote').summernote({
+            placeholder: 'Tulis artikel anda disini...',
+            tabsize: 2,
+            height: 300,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ]
+        });
+    });
+</script>
 @endpush

@@ -16,15 +16,13 @@ class AdminController extends Controller
         $projectCount = \App\Models\Project::count();
         $completedProjects = \App\Models\Project::where('status', 'completed')->count();
         $branchCount = \App\Models\Branch::where('is_active', true)->count();
-        $mainBranches = \App\Models\Branch::where('is_main_branch', true)->count();
         
         return view('admin.dashboard', compact(
             'scaffoldingCount', 
             'availableScaffolding',
             'projectCount',
             'completedProjects',
-            'branchCount',
-            'mainBranches'
+            'branchCount'
         ));
     }
 

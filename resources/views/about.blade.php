@@ -69,9 +69,9 @@
 <!-- About Section -->
 <section class="about-section py-5 bg-light">
     <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 mb-4 mb-lg-0">
-                <div class="about-content">
+        <div class="row">
+            <div class="col-12">
+                <div class="about-content clearfix">
                     <h2 class="section-title mb-4">
                         @if($profile)
                             {{ $profile->company_name }}
@@ -79,7 +79,16 @@
                             Tata Bhuana Scaffolding
                         @endif
                     </h2>
-                    <p class="lead text-muted mb-4">
+
+                    <div class="about-image-mini float-end ms-4 mb-3">
+                        @if($profile && $profile->logo)
+                            <img src="{{ asset('storage/' . $profile->logo) }}" alt="Logo Perusahaan" class="img-fluid rounded shadow">
+                        @else
+                            <img src="{{ asset('storage/projects/VnqaffFD7MT1xzG0x4FPlmjPsr3s4iXAWUrxlnO3.jpg') }}" alt="Proyek Kami" class="img-fluid rounded shadow">
+                        @endif
+                    </div>
+
+                    <p class="lead text-muted mb-4" style="text-align: justify;">
                         {{ $profile?->about_main_text ?? 'Kami dikenal sebagai perusahaan penyedia layanan sewa dan penjualan scaffolding (perancah) utama yang berpusat di Daerah Istimewa Yogyakarta. Dengan komitmen untuk memberikan layanan terbaik, kami telah dipercaya oleh berbagai klien untuk mendukung proyek konstruksi mereka dengan aman, berkualitas, dan efisien.' }}
                     </p>
                     
@@ -97,16 +106,6 @@
                             <span>{{ $profile?->about_feature_3 ?? 'Layanan Cepat & Responsif' }}</span>
                         </div>
                     </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-6">
-                <div class="about-image-wrapper">
-                    @if($profile && $profile->logo)
-                        <img src="{{ asset('storage/' . $profile->logo) }}" alt="Logo Perusahaan">
-                    @else
-                        <img src="{{ asset('storage/projects/VnqaffFD7MT1xzG0x4FPlmjPsr3s4iXAWUrxlnO3.jpg') }}" alt="Proyek Kami">
-                    @endif
                 </div>
             </div>
         </div>
@@ -144,7 +143,7 @@
                         {{ $profile?->about_mission_title ?? 'Misi Kami' }}
                     </h3>
                     <p class="vision-mission-text">
-                        {{ $profile?->about_mission_text ?? 'Memberikan layanan scaffolding yang responsif, profesional, dan berfokus pada keselamatan serta kepuasan pelanggan di setiap tahap proyek.' }}
+                        {!! nl2br(e($profile?->about_mission_text ?? 'Memberikan layanan scaffolding yang responsif, profesional, dan berfokus pada keselamatan serta kepuasan pelanggan di setiap tahap proyek.')) !!}
                     </p>
                 </div>
             </div>
@@ -430,8 +429,14 @@
 
 .feature-list {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 15px;
+}
+
+@media (max-width: 768px) {
+    .feature-list {
+        flex-direction: column;
+    }
 }
 
 .feature-item {
@@ -442,10 +447,11 @@
     border-radius: 10px;
     transition: all 0.3s ease;
     animation: fadeInUp 0.8s ease-out both;
+    flex: 1;
 }
 
 .feature-item:hover {
-    transform: translateX(10px);
+    transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(220, 38, 38, 0.1);
 }
 
@@ -467,6 +473,25 @@
 .feature-item:hover .feature-icon {
     background: #16a34a;
     transform: rotate(360deg);
+}
+
+/* About Image Styling */
+.about-image-mini {
+    width: 40%;
+    max-width: 380px;
+    clear: right;
+    margin-top: 5.5rem !important; /* Align with text body */
+}
+
+@media (max-width: 768px) {
+    .about-image-mini {
+        width: 100%;
+        max-width: 100%;
+        float: none !important;
+        margin-left: 0 !important;
+        margin-top: 20px !important;
+        margin-bottom: 20px !important;
+    }
 }
 
 /* Section Title */

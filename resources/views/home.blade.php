@@ -246,7 +246,7 @@
                     <h2 class="fw-bold mb-3">
                         {{ $profile?->company_name ?? 'Tata Bhuana Scaffolding' }}
                     </h2>
-                    <p class="text-muted mb-3">
+                    <p class="text-muted mb-3" style="text-align: justify;">
                         {{ $profile?->about_main_text ?? 'Kami dikenal sebagai perusahaan penyedia layanan sewa dan penjualan scaffolding (perancah) utama yang berpusat di Daerah Istimewa Yogyakarta. Dengan komitmen untuk memberikan layanan terbaik, kami telah dipercaya oleh berbagai klien untuk mendukung proyek konstruksi mereka dengan aman, berkualitas, dan efisien.' }}
                     </p>
                     <ul class="list-unstyled mb-0">

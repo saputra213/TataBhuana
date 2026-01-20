@@ -14,10 +14,6 @@ use App\Http\Controllers\ArticleController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/services', [HomeController::class, 'services'])->name('services');
-Route::get('/services/penjualan', [HomeController::class, 'serviceSales'])->name('services.sales');
-Route::get('/services/persewaan', [HomeController::class, 'serviceRental'])->name('services.rental');
-Route::get('/services/pengiriman', [HomeController::class, 'serviceDelivery'])->name('services.delivery');
-Route::get('/services/konsultasi', [HomeController::class, 'serviceConsultation'])->name('services.consultation');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 

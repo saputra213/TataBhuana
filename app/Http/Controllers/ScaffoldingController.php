@@ -19,6 +19,14 @@ class ScaffoldingController extends Controller
         if ($request->filled('material')) {
             $query->where('material', $request->material);
         }
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('description', 'like', "%{$search}%");
+            });
+        }
         
         switch ($request->sort) {
             case 'name':
@@ -35,7 +43,7 @@ class ScaffoldingController extends Controller
                 break;
         }
         
-        $perPage = (int) $request->input('per_page', 9);
+        $perPage = (int) $request->input('per_page', 12);
         $scaffoldings = $query->paginate($perPage);
         $profile = CompanyProfile::first();
         return view('scaffoldings.index', compact('scaffoldings', 'profile'));

@@ -85,9 +85,46 @@
                 </div>
             </div>
             <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-header bg-white">
+                        <h5 class="mb-0">Kategori</h5>
+                    </div>
+                    <div class="card-body">
+                        @if($categories->count() > 0)
+                            <ul class="list-group list-group-flush">
+                                @foreach($categories as $cat)
+                                    <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                        <a href="#" class="text-decoration-none text-dark">{{ $cat->category }}</a>
+                                        <span class="badge bg-secondary rounded-pill">{{ $cat->total }}</span>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @else
+                            <p class="text-muted mb-0">Belum ada kategori.</p>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header bg-white">
+                        <h5 class="mb-0">Tags</h5>
+                    </div>
+                    <div class="card-body">
+                        @if($tags->count() > 0)
+                            <div class="d-flex flex-wrap gap-2">
+                                @foreach($tags as $tag)
+                                    <a href="#" class="btn btn-outline-secondary btn-sm rounded-pill">{{ $tag }}</a>
+                                @endforeach
+                            </div>
+                        @else
+                            <p class="text-muted mb-0">Belum ada tags.</p>
+                        @endif
+                    </div>
+                </div>
+
                 <div class="card">
-                    <div class="card-header">
-                        Artikel Terkait
+                    <div class="card-header bg-white">
+                        <h5 class="mb-0">Artikel Terkait</h5>
                     </div>
                     <div class="card-body">
                         @if($related->count() > 0)
@@ -104,7 +141,7 @@
                                             <img src="{{ $relatedImageSrc }}" alt="{{ $item->title }}" class="rounded me-3" style="width: 60px; height: 60px; object-fit: cover;" loading="lazy" decoding="async">
                                         @endif
                                         <div>
-                                            <a href="{{ route('articles.show', $item) }}" class="text-decoration-none">{{ $item->title }}</a>
+                                            <a href="{{ route('articles.show', $item) }}" class="text-decoration-none text-dark fw-semibold">{{ $item->title }}</a>
                                             <div class="small text-muted">
                                                 {{ $item->formatted_published_date ?? $item->created_at->format('d M Y') }}
                                             </div>

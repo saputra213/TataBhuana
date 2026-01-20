@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\CompanyProfile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
 {
@@ -49,7 +50,24 @@ class ArticleController extends Controller
             ->take(3)
             ->get();
 
-        return view('articles.show', compact('article', 'related', 'profile'));
+        $categories = Article::where('is_published', true)
+            ->whereNotNull('category')
+            ->where('category', '!=', '')
+            ->select('category', DB::raw('count(*) as total'))
+            ->groupBy('category')
+            ->get();
+
+        $tags = Article::where('is_published', true)
+            ->whereNotNull('keywords')
+            ->pluck('keywords')
+            ->flatMap(function ($values) {
+                return array_map('trim', explode(',', $values));
+            })
+            ->filter()
+            ->unique()
+            ->values();
+
+        return view('articles.show', compact('article', 'related', 'profile', 'categories', 'tags'));
     }
 
     public function storeComment(Request $request, Article $article)

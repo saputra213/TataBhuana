@@ -14,7 +14,7 @@ class SecurityHeaders
         $response->headers->set('X-Frame-Options', 'SAMEORIGIN');
         $response->headers->set('X-Content-Type-Options', 'nosniff');
 
-        $csp = "default-src 'self'; connect-src 'self' https:; img-src 'self' data: blob: https:; style-src 'self' https: 'unsafe-inline'; script-src 'self' https: 'unsafe-inline'; font-src 'self' https:; frame-src 'self' https://maps.google.com https://www.google.com";
+        $csp = "default-src * data: blob: 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src * 'unsafe-inline'; img-src * data: blob: 'unsafe-inline'; frame-src *; style-src * 'unsafe-inline'; font-src * data:;";
         $response->headers->set('Content-Security-Policy', $csp);
 
         if ($request->isSecure()) {

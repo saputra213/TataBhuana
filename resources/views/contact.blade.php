@@ -132,8 +132,8 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="branch-card card h-100 shadow-sm border-0 position-relative overflow-hidden">
                         @if($branch->is_main_branch)
-                        <div class="branch-badge">
-                            <i class="fas fa-star me-1"></i>Kantor Pusat
+                        <div class="branch-badge" title="Kantor Pusat" data-bs-toggle="tooltip">
+                            <i class="fas fa-star"></i>
                         </div>
                         @endif
                         
@@ -152,8 +152,14 @@
                                 </div>
                             </div>
 
-                            <a href="{{ $branch->google_maps_url }}" target="_blank" rel="noopener" class="btn branch-map-btn w-100">
-                                <i class="fas fa-map-marker-alt me-2"></i>Lihat di Google Maps
+                            @php
+                                $wa_number = preg_replace('/[^0-9]/', '', $branch->phone);
+                                if(substr($wa_number, 0, 1) == '0') {
+                                    $wa_number = '62' . substr($wa_number, 1);
+                                }
+                            @endphp
+                            <a href="https://wa.me/{{ $wa_number }}" target="_blank" rel="noopener" class="btn btn-success w-100 mt-auto">
+                                <i class="fab fa-whatsapp me-2"></i>Hubungi via WhatsApp
                             </a>
                             
                         </div>
@@ -218,13 +224,17 @@
     position: absolute;
     top: 15px;
     right: 15px;
-    background: linear-gradient(135deg, #ffc107, #ff9800);
+    background: #16a34a;
     color: white;
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: bold;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 1rem;
     z-index: 1;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .branch-info {
@@ -262,9 +272,7 @@
     color: #dc2626;
 }
 
-.branch-badge {
-    background: #16a34a;
-}
+
 
 .info-item {
     display: flex;
@@ -410,6 +418,12 @@
 <script>
 // Scroll to Top Button Functionality
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Bootstrap Tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+
     const scrollToTopBtn = document.getElementById('scrollToTopBtn');
     
     if (!scrollToTopBtn) {

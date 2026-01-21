@@ -42,13 +42,13 @@
                             <div class="col-6">
                                 <div class="d-flex justify-content-between">
                                     <span class="text-muted">Jenis:</span>
-                                    <strong>{{ ucfirst($scaffolding->type) }}</strong>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="d-flex justify-content-between">
-                                    <span class="text-muted">Material:</span>
-                                    <strong>{{ ucfirst($scaffolding->material) }}</strong>
+                                    <strong>
+                                        {{ 
+                                            $scaffolding->type == 'scaffolding' ? 'Scaffolding' : 
+                                            ($scaffolding->type == 'accessories' ? 'Accessories' : 
+                                            ($scaffolding->type == 'bekisting' ? 'Bekisting' : ucfirst($scaffolding->type)))
+                                        }}
+                                    </strong>
                                 </div>
                             </div>
                             <div class="col-6">

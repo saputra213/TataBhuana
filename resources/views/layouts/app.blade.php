@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Tata Bhuana - Sewa & Jual Scaffolding')</title>
+    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
     <meta name="description" content="@yield('description', 'Perusahaan penyedia jasa sewa dan jual scaffolding berkualitas tinggi untuk proyek konstruksi Anda.')">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta property="og:title" content="@yield('title', 'Tata Bhuana - Sewa & Jual Scaffolding')">

@@ -13,7 +13,7 @@
 
 <!-- Stats Cards -->
 <div class="row g-3 g-lg-4 mb-4 mb-lg-5">
-    <div class="col-6 col-lg-3">
+    <div class="col-6 col-md-4">
         <div class="card bg-primary text-white h-100">
             <div class="card-body p-3">
                 <div class="d-flex justify-content-between align-items-center">
@@ -29,7 +29,7 @@
         </div>
     </div>
     
-    <div class="col-6 col-lg-3">
+    <div class="col-6 col-md-4">
         <div class="card bg-success text-white h-100">
             <div class="card-body p-3">
                 <div class="d-flex justify-content-between align-items-center">
@@ -45,7 +45,7 @@
         </div>
     </div>
     
-    <div class="col-6 col-lg-3">
+    <div class="col-6 col-md-4">
         <div class="card bg-warning text-white h-100">
             <div class="card-body p-3">
                 <div class="d-flex justify-content-between align-items-center">
@@ -61,7 +61,7 @@
         </div>
     </div>
     
-    <div class="col-6 col-lg-3">
+    <div class="col-6 col-md-4">
         <div class="card bg-info text-white h-100">
             <div class="card-body p-3">
                 <div class="d-flex justify-content-between align-items-center">
@@ -76,10 +76,8 @@
             </div>
         </div>
     </div>
-</div>
 
-<div class="row g-3 g-lg-4 mb-4 mb-lg-5">
-    <div class="col-6 col-lg-3">
+    <div class="col-6 col-md-4">
         <div class="card bg-success text-white h-100">
             <div class="card-body p-3">
                 <div class="d-flex justify-content-between align-items-center">
@@ -95,7 +93,7 @@
         </div>
     </div>
     
-    <div class="col-6 col-lg-3">
+    <div class="col-6 col-md-4">
         <div class="card bg-warning text-white h-100">
             <div class="card-body p-3">
                 <div class="d-flex justify-content-between align-items-center">
@@ -217,8 +215,6 @@
                                 <tr>
                                     <th>Nama</th>
                                     <th>Jenis</th>
-                                    <th>Material</th>
-                                    <th>Harga Sewa</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -228,19 +224,11 @@
                                 <tr>
                                     <td>{{ $scaffolding->name }}</td>
                                     <td><span class="badge bg-primary">{{ ucfirst($scaffolding->type) }}</span></td>
-                                    <td><span class="badge bg-secondary">{{ ucfirst($scaffolding->material) }}</span></td>
-                                    <td>
-                                        @if($scaffolding->rental_price)
-                                            {{ $scaffolding->formatted_rental_price }}/hari
-                                        @else
-                                            <span class="text-muted">-</span>
-                                        @endif
-                                    </td>
                                     <td>
                                         @if($scaffolding->is_available)
                                             <span class="badge bg-success">Tersedia</span>
                                         @else
-                                            <span class="badge bg-danger">Tidak Tersedia</span>
+                                            <span class="badge bg-danger">Habis</span>
                                         @endif
                                     </td>
                                     <td>

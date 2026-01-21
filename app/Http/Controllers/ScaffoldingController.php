@@ -16,10 +16,6 @@ class ScaffoldingController extends Controller
             $query->where('type', $request->type);
         }
         
-        if ($request->filled('material')) {
-            $query->where('material', $request->material);
-        }
-
         if ($request->filled('search')) {
             $search = $request->search;
             $query->where(function($q) use ($search) {
@@ -31,12 +27,6 @@ class ScaffoldingController extends Controller
         switch ($request->sort) {
             case 'name':
                 $query->orderBy('name', 'asc');
-                break;
-            case 'price_low':
-                $query->orderBy('rental_price', 'asc');
-                break;
-            case 'price_high':
-                $query->orderBy('rental_price', 'desc');
                 break;
             default:
                 $query->orderBy('created_at', 'desc');

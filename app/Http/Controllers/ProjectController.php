@@ -42,7 +42,7 @@ class ProjectController extends Controller
     {
         $relatedProjects = Project::where('id', '!=', $project->id)
             ->where('status', 'completed')
-            ->where('project_type', $project->project_type)
+            ->orderBy('created_at', 'desc')
             ->take(3)
             ->get();
         $profile = CompanyProfile::first();

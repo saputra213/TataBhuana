@@ -28,10 +28,9 @@
                             <label for="type" class="form-label">Jenis *</label>
                             <select class="form-select @error('type') is-invalid @enderror" id="type" name="type" required>
                                 <option value="">Pilih Jenis</option>
-                                <option value="frame" {{ old('type', $scaffolding->type) == 'frame' ? 'selected' : '' }}>Frame Scaffolding</option>
-                                <option value="tube" {{ old('type', $scaffolding->type) == 'tube' ? 'selected' : '' }}>Tube Scaffolding</option>
-                                <option value="system" {{ old('type', $scaffolding->type) == 'system' ? 'selected' : '' }}>System Scaffolding</option>
-                                <option value="mobile" {{ old('type', $scaffolding->type) == 'mobile' ? 'selected' : '' }}>Mobile Scaffolding</option>
+                                <option value="scaffolding" {{ old('type', $scaffolding->type) == 'scaffolding' ? 'selected' : '' }}>Scaffolding</option>
+                                <option value="accessories" {{ old('type', $scaffolding->type) == 'accessories' ? 'selected' : '' }}>Accessories</option>
+                                <option value="bekisting" {{ old('type', $scaffolding->type) == 'bekisting' ? 'selected' : '' }}>Bekisting</option>
                             </select>
                             @error('type')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -48,20 +47,7 @@
                     </div>
                     
                     <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="material" class="form-label">Material *</label>
-                            <select class="form-select @error('material') is-invalid @enderror" id="material" name="material" required>
-                                <option value="">Pilih Material</option>
-                                <option value="steel" {{ old('material', $scaffolding->material) == 'steel' ? 'selected' : '' }}>Baja</option>
-                                <option value="aluminum" {{ old('material', $scaffolding->material) == 'aluminum' ? 'selected' : '' }}>Aluminium</option>
-                                <option value="galvanized" {{ old('material', $scaffolding->material) == 'galvanized' ? 'selected' : '' }}>Galvanized</option>
-                            </select>
-                            @error('material')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-12 mb-3">
                             <label for="dimensions" class="form-label">Dimensi *</label>
                             <input type="text" class="form-control @error('dimensions') is-invalid @enderror" id="dimensions" name="dimensions" value="{{ old('dimensions', $scaffolding->dimensions) }}" placeholder="Contoh: 1.2m x 1.8m" required>
                             @error('dimensions')
@@ -71,7 +57,7 @@
                     </div>
                     
                     <div class="row">
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-6 mb-3">
                             <label for="max_height" class="form-label">Tinggi Maksimal (m) *</label>
                             <input type="number" class="form-control @error('max_height') is-invalid @enderror" id="max_height" name="max_height" value="{{ old('max_height', $scaffolding->max_height) }}" min="0" required>
                             @error('max_height')
@@ -79,34 +65,30 @@
                             @enderror
                         </div>
                         
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-6 mb-3">
                             <label for="max_load" class="form-label">Beban Maksimal (kg) *</label>
                             <input type="number" class="form-control @error('max_load') is-invalid @enderror" id="max_load" name="max_load" value="{{ old('max_load', $scaffolding->max_load) }}" min="0" required>
                             @error('max_load')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        
-                        <div class="col-md-6 mb-3">
-                            <label for="stock_quantity" class="form-label">Jumlah Stok</label>
-                            <input type="number" class="form-control @error('stock_quantity') is-invalid @enderror" id="stock_quantity" name="stock_quantity" value="{{ old('stock_quantity', $scaffolding->stock_quantity) }}" min="0">
-                            @error('stock_quantity')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+                    </div>
 
-                        <div class="col-md-6 mb-3">
-                            <label for="image" class="form-label">Gambar Produk</label>
-                            @if($scaffolding->image)
-                                <div class="mb-2">
-                                    <img src="{{ asset('storage/' . $scaffolding->image) }}" alt="Current Image" class="img-thumbnail" style="max-height: 100px;">
-                                </div>
-                            @endif
+                        <div class="col-md-12 mb-3">
+                            <label for="image" class="form-label">Gambar Produk (Biarkan kosong jika tidak ingin mengubah)</label>
                             <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" accept="image/*,.webp">
                             <div class="form-text">Format: JPG, PNG, GIF, WEBP. Maksimal 5MB</div>
                             @error('image')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
+                            @if($scaffolding->image)
+                                <div class="mt-2">
+                                    <small class="text-muted">Gambar saat ini:</small>
+                                    <div class="mt-1">
+                                        <img src="{{ asset('storage/' . $scaffolding->image) }}" alt="Current Image" class="img-thumbnail" style="max-height: 100px;">
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                     

@@ -59,81 +59,59 @@
                 <form method="GET" action="{{ route('scaffoldings.index') }}" id="filterForm">
                     <!-- Hidden Inputs for Filter Values -->
                     <input type="hidden" name="type" id="inputType" value="{{ request('type') }}">
-                    <input type="hidden" name="material" id="inputMaterial" value="{{ request('material') }}">
                     <input type="hidden" name="sort" id="inputSort" value="{{ request('sort') }}">
                     <input type="hidden" name="per_page" id="inputPerPage" value="{{ request('per_page', 12) }}">
 
                     <div class="row g-2">
                         <!-- Search Bar -->
-                        <div class="col-12 mb-2">
-                            <div class="input-group shadow-sm">
+                        <div class="col-12 col-lg-4">
+                            <div class="input-group shadow-sm h-100">
                                 <span class="input-group-text bg-white border-end-0 ps-3"><i class="fas fa-search text-muted"></i></span>
                                 <input type="text" name="search" class="form-control border-start-0 py-2" placeholder="Cari produk scaffolding..." value="{{ request('search') }}">
                             </div>
                         </div>
 
                         <!-- Type Dropdown -->
-                        <div class="col-6 col-md-3">
-                            <div class="dropdown w-100">
-                                <button class="btn btn-outline-secondary w-100 dropdown-toggle text-start text-truncate bg-white" type="button" id="dropdownType" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="col-6 col-lg-3">
+                            <div class="dropdown w-100 h-100">
+                                <button class="btn bg-white border shadow-sm w-100 h-100 dropdown-toggle d-flex justify-content-between align-items-center" type="button" id="dropdownType" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="text-truncate">
                                     {{ 
-                                        request('type') == 'frame' ? 'Frame' : 
-                                        (request('type') == 'tube' ? 'Tube' : 
-                                        (request('type') == 'system' ? 'System' : 
-                                        (request('type') == 'mobile' ? 'Mobile' : 'Jenis')))
+                                        request('type') == 'scaffolding' ? 'Scaffolding' : 
+                                        (request('type') == 'accessories' ? 'Accessories' : 
+                                        (request('type') == 'bekisting' ? 'Bekisting' : 'Jenis'))
                                     }}
+                                    </span>
                                 </button>
                                 <ul class="dropdown-menu shadow-sm w-100" aria-labelledby="dropdownType">
                                     <li><a class="dropdown-item {{ request('type') == '' ? 'active' : '' }}" href="#" onclick="setFilter('type', ''); return false;">Semua Jenis</a></li>
-                                    <li><a class="dropdown-item {{ request('type') == 'frame' ? 'active' : '' }}" href="#" onclick="setFilter('type', 'frame'); return false;">Frame Scaffolding</a></li>
-                                    <li><a class="dropdown-item {{ request('type') == 'tube' ? 'active' : '' }}" href="#" onclick="setFilter('type', 'tube'); return false;">Tube Scaffolding</a></li>
-                                    <li><a class="dropdown-item {{ request('type') == 'system' ? 'active' : '' }}" href="#" onclick="setFilter('type', 'system'); return false;">System Scaffolding</a></li>
-                                    <li><a class="dropdown-item {{ request('type') == 'mobile' ? 'active' : '' }}" href="#" onclick="setFilter('type', 'mobile'); return false;">Mobile Scaffolding</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                        <!-- Material Dropdown -->
-                        <div class="col-6 col-md-3">
-                            <div class="dropdown w-100">
-                                <button class="btn btn-outline-secondary w-100 dropdown-toggle text-start text-truncate bg-white" type="button" id="dropdownMaterial" data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{ 
-                                        request('material') == 'steel' ? 'Baja' : 
-                                        (request('material') == 'aluminum' ? 'Alum.' : 
-                                        (request('material') == 'galvanized' ? 'Galv.' : 'Bahan'))
-                                    }}
-                                </button>
-                                <ul class="dropdown-menu shadow-sm w-100" aria-labelledby="dropdownMaterial">
-                                    <li><a class="dropdown-item {{ request('material') == '' ? 'active' : '' }}" href="#" onclick="setFilter('material', ''); return false;">Semua Bahan</a></li>
-                                    <li><a class="dropdown-item {{ request('material') == 'steel' ? 'active' : '' }}" href="#" onclick="setFilter('material', 'steel'); return false;">Baja</a></li>
-                                    <li><a class="dropdown-item {{ request('material') == 'aluminum' ? 'active' : '' }}" href="#" onclick="setFilter('material', 'aluminum'); return false;">Aluminium</a></li>
-                                    <li><a class="dropdown-item {{ request('material') == 'galvanized' ? 'active' : '' }}" href="#" onclick="setFilter('material', 'galvanized'); return false;">Galvanis</a></li>
+                                    <li><a class="dropdown-item {{ request('type') == 'scaffolding' ? 'active' : '' }}" href="#" onclick="setFilter('type', 'scaffolding'); return false;">Scaffolding</a></li>
+                                    <li><a class="dropdown-item {{ request('type') == 'accessories' ? 'active' : '' }}" href="#" onclick="setFilter('type', 'accessories'); return false;">Accessories</a></li>
+                                    <li><a class="dropdown-item {{ request('type') == 'bekisting' ? 'active' : '' }}" href="#" onclick="setFilter('type', 'bekisting'); return false;">Bekisting</a></li>
                                 </ul>
                             </div>
                         </div>
                         
                         <!-- Sort Dropdown -->
-                        <div class="col-6 col-md-3">
-                            <div class="dropdown w-100">
-                                <button class="btn btn-outline-secondary w-100 dropdown-toggle text-start text-truncate bg-white" type="button" id="dropdownSort" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="col-6 col-lg-3">
+                            <div class="dropdown w-100 h-100">
+                                <button class="btn bg-white border shadow-sm w-100 h-100 dropdown-toggle d-flex justify-content-between align-items-center" type="button" id="dropdownSort" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="text-truncate">
                                     {{ 
-                                        request('sort') == 'name' ? 'Nama' : 
-                                        (request('sort') == 'price_low' ? 'Murah' : 
-                                        (request('sort') == 'price_high' ? 'Mahal' : 'Urut'))
+                                        request('sort') == 'name' ? 'Nama' : 'Urut'
                                     }}
+                                    </span>
                                 </button>
                                 <ul class="dropdown-menu shadow-sm w-100" aria-labelledby="dropdownSort">
                                     <li><a class="dropdown-item {{ request('sort') == '' ? 'active' : '' }}" href="#" onclick="setFilter('sort', ''); return false;">Default</a></li>
                                     <li><a class="dropdown-item {{ request('sort') == 'name' ? 'active' : '' }}" href="#" onclick="setFilter('sort', 'name'); return false;">Nama A-Z</a></li>
-                                    <li><a class="dropdown-item {{ request('sort') == 'price_low' ? 'active' : '' }}" href="#" onclick="setFilter('sort', 'price_low'); return false;">Harga Terendah</a></li>
-                                    <li><a class="dropdown-item {{ request('sort') == 'price_high' ? 'active' : '' }}" href="#" onclick="setFilter('sort', 'price_high'); return false;">Harga Tertinggi</a></li>
                                 </ul>
                             </div>
                         </div>
                         
-                        <div class="col-6 col-md-3">
-                            <button type="submit" class="btn btn-success-modern w-100 h-100 d-flex align-items-center justify-content-center">
-                                <i class="fas fa-filter"></i> <span class="ms-1">Filter</span>
+                        <div class="col-12 col-lg-2">
+                            <button type="submit" class="btn btn-danger w-100 h-100 d-flex align-items-center justify-content-center shadow-sm fw-bold">
+                                <i class="fas fa-filter"></i> <span class="ms-2">Filter</span>
                             </button>
                         </div>
                     </div>
@@ -189,13 +167,15 @@
                         <div class="card-body d-flex flex-column p-3">
                             <h6 class="card-title fw-bold mb-2 text-truncate scaffolding-title">{{ $scaffolding->name }}</h6>
                             
-                            <div class="mb-2">
-                                <span class="badge badge-primary-modern me-1" style="font-size:0.7rem">{{ ucfirst($scaffolding->type) }}</span>
-                                <span class="badge badge-secondary-modern" style="font-size:0.7rem">{{ ucfirst($scaffolding->material) }}</span>
-                            </div>
-                            
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                 @if($scaffolding->stock_quantity > 0)
+                            <div class="mb-3 d-flex align-items-center flex-wrap gap-2">
+                                <span class="badge badge-primary-modern" style="font-size:0.7rem">
+                                    {{ 
+                                        $scaffolding->type == 'scaffolding' ? 'Scaffolding' : 
+                                        ($scaffolding->type == 'accessories' ? 'Accessories' : 
+                                        ($scaffolding->type == 'bekisting' ? 'Bekisting' : ucfirst($scaffolding->type)))
+                                    }}
+                                </span>
+                                @if($scaffolding->is_available)
                                     <span class="badge bg-success" style="font-size:0.7rem">Tersedia</span>
                                 @else
                                     <span class="badge bg-danger" style="font-size:0.7rem">Habis</span>
@@ -698,7 +678,6 @@
                             
                             <div class="mb-2">
                                 <span id="modalProductType" class="badge badge-primary-modern me-1"></span>
-                                <span id="modalProductMaterial" class="badge badge-secondary-modern"></span>
                             </div>
                             
                             <h3 id="modalProductName" class="fw-bold mb-3"></h3>
@@ -764,8 +743,14 @@ document.addEventListener('DOMContentLoaded', function() {
             // Text Content
             document.getElementById('modalProductName').textContent = product.name;
             document.getElementById('modalProductDesc').textContent = product.description || 'Deskripsi belum tersedia.';
-            document.getElementById('modalProductType').textContent = product.type.charAt(0).toUpperCase() + product.type.slice(1);
-            document.getElementById('modalProductMaterial').textContent = product.material.charAt(0).toUpperCase() + product.material.slice(1);
+            
+            var typeDisplay = product.type;
+            if(product.type === 'scaffolding') typeDisplay = 'Scaffolding';
+            else if(product.type === 'accessories') typeDisplay = 'Accessories';
+            else if(product.type === 'bekisting') typeDisplay = 'Bekisting';
+            else typeDisplay = product.type.charAt(0).toUpperCase() + product.type.slice(1);
+            
+            document.getElementById('modalProductType').textContent = typeDisplay;
             
             // Specs
             document.getElementById('modalProductDim').textContent = product.dimensions || '-';
@@ -774,7 +759,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Stock
             var stockEl = document.getElementById('modalProductStock');
-            if(product.stock_quantity > 0) {
+            if(product.is_available) {
                 stockEl.textContent = 'Tersedia';
                 stockEl.className = 'fw-bold text-success';
             } else {

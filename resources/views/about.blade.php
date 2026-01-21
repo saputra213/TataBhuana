@@ -418,11 +418,13 @@
 
 .about-content {
     padding-left: 40px;
+    padding-right: 40px; /* Symmetric padding */
 }
 
 @media (max-width: 768px) {
     .about-content {
         padding-left: 0;
+        padding-right: 0;
         margin-top: 40px;
     }
 }
@@ -477,10 +479,12 @@
 
 /* About Image Styling */
 .about-image-mini {
-    width: 40%;
-    max-width: 380px;
+    width: 50%;
+    max-width: 500px;
     clear: right;
-    margin-top: 5.5rem !important; /* Align with text body */
+    margin-left: 2rem !important;
+    margin-bottom: 1rem;
+    margin-top: 6rem !important;
 }
 
 @media (max-width: 768px) {

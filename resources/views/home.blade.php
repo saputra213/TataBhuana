@@ -249,21 +249,21 @@
                     <p class="text-muted mb-3" style="text-align: justify;">
                         {{ $profile?->about_main_text ?? 'Kami dikenal sebagai perusahaan penyedia layanan sewa dan penjualan scaffolding (perancah) utama yang berpusat di Daerah Istimewa Yogyakarta. Dengan komitmen untuk memberikan layanan terbaik, kami telah dipercaya oleh berbagai klien untuk mendukung proyek konstruksi mereka dengan aman, berkualitas, dan efisien.' }}
                     </p>
-                    <ul class="list-unstyled mb-0">
-                        <li class="d-flex align-items-center mb-2">
-                            <span class="badge rounded-circle bg-danger me-2 d-flex align-items-center justify-content-center" style="width: 28px; height: 28px;">
+                    <ul class="list-unstyled mb-0 d-flex flex-column flex-md-row gap-3 justify-content-between">
+                        <li class="d-flex align-items-center">
+                            <span class="badge rounded-circle bg-danger me-2 d-flex align-items-center justify-content-center flex-shrink-0" style="width: 28px; height: 28px;">
                                 <i class="fas fa-check text-white"></i>
                             </span>
                             <span>{{ $profile?->about_feature_1 ?? 'Tim Profesional Berpengalaman' }}</span>
                         </li>
-                        <li class="d-flex align-items-center mb-2">
-                            <span class="badge rounded-circle bg-danger me-2 d-flex align-items-center justify-content-center" style="width: 28px; height: 28px;">
+                        <li class="d-flex align-items-center">
+                            <span class="badge rounded-circle bg-danger me-2 d-flex align-items-center justify-content-center flex-shrink-0" style="width: 28px; height: 28px;">
                                 <i class="fas fa-check text-white"></i>
                             </span>
                             <span>{{ $profile?->about_feature_2 ?? 'Produk Berkualitas Standar SNI' }}</span>
                         </li>
                         <li class="d-flex align-items-center">
-                            <span class="badge rounded-circle bg-danger me-2 d-flex align-items-center justify-content-center" style="width: 28px; height: 28px;">
+                            <span class="badge rounded-circle bg-danger me-2 d-flex align-items-center justify-content-center flex-shrink-0" style="width: 28px; height: 28px;">
                                 <i class="fas fa-check text-white"></i>
                             </span>
                             <span>{{ $profile?->about_feature_3 ?? 'Layanan Cepat & Responsif' }}</span>

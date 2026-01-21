@@ -16,17 +16,57 @@
     </div>
 </section>
 
-<!-- Search Section -->
+<!-- Filters -->
 <section class="py-4 bg-light">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6">
-                <form action="{{ route('articles.index') }}" method="GET" class="d-flex shadow-sm rounded overflow-hidden">
-                    <input type="text" name="search" value="{{ request('search') }}" class="form-control border-0 py-3 px-4" placeholder="Cari artikel..." style="border-radius: 0;">
-                    <button class="btn btn-danger px-4" type="submit" style="border-radius: 0; background-color: #dc2626; border-color: #dc2626;">
-                        <i class="fas fa-search me-1"></i> Cari
-                    </button>
+        <div class="row">
+            <div class="col-12">
+                <form method="GET" action="{{ route('articles.index') }}" class="row g-2 align-items-center" id="articleFilterForm">
+                    <!-- Search -->
+                    <div class="col-12 col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-text bg-white text-muted border-end-0"><i class="fas fa-search"></i></span>
+                            <input type="text" name="search" class="form-control border-start-0 ps-0" placeholder="Cari artikel..." value="{{ request('search') }}">
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="category" id="articleInputCategory" value="{{ request('category') }}">
+                    
+                    <!-- Category Filter -->
+                    <div class="col-12 col-lg-4">
+                        <div class="dropdown w-100">
+                            <button class="btn bg-white border shadow-sm w-100 dropdown-toggle text-start d-flex justify-content-between align-items-center" type="button" id="articleDropdownCategory" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="text-truncate">
+                                    {{ request('category') ? ucfirst(request('category')) : 'Semua Kategori' }}
+                                </span>
+                            </button>
+                            <ul class="dropdown-menu shadow-sm w-100" aria-labelledby="articleDropdownCategory">
+                                <li><a class="dropdown-item {{ request('category') == '' ? 'active' : '' }}" href="#" onclick="setArticleFilter('category', ''); return false;">Semua Kategori</a></li>
+                                @foreach($categories as $category)
+                                    <li><a class="dropdown-item {{ request('category') == $category ? 'active' : '' }}" href="#" onclick="setArticleFilter('category', '{{ $category }}'); return false;">{{ ucfirst($category) }}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Filter Button -->
+                    <div class="col-12 col-lg-2">
+                        <button type="submit" class="btn btn-danger w-100">
+                            <i class="fas fa-filter me-1"></i> Filter
+                        </button>
+                    </div>
                 </form>
+
+                <script>
+                    function setArticleFilter(name, value) {
+                        var id = 'articleInput' + name.charAt(0).toUpperCase() + name.slice(1);
+                        var input = document.getElementById(id);
+                        if (input) {
+                            input.value = value;
+                        }
+                        document.getElementById('articleFilterForm').submit();
+                    }
+                </script>
             </div>
         </div>
     </div>

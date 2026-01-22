@@ -45,7 +45,7 @@
                 <hr>
 
                 <div class="mt-3">
-                    {!! nl2br(e($article->content)) !!}
+                    {!! $article->content !!}
                 </div>
             </div>
         </div>
@@ -60,7 +60,7 @@
                 @if($article->excerpt)
                     <p class="mb-2"><strong>Ringkasan:</strong> {{ $article->excerpt }}</p>
                 @endif
-                <a href="{{ route('articles.show', $article) }}" target="_blank" class="btn btn-outline-info">
+                <a href="{{ route('articles.show', $article) }}" target="_blank" class="btn btn-outline-primary">
                     <i class="fas fa-external-link-alt me-2"></i>Lihat di Website
                 </a>
             </div>
@@ -68,4 +68,3 @@
     </div>
 </div>
 @endsection
-

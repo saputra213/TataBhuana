@@ -67,14 +67,6 @@
                     </div>
                     
                     <div class="mb-3">
-                        <label for="about_us" class="form-label">Tentang Kami *</label>
-                        <textarea class="form-control @error('about_us') is-invalid @enderror" id="about_us" name="about_us" rows="5" required>{{ old('about_us', $profile->about_us ?? '') }}</textarea>
-                        @error('about_us')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    
-                    <div class="mb-3">
                         <label for="services" class="form-label">Layanan Kami *</label>
                         <textarea class="form-control @error('services') is-invalid @enderror" id="services" name="services" rows="4" required>{{ old('services', $profile->services ?? '') }}</textarea>
                         @error('services')
@@ -91,52 +83,37 @@
                                     <p class="text-muted small">Logo saat ini</p>
                                 </div>
                             @endif
-                            <input type="file" class="form-control @error('logo') is-invalid @enderror" id="logo" name="logo" accept="image/*">
-                            <div class="form-text">Format: JPG, PNG, GIF. Maksimal 5MB</div>
+                            <input type="file" class="form-control @error('logo') is-invalid @enderror" id="logo" name="logo" accept="image/*,.webp">
+                            <div class="form-text">Format: JPG, PNG, GIF, WEBP. Maksimal 5MB</div>
                             @error('logo')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        
-                        <div class="col-md-6 mb-3">
-                            <label for="hero_image" class="form-label">Gambar Hero</label>
-                            @if($profile && $profile->hero_image)
-                                <div class="mb-2">
-                                    <img src="{{ asset('storage/' . $profile->hero_image) }}" alt="Hero Image" class="img-thumbnail" style="max-width: 150px;">
-                                    <p class="text-muted small">Gambar hero saat ini</p>
-                                </div>
-                            @endif
-                            <input type="file" class="form-control @error('hero_image') is-invalid @enderror" id="hero_image" name="hero_image" accept="image/*">
-                            <div class="form-text">Format: JPG, PNG, GIF. Maksimal 5MB</div>
-                            @error('hero_image')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
                     </div>
-                    
+
                     <hr>
                     <h6 class="fw-bold mb-3">Media Sosial</h6>
                     
                     <div class="row">
                         <div class="col-md-4 mb-3">
-                            <label for="facebook" class="form-label">Facebook</label>
-                            <input type="url" class="form-control @error('facebook') is-invalid @enderror" id="facebook" name="facebook" value="{{ old('facebook', $profile->social_media['facebook'] ?? '') }}" placeholder="https://facebook.com/username">
+                            <label for="facebook" class="form-label">Facebook <small class="text-muted">(Maks. 255 karakter)</small></label>
+                            <input type="url" class="form-control @error('facebook') is-invalid @enderror" id="facebook" name="facebook" value="{{ old('facebook', $profile->social_media['facebook'] ?? '') }}" placeholder="https://facebook.com/username" maxlength="255">
                             @error('facebook')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         
                         <div class="col-md-4 mb-3">
-                            <label for="instagram" class="form-label">Instagram</label>
-                            <input type="url" class="form-control @error('instagram') is-invalid @enderror" id="instagram" name="instagram" value="{{ old('instagram', $profile->social_media['instagram'] ?? '') }}" placeholder="https://instagram.com/username">
+                            <label for="instagram" class="form-label">Instagram <small class="text-muted">(Maks. 255 karakter)</small></label>
+                            <input type="url" class="form-control @error('instagram') is-invalid @enderror" id="instagram" name="instagram" value="{{ old('instagram', $profile->social_media['instagram'] ?? '') }}" placeholder="https://instagram.com/username" maxlength="255">
                             @error('instagram')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         
                         <div class="col-md-4 mb-3">
-                            <label for="whatsapp" class="form-label">WhatsApp</label>
-                            <input type="text" class="form-control @error('whatsapp') is-invalid @enderror" id="whatsapp" name="whatsapp" value="{{ old('whatsapp', $profile->social_media['whatsapp'] ?? '') }}" placeholder="6281234567890">
+                            <label for="whatsapp" class="form-label">WhatsApp <small class="text-muted">(Maks. 50 karakter)</small></label>
+                            <input type="text" class="form-control @error('whatsapp') is-invalid @enderror" id="whatsapp" name="whatsapp" value="{{ old('whatsapp', $profile->social_media['whatsapp'] ?? '') }}" placeholder="6281234567890" maxlength="50">
                             <div class="form-text">Format: 6281234567890 (tanpa +)</div>
                             @error('whatsapp')
                                 <div class="invalid-feedback">{{ $message }}</div>

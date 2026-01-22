@@ -21,9 +21,6 @@
                             <th>Gambar</th>
                             <th>Nama</th>
                             <th>Jenis</th>
-                            <th>Material</th>
-                            <th>Harga Sewa</th>
-                            <th>Harga Jual</th>
                             <th>Status Stok</th>
                             <th>Aksi</th>
                         </tr>
@@ -45,24 +42,17 @@
                                 <br>
                                 <small class="text-muted">{{ Str::limit($scaffolding->description, 50) }}</small>
                             </td>
-                            <td><span class="badge bg-primary">{{ ucfirst($scaffolding->type) }}</span></td>
-                            <td><span class="badge bg-secondary">{{ ucfirst($scaffolding->material) }}</span></td>
                             <td>
-                                @if($scaffolding->rental_price)
-                                    {{ $scaffolding->formatted_rental_price }}/hari
-                                @else
-                                    <span class="text-muted">-</span>
-                                @endif
+                                <span class="badge bg-primary">
+                                    {{ 
+                                        $scaffolding->type == 'scaffolding' ? 'Scaffolding' : 
+                                        ($scaffolding->type == 'accessories' ? 'Accessories' : 
+                                        ($scaffolding->type == 'bekisting' ? 'Bekisting' : ucfirst($scaffolding->type)))
+                                    }}
+                                </span>
                             </td>
                             <td>
-                                @if($scaffolding->sale_price)
-                                    {{ $scaffolding->formatted_sale_price }}
-                                @else
-                                    <span class="text-muted">-</span>
-                                @endif
-                            </td>
-                            <td>
-                                @if($scaffolding->stock_quantity > 0)
+                                @if($scaffolding->is_available)
                                     <span class="badge bg-success">Tersedia</span>
                                 @else
                                     <span class="badge bg-danger">Tidak Tersedia</span>
@@ -70,7 +60,7 @@
                             </td>
                             <td>
                                 <div class="btn-group" role="group">
-                                    <a href="{{ route('admin.scaffoldings.show', $scaffolding) }}" class="btn btn-sm btn-outline-info" title="Lihat">
+                                    <a href="{{ route('admin.scaffoldings.show', $scaffolding) }}" class="btn btn-sm btn-outline-primary" title="Lihat">
                                         <i class="fas fa-eye"></i>
                                     </a>
                                     <a href="{{ route('admin.scaffoldings.edit', $scaffolding) }}" class="btn btn-sm btn-outline-primary" title="Edit">
@@ -114,11 +104,5 @@
 @endsection
 
 @push('scripts')
-<script>
-function confirmDelete(id) {
-    if (confirm('Apakah Anda yakin ingin menghapus scaffolding ini?')) {
-        document.getElementById('delete-form-' + id).submit();
-    }
-}
-</script>
+@vite('resources/js/admin/confirmDelete.js')
 @endpush

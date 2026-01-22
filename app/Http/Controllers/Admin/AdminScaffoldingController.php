@@ -28,18 +28,24 @@ class AdminScaffoldingController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'type' => 'required|string|max:255',
-            'material' => 'required|string|max:255',
             'rental_price' => 'nullable|numeric|min:0',
             'sale_price' => 'nullable|numeric|min:0',
             'dimensions' => 'required|string|max:255',
             'max_height' => 'required|integer|min:0',
             'max_load' => 'required|integer|min:0',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
-            'stock_quantity' => 'required|integer|min:0',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             'specifications' => 'nullable|string'
         ]);
 
         $data = $request->all();
+        // Set default values
+        if (!isset($data['material'])) {
+            $data['material'] = '-';
+        }
+        $data['stock_quantity'] = 999;
+        $data['rental_price'] = 0;
+        $data['sale_price'] = 0;
+        $data['is_available'] = $request->has('is_available') ? 1 : 0;
         
         if ($request->hasFile('image')) {
             $storedPath = $request->file('image')->store('scaffoldings', 'public');
@@ -74,18 +80,24 @@ class AdminScaffoldingController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'type' => 'required|string|max:255',
-            'material' => 'required|string|max:255',
             'rental_price' => 'nullable|numeric|min:0',
             'sale_price' => 'nullable|numeric|min:0',
             'dimensions' => 'required|string|max:255',
             'max_height' => 'required|integer|min:0',
             'max_load' => 'required|integer|min:0',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
-            'stock_quantity' => 'required|integer|min:0',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             'specifications' => 'nullable|string'
         ]);
 
         $data = $request->all();
+        // Set default values
+        if (!isset($data['material'])) {
+            $data['material'] = '-';
+        }
+        $data['stock_quantity'] = 999;
+        $data['rental_price'] = 0;
+        $data['sale_price'] = 0;
+        $data['is_available'] = $request->has('is_available') ? 1 : 0;
         
         if ($request->hasFile('image')) {
             if ($scaffolding->image) {

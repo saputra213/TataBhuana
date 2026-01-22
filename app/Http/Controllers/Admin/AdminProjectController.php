@@ -32,7 +32,7 @@ class AdminProjectController extends Controller
             'end_date' => 'nullable|date|after:start_date',
             'project_type' => 'required|string|max:255',
             'status' => 'required|string|in:completed,ongoing,planning',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             'challenges' => 'nullable|string',
             'solutions' => 'nullable|string',
             'results' => 'nullable|string',
@@ -85,7 +85,7 @@ class AdminProjectController extends Controller
             'end_date' => 'nullable|date|after:start_date',
             'project_type' => 'required|string|max:255',
             'status' => 'required|string|in:completed,ongoing,planning',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             'challenges' => 'nullable|string',
             'solutions' => 'nullable|string',
             'results' => 'nullable|string',
@@ -139,7 +139,6 @@ class AdminProjectController extends Controller
             ->with('success', 'Proyek berhasil dihapus!');
     }
 }
-
 
 
 

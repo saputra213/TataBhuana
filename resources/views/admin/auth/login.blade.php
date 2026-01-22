@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Admin - Tata Bhuana</title>
+    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
+    <meta name="robots" content="noindex,nofollow">
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    @php($siteKey = config('services.recaptcha.site_key'))
 </head>
 <body class="bg-light">
     <div class="container">
@@ -38,7 +41,7 @@
                                     <span class="input-group-text">
                                         <i class="fas fa-envelope"></i>
                                     </span>
-                                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autofocus>
+                                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autofocus maxlength="255">
                                 </div>
                                 @error('email')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -51,7 +54,7 @@
                                     <span class="input-group-text">
                                         <i class="fas fa-lock"></i>
                                     </span>
-                                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required>
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required maxlength="255">
                                 </div>
                                 @error('password')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -68,15 +71,23 @@
                             <button type="submit" class="btn btn-primary w-100">
                                 <i class="fas fa-sign-in-alt me-2"></i>Login
                             </button>
+                            <input type="text" name="hp" class="d-none" autocomplete="off" tabindex="-1">
+                            @if(!empty($siteKey))
+                                <div class="mt-3">
+                                    <div class="g-recaptcha" data-sitekey="{{ $siteKey }}"></div>
+                                </div>
+                            @endif
                         </form>
-                        
-                        <hr class="my-4">
-                        
-                        <div class="text-center">
-                            <a href="{{ route('admin.register') }}" class="btn btn-outline-secondary">
-                                <i class="fas fa-user-plus me-2"></i>Daftar Admin Baru
+                         
+                         <hr class="my-4">
+                         
+                         <div class="text-center">
+                            <a href="{{ route('admin.password.request') }}" class="text-muted text-decoration-none">
+                                <i class="fas fa-key me-2"></i>Lupa password?
                             </a>
                         </div>
+                        
+                        
                         
                         <div class="text-center mt-3">
                             <a href="{{ route('home') }}" class="text-muted text-decoration-none">
@@ -91,6 +102,8 @@
     
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    @if(!empty($siteKey))
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    @endif
 </body>
 </html>
-

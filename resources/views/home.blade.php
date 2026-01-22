@@ -1,102 +1,149 @@
 @extends('layouts.app')
 
+@push('styles')
+    @vite('resources/css/home.css')
+@endpush
+
 @section('title', 'Beranda - Tata Bhuana Scaffolding')
 @section('description', 'Perusahaan penyedia jasa sewa dan jual scaffolding berkualitas tinggi untuk proyek konstruksi Anda.')
 
 @section('content')
-<!-- Hero Triple Slider Section -->
+@php
+    $heroTitle = $profile?->hero_title ?? 'Mitra Konstruksi Andal';
+    $heroDescription = $profile?->hero_description ?? ($profile?->description ?? 'Scaffolding berkualitas untuk proyek Anda, aman dan efisien.');
+    $slides = [];
+    if (is_array($profile?->hero_slides) && count($profile->hero_slides) > 0) {
+        $slides = $profile->hero_slides;
+    } else {
+        $heroImages = [];
+        if (!empty($profile?->hero_images) && is_array($profile->hero_images)) {
+            $heroImages = $profile->hero_images;
+        } elseif (!empty($profile?->hero_image)) {
+            $heroImages = [$profile->hero_image];
+        }
+        foreach ($heroImages as $img) {
+            $slides[] = [
+                'image' => $img,
+                'title' => $heroTitle,
+                'description' => $heroDescription,
+            ];
+        }
+    }
+
+    $homeHighlightKicker = $profile?->home_highlight_kicker ?? 'Keunggulan Utama';
+    $homeHighlightTitle = $profile?->home_highlight_title ?? 'Keunggulan Utama Tatabhuana Scaffolding untuk Proyek Konstruksi & Industri.';
+    $homeHighlightSubtitle = $profile?->home_highlight_subtitle ?? 'Solusi scaffolding profesional dengan harga kompetitif, standar mutu tinggi, dan dukungan layanan yang bergaransi.';
+    $homeHighlight1Label = $profile?->home_highlight_1_label ?? 'Terjangkau';
+    $homeHighlight1Title = $profile?->home_highlight_1_title ?? 'Harga Scaffolding Kompetitif Sesuai Kebutuhan Proyek';
+    $homeHighlight1Text = $profile?->home_highlight_1_text ?? 'Tatabhuana Scaffolding menyediakan paket sewa dan penjualan scaffolding dengan harga terjangkau dan fleksibel, disesuaikan dengan skala proyek konstruksi tanpa mengorbankan kualitas dan keamanan kerja.';
+    $homeHighlight2Label = $profile?->home_highlight_2_label ?? 'Berkualitas';
+    $homeHighlight2Title = $profile?->home_highlight_2_title ?? 'Scaffolding Berkualitas dengan Standar Mutu & Keselamatan';
+    $homeHighlight2Text = $profile?->home_highlight_2_text ?? 'Seluruh unit scaffolding kami dirawat secara berkala dan melalui proses pengecekan ketat untuk memastikan kekuatan struktur serta memenuhi standar keselamatan kerja di lapangan konstruksi dan industri.';
+    $homeHighlight3Label = $profile?->home_highlight_3_label ?? 'Bergaransi';
+    $homeHighlight3Title = $profile?->home_highlight_3_title ?? 'Dukungan Purna Jual & Layanan Scaffolding Responsif';
+    $homeHighlight3Text = $profile?->home_highlight_3_text ?? 'Didukung tim profesional, Tatabhuana Scaffolding memberikan layanan purna jual dan dukungan teknis yang responsif, mulai dari konsultasi awal hingga pendampingan selama masa penggunaan scaffolding.';
+
+    $homeServicesHeadingTitle = $profile?->home_services_heading_title ?? 'Layanan Kami';
+    $homeServicesHeadingSubtitle = $profile?->home_services_heading_subtitle ?? 'Pilihan layanan utama untuk mendukung proyek konstruksi Anda';
+    $homeService1Title = $profile?->home_services_1_title ?? 'Penjualan';
+    $homeService2Title = $profile?->home_services_2_title ?? 'Persewaan';
+    $homeService3Title = $profile?->home_services_3_title ?? 'Pengiriman';
+    $homeService4Title = $profile?->home_services_4_title ?? 'Konsultasi';
+
+    $homeFeaturesHeadingTitle = $profile?->home_features_heading_title ?? 'Mengapa Memilih Tatabhuana Scaffolding sebagai Partner Scaffolding Profesional?';
+    $homeFeaturesHeadingSubtitle = $profile?->home_features_heading_subtitle ?? 'Tatabhuana Scaffolding adalah perusahaan penyedia scaffolding dan perancah bangunan profesional yang berfokus pada keamanan kerja, kualitas material, dan ketepatan waktu proyek. Kami melayani kebutuhan proyek konstruksi, industri, dan infrastruktur dengan sistem kerja terstandarisasi serta dukungan teknis berpengalaman.';
+    $homeFeature1Title = $profile?->home_features_1_title ?? 'Keamanan Terjamin';
+    $homeFeature2Title = $profile?->home_features_2_title ?? 'Pengiriman Cepat';
+    $homeFeature3Title = $profile?->home_features_3_title ?? 'Stok Produk Lengkap';
+    $homeFeature4Title = $profile?->home_features_4_title ?? 'Cepat & Responsif';
+    $homeFeature5Title = $profile?->home_features_5_title ?? 'Produk Berkualitas';
+    $homeFeature6Title = $profile?->home_features_6_title ?? 'Dukungan Teknis';
+
+    $homeArticlesHeadingTitle = $profile?->home_articles_heading_title ?? 'Artikel Terbaru';
+    $homeArticlesHeadingSubtitle = $profile?->home_articles_heading_subtitle ?? 'Update informasi dan insight seputar dunia konstruksi';
+
+    $homeProjectsHeadingTitle = $profile?->home_projects_heading_title ?? 'Proyek Unggulan';
+
+    $homeCtaTitle = $profile?->home_cta_title ?? 'Siap Memulai Proyek Anda?';
+    $homeCtaSubtitle = $profile?->home_cta_subtitle ?? 'Hubungi kami sekarang untuk konsultasi gratis dan penawaran terbaik';
+    $homeCtaButtonText = $profile?->home_cta_button_text ?? 'Hubungi Kami Sekarang';
+@endphp
+@if(count($slides) > 0)
 <section class="hero-triple-slider position-relative overflow-hidden">
-    <div id="heroTripleCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000" data-bs-wrap="true">
-        <div class="carousel-inner">
-            @php
-                $slides = [];
-                // Ambil semua foto dari semua proyek yang featured
-                if(isset($featuredProjects) && $featuredProjects->count() > 0) {
-                    foreach($featuredProjects as $project) {
-                        if($project->images && count($project->images) > 0) {
-                            // Ambil semua foto dari setiap proyek, bukan hanya foto pertama
-                            foreach($project->images as $image) {
-                                $slides[] = [
-                                    'image' => $image,
-                                    'title' => $project->title,
-                                    'description' => $project->description
-                                ];
+    <div id="heroTripleCarousel" class="carousel slide h-100" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-inner h-100">
+            @foreach($slides as $idx => $slide)
+                @php
+                    $path = $slide['image'] ?? null;
+                    if (!$path) continue;
+                    $src = asset('storage/' . $path);
+                    $title = $slide['title'] ?? $heroTitle;
+                    $desc = $slide['description'] ?? $heroDescription;
+                    $btnText = $slide['button_text'] ?? 'Hubungi Kami';
+                    $btnRoute = $slide['button_route'] ?? 'contact';
+                    $btnUrl = '#';
+                    if ($btnRoute === 'none') {
+                        $btnUrl = '#';
+                    } elseif ($btnRoute === 'custom') {
+                        $btnUrl = $slide['button_url'] ?? '#';
+                    } else {
+                        try {
+                            switch ($btnRoute) {
+                                case 'contact':
+                                    $btnUrl = route('contact');
+                                    break;
+                                case 'services':
+                                    $btnUrl = route('services');
+                                    break;
+                                case 'scaffoldings':
+                                    $btnUrl = route('scaffoldings.index');
+                                    break;
+                                case 'projects':
+                                    $btnUrl = route('projects.index');
+                                    break;
+                                case 'articles':
+                                    $btnUrl = route('articles.index');
+                                    break;
+                                case 'about':
+                                    $btnUrl = route('about');
+                                    break;
+                                case 'branches':
+                                    $btnUrl = route('branches.index');
+                                    break;
+                                default:
+                                    $btnUrl = route('contact');
+                                    break;
                             }
+                        } catch (\Throwable $e) {
+                            $btnUrl = '#';
                         }
                     }
-                }
-                
-                // Ambil juga foto dari proyek lainnya jika masih kurang
-                if(count($slides) < 6) {
-                    $allProjects = \App\Models\Project::whereNotNull('images')
-                        ->where('is_featured', false)
-                        ->orderBy('created_at', 'desc')
-                        ->get();
-                    
-                    foreach($allProjects as $project) {
-                        if($project->images && count($project->images) > 0) {
-                            foreach($project->images as $image) {
-                                if(count($slides) >= 30) break; // Batasi maksimal 30 slide
-                                $slides[] = [
-                                    'image' => $image,
-                                    'title' => $project->title,
-                                    'description' => $project->description
-                                ];
-                            }
-                        }
-                        if(count($slides) >= 30) break;
-                    }
-                }
-                
-                // Fallback jika tidak ada foto sama sekali
-                if(empty($slides)) {
-                    $slides[] = [
-                        'image' => 'projects/OxxBwzXcvQxvz1NwVtmjNDnaUnK8OVOy8pzLN1OR.jpg',
-                        'title' => 'Aman, Kokoh, Efisien',
-                        'description' => 'Scaffolding standar SNI yang menjamin keselamatan dan kelancaran pekerjaan di lapangan.'
-                    ];
-                }
-            @endphp
-            
-            @foreach($slides as $index => $slide)
-                <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                @endphp
+                <div class="carousel-item h-100 {{ $idx === 0 ? 'active' : '' }}">
                     <div class="triple-slide-container">
-                        <!-- Left Panel -->
-                        <div class="slide-panel slide-panel-left">
-                            @php
-                                $leftIndex = $index > 0 ? $index - 1 : count($slides) - 1;
-                            @endphp
-                            <img src="{{ asset('storage/' . $slides[$leftIndex]['image']) }}" alt="Previous" class="panel-image" data-slide-index="{{ $leftIndex }}" onerror="this.style.display='none'">
-                        </div>
-                        
-                        <!-- Center Panel (Main) -->
                         <div class="slide-panel slide-panel-center">
                             <div class="center-image-container">
-                                <img src="{{ asset('storage/' . $slide['image']) }}" alt="Featured" class="panel-image center-main-image" data-src="{{ asset('storage/' . $slide['image']) }}" data-slide-index="{{ $index }}" onerror="console.error('Image failed to load:', this.src)">
+                                <img src="{{ $src }}" data-src="{{ $src }}" alt="Hero {{ $idx + 1 }}" class="center-main-image">
                                 <div class="center-overlay"></div>
-                                <div class="center-content">
-                                <h1 class="hero-main-title text-white mb-3">{{ $slide['title'] }}</h1>
-                                <p class="hero-subtitle-text text-white mb-4">{{ Str::limit($slide['description'], 80) }}</p>
-                                <a href="{{ route('contact') }}" class="btn hero-contact-btn">
-                                    <i class="fas fa-phone-alt me-2"></i>Hubungi Kami
-                    </a>
+                            </div>
+                            <div class="center-content">
+                                <h1 class="hero-main-title text-white mb-3">
+                                    {{ $title }}
+                                </h1>
+                                <p class="hero-subtitle-text text-white-50 mb-4">
+                                    {{ \Illuminate\Support\Str::limit($desc, 180) }}
+                                </p>
+                                @if($btnRoute !== 'none')
+                                    <a href="{{ $btnUrl }}" class="btn hero-contact-btn">
+                                        <i class="fas fa-phone me-2"></i>{{ $btnText }}
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-                </div>
-                        
-                        <!-- Right Panel -->
-                        <div class="slide-panel slide-panel-right">
-                            @php
-                                $rightIndex = $index < count($slides) - 1 ? $index + 1 : 0;
-                            @endphp
-                            <img src="{{ asset('storage/' . $slides[$rightIndex]['image']) }}" alt="Next" class="panel-image" data-slide-index="{{ $rightIndex }}" onerror="this.style.display='none'">
-            </div>
-        </div>
-    </div>
             @endforeach
         </div>
-        
-        <!-- Navigation Controls -->
         <button class="carousel-control-triple carousel-control-prev" type="button" data-bs-target="#heroTripleCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon-custom">
                 <i class="fas fa-chevron-left"></i>
@@ -108,88 +155,205 @@
             </span>
         </button>
     </div>
-    
-    <!-- Scroll to Top Button -->
-    <button id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll ke Atas">
-        <i class="fas fa-arrow-up"></i>
-    </button>
 </section>
-
-<!-- Quick Services Section -->
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="row g-3">
-            <div class="col-lg-3 col-md-6">
-                <a href="{{ route('services') }}" class="service-quick-card text-decoration-none service-animate">
-                    <div class="service-icon-box bg-red-gradient">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <h5 class="fw-bold mt-3 mb-2">Penjualan</h5>
-                    <p class="text-muted small mb-0">Produk scaffolding berkualitas dengan harga kompetitif</p>
-                </a>
-            </div>
-            
-            <div class="col-lg-3 col-md-6">
-                <a href="{{ route('services') }}" class="service-quick-card text-decoration-none service-animate" style="animation-delay: 0.1s;">
-                    <div class="service-icon-box bg-green-gradient">
-                        <i class="fas fa-handshake"></i>
-                    </div>
-                    <h5 class="fw-bold mt-3 mb-2">Persewaan</h5>
-                    <p class="text-muted small mb-0">Layanan sewa scaffolding untuk proyek Anda</p>
-                </a>
-            </div>
-            
-            <div class="col-lg-3 col-md-6">
-                <a href="{{ route('services') }}" class="service-quick-card text-decoration-none service-animate" style="animation-delay: 0.2s;">
-                    <div class="service-icon-box bg-red-gradient">
-                        <i class="fas fa-truck"></i>
-                    </div>
-                    <h5 class="fw-bold mt-3 mb-2">Pengiriman</h5>
-                    <p class="text-muted small mb-0">Pengiriman cepat ke lokasi proyek</p>
-                </a>
-            </div>
-            
-            <div class="col-lg-3 col-md-6">
-                <a href="{{ route('contact') }}" class="service-quick-card text-decoration-none service-animate" style="animation-delay: 0.3s;">
-                    <div class="service-icon-box bg-green-gradient">
-                        <i class="fas fa-headset"></i>
-                    </div>
-                    <h5 class="fw-bold mt-3 mb-2">Konsultasi</h5>
-                    <p class="text-muted small mb-0">Tim ahli siap membantu kebutuhan proyek Anda</p>
+@else
+<section class="hero-slideshow position-relative overflow-hidden">
+    <div class="hero-slides-container">
+        <div class="hero-bg-fallback"></div>
+        <div class="hero-overlay"></div>
+    </div>
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="row">
+            <div class="col-12 text-center py-5 my-4">
+                <h1 class="display-3 fw-bold text-white mb-3">
+                    {{ $heroTitle }}
+                </h1>
+                <p class="lead text-white-50 mb-4">
+                    {{ $heroDescription }}
+                </p>
+                <a href="{{ route('contact') }}" class="btn btn-light btn-lg">
+                    <i class="fas fa-phone-alt me-2"></i>Hubungi Kami
                 </a>
             </div>
         </div>
     </div>
 </section>
+@endif
 
-<!-- Features Section -->
-<section class="py-5">
+<section class="py-5 home-highlight-section">
     <div class="container">
-        <div class="row text-center mb-5">
-            <div class="col-12">
-                <h2 class="display-5 fw-bold mb-3">Mengapa Memilih Kami?</h2>
-                <p class="lead text-muted">Kualitas Selalu Terjaga, Layanan Terpercaya</p>
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <p class="text-uppercase text-muted fw-semibold small mb-1">{{ $homeHighlightKicker ?? 'Keunggulan Utama' }}</p>
+                <h2 class="fw-bold mb-0">{{ $homeHighlightTitle ?? 'Keunggulan Utama Tatabhuana Scaffolding untuk Proyek Konstruksi & Industri.' }}</h2>
+                <p class="text-muted mt-2">{{ $homeHighlightSubtitle ?? 'Solusi scaffolding profesional dengan harga kompetitif, standar mutu tinggi, dan dukungan layanan yang bergaransi.' }}</p>
             </div>
         </div>
-        
-        <div class="row g-4 justify-content-center">
-            <div class="col-lg-5 col-md-6">
-                <div class="feature-card text-center h-100 p-5 bg-white rounded shadow-sm border-0">
-                    <div class="feature-icon bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4 shadow">
-                        <i class="fas fa-shield-alt fa-2x"></i>
+        <div class="home-highlight-grid">
+            <div class="home-highlight-card">
+                <div class="home-highlight-label">{{ $homeHighlight1Label ?? 'TERJANGKAU' }}</div>
+                <div class="home-highlight-icon">
+                    <i class="fas fa-tags"></i>
+                </div>
+                <h3 class="home-highlight-title">{{ $homeHighlight1Title ?? 'Harga Scaffolding Kompetitif Sesuai Kebutuhan Proyek' }}</h3>
+                <p class="home-highlight-text">
+                    {{ $homeHighlight1Text ?? 'Tatabhuana Scaffolding menyediakan paket sewa dan penjualan scaffolding dengan harga terjangkau dan fleksibel, disesuaikan dengan skala proyek konstruksi tanpa mengorbankan kualitas dan keamanan kerja.' }}
+                </p>
+                <div class="home-highlight-index">01</div>
+            </div>
+            <div class="home-highlight-card home-highlight-card-primary">
+                <div class="home-highlight-label">{{ $homeHighlight2Label ?? 'BERKUALITAS' }}</div>
+                <div class="home-highlight-icon">
+                    <i class="fas fa-medal"></i>
+                </div>
+                <h3 class="home-highlight-title">{{ $homeHighlight2Title ?? 'Scaffolding Berkualitas dengan Standar Mutu & Keselamatan' }}</h3>
+                <p class="home-highlight-text">
+                    {{ $homeHighlight2Text ?? 'Seluruh unit scaffolding kami dirawat secara berkala dan melalui proses pengecekan ketat untuk memastikan kekuatan struktur serta memenuhi standar keselamatan kerja di lapangan konstruksi dan industri.' }}
+                </p>
+                <div class="home-highlight-index">02</div>
+            </div>
+            <div class="home-highlight-card">
+                <div class="home-highlight-label">{{ $homeHighlight3Label ?? 'BERGARANSI' }}</div>
+                <div class="home-highlight-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="home-highlight-title">{{ $homeHighlight3Title ?? 'Dukungan Purna Jual & Layanan Scaffolding Responsif' }}</h3>
+                <p class="home-highlight-text">
+                    {{ $homeHighlight3Text ?? 'Didukung tim profesional, Tatabhuana Scaffolding memberikan layanan purna jual dan dukungan teknis yang responsif, mulai dari konsultasi awal hingga pendampingan selama masa penggunaan scaffolding.' }}
+                </p>
+                <div class="home-highlight-index">03</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Company Profile Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="company-profile-wrapper">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-5">
+                    <div class="company-profile-image-wrapper">
+                        @if($profile && $profile->logo)
+                            <img src="{{ asset('storage/' . $profile->logo) }}" alt="{{ $profile->company_name ?? 'Profil Perusahaan' }}" class="company-profile-image" loading="lazy" decoding="async">
+                        @else
+                            <img src="{{ asset('storage/projects/VnqaffFD7MT1xzG0x4FPlmjPsr3s4iXAWUrxlnO3.jpg') }}" alt="Proyek Kami" class="company-profile-image" loading="lazy" decoding="async">
+                        @endif
                     </div>
-                    <h4 class="fw-bold mb-3">Keamanan Terjamin</h4>
-                    <p class="text-muted mb-0 feature-text">Semua scaffolding kami memenuhi standar keamanan internasional dan telah teruji kualitasnya untuk menjamin keselamatan pekerja di lapangan.</p>
+                </div>
+                <div class="col-lg-7">
+                    <p class="text-danger text-uppercase fw-bold small mb-2">Tentang Kami</p>
+                    <h2 class="fw-bold mb-3">
+                        {{ $profile?->company_name ?? 'Tata Bhuana Scaffolding' }}
+                    </h2>
+                    <p class="text-muted mb-3" style="text-align: justify;">
+                        {{ $profile?->about_main_text ?? 'Kami dikenal sebagai perusahaan penyedia layanan sewa dan penjualan scaffolding (perancah) utama yang berpusat di Daerah Istimewa Yogyakarta. Dengan komitmen untuk memberikan layanan terbaik, kami telah dipercaya oleh berbagai klien untuk mendukung proyek konstruksi mereka dengan aman, berkualitas, dan efisien.' }}
+                    </p>
+                    <ul class="list-unstyled mb-0 d-flex flex-column flex-md-row gap-3 justify-content-between">
+                        <li class="d-flex align-items-center">
+                            <span class="badge rounded-circle bg-danger me-2 d-flex align-items-center justify-content-center flex-shrink-0" style="width: 28px; height: 28px;">
+                                <i class="fas fa-check text-white"></i>
+                            </span>
+                            <span>{{ $profile?->about_feature_1 ?? 'Tim Profesional Berpengalaman' }}</span>
+                        </li>
+                        <li class="d-flex align-items-center">
+                            <span class="badge rounded-circle bg-danger me-2 d-flex align-items-center justify-content-center flex-shrink-0" style="width: 28px; height: 28px;">
+                                <i class="fas fa-check text-white"></i>
+                            </span>
+                            <span>{{ $profile?->about_feature_2 ?? 'Produk Berkualitas Standar SNI' }}</span>
+                        </li>
+                        <li class="d-flex align-items-center">
+                            <span class="badge rounded-circle bg-danger me-2 d-flex align-items-center justify-content-center flex-shrink-0" style="width: 28px; height: 28px;">
+                                <i class="fas fa-check text-white"></i>
+                            </span>
+                            <span>{{ $profile?->about_feature_3 ?? 'Layanan Cepat & Responsif' }}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Services Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12 text-center home-services-heading">
+                <h2 class="fw-bold mb-1">{{ $homeServicesHeadingTitle }}</h2>
+                <p class="text-muted mb-0">{{ $homeServicesHeadingSubtitle }}</p>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-6 col-md-6">
+                <div class="service-feature" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#featureModal" data-title="{{ $profile?->about_service_1_title ?? 'Sewa Scaffolding' }}" data-description="{{ $profile?->about_service_1_description ?? 'Layanan sewa scaffolding dengan berbagai jenis dan ukuran untuk kebutuhan proyek jangka pendek maupun panjang dengan kualitas terjamin.' }}">
+                    <div class="d-flex">
+                        <div class="service-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <div class="service-content">
+                            <h4 class="fw-bold mb-3">
+                                {{ $profile?->about_service_1_title ?? 'Sewa Scaffolding' }}
+                            </h4>
+                            <p class="text-muted mb-0">
+                                {{ $profile?->about_service_1_description ?? 'Layanan sewa scaffolding dengan berbagai jenis dan ukuran untuk kebutuhan proyek jangka pendek maupun panjang dengan kualitas terjamin.' }}
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="col-lg-5 col-md-6">
-                <div class="feature-card text-center h-100 p-5 bg-white rounded shadow-sm border-0">
-                    <div class="feature-icon bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4 shadow">
-                        <i class="fas fa-clock fa-2x"></i>
+            <div class="col-6 col-md-6">
+                <div class="service-feature" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#featureModal" data-title="{{ $profile?->about_service_2_title ?? 'Jual Scaffolding' }}" data-description="{{ $profile?->about_service_2_description ?? 'Penjualan scaffolding berkualitas tinggi dengan harga kompetitif dan garansi kualitas terjamin, cocok untuk investasi jangka panjang.' }}">
+                    <div class="d-flex">
+                        <div class="service-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="service-content">
+                            <h4 class="fw-bold mb-3">
+                                {{ $profile?->about_service_2_title ?? 'Jual Scaffolding' }}
+                            </h4>
+                            <p class="text-muted mb-0">
+                                {{ $profile?->about_service_2_description ?? 'Penjualan scaffolding berkualitas tinggi dengan harga kompetitif dan garansi kualitas terjamin, cocok untuk investasi jangka panjang.' }}
+                            </p>
+                        </div>
                     </div>
-                    <h4 class="fw-bold mb-3">Pengiriman Cepat</h4>
-                    <p class="text-muted mb-0 feature-text">Layanan pengiriman yang cepat dan tepat waktu untuk mendukung jadwal proyek Anda tanpa menunda kegiatan konstruksi.</p>
+                </div>
+            </div>
+            
+            <div class="col-6 col-md-6">
+                <div class="service-feature" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#featureModal" data-title="{{ $profile?->about_service_3_title ?? 'Layanan Pengiriman' }}" data-description="{{ $profile?->about_service_3_description ?? 'Pengiriman cepat dan aman dengan dukungan tim profesional yang berpengalaman, melayani berbagai daerah di Indonesia.' }}">
+                    <div class="d-flex">
+                        <div class="service-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <div class="service-content">
+                            <h4 class="fw-bold mb-3">
+                                {{ $profile?->about_service_3_title ?? 'Layanan Pengiriman' }}
+                            </h4>
+                            <p class="text-muted mb-0">
+                                {{ $profile?->about_service_3_description ?? 'Pengiriman cepat dan aman dengan dukungan tim profesional yang berpengalaman, melayani berbagai daerah di Indonesia.' }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-6 col-md-6">
+                <div class="service-feature" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#featureModal" data-title="{{ $profile?->about_service_4_title ?? 'Konsultasi & Support' }}" data-description="{{ $profile?->about_service_4_description ?? 'Tim ahli kami siap memberikan konsultasi dan dukungan teknis untuk memastikan kesuksesan proyek konstruksi Anda.' }}">
+                    <div class="d-flex">
+                        <div class="service-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div class="service-content">
+                            <h4 class="fw-bold mb-3">
+                                {{ $profile?->about_service_4_title ?? 'Konsultasi & Support' }}
+                            </h4>
+                            <p class="text-muted mb-0">
+                                {{ $profile?->about_service_4_description ?? 'Tim ahli kami siap memberikan konsultasi dan dukungan teknis untuk memastikan kesuksesan proyek konstruksi Anda.' }}
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -197,1607 +361,557 @@
 </section>
 
 <style>
-/* Triple Slider Hero Section */
-.hero-triple-slider {
-    height: 85vh;
-    min-height: 600px;
-}
-
-.triple-slide-container {
-    display: flex;
-    height: 85vh;
-    min-height: 600px;
-}
-
-.slide-panel {
-    position: relative;
-    overflow: hidden;
-    height: 100%;
-}
-
-.slide-panel-left,
-.slide-panel-right {
-    flex: 0 0 20%;
-    position: relative;
-}
-
-.slide-panel-center {
-    flex: 1;
-    position: relative;
-    background: #dc2626;
-    padding: 20px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    /* Background tetap visible, tidak ikut animasi */
-    transition: none !important;
-    animation: none !important;
-}
-
-/* Scaffolding Pattern untuk Center Panel - Background Statis */
-.slide-panel-center::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-    /* Pastikan background tidak ikut animasi */
-    transition: none !important;
-    animation: none !important;
-    transform: none !important;
-    /* Realistic scaffolding frame pattern dengan struktur arch */
-    background-image: 
-        /* Vertical frame supports */
-        repeating-linear-gradient(
-            90deg,
-            transparent 0px,
-            transparent 74px,
-            rgba(139, 0, 0, 0.45) 75px,
-            rgba(139, 0, 0, 0.55) 77px,
-            rgba(139, 0, 0, 0.45) 79px,
-            transparent 80px,
-            transparent 160px
-        ),
-        /* Horizontal top bar */
-        repeating-linear-gradient(
-            0deg,
-            transparent 0px,
-            transparent 84px,
-            rgba(139, 0, 0, 0.4) 85px,
-            rgba(139, 0, 0, 0.5) 87px,
-            rgba(139, 0, 0, 0.4) 89px,
-            transparent 90px,
-            transparent 180px
-        ),
-        repeating-linear-gradient(
-            0deg,
-            transparent 0px,
-            transparent 99px,
-            rgba(139, 0, 0, 0.35) 100px,
-            rgba(139, 0, 0, 0.45) 102px,
-            rgba(139, 0, 0, 0.35) 104px,
-            transparent 105px,
-            transparent 210px
-        ),
-        /* Internal arch structure */
-        repeating-linear-gradient(
-            45deg,
-            transparent 0px,
-            transparent 69px,
-            rgba(139, 0, 0, 0.25) 70px,
-            rgba(139, 0, 0, 0.3) 72px,
-            transparent 73px,
-            transparent 140px
-        ),
-        repeating-linear-gradient(
-            -45deg,
-            transparent 0px,
-            transparent 89px,
-            rgba(139, 0, 0, 0.25) 90px,
-            rgba(139, 0, 0, 0.3) 92px,
-            transparent 93px,
-            transparent 180px
-        ),
-        /* Curved arch bottom */
-        repeating-radial-gradient(
-            ellipse 50px 30px at 50% 95%,
-            rgba(139, 0, 0, 0.2) 0%,
-            rgba(139, 0, 0, 0.25) 40%,
-            transparent 70%
-        ),
-        /* Scratch effect */
-        repeating-linear-gradient(
-            90deg,
-            transparent 0px,
-            transparent 12px,
-            rgba(0, 0, 0, 0.08) 13px,
-            transparent 14px,
-            transparent 30px
-        ),
-        repeating-linear-gradient(
-            0deg,
-            transparent 0px,
-            transparent 16px,
-            rgba(0, 0, 0, 0.06) 17px,
-            transparent 18px,
-            transparent 35px
-        ),
-        repeating-linear-gradient(
-            15deg,
-            transparent 0px,
-            transparent 22px,
-            rgba(0, 0, 0, 0.05) 23px,
-            transparent 24px,
-            transparent 45px
-        ),
-        repeating-linear-gradient(
-            -15deg,
-            transparent 0px,
-            transparent 28px,
-            rgba(0, 0, 0, 0.05) 29px,
-            transparent 30px,
-            transparent 55px
-        );
-    background-size: 
-        160px 180px,
-        180px 180px,
-        210px 210px,
-        140px 140px,
-        180px 180px,
-        160px 200px,
-        60px 35px,
-        35px 70px,
-        90px 90px,
-        110px 110px;
-    background-position: 
-        80px 0px,
-        0px 10px,
-        0px 105px,
-        40px 50px,
-        120px 60px,
-        80px 150px,
-        5px 8px,
-        8px 5px,
-        12px 18px,
-        18px 22px;
-    opacity: 0.85;
-    filter: blur(0.3px);
-    z-index: 0;
-    pointer-events: none;
-}
-
-.center-image-container {
-    position: relative;
-    width: calc(100% - 40px);
-    height: calc(100% - 40px);
-    border-radius: 12px;
-    overflow: hidden;
-    z-index: 1;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    /* Pastikan container tidak ikut animasi carousel */
-    transition: none;
-    animation: none;
-}
-
-.panel-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: transform, opacity;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-}
-
-.slide-panel-center .panel-image,
-.center-main-image {
-    filter: none;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.05s linear;
-    will-change: transform, opacity;
-    transform-origin: center center;
-}
-
-/* Ken Burns Effect - Zoom in slow untuk foto center */
-#heroTripleCarousel .carousel-item.active .center-main-image {
-    animation: kenBurnsZoom 15s ease-in-out infinite;
-}
-
-/* Smooth fade transition untuk carousel - Menggunakan mode Fade */
-#heroTripleCarousel .carousel-item {
-    transition: opacity 0.8s ease-in-out !important;
-    z-index: 1;
-}
-
-#heroTripleCarousel .carousel-item.active {
-    z-index: 2;
-    opacity: 1;
-}
-
-/* Efek Riam (Ripple) - Center Image Zoom Out Smooth */
-#heroTripleCarousel .carousel-item .center-main-image {
-    transform: scale(1.1);
-    opacity: 0;
-    transition: transform 1.2s cubic-bezier(0.215, 0.610, 0.355, 1.000), opacity 0.8s ease-out;
-    will-change: transform, opacity;
-}
-
-#heroTripleCarousel .carousel-item.active .center-main-image {
-    transform: scale(1);
-    opacity: 1;
-    /* Ken Burns Effect lanjutan setelah masuk */
-    animation: kenBurnsZoom 15s ease-in-out 1.2s infinite alternate;
-}
-
-/* Side Panels - Ripple Effect (Muncul sedikit setelah center) */
-#heroTripleCarousel .carousel-item .slide-panel-left .panel-image,
-#heroTripleCarousel .carousel-item .slide-panel-right .panel-image {
-    opacity: 0;
-    transform: translateY(20px) scale(0.95);
-    transition: transform 1s cubic-bezier(0.215, 0.610, 0.355, 1.000), opacity 0.8s ease-out;
-    will-change: transform, opacity;
-}
-
-#heroTripleCarousel .carousel-item.active .slide-panel-left .panel-image {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    transition-delay: 0.1s; /* Ripple delay */
-}
-
-#heroTripleCarousel .carousel-item.active .slide-panel-right .panel-image {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    transition-delay: 0.1s; /* Ripple delay */
-}
-
-.slide-panel-center .center-overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    border-radius: 12px;
-    z-index: 1;
-}
-
-.slide-panel-center .center-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 700px;
-    z-index: 2;
-    text-align: center;
-}
-
-.slide-panel-left,
-.slide-panel-right {
-    background: #dc2626;
-    padding: 20px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-}
-
-/* Scaffolding Pattern Background - Realistic Frame dengan Scratch Effect */
-.slide-panel-left::before,
-.slide-panel-right::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Realistic scaffolding frame pattern dengan struktur arch */
-    background-image: 
-        /* Subtle vertical lines - lebih abstract dengan spacing yang lebih longgar */
-        repeating-linear-gradient(
-            90deg,
-            transparent 0px,
-            transparent 38px,
-            rgba(0, 0, 0, 0.25) 39px,
-            rgba(0, 0, 0, 0.25) 41px,
-            transparent 42px,
-            transparent 80px
-        ),
-        /* Horizontal ledgers - palang horizontal */
-        repeating-linear-gradient(
-            0deg,
-            transparent 0px,
-            transparent 84px,
-            rgba(139, 0, 0, 0.4) 85px,
-            rgba(139, 0, 0, 0.5) 87px,
-            rgba(139, 0, 0, 0.4) 89px,
-            transparent 90px,
-            transparent 180px
-        ),
-        repeating-linear-gradient(
-            0deg,
-            transparent 0px,
-            transparent 99px,
-            rgba(139, 0, 0, 0.35) 100px,
-            rgba(139, 0, 0, 0.45) 102px,
-            rgba(139, 0, 0, 0.35) 104px,
-            transparent 105px,
-            transparent 210px
-        ),
-        /* Internal arch structure - diagonal untuk bentuk arch */
-        repeating-linear-gradient(
-            45deg,
-            transparent 0px,
-            transparent 69px,
-            rgba(139, 0, 0, 0.25) 70px,
-            rgba(139, 0, 0, 0.3) 72px,
-            transparent 73px,
-            transparent 140px
-        ),
-        repeating-linear-gradient(
-            -45deg,
-            transparent 0px,
-            transparent 89px,
-            rgba(139, 0, 0, 0.25) 90px,
-            rgba(139, 0, 0, 0.3) 92px,
-            transparent 93px,
-            transparent 180px
-        ),
-        /* Curved arch bottom */
-        repeating-radial-gradient(
-            ellipse 50px 30px at 50% 95%,
-            rgba(139, 0, 0, 0.2) 0%,
-            rgba(139, 0, 0, 0.25) 40%,
-            transparent 70%
-        ),
-        /* Very light crosshatch untuk tekstur halus */
-        repeating-linear-gradient(
-            90deg,
-            transparent 0px,
-            transparent 12px,
-            rgba(0, 0, 0, 0.08) 13px,
-            transparent 14px,
-            transparent 30px
-        ),
-        repeating-linear-gradient(
-            0deg,
-            transparent 0px,
-            transparent 16px,
-            rgba(0, 0, 0, 0.06) 17px,
-            transparent 18px,
-            transparent 35px
-        ),
-        repeating-linear-gradient(
-            15deg,
-            transparent 0px,
-            transparent 22px,
-            rgba(0, 0, 0, 0.05) 23px,
-            transparent 24px,
-            transparent 45px
-        ),
-        repeating-linear-gradient(
-            -15deg,
-            transparent 0px,
-            transparent 28px,
-            rgba(0, 0, 0, 0.05) 29px,
-            transparent 30px,
-            transparent 55px
-        );
-    background-size: 
-        160px 180px,    /* vertical frame */
-        180px 180px,    /* horizontal top */
-        210px 210px,    /* horizontal middle */
-        140px 140px,    /* diagonal arch 1 */
-        180px 180px,    /* diagonal arch 2 */
-        160px 200px,    /* curved arch */
-        60px 35px,      /* horizontal scratch */
-        35px 70px,      /* vertical scratch */
-        90px 90px,      /* diagonal scratch 1 */
-        110px 110px;    /* diagonal scratch 2 */
-    background-position: 
-        80px 0px,       /* vertical frame */
-        0px 10px,       /* horizontal top */
-        0px 105px,      /* horizontal middle */
-        40px 50px,      /* diagonal arch 1 */
-        120px 60px,     /* diagonal arch 2 */
-        80px 150px,     /* curved arch */
-        5px 8px,        /* scratches */
-        8px 5px,
-        12px 18px,
-        18px 22px;
-    opacity: 0.85;
-    filter: blur(0.3px);
-    z-index: 0;
-    pointer-events: none;
-}
-
-.slide-panel-left .panel-image,
-.slide-panel-right .panel-image {
-    width: calc(100% - 40px);
-    height: calc(100% - 40px);
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    filter: grayscale(100%) blur(2px) brightness(0.7);
-    object-fit: cover;
-    position: relative;
-    z-index: 1;
-    transition: all 0.3s ease;
-}
-
-.slide-panel-left:hover .panel-image,
-.slide-panel-right:hover .panel-image {
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-    filter: grayscale(70%) blur(1px) brightness(0.8);
-}
-
-.center-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.2);
-    z-index: 1;
-}
-
-.center-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    z-index: 2;
-    width: 90%;
-    max-width: 700px;
-}
-
-.hero-main-title {
-    font-size: 3.5rem;
-    font-weight: 700;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8), 0 2px 10px rgba(0, 0, 0, 0.6);
-    margin-bottom: 1.5rem;
-    line-height: 1.2;
-    opacity: 0;
-    animation: slideInDownFade 0.8s ease-out 0.3s forwards;
-}
-
-.hero-subtitle-text {
-    font-size: 1.25rem;
-    text-shadow: 0 3px 15px rgba(0, 0, 0, 0.8), 0 1px 5px rgba(0, 0, 0, 0.6);
-    margin-bottom: 2rem;
-    line-height: 1.6;
-    opacity: 0;
-    animation: slideInUpFade 0.8s ease-out 0.5s forwards;
-}
-
-.hero-contact-btn {
-    background: #16a34a; /* Hijau solid untuk kontras dengan background merah */
-    color: white;
-    padding: 14px 35px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border-radius: 50px;
-    border: 2px solid white; /* Border putih untuk lebih kontras */
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 0 3px rgba(255, 255, 255, 0.3); /* Shadow lebih kuat dengan glow putih */
-    opacity: 0;
-    animation: scaleInFade 0.6s ease-out 0.7s forwards;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Text shadow untuk readability */
-}
-
-.hero-contact-btn:hover {
-    background: #15803d; /* Hijau lebih gelap saat hover */
-    transform: translateY(-3px);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6), 0 0 0 4px rgba(255, 255, 255, 0.4);
-    color: white;
-    border-color: white;
-}
-
-/* Carousel Controls */
-.carousel-control-triple {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 60px;
-    height: 60px;
+/* Service Feature Cards (From About Us) */
+.service-feature {
     background: white;
-    border-radius: 50%;
-    border: none;
-    opacity: 0.9;
-    transition: all 0.3s ease;
-    z-index: 999;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-
-.carousel-control-triple:hover {
-    opacity: 1;
-    transform: translateY(-50%) scale(1.1);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-.carousel-control-triple.carousel-control-prev {
-    left: 20px;
-}
-
-.carousel-control-triple.carousel-control-next {
-    right: 20px;
-}
-
-.carousel-control-prev-icon-custom,
-.carousel-control-next-icon-custom {
-    color: #333;
-    font-size: 1.5rem;
-}
-
-/* Scroll to Top Button - Pojok kanan bawah */
-.scroll-to-top-btn {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    background: #dc2626;
-    color: white;
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.35rem;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4), 0 0 0 3px rgba(255, 255, 255, 0.1);
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    z-index: 9999;
-    opacity: 0;
-    transform: translateX(100px) scale(0.8);
-    pointer-events: none;
-    visibility: hidden;
-}
-
-.scroll-to-top-btn.show {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-    pointer-events: auto;
-    visibility: visible;
-}
-
-.scroll-to-top-btn:hover {
-    background: #b91c1c;
-    transform: translateY(-8px) scale(1.08);
-    box-shadow: 0 8px 30px rgba(220, 38, 38, 0.5), 0 0 0 4px rgba(255, 255, 255, 0.2);
-}
-
-.scroll-to-top-btn:active {
-    transform: translateY(-4px) scale(1.03);
-    box-shadow: 0 4px 20px rgba(220, 38, 38, 0.4), 0 0 0 3px rgba(255, 255, 255, 0.15);
-}
-
-.scroll-to-top-btn i {
-    transition: transform 0.3s ease;
-}
-
-.scroll-to-top-btn:hover i {
-    transform: translateY(-3px);
-}
-
-
-@media (max-width: 768px) {
-    .hero-triple-slider {
-        height: 70vh;
-        min-height: 500px;
-    }
-    
-    .triple-slide-container {
-        height: 70vh;
-        min-height: 500px;
-    }
-    
-    .slide-panel-left,
-    .slide-panel-right {
-        display: none;
-    }
-    
-    .slide-panel-center {
-        flex: 1;
-    }
-    
-    .hero-main-title {
-        font-size: 2rem;
-    }
-    
-    .hero-subtitle-text {
-        font-size: 1rem;
-    }
-    
-    .scroll-to-top-btn {
-        bottom: 90px; /* Lebih tinggi agar tidak bertumpuk dengan floating buttons */
-        right: 20px; /* Pindah ke kanan untuk konsistensi */
-        left: auto; /* Reset left */
-        width: 48px;
-        height: 48px;
-        font-size: 1.2rem;
-        z-index: 9996; /* Di bawah floating buttons tapi masih di atas konten */
-    }
-}
-
-/* Extra small mobile - posisi lebih tinggi lagi */
-@media (max-width: 480px) {
-    .scroll-to-top-btn {
-        bottom: 100px; /* Lebih tinggi lagi untuk layar kecil */
-        right: 15px;
-        width: 46px;
-        height: 46px;
-        font-size: 1.1rem;
-    }
-}
-
-/* Landscape mobile */
-@media (max-width: 768px) and (orientation: landscape) {
-    .scroll-to-top-btn {
-        bottom: 80px;
-        right: 20px;
-    }
-}
-
-.hero-pattern {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-        radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
-        radial-gradient(circle at 40% 20%, rgba(255,255,255,0.05) 0%, transparent 50%);
-    pointer-events: none;
-    animation: pulse 8s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
-}
-
-.text-red-gradient {
-    color: #dc2626;
-    animation: slideInLeft 1s ease-out;
-}
-
-.text-green-gradient {
-    color: #16a34a;
-    animation: slideInRight 1s ease-out;
-}
-
-@keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-.btn-green-modern {
-    background: #16a34a;
-    border: none;
-    color: white;
-    font-weight: bold;
-}
-
-.btn-green-modern:hover {
-    background: #15803d;
-    box-shadow: 0 10px 30px rgba(22, 163, 74, 0.4) !important;
-}
-
-.btn-red-modern {
-    background: #dc2626;
-    border: none;
-    color: white;
-    font-weight: bold;
-}
-
-.btn-red-modern:hover {
-    background: #b91c1c;
-    box-shadow: 0 10px 30px rgba(220, 38, 38, 0.4) !important;
-}
-
-/* Image Zoom & Shimmer Animation */
-.card-img-top {
-    overflow: hidden;
+    border-radius: 15px;
+    padding: 30px;
+    border: 2px solid #e9ecef;
+    transition: all 0.4s ease;
     position: relative;
-    transition: all 0.3s ease;
+    overflow: hidden;
+    height: 100%;
 }
 
-.card-img-top img {
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: center;
-}
-
-.card:hover .card-img-top img {
-    transform: scale(1.15);
-}
-
-.card-img-top::after {
+.service-feature::before {
     content: '';
     position: absolute;
     top: 0;
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.3),
-        transparent
-    );
-    transition: left 0.5s;
-    pointer-events: none;
+    background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.05), transparent);
+    transition: left 0.6s;
 }
 
-.card:hover .card-img-top::after {
+.service-feature:hover::before {
     left: 100%;
 }
 
-.hero-title {
-    animation: fadeInUp 0.8s ease-out;
-    color: white;
-}
-
-.hero-image-wrapper {
-    position: relative;
-    animation: fadeInRight 1s ease-out;
-}
-
-.hero-image {
-    width: 100%;
-    height: 500px;
-    object-fit: cover;
-    border-radius: 25px;
-    box-shadow: 0 25px 70px rgba(0,0,0,0.4);
-    transform: perspective(1000px) rotateY(-5deg);
-    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    border: 5px solid rgba(255,255,255,0.1);
-}
-
-.hero-image:hover {
-    transform: perspective(1000px) rotateY(0deg) scale(1.05);
-    box-shadow: 0 35px 90px rgba(0,0,0,0.5);
-}
-
-/* Hero Slider Styles */
-.hero-slide-img {
-    width: 100%;
-    height: 650px;
-    object-fit: cover;
-}
-
-.slide-wrapper {
-    position: relative;
-    overflow: hidden;
-}
-
-.slide-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, rgba(220, 38, 38, 0.7), rgba(0,0,0,0.5));
-    z-index: 1;
-}
-
-.slide-content-wrapper {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    transform: translateY(-50%);
-    z-index: 2;
-    animation: fadeInUp 1s ease-out;
-}
-
-.slide-title {
-    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-    animation: fadeInUp 1.2s ease-out;
-}
-
-.slide-description {
-    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-    animation: fadeInUp 1.4s ease-out;
-}
-
-.slide-btn-white {
-    background: white;
-    color: #dc2626;
-    font-weight: 700;
-    border-radius: 50px;
-    border: none;
-    transition: all 0.3s ease;
-    animation: fadeInUp 1.6s ease-out;
-}
-
-.slide-btn-white:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    color: #dc2626;
-    background: #f8f9fa;
-}
-
-.slide-btn-outline {
-    background: transparent;
-    color: white;
-    font-weight: 700;
-    border-radius: 50px;
-    border: 2px solid white;
-    transition: all 0.3s ease;
-    animation: fadeInUp 1.6s ease-out;
-}
-
-.slide-btn-outline:hover {
-    background: white;
-    color: #dc2626;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-
-#heroCarousel {
-    overflow: hidden;
-}
-
-#heroCarousel .carousel-control-prev,
-#heroCarousel .carousel-control-next {
-    width: 60px;
-    height: 60px;
-    background: rgba(220, 38, 38, 0.9);
-    border-radius: 50%;
-    top: 50%;
-    transform: translateY(-50%);
-    transition: all 0.3s ease;
-}
-
-#heroCarousel .carousel-control-prev {
-    left: 20px;
-}
-
-#heroCarousel .carousel-control-next {
-    right: 20px;
-}
-
-#heroCarousel .carousel-control-prev:hover,
-#heroCarousel .carousel-control-next:hover {
-    background: #dc2626;
-    transform: translateY(-50%) scale(1.1);
-}
-
-#heroCarousel .carousel-indicators {
-    bottom: 20px;
-}
-
-#heroCarousel .carousel-indicators button {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.5);
-    margin: 0 5px;
-    border: 2px solid transparent;
-}
-
-#heroCarousel .carousel-indicators .active {
-    background: #dc2626;
+.service-feature:hover {
+    transform: translateX(10px);
+    box-shadow: 0 15px 40px rgba(220, 38, 38, 0.15);
     border-color: #dc2626;
 }
 
-.hover-lift {
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.hover-lift:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.3) !important;
-}
-
-.hover-lift::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: inherit;
-    opacity: 0;
-    transition: opacity 0.3s;
-    background: radial-gradient(circle, rgba(255,255,255,0.2), transparent);
-}
-
-.hover-lift:hover::before {
-    opacity: 1;
-}
-
-.min-vh-50 {
-    min-height: 50vh;
-}
-
-/* Service Quick Cards */
-.service-quick-card {
-    display: block;
-    text-align: center;
-    padding: 2rem 1.5rem;
-    background: white;
-    border-radius: 20px;
-    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-    color: #333;
-    border: 2px solid transparent;
-}
-
-.service-quick-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-    border-color: #f0f0f0;
-}
-
-.service-icon-box {
-    width: 90px;
-    height: 90px;
-    border-radius: 25px;
+.service-icon {
+    width: 70px;
+    height: 70px;
+    background: #dc2626;
+    border-radius: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto;
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: white;
-    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    position: relative;
-    overflow: hidden;
+    margin-right: 20px;
+    flex-shrink: 0;
+    transition: all 0.4s ease;
 }
 
-.service-icon-box::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
-    transition: all 0.5s;
-    transform: rotate(45deg);
-}
-
-.service-quick-card:hover .service-icon-box::before {
-    animation: shine 0.8s;
-}
-
-@keyframes shine {
-    0% { left: -50%; }
-    100% { left: 150%; }
-}
-
-.service-quick-card:hover .service-icon-box {
-    transform: scale(1.15) rotate(8deg);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-
-.service-animate {
-    animation: fadeInUp 0.8s ease-out forwards;
-    opacity: 0;
-}
-
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-}
-
-.bg-red-gradient {
-    background: #dc2626;
-}
-
-.bg-green-gradient {
+.service-feature:hover .service-icon {
+    transform: rotate(360deg) scale(1.1);
     background: #16a34a;
 }
 
-/* Feature Cards */
-.feature-card {
-    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    background: #ffffff !important;
-    position: relative;
-    overflow: hidden;
+.service-content {
+    flex: 1;
 }
 
-.feature-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: rgba(22, 163, 74, 0.1);
-    transition: left 0.5s;
-}
-
-.feature-card:hover::before {
-    left: 100%;
-}
-
-.feature-card:hover {
-    transform: translateY(-12px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
-}
-
-.feature-icon {
-    width: 100px;
-    height: 100px;
-    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    position: relative;
-}
-
-.feature-card:hover .feature-icon {
-    transform: scale(1.15) rotate(10deg);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-}
-
-.feature-text {
-    line-height: 1.8;
-}
-
-/* Animations */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideInDownFade {
-    from {
-        opacity: 0;
-        transform: translateY(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideInUpFade {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes scaleInFade {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* Reset animasi saat slide berubah */
-#heroTripleCarousel .carousel-item:not(.active) .hero-main-title,
-#heroTripleCarousel .carousel-item:not(.active) .hero-subtitle-text,
-#heroTripleCarousel .carousel-item:not(.active) .hero-contact-btn {
-    opacity: 0;
-    animation: none;
-}
-
-#heroTripleCarousel .carousel-item.active .hero-main-title,
-#heroTripleCarousel .carousel-item.active .hero-subtitle-text,
-#heroTripleCarousel .carousel-item.active .hero-contact-btn {
-    animation-fill-mode: forwards;
-}
-
-@keyframes fadeInRight {
-    from {
-        opacity: 0;
-        transform: translateX(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-/* Ken Burns Zoom Effect */
-@keyframes kenBurnsZoom {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-/* Smooth Slide Animations untuk Side Panels */
-@keyframes slideInLeftSmooth {
-    from {
-        opacity: 0;
-        transform: translateX(-30px) scale(1.05);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0) scale(1);
-    }
-}
-
-@keyframes slideInRightSmooth {
-    from {
-        opacity: 0;
-        transform: translateX(30px) scale(1.05);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0) scale(1);
-    }
-}
-
-/* Zoom In Effect untuk Center Image */
-@keyframes zoomInSmooth {
-    from {
-        opacity: 0;
-        transform: scale(1.15);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@media (max-width: 768px) {
-    .hero-image {
-        height: 300px;
-        margin-top: 2rem;
+@media (max-width: 576px) {
+    /* Mobile Typography Consistency */
+    
+    /* Section Headings */
+    h2.fw-bold {
+        font-size: 1.5rem !important; /* Unified Section Title Size */
+        line-height: 1.3;
     }
     
-    .hero-title {
-        font-size: 2rem !important;
+    .display-6 {
+        font-size: 1.5rem !important; /* Unified Display Title Size */
+    }
+    
+    .lead {
+        font-size: 0.95rem !important; /* Unified Lead Text Size */
+    }
+    
+    p.text-muted {
+        font-size: 0.85rem !important; /* Unified Body Text Size */
+    }
+    
+    /* Hero Section Mobile */
+    .hero-main-title {
+        font-size: 1.75rem !important;
+    }
+    
+    .hero-subtitle-text {
+        font-size: 0.9rem !important;
+    }
+    
+    /* Highlight Section Mobile */
+    .home-highlight-title {
+        font-size: 1.1rem !important;
+    }
+    
+    .home-highlight-text {
+        font-size: 0.85rem !important;
+    }
+    
+    /* Company Profile Mobile */
+    .company-profile-wrapper h2 {
+        font-size: 1.5rem !important;
+    }
+    
+    /* CTA Section Mobile */
+    .home-cta-title {
+        font-size: 1.5rem !important;
+    }
+    
+    .home-cta-subtitle {
+        font-size: 1rem !important;
+    }
+    
+    /* Global Container Padding */
+    .container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    /* Spacing Adjustments */
+    .py-5 {
+        padding-top: 3rem !important;
+        padding-bottom: 3rem !important;
+    }
+
+    /* Unified Card Styles (Service & Features) */
+    .service-feature, .feature-card {
+        padding: 1rem !important;
+        border-radius: 12px;
+    }
+
+    .service-feature .d-flex {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    /* Icon Consistency */
+    .service-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.25rem;
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+    }
+
+    .feature-card .feature-icon {
+        width: 45px !important;
+        height: 45px !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    .feature-card .feature-icon i {
+        font-size: 1.25rem !important;
+    }
+
+    /* Title Consistency */
+    .service-content h4, .feature-card h3 {
+        font-size: 0.95rem !important;
+        font-weight: 700;
+        margin-bottom: 0 !important;
+        line-height: 1.2;
+    }
+
+    /* Description Consistency - HIDDEN on Mobile */
+    .service-content p, .feature-card p {
+        display: none !important;
+    }
+    
+    /* Feature Card Specifics */
+    .feature-card h3 {
+        min-height: auto;
+        display: block;
+    }
+
+    /* Article Card Consistency */
+    .home-article-card .card-body {
+        padding: 1.25rem !important;
+    }
+    
+    .home-article-card .card-title {
+        font-size: 1.1rem !important;
+        font-weight: 700;
+    }
+    
+    .home-article-card .card-text {
+        font-size: 0.85rem !important;
+        line-height: 1.5;
+    }
+
+    /* Enable Desktop-like interactions on Mobile Touch via JS Class */
+    .service-feature {
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    
+    .service-feature.mobile-animate {
+        transform: translateX(10px);
+        box-shadow: 0 15px 40px rgba(220, 38, 38, 0.15);
+        border-color: #dc2626;
+    }
+    
+    .service-feature.mobile-animate .service-icon {
+        transform: rotate(360deg) scale(1.1);
+        background: #16a34a;
+        transition: transform 0.4s ease, background 0.4s ease;
     }
 }
 </style>
 
-<!-- Products Section -->
-@if($featuredScaffoldings->count() > 0)
+<!-- Features Section -->
 <section class="py-5 bg-light">
     <div class="container">
         <div class="row text-center mb-5">
-            <div class="col-12">
-                <h2 class="display-5 fw-bold mb-3">Produk Unggulan Kami</h2>
-                <p class="lead text-muted">Pilihan scaffolding berkualitas tinggi untuk berbagai kebutuhan proyek</p>
+            <div class="col-lg-10 mx-auto home-features-heading">
+                <h2 class="display-6 fw-bold mb-3">{{ $homeFeaturesHeadingTitle ?? 'Mengapa Memilih Tatabhuana Scaffolding sebagai Partner Scaffolding Profesional?' }}</h2>
+                <p class="lead text-muted">{{ $homeFeaturesHeadingSubtitle ?? 'Tatabhuana Scaffolding adalah perusahaan penyedia scaffolding dan perancah bangunan profesional yang berfokus pada keamanan kerja, kualitas material, dan ketepatan waktu proyek. Kami melayani kebutuhan proyek konstruksi, industri, dan infrastruktur dengan sistem kerja terstandarisasi serta dukungan teknis berpengalaman.' }}</p>
             </div>
         </div>
         
+        <div class="row g-4 justify-content-center">
+            <div class="col-6 col-md-6 col-lg-4">
+                <div class="feature-card text-center h-100 p-4 bg-white rounded shadow-sm border-0" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#featureModal" data-title="Keamanan Scaffolding Terjamin & Bersertifikat" data-description="Seluruh unit scaffolding Tatabhuana menggunakan material berkualitas tinggi yang memenuhi standar keselamatan kerja konstruksi. Sistem perancah kami dirancang untuk memberikan stabilitas dan keamanan maksimal di berbagai kondisi proyek.">
+                    <div class="feature-icon bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4 shadow" style="width: 70px; height: 70px;">
+                        <i class="fas fa-shield-alt fa-2x"></i>
+                    </div>
+                    <h3 class="h5 fw-bold mb-3">Keamanan Scaffolding Terjamin & Bersertifikat</h3>
+                    <p class="text-muted small">
+                        Seluruh unit scaffolding Tatabhuana menggunakan material berkualitas tinggi yang memenuhi standar keselamatan kerja konstruksi. Sistem perancah kami dirancang untuk memberikan stabilitas dan keamanan maksimal di berbagai kondisi proyek.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-6 col-md-6 col-lg-4">
+                <div class="feature-card text-center h-100 p-4 bg-white rounded shadow-sm border-0" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#featureModal" data-title="Pengiriman Scaffolding Cepat & Tepat Waktu" data-description="Kami menyediakan layanan pengiriman scaffolding yang cepat dan terjadwal untuk memastikan kebutuhan proyek terpenuhi tanpa menghambat progres pekerjaan di lapangan.">
+                    <div class="feature-icon bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4 shadow" style="width: 70px; height: 70px;">
+                        <i class="fas fa-clock fa-2x"></i>
+                    </div>
+                    <h3 class="h5 fw-bold mb-3">Pengiriman Scaffolding Cepat & Tepat Waktu</h3>
+                    <p class="text-muted small">
+                        Kami menyediakan layanan pengiriman scaffolding yang cepat dan terjadwal untuk memastikan kebutuhan proyek terpenuhi tanpa menghambat progres pekerjaan di lapangan.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-6 col-md-6 col-lg-4">
+                <div class="feature-card text-center h-100 p-4 bg-white rounded shadow-sm border-0" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#featureModal" data-title="Stok Scaffolding Lengkap & Ready Stock" data-description="Tatabhuana Scaffolding memiliki stok scaffolding lengkap dan siap digunakan, mulai dari frame scaffolding, cross brace, joint pin, hingga aksesoris pendukung proyek konstruksi dan industri.">
+                    <div class="feature-icon bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4 shadow" style="width: 70px; height: 70px;">
+                        <i class="fas fa-boxes fa-2x"></i>
+                    </div>
+                    <h3 class="h5 fw-bold mb-3">Stok Scaffolding Lengkap & Ready Stock</h3>
+                    <p class="text-muted small">
+                        Tatabhuana Scaffolding memiliki stok scaffolding lengkap dan siap digunakan, mulai dari frame scaffolding, cross brace, joint pin, hingga aksesoris pendukung proyek konstruksi dan industri.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-6 col-md-6 col-lg-4">
+                <div class="feature-card text-center h-100 p-4 bg-white rounded shadow-sm border-0" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#featureModal" data-title="Layanan Cepat, Responsif & Profesional" data-description="Tim kami siap merespons setiap kebutuhan proyek dengan cepat, mulai dari konsultasi teknis hingga penyesuaian kebutuhan scaffolding di lokasi kerja.">
+                    <div class="feature-icon bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4 shadow" style="width: 70px; height: 70px;">
+                        <i class="fas fa-bolt fa-2x"></i>
+                    </div>
+                    <h3 class="h5 fw-bold mb-3">Layanan Cepat, Responsif & Profesional</h3>
+                    <p class="text-muted small">
+                        Tim kami siap merespons setiap kebutuhan proyek dengan cepat, mulai dari konsultasi teknis hingga penyesuaian kebutuhan scaffolding di lokasi kerja.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-6 col-md-6 col-lg-4">
+                <div class="feature-card text-center h-100 p-4 bg-white rounded shadow-sm border-0" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#featureModal" data-title="Produk Scaffolding Berkualitas Tinggi" data-description="Kami hanya menyediakan scaffolding dengan kualitas teruji, dirawat secara berkala, dan siap digunakan untuk proyek jangka pendek maupun jangka panjang.">
+                    <div class="feature-icon bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4 shadow" style="width: 70px; height: 70px;">
+                        <i class="fas fa-trophy fa-2x"></i>
+                    </div>
+                    <h3 class="h5 fw-bold mb-3">Produk Scaffolding Berkualitas Tinggi</h3>
+                    <p class="text-muted small">
+                        Kami hanya menyediakan scaffolding dengan kualitas teruji, dirawat secara berkala, dan siap digunakan untuk proyek jangka pendek maupun jangka panjang.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-6 col-md-6 col-lg-4">
+                <div class="feature-card text-center h-100 p-4 bg-white rounded shadow-sm border-0" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#featureModal" data-title="Dukungan Teknis & Konsultasi Proyek" data-description="Didukung oleh tenaga teknis berpengalaman, Tatabhuana Scaffolding memberikan pendampingan teknis mulai dari perencanaan, pemasangan, hingga evaluasi penggunaan scaffolding di lapangan.">
+                    <div class="feature-icon bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-4 shadow" style="width: 70px; height: 70px;">
+                        <i class="fas fa-headset fa-2x"></i>
+                    </div>
+                    <h3 class="h5 fw-bold mb-3">Dukungan Teknis & Konsultasi Proyek</h3>
+                    <p class="text-muted small">
+                        Didukung oleh tenaga teknis berpengalaman, Tatabhuana Scaffolding memberikan pendampingan teknis mulai dari perencanaan, pemasangan, hingga evaluasi penggunaan scaffolding di lapangan.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@if($latestArticles->count() > 0)
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12 text-center home-latest-articles-heading">
+                <h2 class="fw-bold mb-1">{{ $homeArticlesHeadingTitle }}</h2>
+                <p class="text-muted mb-0">{{ $homeArticlesHeadingSubtitle }}</p>
+            </div>
+        </div>
         <div class="row g-4">
-            @foreach($featuredScaffoldings as $scaffolding)
-            <div class="col-lg-4 col-md-6">
-                <div class="card h-100 shadow-sm">
-                    @if($scaffolding->image)
-                        <img src="{{ asset('storage/' . $scaffolding->image) }}" class="card-img-top" alt="{{ $scaffolding->name }}" style="height: 250px; object-fit: cover;">
-                    @else
-                        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="{{ $scaffolding->name }}" style="height: 250px; object-fit: cover;">
+            @foreach($latestArticles as $article)
+            @php
+                $latestImageSrc = $article->image;
+                if ($latestImageSrc && !\Illuminate\Support\Str::startsWith($latestImageSrc, ['http://', 'https://'])) {
+                    $latestImageSrc = asset('storage/' . $latestImageSrc);
+                }
+            @endphp
+            <div class="col-12 col-md-4">
+                <div class="card home-article-card h-100 border-0">
+                    @if($latestImageSrc)
+                    <div class="card-img-top">
+                        <img src="{{ $latestImageSrc }}" alt="{{ $article->title }}" class="img-fluid home-article-card-img" loading="lazy" decoding="async">
+                    </div>
                     @endif
-                    
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title fw-bold">{{ $scaffolding->name }}</h5>
-                        <p class="card-text text-muted flex-grow-1">{{ Str::limit($scaffolding->description, 100) }}</p>
-                        
-                        <div class="mb-3">
-                            <span class="badge bg-primary me-2">{{ $scaffolding->type }}</span>
-                            <span class="badge bg-secondary">{{ $scaffolding->material }}</span>
-                        </div>
-                        
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            @if($scaffolding->rental_price)
-                            <div>
-                                <small class="text-muted">Sewa:</small>
-                                <strong class="text-primary">{{ $scaffolding->formatted_rental_price }}/hari</strong>
-                            </div>
-                            @endif
-                            @if($scaffolding->sale_price)
-                            <div>
-                                <small class="text-muted">Jual:</small>
-                                <strong class="text-success">{{ $scaffolding->formatted_sale_price }}</strong>
-                            </div>
-                            @endif
-                        </div>
-                        
-                        <a href="{{ route('scaffoldings.show', $scaffolding) }}" class="btn btn-primary">
-                            <i class="fas fa-eye me-2"></i>Detail Produk
+                    <div class="card-body">
+                        @if($article->formatted_published_date)
+                        <p class="text-muted small mb-2">{{ $article->formatted_published_date }}</p>
+                        @endif
+                        <h5 class="card-title fw-semibold mb-2">{{ $article->title }}</h5>
+                        @php
+                            $excerpt = $article->excerpt ?: \Illuminate\Support\Str::limit(strip_tags($article->content), 110);
+                        @endphp
+                        <p class="card-text text-muted mb-3">{{ $excerpt }}</p>
+                        <a href="{{ route('articles.show', $article) }}" class="btn btn-link text-danger ps-0">
+                            Baca Selengkapnya <i class="fas fa-arrow-right ms-1"></i>
                         </a>
                     </div>
                 </div>
             </div>
             @endforeach
         </div>
-        
-        <div class="text-center mt-5">
-            <a href="{{ route('scaffoldings.index') }}" class="btn btn-outline-primary btn-lg">
-                <i class="fas fa-list me-2"></i>Lihat Semua Produk
-            </a>
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <a href="{{ route('articles.index') }}" class="btn btn-outline-danger">
+                    Lihat Semua Artikel
+                </a>
+            </div>
         </div>
     </div>
 </section>
 @endif
 
+@if($featuredProjects->count() > 0)
+<section class="py-5">
+    <div class="container mb-3">
+        <div class="row">
+            <div class="col-12 d-flex align-items-center justify-content-between">
+                <h2 class="fw-bold mb-0">{{ $homeProjectsHeadingTitle }}</h2>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-outline-danger btn-sm" id="fpPrev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="btn btn-outline-danger btn-sm" id="fpNext"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="featuredProjectsStrip" class="featured-projects-strip">
+        <div class="strip-container">
+            @foreach($featuredProjects as $project)
+            <a href="{{ route('projects.show', $project) }}" class="strip-item text-decoration-none">
+                @php
+                    $img = null;
+                    if ($project->images && is_array($project->images) && count($project->images) > 0) {
+                        $img = asset('storage/' . $project->images[0]);
+                    }
+                @endphp
+                @if($img)
+                    <img src="{{ $img }}" alt="{{ $project->title }}" loading="lazy" decoding="async">
+                @else
+                    <div class="strip-thumb-fallback"></div>
+                @endif
+                <div class="strip-content">
+                    <div class="strip-content-inner">
+                        <h6 class="mb-1 fw-bold">{{ $project->title }}</h6>
+                        <p class="small mb-0">{{ Str::limit($project->description, 80) }}</p>
+                    </div>
+                </div>
+            </a>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
+
+@include('partials.client-slider')
+
 <!-- CTA Section -->
-<section class="py-5 bg-primary text-white">
-    <div class="container text-center">
-        <h2 class="display-5 fw-bold mb-3">Siap Memulai Proyek Anda?</h2>
-        <p class="lead mb-4">Hubungi kami sekarang untuk konsultasi gratis dan penawaran terbaik</p>
-        <a href="{{ route('contact') }}" class="btn btn-light btn-lg">
-            <i class="fas fa-phone me-2"></i>Hubungi Kami Sekarang
-        </a>
+<section class="py-5 bg-danger home-cta-section">
+    <div class="container">
+        <div class="home-cta-inner mx-auto">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-7">
+                    <div class="home-cta-kicker text-uppercase fw-semibold small mb-2">
+                        Jangan tunda keamanan proyek Anda.
+                    </div>
+                    <h2 class="home-cta-title fw-bold mb-3 text-white">
+                        {{ $homeCtaTitle }}
+                    </h2>
+                    <p class="home-cta-subtitle lead mb-3 text-white-50">
+                        {{ $homeCtaSubtitle }}
+                    </p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="home-cta-chip home-cta-chip-red">
+                            <i class="fas fa-shield-alt me-1"></i> Rekomendasi sistem scaffolding yang aman dan sesuai standar
+                        </span>
+                        <span class="home-cta-chip home-cta-chip-green">
+                            <i class="fas fa-headset me-1"></i> Tim support siap membantu dari perencanaan hingga eksekusi
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="home-cta-card bg-white text-start">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="home-cta-icon me-3">
+                                <i class="fas fa-clipboard-check"></i>
+                            </div>
+                            <div>
+                                <div class="fw-semibold small text-muted">
+                                    Konsultasi Proyek & Kebutuhan Scaffolding
+                                </div>
+                                <div class="fw-bold">
+                                    Tim siap membantu Anda
+                                </div>
+                            </div>
+                        </div>
+                        <p class="small text-muted mb-3">
+                            Ceritakan secara singkat jenis pekerjaan, ketinggian kerja, dan lokasi proyek Anda.
+                            Kami akan merangkum kebutuhan scaffolding, estimasi biaya, serta opsi sewa atau jual
+                            yang paling pas untuk tim Anda.
+                        </p>
+                        <div class="d-grid">
+                            <a href="{{ route('contact') }}" class="btn btn-danger btn-lg">
+                                <i class="fas fa-file-signature me-2"></i> Minta penawaran & konsultasi
+                            </a>
+                        </div>
+                        <div class="home-cta-meta small text-muted mt-3">
+                            <i class="fas fa-map-marker-alt me-1"></i> Berbasis di Yogyakarta, melayani berbagai proyek di sekitarnya.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
+<!-- Scroll To Top Button -->
+<button id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll ke Atas">
+    <i class="fas fa-arrow-up"></i>
+    <span class="visually-hidden">Kembali ke atas</span>
+</button>
+
+<!-- Feature Detail Modal -->
+<div class="modal fade" id="featureModal" tabindex="-1" aria-labelledby="featureModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title fw-bold" id="featureModalLabel">Detail Fitur</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body pt-2 pb-4 text-center">
+        <div id="modalFeatureIcon" class="mb-3 text-primary"></div>
+        <h4 id="modalFeatureTitle" class="fw-bold mb-3"></h4>
+        <p id="modalFeatureDescription" class="text-muted"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
 @push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const carousel = document.querySelector('#heroTripleCarousel');
-    if (!carousel) return;
-    
-    // Preload semua gambar untuk smooth transition tanpa bug
-    const allImages = carousel.querySelectorAll('.panel-image');
-    allImages.forEach(img => {
-        if (img.src) {
-            const imageLoader = new Image();
-            imageLoader.src = img.src;
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Mobile Animation Logic for Service Features
+        if (window.innerWidth <= 576) {
+            const serviceCards = document.querySelectorAll('.service-feature');
+            
+            serviceCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Remove class from all other cards first
+                    serviceCards.forEach(c => c.classList.remove('mobile-animate'));
+                    
+                    // Add class to clicked card
+                    this.classList.add('mobile-animate');
+                    
+                    // Remove class after animation completes (simulating hover out)
+                    setTimeout(() => {
+                        this.classList.remove('mobile-animate');
+                    }, 800); // Durasi sedikit lebih lama agar user sempat melihat efeknya
+                });
+            });
+        }
+        
+        var featureModal = document.getElementById('featureModal');
+        if (featureModal) {
+            featureModal.addEventListener('show.bs.modal', function(event) {
+                var button = event.relatedTarget;
+                var title = button.getAttribute('data-title');
+                var description = button.getAttribute('data-description');
+                // Get icon from the card (support both feature-icon and service-icon)
+                var iconElement = button.querySelector('.feature-icon') || button.querySelector('.service-icon');
+                var iconHtml = iconElement ? iconElement.innerHTML : '';
+                
+                var modalTitle = featureModal.querySelector('#modalFeatureTitle');
+                var modalDescription = featureModal.querySelector('#modalFeatureDescription');
+                var modalIcon = featureModal.querySelector('#modalFeatureIcon');
+                
+                modalTitle.textContent = title;
+                modalDescription.textContent = description;
+                modalIcon.innerHTML = iconHtml;
+                
+                // Adjust icon size in modal
+                var modalIconI = modalIcon.querySelector('i');
+                if(modalIconI) {
+                    modalIconI.classList.remove('fa-2x');
+                    modalIconI.classList.add('fa-4x');
+                }
+            });
         }
     });
-    
-    // Fungsi untuk reset dan restart animasi teks & foto
-    function resetAnimations(activeItem) {
-        if (!activeItem) return;
-        
-        const title = activeItem.querySelector('.hero-main-title');
-        const subtitle = activeItem.querySelector('.hero-subtitle-text');
-        const button = activeItem.querySelector('.hero-contact-btn');
-        
-        // Reset animasi teks
-        [title, subtitle, button].forEach(el => {
-            if (el) {
-                el.style.animation = 'none';
-                el.style.opacity = '0';
-                void el.offsetWidth; // Trigger reflow
+    </script>
+    @vite('resources/js/home.js')
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const slides = document.querySelectorAll('.hero-bg-slide');
+        if (!slides || slides.length === 0) return;
+        slides.forEach(img => {
+            if (img && img.src) {
+                const loader = new Image();
+                loader.src = img.src;
             }
         });
-        
-        // Restart animasi teks dengan delay bertahap (Staggered Ripple Effect)
-        setTimeout(() => {
-            if (title) title.style.animation = 'slideInDownFade 0.8s ease-out 0.2s forwards';
-            if (subtitle) subtitle.style.animation = 'slideInUpFade 0.8s ease-out 0.4s forwards';
-            if (button) button.style.animation = 'scaleInFade 0.6s ease-out 0.6s forwards';
-        }, 50);
-    }
-    
-    // Event listener untuk slide mulai bergerak - reset animasi teks
-    carousel.addEventListener('slide.bs.carousel', function(event) {
-        // Tidak perlu manipulasi transform manual, biarkan CSS handle
-    });
-    
-    // Fungsi untuk update left/right panel images secara dinamis dengan perbaikan
-    function updateSidePanels() {
-        const allItems = Array.from(carousel.querySelectorAll('.carousel-item'));
-        const totalItems = allItems.length;
-        
-        if (totalItems === 0) return;
-        
-        allItems.forEach((item, index) => {
-            const leftImage = item.querySelector('.slide-panel-left .panel-image');
-            const rightImage = item.querySelector('.slide-panel-right .panel-image');
-            
-            if (!leftImage || !rightImage) {
-                console.warn('Left or right image not found for slide', index);
-                return;
-            }
-            
-            // Calculate indices dengan circular logic yang lebih robust
-            const leftIndex = ((index - 1) + totalItems) % totalItems;
-            const rightIndex = (index + 1) % totalItems;
-            
-            // Get images from corresponding carousel items
-            const leftItem = allItems[leftIndex];
-            const rightItem = allItems[rightIndex];
-            
-            // Update left panel image
-            if (leftItem) {
-                const leftSource = leftItem.querySelector('.center-main-image');
-                if (leftSource && leftSource.src) {
-                    // Gunakan data attribute sebagai fallback
-                    const dataSrc = leftSource.getAttribute('data-src') || leftSource.src;
-                    if (leftImage.src !== dataSrc) {
-                        leftImage.src = dataSrc;
-                        // Force reload jika gambar tidak muncul
-                        leftImage.style.opacity = '1';
-                        leftImage.style.display = 'block';
-                    }
+        let current = 0;
+        const intervalMs = 7000;
+        function show(index) {
+            slides.forEach((img, i) => {
+                if (i === index) {
+                    img.classList.add('active');
                 } else {
-                    // Fallback: coba ambil dari img tag langsung di leftItem
-                    const fallbackImg = leftItem.querySelector('.center-image-container img');
-                    if (fallbackImg && fallbackImg.src) {
-                        leftImage.src = fallbackImg.src;
-                        leftImage.style.opacity = '1';
-                        leftImage.style.display = 'block';
-                    }
+                    img.classList.remove('active');
                 }
-            }
-            
-            // Update right panel image
-            if (rightItem) {
-                const rightSource = rightItem.querySelector('.center-main-image');
-                if (rightSource && rightSource.src) {
-                    // Gunakan data attribute sebagai fallback
-                    const dataSrc = rightSource.getAttribute('data-src') || rightSource.src;
-                    if (rightImage.src !== dataSrc) {
-                        rightImage.src = dataSrc;
-                        // Force reload jika gambar tidak muncul
-                        rightImage.style.opacity = '1';
-                        rightImage.style.display = 'block';
-                    }
-                } else {
-                    // Fallback: coba ambil dari img tag langsung di rightItem
-                    const fallbackImg = rightItem.querySelector('.center-image-container img');
-                    if (fallbackImg && fallbackImg.src) {
-                        rightImage.src = fallbackImg.src;
-                        rightImage.style.opacity = '1';
-                        rightImage.style.display = 'block';
-                    }
-                }
-            }
-        });
-    }
-    
-    // Event listener untuk slide selesai berganti
-    carousel.addEventListener('slid.bs.carousel', function(event) {
-        const activeItem = event.relatedTarget || carousel.querySelector('.carousel-item.active');
-        
-        if (activeItem) {
-            const centerImage = activeItem.querySelector('.center-main-image');
-            if (centerImage) {
-                centerImage.style.animationPlayState = 'running';
-            }
+            });
         }
-        
-        resetAnimations(activeItem);
-        
-        // Update side panels langsung tanpa delay besar
-        updateSidePanels();
-        
-        // Tidak ada manipulasi tambahan untuk menghindari flicker
-        
-        // Hanya foto yang fade, background tetap visible - jangan set opacity pada carousel-item
-        // Background scaffolding pattern harus tetap terlihat
-    });
-    
-    // Update side panels juga saat slide mulai (sebelum transisi selesai) untuk responsif
-    carousel.addEventListener('slide.bs.carousel', function(event) {
-        // Pre-update langsung tanpa delay untuk immediate feedback
-        updateSidePanels();
-    });
-    
-    // Inisialisasi animasi untuk slide pertama dan update side panels
-    setTimeout(() => {
-        const firstActive = carousel.querySelector('.carousel-item.active');
-        if (firstActive) {
-            resetAnimations(firstActive);
-        }
-        // Update side panels setelah semua elemen dimuat
-        updateSidePanels();
-    }, 100);
-    
-    // Pause animasi Ken Burns saat hover (optional enhancement)
-    carousel.addEventListener('mouseenter', function() {
-        const activeImage = carousel.querySelector('.carousel-item.active .center-main-image');
-        if (activeImage) {
-            activeImage.style.animationPlayState = 'paused';
+        show(current);
+        if (slides.length > 1) {
+            setInterval(() => {
+                current = (current + 1) % slides.length;
+                show(current);
+            }, intervalMs);
         }
     });
-    
-    carousel.addEventListener('mouseleave', function() {
-        const activeImage = carousel.querySelector('.carousel-item.active .center-main-image');
-        if (activeImage) {
-            activeImage.style.animationPlayState = 'running';
-        }
-    });
-
-    // === SWIPE & DRAG SUPPORT ===
-    let touchStartX = 0;
-    let touchEndX = 0;
-    let isDragging = false;
-    let startX = 0;
-    let currentX = 0;
-    
-    // Mouse events for desktop dragging
-    carousel.addEventListener('mousedown', e => {
-        // Ignore if clicking on buttons or links
-        if (e.target.closest('button') || e.target.closest('a')) return;
-        
-        isDragging = true;
-        startX = e.clientX;
-        currentX = startX; // Initialize currentX
-        carousel.style.cursor = 'grabbing';
-        carousel.style.userSelect = 'none';
-    });
-
-    carousel.addEventListener('mousemove', e => {
-        if (!isDragging) return;
-        e.preventDefault();
-        currentX = e.clientX;
-    });
-
-    carousel.addEventListener('mouseup', e => {
-        if (!isDragging) return;
-        finishDrag(e.clientX);
-    });
-
-    carousel.addEventListener('mouseleave', () => {
-        // Only finish drag if we were actually dragging
-        if (isDragging) {
-            finishDrag(currentX);
-        }
-    });
-
-    function finishDrag(endX) {
-        isDragging = false;
-        carousel.style.cursor = 'default';
-        carousel.style.userSelect = 'auto';
-        
-        const diffX = endX - startX;
-        handleGesture(diffX);
-    }
-
-    // Touch events for mobile (Enhancement to default Bootstrap behavior)
-    carousel.addEventListener('touchstart', e => {
-        touchStartX = e.changedTouches[0].screenX;
-    }, {passive: true});
-
-    carousel.addEventListener('touchend', e => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleGesture(touchEndX - touchStartX);
-    }, {passive: true});
-
-    // Manual Nav Button Handler (Fix for non-responsive buttons)
-    const prevBtn = carousel.querySelector('.carousel-control-prev');
-    const nextBtn = carousel.querySelector('.carousel-control-next');
-    
-    if (prevBtn) {
-        prevBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation(); // Prevent propagation issues
-            try {
-                const bsCarousel = bootstrap.Carousel.getInstance(carousel) || new bootstrap.Carousel(carousel);
-                bsCarousel.prev();
-            } catch (err) { console.error('Carousel prev error:', err); }
-        });
-    }
-    
-    if (nextBtn) {
-        nextBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation(); // Prevent propagation issues
-            try {
-                const bsCarousel = bootstrap.Carousel.getInstance(carousel) || new bootstrap.Carousel(carousel);
-                bsCarousel.next();
-            } catch (err) { console.error('Carousel next error:', err); }
-        });
-    }
-
-    function handleGesture(diffX) {
-        const threshold = 50; // Minimum distance to trigger slide
-        
-        if (Math.abs(diffX) > threshold) {
-            if (diffX > 0) {
-                // Dragged Right -> Prev Slide
-                const prevBtn = carousel.querySelector('.carousel-control-prev');
-                if (prevBtn) prevBtn.click();
-                else {
-                    try {
-                        const bsCarousel = bootstrap.Carousel.getInstance(carousel);
-                        if (bsCarousel) bsCarousel.prev();
-                    } catch (e) { console.log('Bootstrap instance not found'); }
-                }
-            } else {
-                // Dragged Left -> Next Slide
-                const nextBtn = carousel.querySelector('.carousel-control-next');
-                if (nextBtn) nextBtn.click();
-                else {
-                    try {
-                        const bsCarousel = bootstrap.Carousel.getInstance(carousel);
-                        if (bsCarousel) bsCarousel.next();
-                    } catch (e) { console.log('Bootstrap instance not found'); }
-                }
-            }
-        }
-    }
-});
-
-// Scroll to Top Button Functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
-    
-    if (!scrollToTopBtn) {
-        console.warn('Scroll to Top button not found');
-        return;
-    }
-    
-    // Function to show/hide button based on scroll position
-    function toggleScrollButton() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-        
-        // Button muncul setelah scroll 100px saja
-        if (scrollTop > 100) {
-            scrollToTopBtn.classList.add('show');
-        } else {
-            scrollToTopBtn.classList.remove('show');
-        }
-    }
-    
-    // Listen to scroll event
-    window.addEventListener('scroll', toggleScrollButton, { passive: true });
-    
-    // Scroll to top when button is clicked
-    scrollToTopBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-    
-    // Check initial scroll position setelah sedikit delay
-    setTimeout(toggleScrollButton, 100);
-});
-</script>
+    </script>
 @endpush
 
 @endsection

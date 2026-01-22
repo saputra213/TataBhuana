@@ -4,27 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Admin Panel - Tata Bhuana')</title>
+    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/layouts/app.css'])
     
     @stack('styles')
 </head>
 <body>
-    <div class="d-flex">
+    <div class="d-flex admin-layout">
         <!-- Sidebar -->
-        <div class="bg-dark text-white d-none d-lg-block" style="width: 250px; min-height: 100vh;">
+        <div class="bg-dark text-white d-none d-lg-block admin-sidebar" style="width: 250px; min-height: 100vh;">
             <div class="p-3">
                 <h5 class="fw-bold mb-4">
                     <i class="fas fa-cogs me-2"></i>
                     Admin Panel
                 </h5>
                 
-                <nav class="nav flex-column">
+                <nav class="nav flex-column admin-sidebar-nav">
                     <a class="nav-link text-white {{ request()->routeIs('admin.dashboard') ? 'bg-primary' : '' }}" href="{{ route('admin.dashboard') }}">
                         <i class="fas fa-tachometer-alt me-2"></i>Dashboard
                     </a>
@@ -43,8 +44,23 @@
                     <a class="nav-link text-white {{ request()->routeIs('admin.branches.*') ? 'bg-primary' : '' }}" href="{{ route('admin.branches.index') }}">
                         <i class="fas fa-map-marker-alt me-2"></i>Cabang
                     </a>
+                    <a class="nav-link text-white {{ request()->routeIs('admin.home') ? 'bg-primary' : '' }}" href="{{ route('admin.home') }}">
+                        <i class="fas fa-home me-2"></i>Beranda
+                    </a>
+                    <a class="nav-link text-white ps-4 {{ request()->routeIs('admin.hero') ? 'bg-primary' : '' }}" href="{{ route('admin.hero') }}">
+                        <i class="fas fa-images me-2"></i>Hero Beranda
+                    </a>
                     <a class="nav-link text-white {{ request()->routeIs('admin.profile') ? 'bg-primary' : '' }}" href="{{ route('admin.profile') }}">
                         <i class="fas fa-building me-2"></i>Profil Perusahaan
+                    </a>
+                    <a class="nav-link text-white {{ request()->routeIs('admin.about.index') ? 'bg-primary' : '' }}" href="{{ route('admin.about.index') }}">
+                        <i class="fas fa-info-circle me-2"></i>Tentang Kami
+                    </a>
+                    <a class="nav-link text-white {{ request()->routeIs('admin.services.*') ? 'bg-primary' : '' }}" href="{{ route('admin.services.index') }}">
+                        <i class="fas fa-concierge-bell me-2"></i>Layanan Kami
+                    </a>
+                    <a class="nav-link text-white {{ request()->routeIs('admin.footer.*') ? 'bg-primary' : '' }}" href="{{ route('admin.footer.index') }}">
+                        <i class="fas fa-shoe-prints me-2"></i>Footer Website
                     </a>
                     <hr class="text-white">
                     <a class="nav-link text-white" href="{{ route('home') }}" target="_blank">
@@ -103,7 +119,7 @@
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body">
-            <nav class="nav flex-column">
+            <nav class="nav flex-column admin-sidebar-nav">
                 <a class="nav-link text-white {{ request()->routeIs('admin.dashboard') ? 'bg-primary' : '' }}" href="{{ route('admin.dashboard') }}">
                     <i class="fas fa-tachometer-alt me-2"></i>Dashboard
                 </a>
@@ -122,8 +138,23 @@
                 <a class="nav-link text-white {{ request()->routeIs('admin.branches.*') ? 'bg-primary' : '' }}" href="{{ route('admin.branches.index') }}">
                     <i class="fas fa-map-marker-alt me-2"></i>Cabang
                 </a>
+                <a class="nav-link text-white {{ request()->routeIs('admin.home') ? 'bg-primary' : '' }}" href="{{ route('admin.home') }}">
+                    <i class="fas fa-home me-2"></i>Beranda
+                </a>
+                <a class="nav-link text-white ps-4 {{ request()->routeIs('admin.hero') ? 'bg-primary' : '' }}" href="{{ route('admin.hero') }}">
+                    <i class="fas fa-images me-2"></i>Hero Beranda
+                </a>
                 <a class="nav-link text-white {{ request()->routeIs('admin.profile') ? 'bg-primary' : '' }}" href="{{ route('admin.profile') }}">
                     <i class="fas fa-building me-2"></i>Profil Perusahaan
+                </a>
+                <a class="nav-link text-white {{ request()->routeIs('admin.about.index') ? 'bg-primary' : '' }}" href="{{ route('admin.about.index') }}">
+                    <i class="fas fa-info-circle me-2"></i>Tentang Kami
+                </a>
+                <a class="nav-link text-white {{ request()->routeIs('admin.services.*') ? 'bg-primary' : '' }}" href="{{ route('admin.services.index') }}">
+                    <i class="fas fa-concierge-bell me-2"></i>Layanan Kami
+                </a>
+                <a class="nav-link text-white {{ request()->routeIs('admin.footer.*') ? 'bg-primary' : '' }}" href="{{ route('admin.footer.index') }}">
+                    <i class="fas fa-shoe-prints me-2"></i>Footer Website
                 </a>
                 <hr class="text-white">
                 <a class="nav-link text-white" href="{{ route('home') }}" target="_blank">

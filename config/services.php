@@ -17,7 +17,10 @@ return [
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
     ],
-
+    'recaptcha' => [
+        'site_key' => env('RECAPTCHA_SITE_KEY'),
+        'secret' => env('RECAPTCHA_SECRET'),
+    ],
     'resend' => [
         'key' => env('RESEND_KEY'),
     ],

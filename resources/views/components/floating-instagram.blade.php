@@ -37,6 +37,13 @@
     <div class="ig-backdrop" id="igBackdrop"></div>
 </div>
 
+@push('styles')
+@vite('resources/css/components/floating-instagram.css')
+@endpush
+@push('scripts')
+@vite('resources/js/components/floating-instagram.js')
+@endpush
+
 <style>
 /* Transparent Floating Instagram Styles - Di atas FB di kiri */
 .floating-instagram-transparent {
@@ -452,121 +459,3 @@
     }
 }
 </style>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const mainButton = document.getElementById('igMainButton');
-    const buttonsContainer = document.getElementById('igButtonsContainer');
-    const backdrop = document.getElementById('igBackdrop');
-    const closeButton = document.getElementById('igCloseButton');
-    
-    // Toggle buttons container
-    function toggleButtons() {
-        const isOpen = buttonsContainer.classList.contains('show');
-        
-        if (isOpen) {
-            closeButtons();
-        } else {
-            openButtons();
-        }
-    }
-    
-    // Open buttons
-    function openButtons() {
-        buttonsContainer.classList.add('show');
-        backdrop.classList.add('show');
-        
-        // Add haptic feedback for mobile
-        if (navigator.vibrate) {
-            navigator.vibrate(50);
-        }
-        
-        // Add click animation to main button
-        mainButton.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-            mainButton.style.transform = 'scale(1)';
-        }, 150);
-    }
-    
-    // Close buttons
-    function closeButtons() {
-        buttonsContainer.classList.remove('show');
-        backdrop.classList.remove('show');
-        
-        // Reset social items animation
-        const socialItems = document.querySelectorAll('.ig-social-item');
-        socialItems.forEach((item, index) => {
-            item.style.animationDelay = `${index * 0.1}s`;
-        });
-    }
-    
-    // Event listeners
-    mainButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        toggleButtons();
-    });
-    
-    closeButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        closeButtons();
-    });
-    
-    backdrop.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        closeButtons();
-    });
-    
-    // Social item clicks
-    const socialItems = document.querySelectorAll('.ig-social-item');
-    socialItems.forEach(item => {
-        item.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const instagramUrl = this.getAttribute('data-instagram');
-            
-            if (instagramUrl) {
-                // Add loading animation
-                const icon = this.querySelector('.ig-social-icon i');
-                const originalClass = icon.className;
-                icon.className = 'fas fa-spinner fa-spin';
-                
-                // Open Instagram
-                window.open(instagramUrl, '_blank');
-                
-                // Reset icon after delay
-                setTimeout(() => {
-                    icon.className = originalClass;
-                }, 2000);
-                
-                // Close buttons after opening Instagram
-                setTimeout(() => {
-                    closeButtons();
-                }, 500);
-                
-                // Add success feedback
-                if (navigator.vibrate) {
-                    navigator.vibrate([50, 100, 50]);
-                }
-            }
-        });
-    });
-    
-    // Keyboard support
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape' && buttonsContainer.classList.contains('show')) {
-            closeButtons();
-        }
-    });
-    
-    // Prevent buttons container from closing when clicking inside
-    buttonsContainer.addEventListener('click', function(event) {
-        event.stopPropagation();
-    });
-    
-    console.log('Transparent Instagram buttons initialized successfully');
-});
-</script>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\CompanyProfile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
 {
@@ -20,12 +21,26 @@ class ArticleController extends Controller
             });
         }
 
+        if ($request->filled('category')) {
+            $query->where('category', $request->category);
+        }
+
+        $categories = Article::where('is_published', true)
+            ->whereNotNull('category')
+            ->where('category', '!=', '')
+            ->distinct()
+            ->pluck('category');
+
+        $userAgent = $request->header('User-Agent', '');
+        $isMobile = preg_match('/Android|iPhone|iPad|iPod|Windows Phone|Mobi/i', $userAgent);
+        $perPage = $isMobile ? 5 : 9;
+
         $articles = $query->orderBy('published_at', 'desc')
             ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->paginate($perPage);
         $profile = CompanyProfile::first();
 
-        return view('articles.index', compact('articles', 'profile'));
+        return view('articles.index', compact('articles', 'profile', 'categories'));
     }
 
     public function show(Article $article)
@@ -45,7 +60,24 @@ class ArticleController extends Controller
             ->take(3)
             ->get();
 
-        return view('articles.show', compact('article', 'related', 'profile'));
+        $categories = Article::where('is_published', true)
+            ->whereNotNull('category')
+            ->where('category', '!=', '')
+            ->select('category', DB::raw('count(*) as total'))
+            ->groupBy('category')
+            ->get();
+
+        $tags = Article::where('is_published', true)
+            ->whereNotNull('keywords')
+            ->pluck('keywords')
+            ->flatMap(function ($values) {
+                return array_map('trim', explode(',', $values));
+            })
+            ->filter()
+            ->unique()
+            ->values();
+
+        return view('articles.show', compact('article', 'related', 'profile', 'categories', 'tags'));
     }
 
     public function storeComment(Request $request, Article $article)
@@ -66,4 +98,3 @@ class ArticleController extends Controller
         return back()->with('success', 'Komentar berhasil dikirim dan menunggu persetujuan admin.');
     }
 }
-

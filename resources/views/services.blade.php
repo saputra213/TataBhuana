@@ -152,6 +152,9 @@
                             <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Fleksibilitas jangka waktu</li>
                             <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Maintenance dan perawatan</li>
                         </ul>
+                        <a href="{{ route('services.rental') }}" class="btn btn-outline-primary mt-3">
+                            Pelajari detail layanan sewa
+                        </a>
                     </div>
                 </div>
             </div>
@@ -175,6 +178,9 @@
                             <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Garansi kualitas</li>
                             <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Berbagai ukuran tersedia</li>
                         </ul>
+                        <a href="{{ route('services.sales') }}" class="btn btn-outline-primary mt-3">
+                            Pelajari detail layanan jual
+                        </a>
                     </div>
                 </div>
             </div>
@@ -231,9 +237,9 @@
             <div class="col-lg-4 col-md-6">
                 <div class="card h-100 shadow-sm">
                     @if($scaffolding->image)
-                        <img src="{{ asset('storage/' . $scaffolding->image) }}" class="card-img-top" alt="{{ $scaffolding->name }}" style="height: 250px; object-fit: cover;">
+                        <img src="{{ asset('storage/' . $scaffolding->image) }}" class="card-img-top" alt="{{ $scaffolding->name }}" style="height: 250px; object-fit: cover;" loading="lazy" decoding="async">
                     @else
-                        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="{{ $scaffolding->name }}" style="height: 250px; object-fit: cover;">
+                        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="{{ $scaffolding->name }}" style="height: 250px; object-fit: cover;" loading="lazy" decoding="async">
                     @endif
                     
                     <div class="card-body d-flex flex-column">
@@ -242,7 +248,6 @@
                         
                         <div class="mb-3">
                             <span class="badge bg-primary me-2">{{ $scaffolding->type }}</span>
-                            <span class="badge bg-secondary">{{ $scaffolding->material }}</span>
                         </div>
                         
                         <div class="mb-3">
@@ -251,22 +256,7 @@
                             <small class="text-muted d-block">Beban Maks: {{ $scaffolding->max_load }}kg</small>
                         </div>
                         
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            @if($scaffolding->rental_price)
-                            <div>
-                                <small class="text-muted">Sewa:</small>
-                                <strong class="text-primary">{{ $scaffolding->formatted_rental_price }}/hari</strong>
-                            </div>
-                            @endif
-                            @if($scaffolding->sale_price)
-                            <div>
-                                <small class="text-muted">Jual:</small>
-                                <strong class="text-success">{{ $scaffolding->formatted_sale_price }}</strong>
-                            </div>
-                            @endif
-                        </div>
-                        
-                        <a href="{{ route('scaffoldings.show', $scaffolding) }}" class="btn btn-success">
+                        <a href="{{ route('scaffoldings.show', $scaffolding) }}" class="btn btn-danger">
                             <i class="fas fa-eye me-2"></i>Detail Produk
                         </a>
                     </div>
@@ -479,12 +469,21 @@
 
 @media (max-width: 768px) {
     .scroll-to-top-btn {
-        bottom: 90px; /* Lebih tinggi agar tidak bertumpuk dengan floating buttons */
+        bottom: 90px;
         right: 20px;
+        left: auto;
         width: 48px;
         height: 48px;
         font-size: 1.2rem;
-        z-index: 9996; /* Di bawah floating buttons tapi masih di atas konten */
+        z-index: 10000 !important;
+        pointer-events: auto !important;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(220, 38, 38, 0.3);
+    }
+
+    .scroll-to-top-btn.show {
+        pointer-events: auto !important;
+        z-index: 10000 !important;
     }
 }
 

@@ -22,9 +22,9 @@
             <!-- Product Image -->
             <div class="col-lg-6 mb-4">
                 @if($scaffolding->image)
-                    <img src="{{ asset('storage/' . $scaffolding->image) }}" alt="{{ $scaffolding->name }}" class="img-fluid rounded shadow">
+                    <img src="{{ asset('storage/' . $scaffolding->image) }}" alt="{{ $scaffolding->name }}" class="img-fluid rounded shadow" loading="eager" fetchpriority="high" decoding="async">
                 @else
-                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="{{ $scaffolding->name }}" class="img-fluid rounded shadow">
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="{{ $scaffolding->name }}" class="img-fluid rounded shadow" loading="eager" fetchpriority="high" decoding="async">
                 @endif
             </div>
             
@@ -33,45 +33,21 @@
                 <h1 class="display-5 fw-bold mb-3">{{ $scaffolding->name }}</h1>
                 
                 <div class="mb-3">
-                    <span class="badge badge-primary-modern me-2 fs-6">{{ ucfirst($scaffolding->type) }}</span>
-                    <span class="badge badge-secondary-modern fs-6">{{ ucfirst($scaffolding->material) }}</span>
+                    <span class="badge badge-primary-modern me-2 fs-6">
+                        {{ 
+                            $scaffolding->type == 'scaffolding' ? 'Scaffolding' : 
+                            ($scaffolding->type == 'accessories' ? 'Accessories' : 
+                            ($scaffolding->type == 'bekisting' ? 'Bekisting' : ucfirst($scaffolding->type)))
+                        }}
+                    </span>
                 </div>
                 
                 <div class="mb-4">
                     <p class="lead text-muted">{{ $scaffolding->description }}</p>
                 </div>
                 
-                <!-- Pricing -->
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">Harga</h5>
-                        <div class="row justify-content-center">
-                            @if($scaffolding->rental_price)
-                            <div class="{{ $scaffolding->sale_price ? 'col-6' : 'col-12' }}">
-                                <div class="text-center p-3 bg-light rounded">
-                                    <h6 class="text-muted mb-1">Sewa</h6>
-                                    <h4 class="text-primary fw-bold mb-0">{{ $scaffolding->formatted_rental_price }}</h4>
-                                    <small class="text-muted">per hari</small>
-                                </div>
-                            </div>
-                            @endif
-                            @if($scaffolding->sale_price)
-                            <div class="{{ $scaffolding->rental_price ? 'col-6' : 'col-12' }}">
-                                <div class="text-center p-3 bg-light rounded">
-                                    <h6 class="text-muted mb-1">Jual</h6>
-                                    <h4 class="text-success fw-bold mb-0">{{ $scaffolding->formatted_sale_price }}</h4>
-                                    <small class="text-muted">harga satuan</small>
-                                </div>
-                            </div>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Specifications -->
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">Spesifikasi</h5>
+                <div class="row mb-4">
+                    <div class="col-12">
                         <div class="row g-3">
                             <div class="col-6">
                                 <div class="d-flex justify-content-between">
@@ -81,7 +57,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="d-flex justify-content-between">
-                                    <span class="text-muted">Tinggi Maks:</span>
+                                    <span class="text-muted">Tinggi:</span>
                                     <strong>{{ $scaffolding->max_height }}m</strong>
                                 </div>
                             </div>
@@ -94,7 +70,7 @@
                             <div class="col-6">
                                 <div class="d-flex justify-content-between">
                                     <span class="text-muted">Status:</span>
-                                    @if($scaffolding->stock_quantity > 0)
+                                    @if($scaffolding->is_available)
                                         <span class="badge bg-success">Tersedia</span>
                                     @else
                                         <span class="badge bg-danger">Tidak Tersedia</span>
@@ -150,9 +126,9 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="card h-100 shadow-sm">
                             @if($related->image)
-                                <img src="{{ asset('storage/' . $related->image) }}" class="card-img-top" alt="{{ $related->name }}" style="height: 200px; object-fit: cover;">
+                                <img src="{{ asset('storage/' . $related->image) }}" class="card-img-top" alt="{{ $related->name }}" style="height: 200px; object-fit: cover;" loading="lazy" decoding="async">
                             @else
-                                <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="{{ $related->name }}" style="height: 200px; object-fit: cover;">
+                                <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="{{ $related->name }}" style="height: 200px; object-fit: cover;" loading="lazy" decoding="async">
                             @endif
                             
                             <div class="card-body d-flex flex-column">
@@ -160,12 +136,13 @@
                                 <p class="card-text text-muted small flex-grow-1">{{ Str::limit($related->description, 80) }}</p>
                                 
                                 <div class="d-flex justify-content-between align-items-center">
-                                    @if($related->rental_price)
-                                        <span class="text-primary fw-bold">{{ $related->formatted_rental_price }}/hari</span>
-                                    @endif
-                                    @if($related->sale_price && !$related->rental_price)
-                                        <span class="text-success fw-bold">{{ $related->formatted_sale_price }}</span>
-                                    @endif
+                                    <div>
+                                        @if($related->stock_quantity > 0)
+                                            <span class="badge bg-success">Tersedia</span>
+                                        @else
+                                            <span class="badge bg-danger">Tidak Tersedia</span>
+                                        @endif
+                                    </div>
                                     <a href="{{ route('scaffoldings.show', $related) }}" class="btn btn-sm btn-outline-red-modern">Detail</a>
                                 </div>
                             </div>
@@ -177,75 +154,6 @@
         </div>
     </div>
 </section>
-
-<!-- Contact Information Section -->
-@if(isset($profile))
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="row text-center mb-4">
-            <div class="col-12">
-                <h2 class="display-5 fw-bold mb-3">Hubungi Kami</h2>
-                <p class="lead text-muted">Tim kami siap membantu kebutuhan scaffolding Anda</p>
-            </div>
-        </div>
-        
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="text-center p-4 bg-white rounded shadow-sm h-100">
-                    <div class="mb-3">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-circle" style="width: 60px; height: 60px;">
-                            <i class="fas fa-phone fa-lg"></i>
-                        </div>
-                    </div>
-                    <h5 class="fw-bold mb-2">Telepon</h5>
-                    @if($profile->phone)
-                        <p class="text-muted mb-0">
-                            <a href="tel:{{ $profile->phone }}" class="text-decoration-none text-primary">{{ $profile->phone }}</a>
-                        </p>
-                    @else
-                        <p class="text-muted mb-0">-</p>
-                    @endif
-                </div>
-            </div>
-            
-            <div class="col-md-4">
-                <div class="text-center p-4 bg-white rounded shadow-sm h-100">
-                    <div class="mb-3">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-success text-white rounded-circle" style="width: 60px; height: 60px;">
-                            <i class="fas fa-envelope fa-lg"></i>
-                        </div>
-                    </div>
-                    <h5 class="fw-bold mb-2">Email</h5>
-                    @if($profile->email)
-                        <p class="text-muted mb-0">
-                            <a href="mailto:{{ $profile->email }}" class="text-decoration-none text-primary">{{ $profile->email }}</a>
-                        </p>
-                    @else
-                        <p class="text-muted mb-0">-</p>
-                    @endif
-                </div>
-            </div>
-            
-            <div class="col-md-4">
-                <div class="text-center p-4 bg-white rounded shadow-sm h-100">
-                    <div class="mb-3">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-danger text-white rounded-circle" style="width: 60px; height: 60px;">
-                            <i class="fas fa-map-marker-alt fa-lg"></i>
-                        </div>
-                    </div>
-                    <h5 class="fw-bold mb-2">Alamat</h5>
-                    @if($profile->address)
-                        <p class="text-muted mb-0 small">{{ Str::limit($profile->address, 50) }}</p>
-                    @else
-                        <p class="text-muted mb-0">-</p>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-@endif
-
 
 <style>
 /* Button Styles - Jelas dan Konsisten */
@@ -425,12 +333,21 @@
 
 @media (max-width: 768px) {
     .scroll-to-top-btn {
-        bottom: 90px; /* Lebih tinggi agar tidak bertumpuk dengan floating buttons */
+        bottom: 90px;
         right: 20px;
+        left: auto;
         width: 48px;
         height: 48px;
         font-size: 1.2rem;
-        z-index: 9996; /* Di bawah floating buttons tapi masih di atas konten */
+        z-index: 10000 !important;
+        pointer-events: auto !important;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(220, 38, 38, 0.3);
+    }
+
+    .scroll-to-top-btn.show {
+        pointer-events: auto !important;
+        z-index: 10000 !important;
     }
 }
 

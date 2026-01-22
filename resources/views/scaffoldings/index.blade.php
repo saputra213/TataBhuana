@@ -4,6 +4,41 @@
 @section('description', 'Lihat katalog lengkap produk scaffolding berkualitas tinggi untuk kebutuhan proyek konstruksi Anda.')
 
 @section('content')
+<style>
+.scaffolding-btn-wrapper {
+    width: 100%;
+}
+
+.scaffolding-btn-desktop {
+    width: 100%;
+    justify-content: center;
+}
+
+@media (max-width: 576px) {
+    .scaffolding-title {
+        font-size: 11px;
+        line-height: 1.1;
+    }
+    .scaffolding-spec-text {
+        font-size: 10px;
+        line-height: 1.1;
+    }
+    .scaffolding-spec-text div {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+@media (min-width: 992px) {
+    .scaffolding-btn-desktop {
+        padding: 0.6rem 1.2rem !important;
+    }
+    .scaffolding-btn-desktop .small {
+        font-size: 0.95rem;
+    }
+}
+</style>
 <!-- Hero Section -->
 <section class="scaffoldings-hero text-white py-5">
     <div class="container">
@@ -19,43 +54,90 @@
 <!-- Filters -->
 <section class="py-4 bg-light">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <form method="GET" action="{{ route('scaffoldings.index') }}" class="row g-3">
-                    <div class="col-md-3">
-                        <select name="type" class="form-select">
-                            <option value="">Semua Jenis</option>
-                            <option value="frame" {{ request('type') == 'frame' ? 'selected' : '' }}>Frame Scaffolding</option>
-                            <option value="tube" {{ request('type') == 'tube' ? 'selected' : '' }}>Tube Scaffolding</option>
-                            <option value="system" {{ request('type') == 'system' ? 'selected' : '' }}>System Scaffolding</option>
-                            <option value="mobile" {{ request('type') == 'mobile' ? 'selected' : '' }}>Mobile Scaffolding</option>
-                        </select>
-                    </div>
-                    
-                    <div class="col-md-3">
-                        <select name="material" class="form-select">
-                            <option value="">Semua Material</option>
-                            <option value="steel" {{ request('material') == 'steel' ? 'selected' : '' }}>Baja</option>
-                            <option value="aluminum" {{ request('material') == 'aluminum' ? 'selected' : '' }}>Aluminium</option>
-                            <option value="galvanized" {{ request('material') == 'galvanized' ? 'selected' : '' }}>Galvanized</option>
-                        </select>
-                    </div>
-                    
-                    <div class="col-md-3">
-                        <select name="sort" class="form-select">
-                            <option value="">Urutkan</option>
-                            <option value="name" {{ request('sort') == 'name' ? 'selected' : '' }}>Nama A-Z</option>
-                            <option value="price_low" {{ request('sort') == 'price_low' ? 'selected' : '' }}>Harga Terendah</option>
-                            <option value="price_high" {{ request('sort') == 'price_high' ? 'selected' : '' }}>Harga Tertinggi</option>
-                        </select>
-                    </div>
-                    
-                    <div class="col-md-3">
-                        <button type="submit" class="btn btn-success-modern w-100">
-                            <i class="fas fa-filter me-2"></i>Filter
-                        </button>
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10">
+                <form method="GET" action="{{ route('scaffoldings.index') }}" id="filterForm">
+                    <!-- Hidden Inputs for Filter Values -->
+                    <input type="hidden" name="type" id="inputType" value="{{ request('type') }}">
+                    <input type="hidden" name="sort" id="inputSort" value="{{ request('sort') }}">
+                    <input type="hidden" name="per_page" id="inputPerPage" value="{{ request('per_page', 12) }}">
+
+                    <div class="row g-2">
+                        <!-- Search Bar -->
+                        <div class="col-10 col-lg-4 order-1 order-lg-1">
+                            <div class="input-group shadow-sm h-100">
+                                <span class="input-group-text bg-white border-end-0 ps-3"><i class="fas fa-search text-muted"></i></span>
+                                <input type="text" name="search" class="form-control border-start-0 py-2" placeholder="Cari produk..." value="{{ request('search') }}">
+                            </div>
+                        </div>
+
+                        <!-- Filter Button -->
+                        <div class="col-2 col-lg-2 order-2 order-lg-4">
+                            <button type="submit" class="btn btn-danger w-100 h-100 d-flex align-items-center justify-content-center shadow-sm fw-bold">
+                                <i class="fas fa-filter"></i> <span class="ms-2 d-none d-lg-inline">Filter</span>
+                            </button>
+                        </div>
+
+                        <!-- Type Dropdown -->
+                        <div class="col-6 col-lg-3 order-3 order-lg-2">
+                            <div class="dropdown w-100 h-100">
+                                <button class="btn bg-white border shadow-sm w-100 h-100 dropdown-toggle d-flex justify-content-between align-items-center" type="button" id="dropdownType" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="text-truncate">
+                                    {{ 
+                                        request('type') == 'scaffolding' ? 'Scaffolding' : 
+                                        (request('type') == 'accessories' ? 'Accessories' : 
+                                        (request('type') == 'bekisting' ? 'Bekisting' : 'Jenis'))
+                                    }}
+                                    </span>
+                                </button>
+                                <ul class="dropdown-menu shadow-sm w-100" aria-labelledby="dropdownType">
+                                    <li><a class="dropdown-item {{ request('type') == '' ? 'active' : '' }}" href="#" onclick="setFilter('type', ''); return false;">Semua Jenis</a></li>
+                                    <li><a class="dropdown-item {{ request('type') == 'scaffolding' ? 'active' : '' }}" href="#" onclick="setFilter('type', 'scaffolding'); return false;">Scaffolding</a></li>
+                                    <li><a class="dropdown-item {{ request('type') == 'accessories' ? 'active' : '' }}" href="#" onclick="setFilter('type', 'accessories'); return false;">Accessories</a></li>
+                                    <li><a class="dropdown-item {{ request('type') == 'bekisting' ? 'active' : '' }}" href="#" onclick="setFilter('type', 'bekisting'); return false;">Bekisting</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Sort Dropdown -->
+                        <div class="col-6 col-lg-3 order-4 order-lg-3">
+                            <div class="dropdown w-100 h-100">
+                                <button class="btn bg-white border shadow-sm w-100 h-100 dropdown-toggle d-flex justify-content-between align-items-center" type="button" id="dropdownSort" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="text-truncate">
+                                    {{ 
+                                        request('sort') == 'name' ? 'Nama' : 'Urut'
+                                    }}
+                                    </span>
+                                </button>
+                                <ul class="dropdown-menu shadow-sm w-100" aria-labelledby="dropdownSort">
+                                    <li><a class="dropdown-item {{ request('sort') == '' ? 'active' : '' }}" href="#" onclick="setFilter('sort', ''); return false;">Default</a></li>
+                                    <li><a class="dropdown-item {{ request('sort') == 'name' ? 'active' : '' }}" href="#" onclick="setFilter('sort', 'name'); return false;">Nama A-Z</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </form>
+
+                <script>
+                    function setFilter(name, value) {
+                        document.getElementById('input' + name.charAt(0).toUpperCase() + name.slice(1)).value = value;
+                        document.getElementById('filterForm').submit();
+                    }
+                    
+                    document.addEventListener('DOMContentLoaded', function() {
+                        var isMobile = window.innerWidth < 768;
+                        var urlParams = new URLSearchParams(window.location.search);
+                        var perPage = urlParams.get('per_page');
+
+                        if (isMobile && perPage !== '6') {
+                            urlParams.set('per_page', '6');
+                            window.location.search = urlParams.toString();
+                        } else if (!isMobile && perPage === '6') {
+                            urlParams.delete('per_page');
+                            window.location.search = urlParams.toString();
+                        }
+                    });
+                </script>
             </div>
         </div>
     </div>
@@ -65,63 +147,55 @@
 <section class="py-5">
     <div class="container">
         @if($scaffoldings->count() > 0)
-            <div class="row g-4">
+            <div class="row g-4 products-grid-mobile-limit">
                 @foreach($scaffoldings as $scaffolding)
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100 shadow-sm">
-                        @if($scaffolding->image)
-                            <img src="{{ asset('storage/' . $scaffolding->image) }}" class="card-img-top" alt="{{ $scaffolding->name }}" style="height: 250px; object-fit: cover;">
-                        @else
-                            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="{{ $scaffolding->name }}" style="height: 250px; object-fit: cover;">
-                        @endif
+                <div class="col-6 col-md-3">
+                    <div class="card h-100 shadow-sm product-card border-0" 
+                         style="cursor: pointer;"
+                         data-bs-toggle="modal" 
+                         data-bs-target="#productModal"
+                         data-product="{{ json_encode($scaffolding) }}">
+                        <div class="position-relative overflow-hidden rounded-top">
+                            @if($scaffolding->image)
+                                <div class="ratio ratio-1x1">
+                                    <img src="{{ asset('storage/' . $scaffolding->image) }}" class="card-img-top" alt="{{ $scaffolding->name }}" style="object-fit: cover;" loading="lazy" decoding="async">
+                                </div>
+                            @else
+                                <div class="ratio ratio-1x1">
+                                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.0&auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="{{ $scaffolding->name }}" style="object-fit: cover;" loading="lazy" decoding="async">
+                                </div>
+                            @endif
+                        </div>
                         
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title fw-bold">{{ $scaffolding->name }}</h5>
-                            <p class="card-text text-muted flex-grow-1">{{ Str::limit($scaffolding->description, 120) }}</p>
+                        <div class="card-body d-flex flex-column p-3">
+                            <h6 class="card-title fw-bold mb-2 text-truncate scaffolding-title">{{ $scaffolding->name }}</h6>
                             
-                            <div class="mb-3">
-                                <span class="badge badge-primary-modern me-2">{{ ucfirst($scaffolding->type) }}</span>
-                                <span class="badge badge-secondary-modern">{{ ucfirst($scaffolding->material) }}</span>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <div class="row text-center">
-                                    <div class="col-4">
-                                        <small class="text-muted d-block">Dimensi</small>
-                                        <strong class="small">{{ $scaffolding->dimensions }}</strong>
-                                    </div>
-                                    <div class="col-4">
-                                        <small class="text-muted d-block">Tinggi</small>
-                                        <strong class="small">{{ $scaffolding->max_height }}m</strong>
-                                    </div>
-                                    <div class="col-4">
-                                        <small class="text-muted d-block">Beban</small>
-                                        <strong class="small">{{ $scaffolding->max_load }}kg</strong>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                @if($scaffolding->rental_price)
-                                <div>
-                                    <small class="text-muted">Sewa:</small>
-                                    <strong class="text-primary d-block">{{ $scaffolding->formatted_rental_price }}/hari</strong>
-                                </div>
-                                @endif
-                                @if($scaffolding->sale_price)
-                                <div>
-                                    <small class="text-muted">Jual:</small>
-                                    <strong class="text-success d-block">{{ $scaffolding->formatted_sale_price }}</strong>
-                                </div>
+                            <div class="mb-3 d-flex align-items-center flex-wrap gap-2">
+                                <span class="badge badge-primary-modern" style="font-size:0.7rem">
+                                    {{ 
+                                        $scaffolding->type == 'scaffolding' ? 'Scaffolding' : 
+                                        ($scaffolding->type == 'accessories' ? 'Accessories' : 
+                                        ($scaffolding->type == 'bekisting' ? 'Bekisting' : ucfirst($scaffolding->type)))
+                                    }}
+                                </span>
+                                @if($scaffolding->is_available)
+                                    <span class="badge bg-success" style="font-size:0.7rem">Tersedia</span>
+                                @else
+                                    <span class="badge bg-danger" style="font-size:0.7rem">Habis</span>
                                 @endif
                             </div>
                             
-                            <div class="d-flex gap-2">
-                                <a href="{{ route('scaffoldings.show', $scaffolding) }}" class="btn btn-success-modern flex-grow-1">
-                                    <i class="fas fa-eye me-2"></i>Detail
-                                </a>
-                                <a href="{{ route('contact') }}" class="btn btn-outline-success-modern">
-                                    <i class="fas fa-phone"></i>
+                            <div class="mt-auto">
+                                 @php
+                                    $phone = $profile->phone ?? '6281234567890';
+                                    if(substr($phone, 0, 1) == '0') {
+                                        $phone = '62' . substr($phone, 1);
+                                    }
+                                    $message = "Halo Tata Bhuana, saya tertarik dengan produk {$scaffolding->name}. Apakah stok tersedia?";
+                                    $waLink = "https://wa.me/" . preg_replace('/\D/', '', $phone) . "?text=" . urlencode($message);
+                                @endphp
+                                <a href="{{ $waLink }}" target="_blank" onclick="event.stopPropagation()" class="btn btn-success-modern w-100 btn-sm d-flex align-items-center justify-content-center gap-2">
+                                    <i class="fab fa-whatsapp"></i> <span class="small">Order via WA</span>
                                 </a>
                             </div>
                         </div>
@@ -129,12 +203,18 @@
                 </div>
                 @endforeach
             </div>
+
+            @if($scaffoldings->hasPages())
+                <div class="d-flex justify-content-center mt-4">
+                    {{ $scaffoldings->withQueryString()->links() }}
+                </div>
+            @endif
         @else
             <div class="text-center py-5">
                 <i class="fas fa-search fa-3x text-muted mb-3"></i>
                 <h4 class="text-muted">Tidak ada produk yang ditemukan</h4>
                 <p class="text-muted">Coba ubah filter pencarian Anda</p>
-                <a href="{{ route('scaffoldings.index') }}" class="btn btn-success-modern">
+                <a href="{{ route('scaffoldings.index') }}" class="btn btn-danger">
                     <i class="fas fa-refresh me-2"></i>Reset Filter
                 </a>
             </div>
@@ -142,83 +222,62 @@
     </div>
 </section>
 
-<!-- Contact Information Section -->
-@if(isset($profile))
-<section class="py-5 bg-light">
+<!-- CTA Section -->
+<section class="py-5 bg-danger home-cta-section">
     <div class="container">
-        <div class="row text-center mb-4">
-            <div class="col-12">
-                <h2 class="display-5 fw-bold mb-3">Hubungi Kami</h2>
-                <p class="lead text-muted">Tim kami siap membantu kebutuhan scaffolding Anda</p>
-            </div>
-        </div>
-        
-        <div class="row g-4 icon-grid-3">
-            <div class="col-md-4">
-                <div class="text-center p-4 bg-white rounded shadow-sm h-100">
-                    <div class="mb-3">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-circle" style="width: 60px; height: 60px;">
-                            <i class="fas fa-phone fa-lg"></i>
-                        </div>
+        <div class="home-cta-inner mx-auto">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-7 text-white">
+                    <div class="home-cta-kicker text-uppercase fw-semibold small mb-2">
+                        Jangan tunda keamanan proyek Anda.
                     </div>
-                    <h5 class="fw-bold mb-2">Telepon</h5>
-                    @if($profile->phone)
-                        <p class="text-muted mb-0">
-                            <a href="tel:{{ $profile->phone }}" class="text-decoration-none text-primary">{{ $profile->phone }}</a>
-                        </p>
-                    @else
-                        <p class="text-muted mb-0">-</p>
-                    @endif
+                    <h2 class="home-cta-title fw-bold mb-3">
+                        {{ $profile?->home_cta_title ?? 'Siap Memulai Proyek Anda?' }}
+                    </h2>
+                    <p class="home-cta-subtitle lead mb-3 text-white-50">
+                        {{ $profile?->home_cta_subtitle ?? 'Hubungi kami sekarang untuk konsultasi gratis dan penawaran terbaik' }}
+                    </p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="home-cta-chip home-cta-chip-red">
+                            <i class="fas fa-shield-alt me-1"></i> Rekomendasi sistem scaffolding yang aman dan sesuai standar
+                        </span>
+                        <span class="home-cta-chip home-cta-chip-green">
+                            <i class="fas fa-headset me-1"></i> Tim support siap membantu dari perencanaan hingga eksekusi
+                        </span>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="col-md-4">
-                <div class="text-center p-4 bg-white rounded shadow-sm h-100">
-                    <div class="mb-3">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-success text-white rounded-circle" style="width: 60px; height: 60px;">
-                            <i class="fas fa-envelope fa-lg"></i>
+                <div class="col-lg-5">
+                    <div class="home-cta-card bg-white text-start">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="home-cta-icon me-3">
+                                <i class="fas fa-clipboard-check"></i>
+                            </div>
+                            <div>
+                                <div class="fw-semibold small text-muted">
+                                    Konsultasi Proyek & Kebutuhan Scaffolding
+                                </div>
+                                <div class="fw-bold">
+                                    Tim siap membantu Anda
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <h5 class="fw-bold mb-2">Email</h5>
-                    @if($profile->email)
-                        <p class="text-muted mb-0">
-                            <a href="mailto:{{ $profile->email }}" class="text-decoration-none text-primary">{{ $profile->email }}</a>
+                        <p class="small text-muted mb-3">
+                            Ceritakan secara singkat jenis pekerjaan, ketinggian kerja, dan lokasi proyek Anda.
+                            Kami akan merangkum kebutuhan scaffolding, estimasi biaya, serta opsi sewa atau jual
+                            yang paling pas untuk tim Anda.
                         </p>
-                    @else
-                        <p class="text-muted mb-0">-</p>
-                    @endif
-                </div>
-            </div>
-            
-            <div class="col-md-4">
-                <div class="text-center p-4 bg-white rounded shadow-sm h-100">
-                    <div class="mb-3">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-danger text-white rounded-circle" style="width: 60px; height: 60px;">
-                            <i class="fas fa-map-marker-alt fa-lg"></i>
+                        <div class="d-grid">
+                            <a href="{{ route('contact') }}" class="btn btn-danger btn-lg">
+                                <i class="fas fa-file-signature me-2"></i> Minta penawaran & konsultasi
+                            </a>
+                        </div>
+                        <div class="home-cta-meta small text-muted mt-3">
+                            <i class="fas fa-map-marker-alt me-1"></i> Berbasis di Yogyakarta, melayani berbagai proyek di sekitarnya.
                         </div>
                     </div>
-                    <h5 class="fw-bold mb-2">Alamat</h5>
-                    @if($profile->address)
-                        <p class="text-muted mb-0 small">{{ Str::limit($profile->address, 50) }}</p>
-                    @else
-                        <p class="text-muted mb-0">-</p>
-                    @endif
                 </div>
             </div>
         </div>
-    </div>
-</section>
-@endif
-
-<!-- CTA Section -->
-<!-- CTA Section -->
-<section class="py-5 bg-primary text-white">
-    <div class="container text-center">
-        <h2 class="display-5 fw-bold mb-3">Siap Memulai Proyek Anda?</h2>
-        <p class="lead mb-4">Hubungi kami sekarang untuk konsultasi gratis dan penawaran terbaik</p>
-        <a href="{{ route('contact') }}" class="btn btn-light btn-lg">
-            <i class="fas fa-phone me-2"></i>Hubungi Kami Sekarang
-        </a>
     </div>
 </section>
 
@@ -249,6 +308,99 @@
 .hero-subtitle {
     animation: fadeInUp 1s ease-out 0.2s both;
     font-size: 1.5rem;
+}
+
+/* CTA styles */
+.home-cta-inner {
+    max-width: 1040px;
+}
+
+.home-cta-card {
+    border-radius: 24px;
+    padding: 1.9rem 1.7rem;
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.35);
+    position: relative;
+    overflow: hidden;
+}
+
+.home-cta-card::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: 24px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.8), rgba(248, 113, 113, 0.7));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+.home-cta-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 1.6rem;
+    box-shadow: 0 12px 30px rgba(220, 38, 38, 0.55);
+}
+
+.home-cta-chip {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.78rem;
+    backdrop-filter: blur(4px);
+}
+
+.home-cta-chip i {
+    font-size: 0.9rem;
+}
+
+.home-cta-chip-red {
+    background: rgba(248, 113, 113, 0.12);
+    color: #fee2e2;
+    border: 1px solid rgba(254, 226, 226, 0.4);
+}
+
+.home-cta-chip-green {
+    background: rgba(22, 163, 74, 0.12);
+    color: #bbf7d0;
+    border: 1px solid rgba(74, 222, 128, 0.5);
+}
+
+.home-cta-kicker {
+    letter-spacing: 0.08em;
+    color: rgba(254, 226, 226, 0.9);
+}
+
+.home-cta-title {
+    font-size: 2.4rem;
+}
+
+.home-cta-meta {
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .home-cta-card {
+        margin-top: 0.75rem;
+        padding: 1.4rem 1.25rem;
+    }
+    .home-cta-title {
+        font-size: 1.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .products-grid-mobile-limit > [class*="col-"]:nth-child(n+7) {
+        display: none;
+    }
 }
 
 /* Product Cards */
@@ -326,9 +478,15 @@
 .btn-outline-success-modern:hover {
     background: #16a34a;
     color: white !important;
-    border-color: #16a34a;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.4);
+}
+
+/* Product Card Redesign */
+.product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
 }
 
 /* CTA Section */
@@ -468,12 +626,21 @@
 
 @media (max-width: 768px) {
     .scroll-to-top-btn {
-        bottom: 90px; /* Lebih tinggi agar tidak bertumpuk dengan floating buttons */
+        bottom: 90px;
         right: 20px;
+        left: auto;
         width: 48px;
         height: 48px;
         font-size: 1.2rem;
-        z-index: 9996; /* Di bawah floating buttons tapi masih di atas konten */
+        z-index: 10000 !important;
+        pointer-events: auto !important;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(220, 38, 38, 0.3);
+    }
+
+    .scroll-to-top-btn.show {
+        pointer-events: auto !important;
+        z-index: 10000 !important;
     }
 }
 
@@ -496,6 +663,121 @@
     }
 }
 </style>
+
+<!-- Product Modal -->
+<div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content rounded-4 border-0 shadow-lg overflow-hidden">
+            <div class="modal-body p-0">
+                <div class="row g-0">
+                    <div class="col-lg-6 bg-light position-relative" style="min-height: 300px;">
+                         <img id="modalProductImage" src="" alt="" class="w-100 h-100 position-absolute top-0 start-0" style="object-fit: cover;">
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="p-4 p-lg-5 h-100 d-flex flex-column">
+                            <button type="button" class="btn-close position-absolute top-0 end-0 m-3 z-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                            
+                            <div class="mb-2">
+                                <span id="modalProductType" class="badge badge-primary-modern me-1"></span>
+                            </div>
+                            
+                            <h3 id="modalProductName" class="fw-bold mb-3"></h3>
+                            
+                            <div class="mb-4">
+                                <h6 class="fw-bold text-muted small text-uppercase mb-2">Deskripsi</h6>
+                                <p id="modalProductDesc" class="text-muted mb-0 small"></p>
+                            </div>
+                            
+                            <div class="row g-3 mb-4">
+                                <div class="col-4">
+                                    <div class="p-2 bg-light rounded text-center h-100">
+                                        <div class="small text-muted mb-1">Dimensi</div>
+                                        <div id="modalProductDim" class="fw-bold small"></div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-2 bg-light rounded text-center h-100">
+                                        <div class="small text-muted mb-1">Tinggi</div>
+                                        <div id="modalProductHeight" class="fw-bold small"></div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="p-2 bg-light rounded text-center h-100">
+                                        <div class="small text-muted mb-1">Beban</div>
+                                        <div id="modalProductLoad" class="fw-bold small"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-auto">
+                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                    <div class="small text-muted">Status: <span id="modalProductStock" class="fw-bold text-success">Tersedia</span></div>
+                                </div>
+                                <a id="modalProductWA" href="#" target="_blank" class="btn btn-success-modern w-100 py-2">
+                                    <i class="fab fa-whatsapp me-2"></i> Order via WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var productModal = document.getElementById('productModal');
+    if(productModal) {
+        productModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var productData = button.getAttribute('data-product');
+            if(!productData) return;
+            
+            var product = JSON.parse(productData);
+            
+            // Image
+            var storageUrl = "{{ asset('storage') }}";
+            var imgPath = product.image ? storageUrl + '/' + product.image : "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.0&auto=format&fit=crop&w=400&q=80";
+            document.getElementById('modalProductImage').src = imgPath;
+            
+            // Text Content
+            document.getElementById('modalProductName').textContent = product.name;
+            document.getElementById('modalProductDesc').textContent = product.description || 'Deskripsi belum tersedia.';
+            
+            var typeDisplay = product.type;
+            if(product.type === 'scaffolding') typeDisplay = 'Scaffolding';
+            else if(product.type === 'accessories') typeDisplay = 'Accessories';
+            else if(product.type === 'bekisting') typeDisplay = 'Bekisting';
+            else typeDisplay = product.type.charAt(0).toUpperCase() + product.type.slice(1);
+            
+            document.getElementById('modalProductType').textContent = typeDisplay;
+            
+            // Specs
+            document.getElementById('modalProductDim').textContent = product.dimensions || '-';
+            document.getElementById('modalProductHeight').textContent = (product.max_height || '-') + 'm';
+            document.getElementById('modalProductLoad').textContent = (product.max_load || '-') + 'kg';
+            
+            // Stock
+            var stockEl = document.getElementById('modalProductStock');
+            if(product.is_available) {
+                stockEl.textContent = 'Tersedia';
+                stockEl.className = 'fw-bold text-success';
+            } else {
+                stockEl.textContent = 'Habis';
+                stockEl.className = 'fw-bold text-danger';
+            }
+            
+            // WA Link
+            var phone = "{{ $profile->phone ?? '6281234567890' }}";
+            if(phone.startsWith('0')) phone = '62' + phone.substring(1);
+            var message = "Halo Tata Bhuana, saya tertarik dengan produk " + product.name + ". Apakah stok tersedia?";
+            var waLink = "https://wa.me/" + phone.replace(/\D/g, '') + "?text=" + encodeURIComponent(message);
+            document.getElementById('modalProductWA').href = waLink;
+        });
+    }
+});
+</script>
 
 <!-- Scroll to Top Button -->
 <button id="scrollToTopBtn" class="scroll-to-top-btn" title="Scroll ke Atas">

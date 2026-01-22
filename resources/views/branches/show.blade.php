@@ -3,6 +3,10 @@
 @section('title', $branch->name . ' - Tata Bhuana Scaffolding')
 @section('description', $branch->description)
 
+@push('styles')
+    @vite('resources/css/home.css')
+@endpush
+
 @section('content')
 <!-- Breadcrumb -->
 <nav aria-label="breadcrumb" class="py-3 bg-light">
@@ -22,7 +26,7 @@
             <!-- Branch Image -->
             <div class="col-lg-6 mb-4">
                 @if($branch->image)
-                    <img src="{{ asset('storage/' . $branch->image) }}" alt="{{ $branch->name }}" class="img-fluid rounded shadow">
+                    <img src="{{ asset('storage/' . $branch->image) }}" alt="{{ $branch->name }}" class="img-fluid rounded shadow" loading="eager" fetchpriority="high" decoding="async">
                 @else
                     <div class="bg-light d-flex align-items-center justify-content-center rounded shadow" style="height: 400px;">
                         <div class="text-center">
@@ -134,10 +138,10 @@
                 
                 <!-- Action Buttons -->
                 <div class="d-grid gap-2">
-                    <a href="{{ $branch->google_maps_url }}" target="_blank" class="btn btn-primary btn-lg">
+                    <a href="{{ $branch->google_maps_url }}" target="_blank" class="btn branch-map-btn btn-lg">
                         <i class="fas fa-map-marked-alt me-2"></i>Lihat di Google Maps
                     </a>
-                    <a href="{{ $branch->whatsapp_url }}" target="_blank" class="btn btn-outline-primary">
+                    <a href="{{ $branch->whatsapp_url }}" target="_blank" class="btn branch-whatsapp-btn">
                         <i class="fab fa-whatsapp me-2"></i>Hubungi via WhatsApp
                     </a>
                     <a href="{{ route('branches.index') }}" class="btn btn-outline-secondary">
@@ -233,7 +237,7 @@
                         </div>
                         @if(($branch->latitude && $branch->longitude) || $branch->address)
                         <div class="mt-3">
-                            <a href="{{ $branch->google_maps_url }}" target="_blank" class="btn btn-primary">
+                            <a href="{{ $branch->google_maps_url }}" target="_blank" class="btn branch-map-btn">
                                 <i class="fas fa-map-marked-alt me-2"></i>Buka di Google Maps
                             </a>
                         </div>
@@ -245,135 +249,37 @@
     </div>
 </section>
 
-<!-- Contact Information Section -->
-@if(isset($profile))
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="row text-center mb-4">
-            <div class="col-12">
-                <h2 class="display-5 fw-bold mb-3">Hubungi Kami</h2>
-                <p class="lead text-muted">Tim kami siap membantu kebutuhan scaffolding Anda</p>
-            </div>
-        </div>
-        
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="text-center p-4 bg-white rounded shadow-sm h-100">
-                    <div class="mb-3">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-circle" style="width: 60px; height: 60px;">
-                            <i class="fas fa-phone fa-lg"></i>
-                        </div>
-                    </div>
-                    <h5 class="fw-bold mb-2">Telepon</h5>
-                    @if($profile->phone)
-                        <p class="text-muted mb-0">
-                            <a href="tel:{{ $profile->phone }}" class="text-decoration-none text-primary">{{ $profile->phone }}</a>
-                        </p>
-                    @else
-                        <p class="text-muted mb-0">-</p>
-                    @endif
-                </div>
-            </div>
-            
-            <div class="col-md-4">
-                <div class="text-center p-4 bg-white rounded shadow-sm h-100">
-                    <div class="mb-3">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-success text-white rounded-circle" style="width: 60px; height: 60px;">
-                            <i class="fas fa-envelope fa-lg"></i>
-                        </div>
-                    </div>
-                    <h5 class="fw-bold mb-2">Email</h5>
-                    @if($profile->email)
-                        <p class="text-muted mb-0">
-                            <a href="mailto:{{ $profile->email }}" class="text-decoration-none text-primary">{{ $profile->email }}</a>
-                        </p>
-                    @else
-                        <p class="text-muted mb-0">-</p>
-                    @endif
-                </div>
-            </div>
-            
-            <div class="col-md-4">
-                <div class="text-center p-4 bg-white rounded shadow-sm h-100">
-                    <div class="mb-3">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-danger text-white rounded-circle" style="width: 60px; height: 60px;">
-                            <i class="fas fa-map-marker-alt fa-lg"></i>
-                        </div>
-                    </div>
-                    <h5 class="fw-bold mb-2">Alamat</h5>
-                    @if($profile->address)
-                        <p class="text-muted mb-0 small">{{ Str::limit($profile->address, 50) }}</p>
-                    @else
-                        <p class="text-muted mb-0">-</p>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-@endif
+<!-- Contact Section Removed -->
 
-<!-- CTA Section -->
-<section class="cta-section py-5 text-white">
-    <div class="container text-center">
-        <h2 class="display-5 fw-bold mb-3">Siap Bekerja Sama?</h2>
-        <p class="lead mb-4">Hubungi cabang {{ $branch->name }} untuk konsultasi dan penawaran terbaik</p>
-        <a href="{{ $branch->whatsapp_url ?? route('contact') }}" target="_blank" class="btn btn-light btn-lg me-2">
-            <i class="fab fa-whatsapp me-2"></i>Hubungi via WhatsApp
-        </a>
-        <a href="{{ route('contact') }}" class="btn btn-outline-light btn-lg">
-            <i class="fas fa-phone me-2"></i>Kontak Lainnya
-        </a>
-    </div>
-</section>
+<!-- CTA Section Removed -->
 
 <style>
-.cta-section {
+.branch-map-btn {
     background: #dc2626;
-    position: relative;
-    overflow: hidden;
+    border-color: #dc2626;
+    color: #ffffff;
+    font-weight: 600;
 }
 
-.cta-section::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -10%;
-    width: 500px;
-    height: 500px;
+.branch-map-btn:hover,
+.branch-map-btn:focus {
+    background: #b91c1c;
+    border-color: #b91c1c;
+    color: #ffffff;
+}
+
+.branch-whatsapp-btn {
     background: #16a34a;
-    border-radius: 50%;
-    opacity: 0.1;
-    animation: float 6s ease-in-out infinite;
+    border-color: #16a34a;
+    color: #ffffff;
+    font-weight: 600;
 }
 
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-20px) rotate(180deg);
-    }
-}
-
-.btn-outline-light {
-    background: transparent !important;
-    color: white !important;
-    font-weight: 600 !important;
-    border: 2px solid white !important;
-    border-radius: 8px;
-    padding: 0.6rem 1.2rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
-    text-decoration: none;
-}
-
-.btn-outline-light:hover {
-    background: white !important;
-    color: #dc2626 !important;
-    border-color: white !important;
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.4);
-    transform: translateY(-2px);
+.branch-whatsapp-btn:hover,
+.branch-whatsapp-btn:focus {
+    background: #15803d;
+    border-color: #15803d;
+    color: #ffffff;
 }
 </style>
 @endsection

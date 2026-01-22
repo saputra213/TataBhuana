@@ -12,33 +12,33 @@ class ScaffoldingController extends Controller
     {
         $query = Scaffolding::where('is_available', true);
         
-        // Filter by type
         if ($request->filled('type')) {
             $query->where('type', $request->type);
         }
         
-        // Filter by material
-        if ($request->filled('material')) {
-            $query->where('material', $request->material);
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('description', 'like', "%{$search}%");
+            });
         }
         
-        // Sort
         switch ($request->sort) {
             case 'name':
                 $query->orderBy('name', 'asc');
-                break;
-            case 'price_low':
-                $query->orderBy('rental_price', 'asc');
-                break;
-            case 'price_high':
-                $query->orderBy('rental_price', 'desc');
                 break;
             default:
                 $query->orderBy('created_at', 'desc');
                 break;
         }
         
-        $scaffoldings = $query->paginate(12);
+        $userAgent = $request->header('User-Agent', '');
+        $isMobile = preg_match('/Android|iPhone|iPad|iPod|Windows Phone|Mobi/i', $userAgent);
+        $defaultPerPage = $isMobile ? 6 : 12;
+        
+        $perPage = (int) $request->input('per_page', $defaultPerPage);
+        $scaffoldings = $query->paginate($perPage);
         $profile = CompanyProfile::first();
         return view('scaffoldings.index', compact('scaffoldings', 'profile'));
     }

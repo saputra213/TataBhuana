@@ -41,6 +41,9 @@ class WatermarkService
                 case 'image/gif':
                     $image = imagecreatefromgif($fullPath);
                     break;
+                case 'image/webp':
+                    $image = imagecreatefromwebp($fullPath);
+                    break;
                 default:
                     return false;
             }
@@ -163,9 +166,14 @@ class WatermarkService
                     $result = imagepng($image, $fullPath, 9);
                     break;
                 case 'image/gif':
-                    $result = imagegif($image, $fullPath);
-                    break;
-            }
+                $result = imagegif($image, $fullPath);
+                break;
+            case 'image/webp':
+                // Save alpha for webp
+                imagesavealpha($image, true);
+                $result = imagewebp($image, $fullPath, 90);
+                break;
+        }
             
             imagedestroy($image);
             

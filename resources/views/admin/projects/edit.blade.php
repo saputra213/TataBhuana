@@ -17,16 +17,16 @@
                     
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="title" class="form-label">Judul Proyek *</label>
-                            <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title', $project->title) }}" required>
+                            <label for="title" class="form-label">Judul Proyek <small class="text-muted">(Maks. 255 karakter)</small> *</label>
+                            <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title', $project->title) }}" maxlength="255" required>
                             @error('title')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         
                         <div class="col-md-6 mb-3">
-                            <label for="client_name" class="form-label">Nama Klien *</label>
-                            <input type="text" class="form-control @error('client_name') is-invalid @enderror" id="client_name" name="client_name" value="{{ old('client_name', $project->client_name) }}" required>
+                            <label for="client_name" class="form-label">Nama Klien <small class="text-muted">(Maks. 255 karakter)</small> *</label>
+                            <input type="text" class="form-control @error('client_name') is-invalid @enderror" id="client_name" name="client_name" value="{{ old('client_name', $project->client_name) }}" maxlength="255" required>
                             @error('client_name')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -34,8 +34,8 @@
                     </div>
                     
                     <div class="mb-3">
-                        <label for="description" class="form-label">Deskripsi *</label>
-                        <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="3" required>{{ old('description', $project->description) }}</textarea>
+                        <label for="description" class="form-label">Deskripsi <small class="text-muted">(Maks. 500 karakter)</small> *</label>
+                        <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="3" maxlength="500" required>{{ old('description', $project->description) }}</textarea>
                         @error('description')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -43,8 +43,8 @@
                     
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="location" class="form-label">Lokasi *</label>
-                            <input type="text" class="form-control @error('location') is-invalid @enderror" id="location" name="location" value="{{ old('location', $project->location) }}" required>
+                            <label for="location" class="form-label">Lokasi <small class="text-muted">(Maks. 255 karakter)</small> *</label>
+                            <input type="text" class="form-control @error('location') is-invalid @enderror" id="location" name="location" value="{{ old('location', $project->location) }}" maxlength="255" required>
                             @error('location')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -128,24 +128,24 @@
                     </div>
                     
                     <div class="mb-3">
-                        <label for="challenges" class="form-label">Tantangan</label>
-                        <textarea class="form-control @error('challenges') is-invalid @enderror" id="challenges" name="challenges" rows="3">{{ old('challenges', $project->challenges) }}</textarea>
+                        <label for="challenges" class="form-label">Tantangan <small class="text-muted">(Maks. 1000 karakter)</small></label>
+                        <textarea class="form-control @error('challenges') is-invalid @enderror" id="challenges" name="challenges" rows="3" maxlength="1000">{{ old('challenges', $project->challenges) }}</textarea>
                         @error('challenges')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     
                     <div class="mb-3">
-                        <label for="solutions" class="form-label">Solusi</label>
-                        <textarea class="form-control @error('solutions') is-invalid @enderror" id="solutions" name="solutions" rows="3">{{ old('solutions', $project->solutions) }}</textarea>
+                        <label for="solutions" class="form-label">Solusi <small class="text-muted">(Maks. 1000 karakter)</small></label>
+                        <textarea class="form-control @error('solutions') is-invalid @enderror" id="solutions" name="solutions" rows="3" maxlength="1000">{{ old('solutions', $project->solutions) }}</textarea>
                         @error('solutions')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     
                     <div class="mb-3">
-                        <label for="results" class="form-label">Hasil</label>
-                        <textarea class="form-control @error('results') is-invalid @enderror" id="results" name="results" rows="3">{{ old('results', $project->results) }}</textarea>
+                        <label for="results" class="form-label">Hasil <small class="text-muted">(Maks. 1000 karakter)</small></label>
+                        <textarea class="form-control @error('results') is-invalid @enderror" id="results" name="results" rows="3" maxlength="1000">{{ old('results', $project->results) }}</textarea>
                         @error('results')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

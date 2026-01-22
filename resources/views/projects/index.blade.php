@@ -22,31 +22,32 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <form method="GET" action="{{ route('projects.index') }}" class="row g-1 g-md-3" id="projectFilterForm">
-                    <div class="col-12">
+                <form method="GET" action="{{ route('projects.index') }}" class="row g-2 align-items-center" id="projectFilterForm">
+                    <!-- Search -->
+                    <div class="col-12 col-lg-6">
                         <div class="input-group">
-                            <input type="text" name="search" class="form-control" placeholder="Cari proyek..." value="{{ request('search') }}">
-                            <button class="btn btn-outline-secondary d-flex align-items-center" type="submit">
-                                <i class="fas fa-search"></i>
-                                <span class="d-none d-sm-inline ms-1">Cari</span>
-                            </button>
+                            <span class="input-group-text bg-white text-muted border-end-0"><i class="fas fa-search"></i></span>
+                            <input type="text" name="search" class="form-control border-start-0 ps-0" placeholder="Cari proyek..." value="{{ request('search') }}">
                         </div>
                     </div>
 
                     <input type="hidden" name="type" id="projectInputType" value="{{ request('type') }}">
                     <input type="hidden" name="status" id="projectInputStatus" value="{{ request('status') }}">
                     
-                    <div class="col-4 col-md-3">
+                    <!-- Type Filter -->
+                    <div class="col-6 col-lg-2">
                         <div class="dropdown w-100">
-                            <button class="btn btn-outline-secondary btn-sm w-100 dropdown-toggle text-start text-truncate bg-white" type="button" id="projectDropdownType" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ 
-                                    request('type') == 'konstruksi' ? 'Konstruksi' : 
-                                    (request('type') == 'renovasi' ? 'Renovasi' : 
-                                    (request('type') == 'maintenance' ? 'Maint.' : 
-                                    (request('type') == 'event' ? 'Event' : 'Jenis')))
-                                }}
+                            <button class="btn bg-white border shadow-sm w-100 dropdown-toggle text-start d-flex justify-content-between align-items-center" type="button" id="projectDropdownType" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="text-truncate">
+                                    {{ 
+                                        request('type') == 'konstruksi' ? 'Konstruksi' : 
+                                        (request('type') == 'renovasi' ? 'Renovasi' : 
+                                        (request('type') == 'maintenance' ? 'Maintenance' : 
+                                        (request('type') == 'event' ? 'Event' : 'Jenis Proyek')))
+                                    }}
+                                </span>
                             </button>
-                            <ul class="dropdown-menu shadow-sm" aria-labelledby="projectDropdownType">
+                            <ul class="dropdown-menu shadow-sm w-100" aria-labelledby="projectDropdownType">
                                 <li><a class="dropdown-item {{ request('type') == '' ? 'active' : '' }}" href="#" onclick="setProjectFilter('type', ''); return false;">Semua Jenis</a></li>
                                 <li><a class="dropdown-item {{ request('type') == 'konstruksi' ? 'active' : '' }}" href="#" onclick="setProjectFilter('type', 'konstruksi'); return false;">Konstruksi</a></li>
                                 <li><a class="dropdown-item {{ request('type') == 'renovasi' ? 'active' : '' }}" href="#" onclick="setProjectFilter('type', 'renovasi'); return false;">Renovasi</a></li>
@@ -56,16 +57,19 @@
                         </div>
                     </div>
                     
-                    <div class="col-4 col-md-3">
+                    <!-- Status Filter -->
+                    <div class="col-6 col-lg-2">
                         <div class="dropdown w-100">
-                            <button class="btn btn-outline-secondary btn-sm w-100 dropdown-toggle text-start text-truncate bg-white" type="button" id="projectDropdownStatus" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ 
-                                    request('status') == 'completed' ? 'Selesai' : 
-                                    (request('status') == 'ongoing' ? 'Jalan' : 
-                                    (request('status') == 'planning' ? 'Rencana' : 'Status'))
-                                }}
+                            <button class="btn bg-white border shadow-sm w-100 dropdown-toggle text-start d-flex justify-content-between align-items-center" type="button" id="projectDropdownStatus" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="text-truncate">
+                                    {{ 
+                                        request('status') == 'completed' ? 'Selesai' : 
+                                        (request('status') == 'ongoing' ? 'Berlangsung' : 
+                                        (request('status') == 'planning' ? 'Perencanaan' : 'Status'))
+                                    }}
+                                </span>
                             </button>
-                            <ul class="dropdown-menu shadow-sm" aria-labelledby="projectDropdownStatus">
+                            <ul class="dropdown-menu shadow-sm w-100" aria-labelledby="projectDropdownStatus">
                                 <li><a class="dropdown-item {{ request('status') == '' ? 'active' : '' }}" href="#" onclick="setProjectFilter('status', ''); return false;">Semua Status</a></li>
                                 <li><a class="dropdown-item {{ request('status') == 'completed' ? 'active' : '' }}" href="#" onclick="setProjectFilter('status', 'completed'); return false;">Selesai</a></li>
                                 <li><a class="dropdown-item {{ request('status') == 'ongoing' ? 'active' : '' }}" href="#" onclick="setProjectFilter('status', 'ongoing'); return false;">Berlangsung</a></li>
@@ -74,10 +78,10 @@
                         </div>
                     </div>
                     
-                    <div class="col-4 col-md-3">
-                        <button type="submit" class="btn btn-success-modern w-100 btn-sm h-100 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-filter"></i>
-                            <span class="d-none d-md-inline ms-1">Filter</span>
+                    <!-- Filter Button -->
+                    <div class="col-12 col-lg-2">
+                        <button type="submit" class="btn btn-danger w-100">
+                            <i class="fas fa-filter me-1"></i> Filter
                         </button>
                     </div>
                 </form>

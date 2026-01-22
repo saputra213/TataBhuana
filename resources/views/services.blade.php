@@ -248,28 +248,12 @@
                         
                         <div class="mb-3">
                             <span class="badge bg-primary me-2">{{ $scaffolding->type }}</span>
-                            <span class="badge bg-secondary">{{ $scaffolding->material }}</span>
                         </div>
                         
                         <div class="mb-3">
                             <small class="text-muted d-block">Dimensi: {{ $scaffolding->dimensions }}</small>
                             <small class="text-muted d-block">Tinggi Maks: {{ $scaffolding->max_height }}m</small>
                             <small class="text-muted d-block">Beban Maks: {{ $scaffolding->max_load }}kg</small>
-                        </div>
-                        
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            @if($scaffolding->rental_price)
-                            <div>
-                                <small class="text-muted">Sewa:</small>
-                                <strong class="text-primary">{{ $scaffolding->formatted_rental_price }}/hari</strong>
-                            </div>
-                            @endif
-                            @if($scaffolding->sale_price)
-                            <div>
-                                <small class="text-muted">Jual:</small>
-                                <strong class="text-success">{{ $scaffolding->formatted_sale_price }}</strong>
-                            </div>
-                            @endif
                         </div>
                         
                         <a href="{{ route('scaffoldings.show', $scaffolding) }}" class="btn btn-danger">

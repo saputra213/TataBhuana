@@ -96,24 +96,24 @@
                     
                     <div class="row">
                         <div class="col-md-4 mb-3">
-                            <label for="facebook" class="form-label">Facebook</label>
-                            <input type="url" class="form-control @error('facebook') is-invalid @enderror" id="facebook" name="facebook" value="{{ old('facebook', $profile->social_media['facebook'] ?? '') }}" placeholder="https://facebook.com/username">
+                            <label for="facebook" class="form-label">Facebook <small class="text-muted">(Maks. 255 karakter)</small></label>
+                            <input type="url" class="form-control @error('facebook') is-invalid @enderror" id="facebook" name="facebook" value="{{ old('facebook', $profile->social_media['facebook'] ?? '') }}" placeholder="https://facebook.com/username" maxlength="255">
                             @error('facebook')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         
                         <div class="col-md-4 mb-3">
-                            <label for="instagram" class="form-label">Instagram</label>
-                            <input type="url" class="form-control @error('instagram') is-invalid @enderror" id="instagram" name="instagram" value="{{ old('instagram', $profile->social_media['instagram'] ?? '') }}" placeholder="https://instagram.com/username">
+                            <label for="instagram" class="form-label">Instagram <small class="text-muted">(Maks. 255 karakter)</small></label>
+                            <input type="url" class="form-control @error('instagram') is-invalid @enderror" id="instagram" name="instagram" value="{{ old('instagram', $profile->social_media['instagram'] ?? '') }}" placeholder="https://instagram.com/username" maxlength="255">
                             @error('instagram')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         
                         <div class="col-md-4 mb-3">
-                            <label for="whatsapp" class="form-label">WhatsApp</label>
-                            <input type="text" class="form-control @error('whatsapp') is-invalid @enderror" id="whatsapp" name="whatsapp" value="{{ old('whatsapp', $profile->social_media['whatsapp'] ?? '') }}" placeholder="6281234567890">
+                            <label for="whatsapp" class="form-label">WhatsApp <small class="text-muted">(Maks. 50 karakter)</small></label>
+                            <input type="text" class="form-control @error('whatsapp') is-invalid @enderror" id="whatsapp" name="whatsapp" value="{{ old('whatsapp', $profile->social_media['whatsapp'] ?? '') }}" placeholder="6281234567890" maxlength="50">
                             <div class="form-text">Format: 6281234567890 (tanpa +)</div>
                             @error('whatsapp')
                                 <div class="invalid-feedback">{{ $message }}</div>

@@ -15,13 +15,14 @@
                     @csrf
 
                     <div class="mb-3">
-                        <label for="footer_company_name" class="form-label">Nama Perusahaan di Footer</label>
+                        <label for="footer_company_name" class="form-label">Nama Perusahaan di Footer <small class="text-muted">(Maks. 255 karakter)</small></label>
                         <input
                             type="text"
                             id="footer_company_name"
                             name="footer_company_name"
                             class="form-control @error('footer_company_name') is-invalid @enderror"
                             value="{{ old('footer_company_name', $profile->footer_company_name ?? ($profile->company_name ?? 'Tata Bhuana')) }}"
+                            maxlength="255"
                         >
                         @error('footer_company_name')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -29,12 +30,13 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="footer_company_description" class="form-label">Deskripsi Perusahaan di Footer</label>
+                        <label for="footer_company_description" class="form-label">Deskripsi Perusahaan di Footer <small class="text-muted">(Maks. 500 karakter)</small></label>
                         <textarea
                             id="footer_company_description"
                             name="footer_company_description"
                             rows="3"
                             class="form-control @error('footer_company_description') is-invalid @enderror"
+                            maxlength="500"
                         >{{ old('footer_company_description', $profile->footer_company_description ?? ($profile->description ?? 'Perusahaan penyedia jasa sewa dan jual scaffolding berkualitas tinggi untuk proyek konstruksi Anda.')) }}</textarea>
                         @error('footer_company_description')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -42,13 +44,14 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="footer_services_title" class="form-label">Judul Kolom Layanan</label>
+                        <label for="footer_services_title" class="form-label">Judul Kolom Layanan <small class="text-muted">(Maks. 255 karakter)</small></label>
                         <input
                             type="text"
                             id="footer_services_title"
                             name="footer_services_title"
                             class="form-control @error('footer_services_title') is-invalid @enderror"
                             value="{{ old('footer_services_title', $profile->footer_services_title ?? 'Layanan Kami') }}"
+                            maxlength="255"
                         >
                         @error('footer_services_title')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -56,12 +59,13 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="footer_services_items_text" class="form-label">Menu Layanan</label>
+                        <label for="footer_services_items_text" class="form-label">Menu Layanan <small class="text-muted">(Maks. 2000 karakter)</small></label>
                         <textarea
                             id="footer_services_items_text"
                             name="footer_services_items_text"
                             rows="6"
                             class="form-control @error('footer_services_items_text') is-invalid @enderror"
+                            maxlength="2000"
                         >{{ old('footer_services_items_text', $footerItemsLines) }}</textarea>
                         <div class="form-text">
                             Satu baris untuk satu menu. Format:
@@ -74,13 +78,14 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="footer_copyright_text" class="form-label">Teks Hak Cipta</label>
+                        <label for="footer_copyright_text" class="form-label">Teks Hak Cipta <small class="text-muted">(Maks. 255 karakter)</small></label>
                         <input
                             type="text"
                             id="footer_copyright_text"
                             name="footer_copyright_text"
                             class="form-control @error('footer_copyright_text') is-invalid @enderror"
                             value="{{ old('footer_copyright_text', $profile->footer_copyright_text ?? '. Semua hak dilindungi.') }}"
+                            maxlength="255"
                         >
                         <div class="form-text">
                             Teks ini akan muncul setelah nama perusahaan dan tahun.
@@ -95,13 +100,14 @@
                     <h6 class="fw-bold mb-3">Kontak di Footer</h6>
 
                     <div class="mb-3">
-                        <label for="footer_contact_title" class="form-label">Judul Kolom Kontak</label>
+                        <label for="footer_contact_title" class="form-label">Judul Kolom Kontak <small class="text-muted">(Maks. 255 karakter)</small></label>
                         <input
                             type="text"
                             id="footer_contact_title"
                             name="footer_contact_title"
                             class="form-control @error('footer_contact_title') is-invalid @enderror"
                             value="{{ old('footer_contact_title', $profile->footer_contact_title ?? 'Kontak Kami') }}"
+                            maxlength="255"
                         >
                         @error('footer_contact_title')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -109,12 +115,13 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="footer_contact_address" class="form-label">Alamat di Footer</label>
+                        <label for="footer_contact_address" class="form-label">Alamat di Footer <small class="text-muted">(Maks. 500 karakter)</small></label>
                         <textarea
                             id="footer_contact_address"
                             name="footer_contact_address"
                             rows="2"
                             class="form-control @error('footer_contact_address') is-invalid @enderror"
+                            maxlength="500"
                         >{{ old('footer_contact_address', $profile->footer_contact_address ?? ($profile->address ?? '')) }}</textarea>
                         @error('footer_contact_address')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -122,13 +129,14 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="footer_contact_phone" class="form-label">Telepon di Footer</label>
+                        <label for="footer_contact_phone" class="form-label">Telepon di Footer <small class="text-muted">(Maks. 20 karakter)</small></label>
                         <input
                             type="text"
                             id="footer_contact_phone"
                             name="footer_contact_phone"
                             class="form-control @error('footer_contact_phone') is-invalid @enderror"
                             value="{{ old('footer_contact_phone', $profile->footer_contact_phone ?? ($profile->phone ?? '')) }}"
+                            maxlength="20"
                         >
                         @error('footer_contact_phone')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -136,13 +144,14 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="footer_contact_email" class="form-label">Email di Footer</label>
+                        <label for="footer_contact_email" class="form-label">Email di Footer <small class="text-muted">(Maks. 255 karakter)</small></label>
                         <input
                             type="email"
                             id="footer_contact_email"
                             name="footer_contact_email"
                             class="form-control @error('footer_contact_email') is-invalid @enderror"
                             value="{{ old('footer_contact_email', $profile->footer_contact_email ?? ($profile->email ?? '')) }}"
+                            maxlength="255"
                         >
                         @error('footer_contact_email')
                             <div class="invalid-feedback">{{ $message }}</div>

@@ -22,8 +22,8 @@
             
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <label class="form-label">Pengarang</label>
-                    <input type="text" name="author" class="form-control" value="{{ old('author', $article->author ?? auth('admin')->user()->name) }}" placeholder="Admin">
+                    <label class="form-label">Pengarang <small class="text-muted">(Maks. 255 karakter)</small></label>
+                    <input type="text" name="author" class="form-control" value="{{ old('author', $article->author ?? auth('admin')->user()->name) }}" placeholder="Admin" maxlength="255">
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">Kategori <span class="text-danger">*</span></label>
@@ -39,24 +39,24 @@
 
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <label class="form-label">Judul Artikel <span class="text-danger">*</span></label>
-                    <input type="text" name="title" class="form-control" value="{{ old('title', $article->title) }}" required>
+                    <label class="form-label">Judul Artikel <span class="text-danger">*</span> <small class="text-muted">(Maks. 255 karakter)</small></label>
+                    <input type="text" name="title" class="form-control" value="{{ old('title', $article->title) }}" required maxlength="255">
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label">URL Artikel</label>
-                    <input type="text" name="slug" class="form-control" value="{{ old('slug', $article->slug) }}" placeholder="kosongkan untuk generate otomatis">
+                    <label class="form-label">URL Artikel <small class="text-muted">(Maks. 255 karakter)</small></label>
+                    <input type="text" name="slug" class="form-control" value="{{ old('slug', $article->slug) }}" placeholder="kosongkan untuk generate otomatis" maxlength="255">
                 </div>
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Deskripsi</label>
+                <label class="form-label">Deskripsi <small class="text-muted">(Maks. 160 karakter)</small></label>
                 <textarea name="excerpt" class="form-control" rows="3" maxlength="160" placeholder="Maksimal 160 Karakter (opsional)">{{ old('excerpt', $article->excerpt) }}</textarea>
                 <div class="form-text">Maksimal 160 Karakter (opsional)</div>
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Keywords</label>
-                <input type="text" name="keywords" class="form-control" value="{{ old('keywords', $article->keywords) }}" placeholder="Pisahkan dengan koma">
+                <label class="form-label">Keywords <small class="text-muted">(Maks. 255 karakter)</small></label>
+                <input type="text" name="keywords" class="form-control" value="{{ old('keywords', $article->keywords) }}" placeholder="Pisahkan dengan koma" maxlength="255">
                 <div class="form-text">Pisahkan dengan koma</div>
             </div>
 
@@ -106,7 +106,7 @@
 
 @push('scripts')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<script src="{{ asset('js/summernote-lite.js') }}"></script>
 <script>
     $(document).ready(function() {
         $('#summernote').summernote({

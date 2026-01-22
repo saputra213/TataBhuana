@@ -21,6 +21,16 @@ class ArticleController extends Controller
             });
         }
 
+        if ($request->filled('category')) {
+            $query->where('category', $request->category);
+        }
+
+        $categories = Article::where('is_published', true)
+            ->whereNotNull('category')
+            ->where('category', '!=', '')
+            ->distinct()
+            ->pluck('category');
+
         $userAgent = $request->header('User-Agent', '');
         $isMobile = preg_match('/Android|iPhone|iPad|iPod|Windows Phone|Mobi/i', $userAgent);
         $perPage = $isMobile ? 5 : 9;
@@ -30,7 +40,7 @@ class ArticleController extends Controller
             ->paginate($perPage);
         $profile = CompanyProfile::first();
 
-        return view('articles.index', compact('articles', 'profile'));
+        return view('articles.index', compact('articles', 'profile', 'categories'));
     }
 
     public function show(Article $article)

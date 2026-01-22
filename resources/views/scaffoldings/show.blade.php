@@ -33,8 +33,13 @@
                 <h1 class="display-5 fw-bold mb-3">{{ $scaffolding->name }}</h1>
                 
                 <div class="mb-3">
-                    <span class="badge badge-primary-modern me-2 fs-6">{{ ucfirst($scaffolding->type) }}</span>
-                    <span class="badge badge-secondary-modern fs-6">{{ ucfirst($scaffolding->material) }}</span>
+                    <span class="badge badge-primary-modern me-2 fs-6">
+                        {{ 
+                            $scaffolding->type == 'scaffolding' ? 'Scaffolding' : 
+                            ($scaffolding->type == 'accessories' ? 'Accessories' : 
+                            ($scaffolding->type == 'bekisting' ? 'Bekisting' : ucfirst($scaffolding->type)))
+                        }}
+                    </span>
                 </div>
                 
                 <div class="mb-4">
@@ -65,7 +70,7 @@
                             <div class="col-6">
                                 <div class="d-flex justify-content-between">
                                     <span class="text-muted">Status:</span>
-                                    @if($scaffolding->stock_quantity > 0)
+                                    @if($scaffolding->is_available)
                                         <span class="badge bg-success">Tersedia</span>
                                     @else
                                         <span class="badge bg-danger">Tidak Tersedia</span>

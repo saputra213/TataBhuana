@@ -17,16 +17,16 @@
                     
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="name" class="form-label">Nama Cabang *</label>
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name', $branch->name) }}" required>
+                            <label for="name" class="form-label">Nama Cabang * <small class="text-muted">(Maks. 255 karakter)</small></label>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name', $branch->name) }}" required maxlength="255">
                             @error('name')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         
                         <div class="col-md-6 mb-3">
-                            <label for="code" class="form-label">Kode Cabang *</label>
-                            <input type="text" class="form-control @error('code') is-invalid @enderror" id="code" name="code" value="{{ old('code', $branch->code) }}" placeholder="Contoh: JKT, BDG, SBY" required>
+                            <label for="code" class="form-label">Kode Cabang * <small class="text-muted">(Maks. 50 karakter)</small></label>
+                            <input type="text" class="form-control @error('code') is-invalid @enderror" id="code" name="code" value="{{ old('code', $branch->code) }}" placeholder="Contoh: JKT, BDG, SBY" required maxlength="50">
                             @error('code')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -34,16 +34,16 @@
                     </div>
                     
                     <div class="mb-3">
-                        <label for="description" class="form-label">Deskripsi *</label>
-                        <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="3" required>{{ old('description', $branch->description) }}</textarea>
+                        <label for="description" class="form-label">Deskripsi * <small class="text-muted">(Maks. 500 karakter)</small></label>
+                        <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="3" required maxlength="500">{{ old('description', $branch->description) }}</textarea>
                         @error('description')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     
                     <div class="mb-3">
-                        <label for="address" class="form-label">Alamat *</label>
-                        <textarea class="form-control @error('address') is-invalid @enderror" id="address" name="address" rows="2" required>{{ old('address', $branch->address) }}</textarea>
+                        <label for="address" class="form-label">Alamat * <small class="text-muted">(Maks. 500 karakter)</small></label>
+                        <textarea class="form-control @error('address') is-invalid @enderror" id="address" name="address" rows="2" required maxlength="500">{{ old('address', $branch->address) }}</textarea>
                         @error('address')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -51,16 +51,16 @@
                     
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="phone" class="form-label">Telepon *</label>
-                            <input type="tel" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{ old('phone', $branch->phone) }}" required>
+                            <label for="phone" class="form-label">Telepon * <small class="text-muted">(Maks. 20 karakter)</small></label>
+                            <input type="tel" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{ old('phone', $branch->phone) }}" required maxlength="20">
                             @error('phone')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         
                         <div class="col-md-6 mb-3">
-                            <label for="email" class="form-label">Email *</label>
-                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email', $branch->email) }}" required>
+                            <label for="email" class="form-label">Email * <small class="text-muted">(Maks. 255 karakter)</small></label>
+                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email', $branch->email) }}" required maxlength="255">
                             @error('email')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -72,16 +72,16 @@
                     
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="manager_name" class="form-label">Nama Manager *</label>
-                            <input type="text" class="form-control @error('manager_name') is-invalid @enderror" id="manager_name" name="manager_name" value="{{ old('manager_name', $branch->manager_name) }}" required>
+                            <label for="manager_name" class="form-label">Nama Manager * <small class="text-muted">(Maks. 255 karakter)</small></label>
+                            <input type="text" class="form-control @error('manager_name') is-invalid @enderror" id="manager_name" name="manager_name" value="{{ old('manager_name', $branch->manager_name) }}" required maxlength="255">
                             @error('manager_name')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         
                         <div class="col-md-6 mb-3">
-                            <label for="manager_phone" class="form-label">Telepon Manager *</label>
-                            <input type="tel" class="form-control @error('manager_phone') is-invalid @enderror" id="manager_phone" name="manager_phone" value="{{ old('manager_phone', $branch->manager_phone) }}" required>
+                            <label for="manager_phone" class="form-label">Telepon Manager * <small class="text-muted">(Maks. 20 karakter)</small></label>
+                            <input type="tel" class="form-control @error('manager_phone') is-invalid @enderror" id="manager_phone" name="manager_phone" value="{{ old('manager_phone', $branch->manager_phone) }}" required maxlength="20">
                             @error('manager_phone')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -89,8 +89,8 @@
                     </div>
                     
                     <div class="mb-3">
-                        <label for="manager_email" class="form-label">Email Manager *</label>
-                        <input type="email" class="form-control @error('manager_email') is-invalid @enderror" id="manager_email" name="manager_email" value="{{ old('manager_email', $branch->manager_email) }}" required>
+                        <label for="manager_email" class="form-label">Email Manager * <small class="text-muted">(Maks. 255 karakter)</small></label>
+                        <input type="email" class="form-control @error('manager_email') is-invalid @enderror" id="manager_email" name="manager_email" value="{{ old('manager_email', $branch->manager_email) }}" required maxlength="255">
                         @error('manager_email')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -100,8 +100,8 @@
                     <h6 class="fw-bold mb-3">WhatsApp Integration</h6>
                     
                     <div class="mb-3">
-                        <label for="whatsapp_number" class="form-label">Nomor WhatsApp untuk Direct Link</label>
-                        <input type="tel" class="form-control @error('whatsapp_number') is-invalid @enderror" id="whatsapp_number" name="whatsapp_number" value="{{ old('whatsapp_number', $branch->whatsapp_number) }}" placeholder="Contoh: +62 812 3456 7890">
+                        <label for="whatsapp_number" class="form-label">Nomor WhatsApp untuk Direct Link <small class="text-muted">(Maks. 20 karakter)</small></label>
+                        <input type="tel" class="form-control @error('whatsapp_number') is-invalid @enderror" id="whatsapp_number" name="whatsapp_number" value="{{ old('whatsapp_number', $branch->whatsapp_number) }}" placeholder="Contoh: +62 812 3456 7890" maxlength="20">
                         <div class="form-text">Nomor WhatsApp yang akan digunakan untuk direct link. Jika kosong, akan menggunakan nomor telepon cabang.</div>
                         @error('whatsapp_number')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -109,8 +109,8 @@
                     </div>
                     
                     <div class="mb-3">
-                        <label for="whatsapp_message" class="form-label">Pesan Default WhatsApp</label>
-                        <textarea class="form-control @error('whatsapp_message') is-invalid @enderror" id="whatsapp_message" name="whatsapp_message" rows="2" placeholder="Contoh: Halo, saya tertarik dengan layanan scaffolding dari cabang {{ $branch->name }}">{{ old('whatsapp_message', $branch->whatsapp_message) }}</textarea>
+                        <label for="whatsapp_message" class="form-label">Pesan Default WhatsApp <small class="text-muted">(Maks. 255 karakter)</small></label>
+                        <textarea class="form-control @error('whatsapp_message') is-invalid @enderror" id="whatsapp_message" name="whatsapp_message" rows="2" placeholder="Contoh: Halo, saya tertarik dengan layanan scaffolding dari cabang {{ $branch->name }}" maxlength="255">{{ old('whatsapp_message', $branch->whatsapp_message) }}</textarea>
                         <div class="form-text">Pesan yang akan muncul otomatis saat user klik button WhatsApp. Gunakan {{ $branch->name }} untuk nama cabang.</div>
                         @error('whatsapp_message')
                             <div class="invalid-feedback">{{ $message }}</div>

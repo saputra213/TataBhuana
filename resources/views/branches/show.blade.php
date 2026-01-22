@@ -249,139 +249,17 @@
     </div>
 </section>
 
-<!-- Contact Information Section -->
-@if(isset($profile))
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="row text-center mb-4">
-            <div class="col-12">
-                <h2 class="display-5 fw-bold mb-3">Hubungi Kami</h2>
-                <p class="lead text-muted">Tim kami siap membantu kebutuhan scaffolding Anda</p>
-            </div>
-        </div>
-        
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="text-center p-4 bg-white rounded shadow-sm h-100">
-                    <div class="mb-3">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-circle" style="width: 60px; height: 60px;">
-                            <i class="fas fa-phone fa-lg"></i>
-                        </div>
-                    </div>
-                    <h5 class="fw-bold mb-2">Telepon</h5>
-                    @if($profile->phone)
-                        <p class="text-muted mb-0">
-                            <a href="tel:{{ $profile->phone }}" class="text-decoration-none text-primary">{{ $profile->phone }}</a>
-                        </p>
-                    @else
-                        <p class="text-muted mb-0">-</p>
-                    @endif
-                </div>
-            </div>
-            
-            <div class="col-md-4">
-                <div class="text-center p-4 bg-white rounded shadow-sm h-100">
-                    <div class="mb-3">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-success text-white rounded-circle" style="width: 60px; height: 60px;">
-                            <i class="fas fa-envelope fa-lg"></i>
-                        </div>
-                    </div>
-                    <h5 class="fw-bold mb-2">Email</h5>
-                    @if($profile->email)
-                        <p class="text-muted mb-0">
-                            <a href="mailto:{{ $profile->email }}" class="text-decoration-none text-primary">{{ $profile->email }}</a>
-                        </p>
-                    @else
-                        <p class="text-muted mb-0">-</p>
-                    @endif
-                </div>
-            </div>
-            
-            <div class="col-md-4">
-                <div class="text-center p-4 bg-white rounded shadow-sm h-100">
-                    <div class="mb-3">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-danger text-white rounded-circle" style="width: 60px; height: 60px;">
-                            <i class="fas fa-map-marker-alt fa-lg"></i>
-                        </div>
-                    </div>
-                    <h5 class="fw-bold mb-2">Alamat</h5>
-                    @if($profile->address)
-                        <p class="text-muted mb-0 small">{{ Str::limit($profile->address, 50) }}</p>
-                    @else
-                        <p class="text-muted mb-0">-</p>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-@endif
+<!-- Contact Section Removed -->
 
-<!-- CTA Section -->
-<section class="py-5 bg-danger home-cta-section">
-    <div class="container">
-        <div class="home-cta-inner mx-auto">
-            <div class="row g-4 align-items-center">
-                <div class="col-lg-7 text-white">
-                    <div class="home-cta-kicker text-uppercase fw-semibold small mb-2">
-                        Jangan tunda keamanan proyek Anda.
-                    </div>
-                    <h2 class="home-cta-title fw-bold mb-3">
-                        {{ $profile?->home_cta_title ?? 'Siap Memulai Proyek Anda?' }}
-                    </h2>
-                    <p class="home-cta-subtitle lead mb-3 text-white-50">
-                        {{ $profile?->home_cta_subtitle ?? 'Hubungi kami sekarang untuk konsultasi gratis dan penawaran terbaik' }}
-                        @if($branch)
-                            Cabang {{ $branch->name }} siap membantu Anda.
-                        @endif
-                    </p>
-                    <div class="d-flex flex-wrap gap-2">
-                        <span class="home-cta-chip home-cta-chip-red">
-                            <i class="fas fa-shield-alt me-1"></i> Rekomendasi sistem scaffolding yang aman dan sesuai standar
-                        </span>
-                        <span class="home-cta-chip home-cta-chip-green">
-                            <i class="fas fa-headset me-1"></i> Tim support siap membantu dari perencanaan hingga eksekusi
-                        </span>
-                    </div>
-                </div>
-                <div class="col-lg-5">
-                    <div class="home-cta-card bg-white text-start">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="home-cta-icon me-3">
-                                <i class="fas fa-clipboard-check"></i>
-                            </div>
-                            <div>
-                                <div class="fw-semibold small text-muted">
-                                    Konsultasi dengan cabang kami
-                                </div>
-                                <div class="fw-bold">
-                                    Cabang siap membantu Anda
-                                </div>
-                            </div>
-                        </div>
-                        <p class="small text-muted mb-3">
-                            Hubungi cabang untuk penjelasan detail ketersediaan stok, jadwal pengiriman,
-                            serta penawaran khusus sesuai lokasi proyek Anda.
-                        </p>
-                        <div class="d-grid gap-2">
-                            <a href="{{ $branch->whatsapp_url ?? route('contact') }}" target="_blank" class="btn btn-success btn-lg">
-                                <i class="fab fa-whatsapp me-2"></i>Hubungi cabang via WhatsApp
-                            </a>
-                            <a href="{{ route('contact') }}" class="btn btn-outline-danger btn-lg">
-                                <i class="fas fa-phone me-2"></i>Kontak pusat lainnya
-                            </a>
-                        </div>
-                        <div class="home-cta-meta small text-muted mt-3">
-                            @if($branch)
-                                <i class="fas fa-map-marker-alt me-1"></i> Lokasi cabang: {{ $branch->address }}
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<!-- CTA Section Removed -->
+
+<style>
+.branch-map-btn {
+    background: #dc2626;
+    border-color: #dc2626;
+    color: #ffffff;
+    font-weight: 600;
+}
 
 .branch-map-btn:hover,
 .branch-map-btn:focus {

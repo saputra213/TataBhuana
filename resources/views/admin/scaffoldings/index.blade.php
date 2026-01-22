@@ -21,7 +21,6 @@
                             <th>Gambar</th>
                             <th>Nama</th>
                             <th>Jenis</th>
-                            <th>Material</th>
                             <th>Status Stok</th>
                             <th>Aksi</th>
                         </tr>
@@ -43,10 +42,17 @@
                                 <br>
                                 <small class="text-muted">{{ Str::limit($scaffolding->description, 50) }}</small>
                             </td>
-                            <td><span class="badge bg-primary">{{ ucfirst($scaffolding->type) }}</span></td>
-                            <td><span class="badge bg-secondary">{{ ucfirst($scaffolding->material) }}</span></td>
                             <td>
-                                @if($scaffolding->stock_quantity > 0)
+                                <span class="badge bg-primary">
+                                    {{ 
+                                        $scaffolding->type == 'scaffolding' ? 'Scaffolding' : 
+                                        ($scaffolding->type == 'accessories' ? 'Accessories' : 
+                                        ($scaffolding->type == 'bekisting' ? 'Bekisting' : ucfirst($scaffolding->type)))
+                                    }}
+                                </span>
+                            </td>
+                            <td>
+                                @if($scaffolding->is_available)
                                     <span class="badge bg-success">Tersedia</span>
                                 @else
                                     <span class="badge bg-danger">Tidak Tersedia</span>

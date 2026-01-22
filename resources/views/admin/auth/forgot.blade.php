@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lupa Password Admin - Tata Bhuana</title>
+    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
     <meta name="robots" content="noindex,nofollow">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -36,7 +37,7 @@
                                     <span class="input-group-text">
                                         <i class="fas fa-envelope"></i>
                                     </span>
-                                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autofocus>
+                                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autofocus maxlength="255">
                                 </div>
                                 @error('email')
                                     <div class="invalid-feedback">{{ $message }}</div>

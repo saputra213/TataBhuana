@@ -22,24 +22,24 @@
                             <h6 class="fw-bold mb-3">Slide {{ $i + 1 }}</h6>
 
                             <div class="mb-3">
-                                <label class="form-label">Judul Slide</label>
-                                <input type="text" name="slides[{{ $i }}][title]" class="form-control @error("slides.$i.title") is-invalid @enderror" value="{{ old("slides.$i.title", $slide['title'] ?? '') }}" placeholder="Contoh: Mitra Konstruksi Andal">
+                                <label class="form-label">Judul Slide <small class="text-muted">(Maks. 255 karakter)</small></label>
+                                <input type="text" name="slides[{{ $i }}][title]" class="form-control @error("slides.$i.title") is-invalid @enderror" value="{{ old("slides.$i.title", $slide['title'] ?? '') }}" placeholder="Contoh: Mitra Konstruksi Andal" maxlength="255">
                                 @error("slides.$i.title")
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Deskripsi Slide</label>
-                                <textarea name="slides[{{ $i }}][description]" class="form-control @error("slides.$i.description") is-invalid @enderror" rows="3" placeholder="Deskripsi singkat untuk slide ini">{{ old("slides.$i.description", $slide['description'] ?? '') }}</textarea>
+                                <label class="form-label">Deskripsi Slide <small class="text-muted">(Maks. 500 karakter)</small></label>
+                                <textarea name="slides[{{ $i }}][description]" class="form-control @error("slides.$i.description") is-invalid @enderror" rows="3" placeholder="Deskripsi singkat untuk slide ini" maxlength="500">{{ old("slides.$i.description", $slide['description'] ?? '') }}</textarea>
                                 @error("slides.$i.description")
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Teks Tombol</label>
-                                <input type="text" name="slides[{{ $i }}][button_text]" class="form-control @error("slides.$i.button_text") is-invalid @enderror" value="{{ old("slides.$i.button_text", $slide['button_text'] ?? 'Hubungi Kami') }}" placeholder="Contoh: Hubungi Kami">
+                                <label class="form-label">Teks Tombol <small class="text-muted">(Maks. 50 karakter)</small></label>
+                                <input type="text" name="slides[{{ $i }}][button_text]" class="form-control @error("slides.$i.button_text") is-invalid @enderror" value="{{ old("slides.$i.button_text", $slide['button_text'] ?? 'Hubungi Kami') }}" placeholder="Contoh: Hubungi Kami" maxlength="50">
                                 @error("slides.$i.button_text")
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -68,8 +68,8 @@
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">URL Kustom (opsional)</label>
-                                <input type="url" name="slides[{{ $i }}][button_url]" class="form-control @error("slides.$i.button_url") is-invalid @enderror" value="{{ old("slides.$i.button_url", $slide['button_url'] ?? '') }}" placeholder="https://contoh.com/atau-link-whatsapp">
+                                <label class="form-label">URL Kustom (opsional) <small class="text-muted">(Maks. 255 karakter)</small></label>
+                                <input type="url" name="slides[{{ $i }}][button_url]" class="form-control @error("slides.$i.button_url") is-invalid @enderror" value="{{ old("slides.$i.button_url", $slide['button_url'] ?? '') }}" placeholder="https://contoh.com/atau-link-whatsapp" maxlength="255">
                                 @error("slides.$i.button_url")
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

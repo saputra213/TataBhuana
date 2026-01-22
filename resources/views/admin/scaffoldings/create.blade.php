@@ -16,8 +16,8 @@
                     
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="name" class="form-label">Nama Scaffolding *</label>
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required>
+                            <label for="name" class="form-label">Nama Scaffolding <small class="text-muted">(Maks. 255 karakter)</small> *</label>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" maxlength="255" required>
                             @error('name')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -27,10 +27,9 @@
                             <label for="type" class="form-label">Jenis *</label>
                             <select class="form-select @error('type') is-invalid @enderror" id="type" name="type" required>
                                 <option value="">Pilih Jenis</option>
-                                <option value="frame" {{ old('type') == 'frame' ? 'selected' : '' }}>Frame Scaffolding</option>
-                                <option value="tube" {{ old('type') == 'tube' ? 'selected' : '' }}>Tube Scaffolding</option>
-                                <option value="system" {{ old('type') == 'system' ? 'selected' : '' }}>System Scaffolding</option>
-                                <option value="mobile" {{ old('type') == 'mobile' ? 'selected' : '' }}>Mobile Scaffolding</option>
+                                <option value="scaffolding" {{ old('type') == 'scaffolding' ? 'selected' : '' }}>Scaffolding</option>
+                                <option value="accessories" {{ old('type') == 'accessories' ? 'selected' : '' }}>Accessories</option>
+                                <option value="bekisting" {{ old('type') == 'bekisting' ? 'selected' : '' }}>Bekisting</option>
                             </select>
                             @error('type')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -39,30 +38,17 @@
                     </div>
                     
                     <div class="mb-3">
-                        <label for="description" class="form-label">Deskripsi *</label>
-                        <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="3" required>{{ old('description') }}</textarea>
+                        <label for="description" class="form-label">Deskripsi <small class="text-muted">(Maks. 500 karakter)</small> *</label>
+                        <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="3" maxlength="500" required>{{ old('description') }}</textarea>
                         @error('description')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     
                     <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="material" class="form-label">Material *</label>
-                            <select class="form-select @error('material') is-invalid @enderror" id="material" name="material" required>
-                                <option value="">Pilih Material</option>
-                                <option value="steel" {{ old('material') == 'steel' ? 'selected' : '' }}>Baja</option>
-                                <option value="aluminum" {{ old('material') == 'aluminum' ? 'selected' : '' }}>Aluminium</option>
-                                <option value="galvanized" {{ old('material') == 'galvanized' ? 'selected' : '' }}>Galvanized</option>
-                            </select>
-                            @error('material')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        
-                        <div class="col-md-6 mb-3">
-                            <label for="dimensions" class="form-label">Dimensi *</label>
-                            <input type="text" class="form-control @error('dimensions') is-invalid @enderror" id="dimensions" name="dimensions" value="{{ old('dimensions') }}" placeholder="Contoh: 1.2m x 1.8m" required>
+                        <div class="col-md-12 mb-3">
+                            <label for="dimensions" class="form-label">Dimensi <small class="text-muted">(Maks. 255 karakter)</small> *</label>
+                            <input type="text" class="form-control @error('dimensions') is-invalid @enderror" id="dimensions" name="dimensions" value="{{ old('dimensions') }}" placeholder="Contoh: 1.2m x 1.8m" maxlength="255" required>
                             @error('dimensions')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -70,7 +56,7 @@
                     </div>
                     
                     <div class="row">
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-6 mb-3">
                             <label for="max_height" class="form-label">Tinggi Maksimal (m) *</label>
                             <input type="number" class="form-control @error('max_height') is-invalid @enderror" id="max_height" name="max_height" value="{{ old('max_height') }}" min="0" required>
                             @error('max_height')
@@ -78,23 +64,16 @@
                             @enderror
                         </div>
                         
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-6 mb-3">
                             <label for="max_load" class="form-label">Beban Maksimal (kg) *</label>
                             <input type="number" class="form-control @error('max_load') is-invalid @enderror" id="max_load" name="max_load" value="{{ old('max_load') }}" min="0" required>
                             @error('max_load')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        
-                        <div class="col-md-6 mb-3">
-                            <label for="stock_quantity" class="form-label">Jumlah Stok</label>
-                            <input type="number" class="form-control @error('stock_quantity') is-invalid @enderror" id="stock_quantity" name="stock_quantity" value="{{ old('stock_quantity', 0) }}" min="0">
-                            @error('stock_quantity')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+                    </div>
 
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-12 mb-3">
                             <label for="image" class="form-label">Gambar Produk</label>
                             <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" accept="image/*,.webp">
                             <div class="form-text">Format: JPG, PNG, GIF, WEBP. Maksimal 5MB</div>
@@ -114,8 +93,8 @@
                     </div>
                     
                     <div class="mb-3">
-                        <label for="specifications" class="form-label">Detail Spesifikasi (Opsional)</label>
-                        <textarea class="form-control @error('specifications') is-invalid @enderror" id="specifications" name="specifications" rows="5">{{ old('specifications') }}</textarea>
+                        <label for="specifications" class="form-label">Detail Spesifikasi (Opsional) <small class="text-muted">(Maks. 1000 karakter)</small></label>
+                        <textarea class="form-control @error('specifications') is-invalid @enderror" id="specifications" name="specifications" rows="5" maxlength="1000">{{ old('specifications') }}</textarea>
                         @error('specifications')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

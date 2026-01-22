@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",function(){const e=document.querySelectorAll(".hero-bg-slide");if(!e||e.length===0)return;e.forEach(t=>{if(t&&t.src){const s=new Image;s.src=t.src}});let n=0;const r=7e3;function c(t){e.forEach((s,o)=>{o===t?s.classList.add("active"):s.classList.remove("active")})}c(n),e.length>1&&setInterval(()=>{n=(n+1)%e.length,c(n)},r)});

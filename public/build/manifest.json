@@ -1,0 +1,156 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-DEtMaPif.css",
+    "src": "resources/css/app.css"
+  },
+  "resources/css/articles/index.css": {
+    "file": "assets/index-B_zJbKup.css",
+    "src": "resources/css/articles/index.css",
+    "isEntry": true,
+    "name": "index",
+    "names": [
+      "index.css"
+    ]
+  },
+  "resources/css/components/floating-facebook.css": {
+    "file": "assets/floating-facebook-dN76JZXl.css",
+    "src": "resources/css/components/floating-facebook.css",
+    "isEntry": true,
+    "name": "floating-facebook",
+    "names": [
+      "floating-facebook.css"
+    ]
+  },
+  "resources/css/components/floating-instagram.css": {
+    "file": "assets/floating-instagram-DqFw1IuE.css",
+    "src": "resources/css/components/floating-instagram.css",
+    "isEntry": true,
+    "name": "floating-instagram",
+    "names": [
+      "floating-instagram.css"
+    ]
+  },
+  "resources/css/components/floating-whatsapp.css": {
+    "file": "assets/floating-whatsapp-DqUCbOKl.css",
+    "src": "resources/css/components/floating-whatsapp.css",
+    "isEntry": true,
+    "name": "floating-whatsapp",
+    "names": [
+      "floating-whatsapp.css"
+    ]
+  },
+  "resources/css/home.css": {
+    "file": "assets/home-DRyreAyk.css",
+    "src": "resources/css/home.css",
+    "isEntry": true,
+    "name": "home",
+    "names": [
+      "home.css"
+    ]
+  },
+  "resources/css/layouts/app.css": {
+    "file": "assets/app-NZvPY-Fj.css",
+    "src": "resources/css/layouts/app.css",
+    "isEntry": true,
+    "name": "app",
+    "names": [
+      "app.css"
+    ]
+  },
+  "resources/css/projects-index.css": {
+    "file": "assets/projects-index-DvoRGSke.css",
+    "src": "resources/css/projects-index.css",
+    "isEntry": true,
+    "name": "projects-index",
+    "names": [
+      "projects-index.css"
+    ]
+  },
+  "resources/css/projects-show.css": {
+    "file": "assets/projects-show-ZhRcQhaF.css",
+    "src": "resources/css/projects-show.css",
+    "isEntry": true,
+    "name": "projects-show",
+    "names": [
+      "projects-show.css"
+    ]
+  },
+  "resources/js/admin/articles/create.js": {
+    "file": "assets/create-CTI6KJEQ.js",
+    "name": "create",
+    "src": "resources/js/admin/articles/create.js",
+    "isEntry": true
+  },
+  "resources/js/admin/articles/edit.js": {
+    "file": "assets/edit-CTI6KJEQ.js",
+    "name": "edit",
+    "src": "resources/js/admin/articles/edit.js",
+    "isEntry": true
+  },
+  "resources/js/admin/confirmDelete.js": {
+    "file": "assets/confirmDelete-C0hYKhVH.js",
+    "name": "confirmDelete",
+    "src": "resources/js/admin/confirmDelete.js",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-CAiCLEjY.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/articles/index.js": {
+    "file": "assets/index-CrL4BKru.js",
+    "name": "index",
+    "src": "resources/js/articles/index.js",
+    "isEntry": true
+  },
+  "resources/js/components/floating-facebook.js": {
+    "file": "assets/floating-facebook-Bu5zhT_p.js",
+    "name": "floating-facebook",
+    "src": "resources/js/components/floating-facebook.js",
+    "isEntry": true
+  },
+  "resources/js/components/floating-instagram.js": {
+    "file": "assets/floating-instagram-rRnadVIk.js",
+    "name": "floating-instagram",
+    "src": "resources/js/components/floating-instagram.js",
+    "isEntry": true
+  },
+  "resources/js/components/floating-whatsapp.js": {
+    "file": "assets/floating-whatsapp-HoESPjUZ.js",
+    "name": "floating-whatsapp",
+    "src": "resources/js/components/floating-whatsapp.js",
+    "isEntry": true
+  },
+  "resources/js/hero-slideshow.js": {
+    "file": "assets/hero-slideshow-B9GVedM1.js",
+    "name": "hero-slideshow",
+    "src": "resources/js/hero-slideshow.js",
+    "isEntry": true
+  },
+  "resources/js/home.js": {
+    "file": "assets/home-C3G2jxHN.js",
+    "name": "home",
+    "src": "resources/js/home.js",
+    "isEntry": true
+  },
+  "resources/js/layouts/app.js": {
+    "file": "assets/app-CHcWv34m.js",
+    "name": "app",
+    "src": "resources/js/layouts/app.js",
+    "isEntry": true
+  },
+  "resources/js/projects-index.js": {
+    "file": "assets/projects-index-B1kSjJgr.js",
+    "name": "projects-index",
+    "src": "resources/js/projects-index.js",
+    "isEntry": true
+  },
+  "resources/js/projects-show.js": {
+    "file": "assets/projects-show-DaMBBqld.js",
+    "name": "projects-show",
+    "src": "resources/js/projects-show.js",
+    "isEntry": true
+  }
+}

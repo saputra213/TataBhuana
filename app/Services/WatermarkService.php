@@ -9,9 +9,13 @@ class WatermarkService
      */
     public static function addWatermark($imagePath)
     {
+        ini_set('memory_limit', '512M');
+        \Log::info('Starting watermark process for: ' . $imagePath);
+        
         $fullPath = storage_path('app/public/' . $imagePath);
         
         if (!file_exists($fullPath)) {
+            \Log::error('Watermark failed: Image file not found at ' . $fullPath);
             return false;
         }
         
@@ -48,6 +52,7 @@ class WatermarkService
             // Load logo image
             $logoPath = public_path('images/logo.png');
             if (!file_exists($logoPath)) {
+                \Log::error('Watermark failed: Logo file not found at ' . $logoPath);
                 imagedestroy($image);
                 return false;
             }
@@ -148,22 +153,29 @@ class WatermarkService
             imagedestroy($logo);
             
             // Save the watermarked image
+            $result = false;
             switch ($mimeType) {
                 case 'image/jpeg':
-                    imagejpeg($image, $fullPath, 95);
+                    $result = imagejpeg($image, $fullPath, 95);
                     break;
                 case 'image/png':
                     imagesavealpha($image, true);
-                    imagepng($image, $fullPath, 9);
+                    $result = imagepng($image, $fullPath, 9);
                     break;
                 case 'image/gif':
-                    imagegif($image, $fullPath);
+                    $result = imagegif($image, $fullPath);
                     break;
             }
             
             imagedestroy($image);
             
-            return true;
+            if ($result) {
+                \Log::info('Watermark applied successfully to: ' . $imagePath);
+            } else {
+                \Log::error('Watermark failed: Could not save image to ' . $fullPath);
+            }
+            
+            return $result;
         } catch (\Exception $e) {
             \Log::error('Watermark failed: ' . $e->getMessage());
             return false;

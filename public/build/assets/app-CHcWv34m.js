@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",()=>{const r={threshold:.1,rootMargin:"0px 0px -50px 0px"},s=new IntersectionObserver(e=>{e.forEach(o=>{o.isIntersecting&&(o.target.classList.add("visible"),s.unobserve(o.target))})},r);document.querySelectorAll(".fade-on-scroll, .fade-on-scroll-2, .fade-on-scroll-3, .fade-on-scroll-4").forEach(e=>s.observe(e))});

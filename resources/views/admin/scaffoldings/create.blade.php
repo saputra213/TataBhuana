@@ -16,8 +16,8 @@
                     
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="name" class="form-label">Nama Scaffolding *</label>
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required>
+                            <label for="name" class="form-label">Nama Scaffolding <small class="text-muted">(Maks. 255 karakter)</small> *</label>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" maxlength="255" required>
                             @error('name')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -38,8 +38,8 @@
                     </div>
                     
                     <div class="mb-3">
-                        <label for="description" class="form-label">Deskripsi *</label>
-                        <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="3" required>{{ old('description') }}</textarea>
+                        <label for="description" class="form-label">Deskripsi <small class="text-muted">(Maks. 500 karakter)</small> *</label>
+                        <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="3" maxlength="500" required>{{ old('description') }}</textarea>
                         @error('description')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -47,8 +47,8 @@
                     
                     <div class="row">
                         <div class="col-md-12 mb-3">
-                            <label for="dimensions" class="form-label">Dimensi *</label>
-                            <input type="text" class="form-control @error('dimensions') is-invalid @enderror" id="dimensions" name="dimensions" value="{{ old('dimensions') }}" placeholder="Contoh: 1.2m x 1.8m" required>
+                            <label for="dimensions" class="form-label">Dimensi <small class="text-muted">(Maks. 255 karakter)</small> *</label>
+                            <input type="text" class="form-control @error('dimensions') is-invalid @enderror" id="dimensions" name="dimensions" value="{{ old('dimensions') }}" placeholder="Contoh: 1.2m x 1.8m" maxlength="255" required>
                             @error('dimensions')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -93,8 +93,8 @@
                     </div>
                     
                     <div class="mb-3">
-                        <label for="specifications" class="form-label">Detail Spesifikasi (Opsional)</label>
-                        <textarea class="form-control @error('specifications') is-invalid @enderror" id="specifications" name="specifications" rows="5">{{ old('specifications') }}</textarea>
+                        <label for="specifications" class="form-label">Detail Spesifikasi (Opsional) <small class="text-muted">(Maks. 1000 karakter)</small></label>
+                        <textarea class="form-control @error('specifications') is-invalid @enderror" id="specifications" name="specifications" rows="5" maxlength="1000">{{ old('specifications') }}</textarea>
                         @error('specifications')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

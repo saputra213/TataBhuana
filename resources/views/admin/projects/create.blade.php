@@ -16,16 +16,16 @@
                     
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="title" class="form-label">Judul Proyek *</label>
-                            <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}" required>
+                            <label for="title" class="form-label">Judul Proyek <small class="text-muted">(Maks. 255 karakter)</small> *</label>
+                            <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}" maxlength="255" required>
                             @error('title')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         
                         <div class="col-md-6 mb-3">
-                            <label for="client_name" class="form-label">Nama Klien *</label>
-                            <input type="text" class="form-control @error('client_name') is-invalid @enderror" id="client_name" name="client_name" value="{{ old('client_name') }}" required>
+                            <label for="client_name" class="form-label">Nama Klien <small class="text-muted">(Maks. 255 karakter)</small> *</label>
+                            <input type="text" class="form-control @error('client_name') is-invalid @enderror" id="client_name" name="client_name" value="{{ old('client_name') }}" maxlength="255" required>
                             @error('client_name')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -33,8 +33,8 @@
                     </div>
                     
                     <div class="mb-3">
-                        <label for="description" class="form-label">Deskripsi *</label>
-                        <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="3" required>{{ old('description') }}</textarea>
+                        <label for="description" class="form-label">Deskripsi <small class="text-muted">(Maks. 500 karakter)</small> *</label>
+                        <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="3" maxlength="500" required>{{ old('description') }}</textarea>
                         @error('description')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -42,8 +42,8 @@
                     
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="location" class="form-label">Lokasi *</label>
-                            <input type="text" class="form-control @error('location') is-invalid @enderror" id="location" name="location" value="{{ old('location') }}" required>
+                            <label for="location" class="form-label">Lokasi <small class="text-muted">(Maks. 255 karakter)</small> *</label>
+                            <input type="text" class="form-control @error('location') is-invalid @enderror" id="location" name="location" value="{{ old('location') }}" maxlength="255" required>
                             @error('location')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

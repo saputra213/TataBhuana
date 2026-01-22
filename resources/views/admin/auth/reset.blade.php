@@ -32,7 +32,7 @@
                                     <span class="input-group-text">
                                         <i class="fas fa-envelope"></i>
                                     </span>
-                                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email', $email ?? '') }}" required autofocus>
+                                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email', $email ?? '') }}" required autofocus maxlength="255">
                                 </div>
                                 @error('email')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -45,7 +45,7 @@
                                     <span class="input-group-text">
                                         <i class="fas fa-lock"></i>
                                     </span>
-                                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required>
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required maxlength="255">
                                 </div>
                                 @error('password')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -58,7 +58,7 @@
                                     <span class="input-group-text">
                                         <i class="fas fa-lock"></i>
                                     </span>
-                                    <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+                                    <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required maxlength="255">
                                 </div>
                             </div>
                             

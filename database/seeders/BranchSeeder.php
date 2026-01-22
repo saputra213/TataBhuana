@@ -14,17 +14,17 @@ class BranchSeeder extends Seeder
     {
         $branches = [
             [
-                'name' => 'Kantor Pusat Jakarta',
-                'code' => 'JKT',
-                'description' => 'Kantor pusat Tata Bhuana Scaffolding yang melayani seluruh wilayah Jakarta dan sekitarnya. Dilengkapi dengan gudang penyimpanan scaffolding terbesar dan tim teknis berpengalaman.',
-                'address' => 'Jl. Raya Industri No. 123, Kawasan Industri Cikarang, Bekasi 17530',
-                'phone' => '+62 21 1234 5678',
-                'email' => 'jakarta@tatabhuana.com',
+                'name' => 'Kantor Pusat Yogyakarta',
+                'code' => 'YGY',
+                'description' => 'Kantor pusat Tata Bhuana Scaffolding yang melayani seluruh wilayah Yogyakarta dan sekitarnya. Dilengkapi dengan gudang penyimpanan scaffolding terbesar dan tim teknis berpengalaman.',
+                'address' => 'Yogyakarta',
+                'phone' => '0813-2500-8867',
+                'email' => 'yogyakarta@tatabhuana.com',
                 'manager_name' => 'Budi Santoso',
-                'manager_phone' => '+62 812 3456 7890',
+                'manager_phone' => '0813-2500-8867',
                 'manager_email' => 'budi.santoso@tatabhuana.com',
-                'latitude' => -6.194745,
-                'longitude' => 106.819561,
+                'latitude' => -7.7956,
+                'longitude' => 110.3695,
                 'operating_hours' => [
                     'senin' => '08:00 - 17:00',
                     'selasa' => '08:00 - 17:00',

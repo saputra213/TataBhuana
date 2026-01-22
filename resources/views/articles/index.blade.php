@@ -23,17 +23,24 @@
             <div class="col-12">
                 <form method="GET" action="{{ route('articles.index') }}" class="row g-2 align-items-center" id="articleFilterForm">
                     <!-- Search -->
-                    <div class="col-12 col-lg-6">
+                    <div class="col-10 col-lg-6 order-1 order-lg-1">
                         <div class="input-group">
                             <span class="input-group-text bg-white text-muted border-end-0"><i class="fas fa-search"></i></span>
                             <input type="text" name="search" class="form-control border-start-0 ps-0" placeholder="Cari artikel..." value="{{ request('search') }}">
                         </div>
                     </div>
 
+                    <!-- Filter Button -->
+                    <div class="col-2 col-lg-2 order-2 order-lg-3">
+                        <button type="submit" class="btn btn-danger w-100">
+                            <i class="fas fa-filter"></i> <span class="d-none d-lg-inline ms-1">Filter</span>
+                        </button>
+                    </div>
+
                     <input type="hidden" name="category" id="articleInputCategory" value="{{ request('category') }}">
                     
                     <!-- Category Filter -->
-                    <div class="col-12 col-lg-4">
+                    <div class="col-12 col-lg-4 order-3 order-lg-2">
                         <div class="dropdown w-100">
                             <button class="btn bg-white border shadow-sm w-100 dropdown-toggle text-start d-flex justify-content-between align-items-center" type="button" id="articleDropdownCategory" data-bs-toggle="dropdown" aria-expanded="false">
                                 <span class="text-truncate">
@@ -47,13 +54,6 @@
                                 @endforeach
                             </ul>
                         </div>
-                    </div>
-                    
-                    <!-- Filter Button -->
-                    <div class="col-12 col-lg-2">
-                        <button type="submit" class="btn btn-danger w-100">
-                            <i class="fas fa-filter me-1"></i> Filter
-                        </button>
                     </div>
                 </form>
 

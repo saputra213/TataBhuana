@@ -32,7 +32,10 @@ class ProjectController extends Controller
             });
         }
 
-        $projects = $query->paginate(12);
+        $defaultPerPage = 6;
+        $perPage = (int) $request->input('per_page', $defaultPerPage);
+
+        $projects = $query->paginate($perPage);
         $profile = CompanyProfile::first();
         
         return view('projects.index', compact('projects', 'profile'));

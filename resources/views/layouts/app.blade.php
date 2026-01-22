@@ -192,20 +192,18 @@
                         $footerContactEmail = $profile->footer_contact_email ?? null;
                     @endphp
                     <h6 class="fw-bold mb-3">{{ $footerContactTitle ?: 'Kontak Kami' }}</h6>
-                    @if($profile ?? false)
-                        <p class="text-white mb-2">
-                            <i class="fas fa-map-marker-alt me-2"></i>
-                            {{ $footerContactAddress ?: $profile->address }}
-                        </p>
-                        <p class="text-white mb-2">
-                            <i class="fas fa-phone me-2"></i>
-                            {{ $footerContactPhone ?: $profile->phone }}
-                        </p>
-                        <p class="text-white mb-2">
-                            <i class="fas fa-envelope me-2"></i>
-                            {{ $footerContactEmail ?: $profile->email }}
-                        </p>
-                    @endif
+                    <p class="text-white mb-2">
+                        <i class="fas fa-phone me-2"></i> 0813-2500-8867 (Yogyakarta)
+                    </p>
+                    <p class="text-white mb-2">
+                        <i class="fas fa-phone me-2"></i> 0813-9283-2658 (Magelang)
+                    </p>
+                    <p class="text-white mb-2">
+                        <i class="fas fa-phone me-2"></i> 0821-5645-7224 (Purwokerto)
+                    </p>
+                    <p class="text-white mb-2">
+                        <i class="fas fa-envelope me-2"></i> tatabhuana@gmail.com
+                    </p>
                     
                     <div class="mt-3">
                         @if($profile ?? false && $profile->social_media)

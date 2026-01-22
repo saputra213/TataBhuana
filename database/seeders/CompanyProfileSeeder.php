@@ -15,9 +15,9 @@ class CompanyProfileSeeder extends Seeder
         CompanyProfile::create([
             'company_name' => 'Tata Bhuana Scaffolding',
             'description' => 'Perusahaan penyedia jasa sewa dan jual scaffolding berkualitas tinggi dengan standar keamanan internasional untuk mendukung kesuksesan proyek konstruksi Anda.',
-            'address' => 'Jl. Raya Industri No. 123, Kawasan Industri Cikarang, Bekasi 17530',
-            'phone' => '+62 21 1234 5678',
-            'email' => 'info@tatabhuana.com',
+            'address' => 'Yogyakarta',
+            'phone' => '0813-2500-8867',
+            'email' => 'tatabhuana@gmail.com',
             'website' => 'https://www.tatabhuana.com',
             'about_us' => 'Tata Bhuana Scaffolding adalah perusahaan yang telah berpengalaman dalam menyediakan jasa sewa dan jual scaffolding berkualitas tinggi. Dengan komitmen untuk memberikan layanan terbaik, kami telah dipercaya oleh berbagai klien untuk mendukung proyek konstruksi mereka.
 
@@ -31,9 +31,9 @@ Kami menyediakan berbagai jenis scaffolding yang memenuhi standar keamanan inter
 • Maintenance & Perawatan - Layanan perawatan dan maintenance scaffolding untuk memastikan performa optimal
 • Training & Sertifikasi - Pelatihan penggunaan scaffolding yang aman sesuai standar keselamatan kerja',
             'social_media' => [
-                'facebook' => 'https://facebook.com/tatabhuana.scaffolding',
-                'instagram' => 'https://instagram.com/tatabhuana_scaffolding',
-                'whatsapp' => '6281234567890'
+                'facebook' => null,
+                'instagram' => 'https://www.instagram.com/tatabhuana?igsh=M2ZicjhxZzBpcnd3',
+                'whatsapp' => '6281325008867'
             ]
         ]);
     }

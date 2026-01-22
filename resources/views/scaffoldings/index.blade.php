@@ -64,15 +64,22 @@
 
                     <div class="row g-2">
                         <!-- Search Bar -->
-                        <div class="col-12 col-lg-4">
+                        <div class="col-10 col-lg-4 order-1 order-lg-1">
                             <div class="input-group shadow-sm h-100">
                                 <span class="input-group-text bg-white border-end-0 ps-3"><i class="fas fa-search text-muted"></i></span>
-                                <input type="text" name="search" class="form-control border-start-0 py-2" placeholder="Cari produk scaffolding..." value="{{ request('search') }}">
+                                <input type="text" name="search" class="form-control border-start-0 py-2" placeholder="Cari produk..." value="{{ request('search') }}">
                             </div>
                         </div>
 
+                        <!-- Filter Button -->
+                        <div class="col-2 col-lg-2 order-2 order-lg-4">
+                            <button type="submit" class="btn btn-danger w-100 h-100 d-flex align-items-center justify-content-center shadow-sm fw-bold">
+                                <i class="fas fa-filter"></i> <span class="ms-2 d-none d-lg-inline">Filter</span>
+                            </button>
+                        </div>
+
                         <!-- Type Dropdown -->
-                        <div class="col-6 col-lg-3">
+                        <div class="col-6 col-lg-3 order-3 order-lg-2">
                             <div class="dropdown w-100 h-100">
                                 <button class="btn bg-white border shadow-sm w-100 h-100 dropdown-toggle d-flex justify-content-between align-items-center" type="button" id="dropdownType" data-bs-toggle="dropdown" aria-expanded="false">
                                     <span class="text-truncate">
@@ -93,7 +100,7 @@
                         </div>
                         
                         <!-- Sort Dropdown -->
-                        <div class="col-6 col-lg-3">
+                        <div class="col-6 col-lg-3 order-4 order-lg-3">
                             <div class="dropdown w-100 h-100">
                                 <button class="btn bg-white border shadow-sm w-100 h-100 dropdown-toggle d-flex justify-content-between align-items-center" type="button" id="dropdownSort" data-bs-toggle="dropdown" aria-expanded="false">
                                     <span class="text-truncate">
@@ -108,12 +115,6 @@
                                 </ul>
                             </div>
                         </div>
-                        
-                        <div class="col-12 col-lg-2">
-                            <button type="submit" class="btn btn-danger w-100 h-100 d-flex align-items-center justify-content-center shadow-sm fw-bold">
-                                <i class="fas fa-filter"></i> <span class="ms-2">Filter</span>
-                            </button>
-                        </div>
                     </div>
                 </form>
 
@@ -122,16 +123,18 @@
                         document.getElementById('input' + name.charAt(0).toUpperCase() + name.slice(1)).value = value;
                         document.getElementById('filterForm').submit();
                     }
+                    
+                    document.addEventListener('DOMContentLoaded', function() {
+                        var isMobile = window.innerWidth < 768;
+                        var urlParams = new URLSearchParams(window.location.search);
+                        var perPage = urlParams.get('per_page');
 
-                    document.addEventListener('DOMContentLoaded', function () {
-                        var isMobile = window.innerWidth <= 576;
-                        if (isMobile) {
-                            var currentPerPage = "{{ request('per_page') }}";
-                            if (!currentPerPage || currentPerPage != 6) {
-                                var url = new URL(window.location.href);
-                                url.searchParams.set('per_page', 6);
-                                window.location.replace(url.toString());
-                            }
+                        if (isMobile && perPage !== '6') {
+                            urlParams.set('per_page', '6');
+                            window.location.search = urlParams.toString();
+                        } else if (!isMobile && perPage === '6') {
+                            urlParams.delete('per_page');
+                            window.location.search = urlParams.toString();
                         }
                     });
                 </script>
@@ -202,10 +205,8 @@
             </div>
 
             @if($scaffoldings->hasPages())
-                <div class="row mt-4">
-                    <div class="col-12 d-flex justify-content-center">
-                        {{ $scaffoldings->withQueryString()->links() }}
-                    </div>
+                <div class="d-flex justify-content-center mt-4">
+                    {{ $scaffoldings->withQueryString()->links() }}
                 </div>
             @endif
         @else

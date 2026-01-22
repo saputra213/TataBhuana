@@ -24,18 +24,25 @@
             <div class="col-12">
                 <form method="GET" action="{{ route('projects.index') }}" class="row g-2 align-items-center" id="projectFilterForm">
                     <!-- Search -->
-                    <div class="col-12 col-lg-6">
+                    <div class="col-10 col-lg-6 order-1 order-lg-1">
                         <div class="input-group">
                             <span class="input-group-text bg-white text-muted border-end-0"><i class="fas fa-search"></i></span>
                             <input type="text" name="search" class="form-control border-start-0 ps-0" placeholder="Cari proyek..." value="{{ request('search') }}">
                         </div>
                     </div>
 
+                    <!-- Filter Button -->
+                    <div class="col-2 col-lg-2 order-2 order-lg-4">
+                        <button type="submit" class="btn btn-danger w-100">
+                            <i class="fas fa-filter"></i> <span class="d-none d-lg-inline ms-1">Filter</span>
+                        </button>
+                    </div>
+
                     <input type="hidden" name="type" id="projectInputType" value="{{ request('type') }}">
                     <input type="hidden" name="status" id="projectInputStatus" value="{{ request('status') }}">
                     
                     <!-- Type Filter -->
-                    <div class="col-6 col-lg-2">
+                    <div class="col-6 col-lg-2 order-3 order-lg-2">
                         <div class="dropdown w-100">
                             <button class="btn bg-white border shadow-sm w-100 dropdown-toggle text-start d-flex justify-content-between align-items-center" type="button" id="projectDropdownType" data-bs-toggle="dropdown" aria-expanded="false">
                                 <span class="text-truncate">
@@ -58,7 +65,7 @@
                     </div>
                     
                     <!-- Status Filter -->
-                    <div class="col-6 col-lg-2">
+                    <div class="col-6 col-lg-2 order-4 order-lg-3">
                         <div class="dropdown w-100">
                             <button class="btn bg-white border shadow-sm w-100 dropdown-toggle text-start d-flex justify-content-between align-items-center" type="button" id="projectDropdownStatus" data-bs-toggle="dropdown" aria-expanded="false">
                                 <span class="text-truncate">
@@ -76,13 +83,6 @@
                                 <li><a class="dropdown-item {{ request('status') == 'planning' ? 'active' : '' }}" href="#" onclick="setProjectFilter('status', 'planning'); return false;">Perencanaan</a></li>
                             </ul>
                         </div>
-                    </div>
-                    
-                    <!-- Filter Button -->
-                    <div class="col-12 col-lg-2">
-                        <button type="submit" class="btn btn-danger w-100">
-                            <i class="fas fa-filter me-1"></i> Filter
-                        </button>
                     </div>
                 </form>
 
@@ -176,10 +176,8 @@
             
             <!-- Pagination -->
             @if($projects->hasPages())
-            <div class="row mt-5">
-                <div class="col-12">
-                    {{ $projects->links() }}
-                </div>
+            <div class="d-flex justify-content-center mt-5">
+                {{ $projects->withQueryString()->links() }}
             </div>
             @endif
         @else

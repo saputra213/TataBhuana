@@ -33,7 +33,11 @@ class ScaffoldingController extends Controller
                 break;
         }
         
-        $perPage = (int) $request->input('per_page', 12);
+        $userAgent = $request->header('User-Agent', '');
+        $isMobile = preg_match('/Android|iPhone|iPad|iPod|Windows Phone|Mobi/i', $userAgent);
+        $defaultPerPage = $isMobile ? 6 : 12;
+        
+        $perPage = (int) $request->input('per_page', $defaultPerPage);
         $scaffoldings = $query->paginate($perPage);
         $profile = CompanyProfile::first();
         return view('scaffoldings.index', compact('scaffoldings', 'profile'));
